@@ -1,10 +1,7 @@
 package archetypeAPI.cards;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.green.DeadlyPoison;
-import com.megacrit.cardcrawl.cards.green.Defend_Green;
-import com.megacrit.cardcrawl.cards.green.PoisonedStab;
-import com.megacrit.cardcrawl.cards.green.Strike_Green;
+import com.megacrit.cardcrawl.cards.green.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -50,11 +47,20 @@ public class SilentArchetypeZone {
         while (i.hasNext()) {
             CardArchsSilentEnum en = i.next();
             if (en == CardArchsSilentEnum.BASIC) {
-                BasicSilentCards.add(new Strike_Green());
-                BasicSilentCards.add(new Defend_Green());
+                BasicSilentCards.add(new DaggerSpray());
+                BasicSilentCards.add(new Outmaneuver());
+
+                BasicSilentCards.add(new AllOutAttack());
+                BasicSilentCards.add(new LegSweep());
+                BasicSilentCards.add(new Caltrops());
+
+                BasicSilentCards.add(new DieDieDie());
+                BasicSilentCards.add(new Adrenaline());
+                BasicSilentCards.add(new AfterImage());
+
             } else if (en == CardArchsSilentEnum.POISON) {
                 PoisonSilentCards.add(new DeadlyPoison());
-                PoisonSilentCards.add(new DeadlyPoison());
+                PoisonSilentCards.add(new BouncingFlask());
                 PoisonSilentCards.add(new PoisonedStab());
             }
         }

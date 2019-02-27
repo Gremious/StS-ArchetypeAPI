@@ -132,7 +132,7 @@ public class ArchetypeAPI implements
 
         // UI Strings
         BaseMod.loadCustomStringsFile(UIStrings.class,
-                getModID() + "Resources /localization/eng/" + getModID() + "-UI-Strings.json");
+                getModID() + "Resources/localization/eng/" + getModID() + "-UI-Strings.json");
 
         logger.info("Done edittting strings");
     }

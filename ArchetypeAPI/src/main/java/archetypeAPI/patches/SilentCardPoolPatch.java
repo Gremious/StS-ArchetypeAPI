@@ -25,7 +25,7 @@ public class SilentCardPoolPatch {
     public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         // Do thing.
         silentArchetypesEnums.add(SilentArchetypeZone.CardArchsSilentEnum.BASIC);
-        silentArchetypesEnums.add(SilentArchetypeZone.CardArchsSilentEnum.POISON);
+        //    silentArchetypesEnums.add(SilentArchetypeZone.CardArchsSilentEnum.POISON);
         tmpPool.clear();
         tmpPool.addAll(checkSilentArchetypes());
 
