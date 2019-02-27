@@ -36,7 +36,7 @@ public class ArchetypeAPI implements
     // =============== MAKE IMAGE PATHS =================
 
     public static String makeCardPath(String resourcePath) {
-        return getModID() + "Resources/images/cards/" + resourcePath;
+        return getModID() + "Resources/images/archetypes/" + resourcePath;
     }
 
     // =============== /MAKE IMAGE PATHS/ =================

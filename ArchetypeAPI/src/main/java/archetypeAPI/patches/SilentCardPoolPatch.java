@@ -1,6 +1,6 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.cards.SilentArchetypeZone;
+import archetypeAPI.archetypes.characters.theSilentArchetypes;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.TheSilent;
@@ -9,8 +9,7 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.cards.SilentArchetypeZone.checkSilentArchetypes;
-import static archetypeAPI.cards.SilentArchetypeZone.silentArchetypesEnums;
+import static archetypeAPI.archetypes.characters.theSilentArchetypes.silentArchetypesEnums;
 
 @SpirePatch(
         clz = TheSilent.class,
@@ -23,12 +22,17 @@ public class SilentCardPoolPatch {
     )
 
     public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
-        // Do thing.
-        silentArchetypesEnums.add(SilentArchetypeZone.CardArchsSilentEnum.BASIC);
-        //    silentArchetypesEnums.add(SilentArchetypeZone.CardArchsSilentEnum.POISON);
-        tmpPool.clear();
-        tmpPool.addAll(checkSilentArchetypes());
+        System.out.println("START ARCHETYPE PATCH");
 
+        System.out.println("Initial tmpPool at start of patch is: " + tmpPool);
+        System.out.println("Adding enumerators");
+        silentArchetypesEnums.add(theSilentArchetypes.CardArchsSilentEnum.BASIC);
+
+        System.out.println("tmpPool: " + tmpPool + " will retain only contained inside: " + theSilentArchetypes.addCardsFromArchetypes());
+        tmpPool.retainAll(theSilentArchetypes.addCardsFromArchetypes());
+
+        System.out.println("END ARCHETYPE PATCH");
+        System.out.println(tmpPool);
     }
 
     private static class Locator extends SpireInsertLocator {
