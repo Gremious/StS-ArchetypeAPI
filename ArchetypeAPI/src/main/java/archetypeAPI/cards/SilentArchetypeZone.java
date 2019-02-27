@@ -1,7 +1,9 @@
 package archetypeAPI.cards;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.green.DeadlyPoison;
 import com.megacrit.cardcrawl.cards.green.Defend_Green;
+import com.megacrit.cardcrawl.cards.green.PoisonedStab;
 import com.megacrit.cardcrawl.cards.green.Strike_Green;
 
 import java.util.ArrayList;
@@ -24,35 +26,41 @@ public class SilentArchetypeZone {
     public static ArrayList<AbstractCard> BlockSilentCards = new ArrayList<>();
 
 
-    public static void checkSilentArchetypes() {
-        Iterator<CardArchsSilentEnum> i = silentArchetypesEnums.iterator();
+    public static ArrayList<AbstractCard> checkSilentArchetypes() {
+        ArrayList<AbstractCard> UsedArchetypesCombined = new ArrayList<>();
+        createArchetypeCardArray();
 
+        Iterator<CardArchsSilentEnum> i = silentArchetypesEnums.iterator();
         while (i.hasNext()) {
             CardArchsSilentEnum en = i.next();
 
             if (en == CardArchsSilentEnum.BASIC) {
-                createArchetypeCardArray(BasicSilentCards, en);
+                UsedArchetypesCombined.addAll(BasicSilentCards);
             } else if (en == CardArchsSilentEnum.POISON) {
-                createArchetypeCardArray(PoisonSilentCards, en);
-            } else if (en == CardArchsSilentEnum.DISCARD) {
-                createArchetypeCardArray(DiscardSilentCards, en);
-            } else if (en == CardArchsSilentEnum.SHIV) {
-                createArchetypeCardArray(ShivSilentCards, en);
-            } else if (en == CardArchsSilentEnum.BLOCK) {
-                createArchetypeCardArray(BlockSilentCards, en);
+                UsedArchetypesCombined.addAll(PoisonSilentCards);
             }
+        }
 
+        return UsedArchetypesCombined;
+    }
+
+    public static void createArchetypeCardArray() {
+        Iterator<CardArchsSilentEnum> i = silentArchetypesEnums.iterator();
+
+        while (i.hasNext()) {
+            CardArchsSilentEnum en = i.next();
+            if (en == CardArchsSilentEnum.BASIC) {
+                BasicSilentCards.add(new Strike_Green());
+                BasicSilentCards.add(new Defend_Green());
+            } else if (en == CardArchsSilentEnum.POISON) {
+                PoisonSilentCards.add(new DeadlyPoison());
+                PoisonSilentCards.add(new DeadlyPoison());
+                PoisonSilentCards.add(new PoisonedStab());
+            }
         }
     }
 
-    public static void createArchetypeCardArray(ArrayList<AbstractCard> arrayListOfCards, CardArchsSilentEnum arch) {
-        if (arch == CardArchsSilentEnum.BASIC) {
-            arrayListOfCards.add(new Strike_Green());
-            arrayListOfCards.add(new Defend_Green());
-        }
-    }
-
-    enum CardArchsSilentEnum {
+    public enum CardArchsSilentEnum {
         BASIC,
         POISON,
         DISCARD,
@@ -60,7 +68,7 @@ public class SilentArchetypeZone {
         BLOCK
     }
 
-    enum CardArchsIronclad {
+    public enum CardArchsIronclad {
         BASIC,
         STRENGTH,
         EXHAUST,
@@ -69,7 +77,7 @@ public class SilentArchetypeZone {
         STRIKE
     }
 
-    enum CardArchsDefect {
+    public enum CardArchsDefect {
         BASIC,
         LIGHTNING,
         FROST,

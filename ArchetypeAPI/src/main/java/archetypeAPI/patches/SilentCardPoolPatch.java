@@ -9,8 +9,8 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.cards.SilentArchetypeZone.BasicSilentCards;
-
+import static archetypeAPI.cards.SilentArchetypeZone.checkSilentArchetypes;
+import static archetypeAPI.cards.SilentArchetypeZone.silentArchetypesEnums;
 
 @SpirePatch(
         clz = TheSilent.class,
@@ -24,10 +24,11 @@ public class SilentCardPoolPatch {
 
     public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         // Do thing.
+        silentArchetypesEnums.add(SilentArchetypeZone.CardArchsSilentEnum.BASIC);
+        silentArchetypesEnums.add(SilentArchetypeZone.CardArchsSilentEnum.POISON);
         tmpPool.clear();
-        if (SilentArchetypeZone.UseBasicSilent = true) {
-            tmpPool.addAll(BasicSilentCards);
-        }
+        tmpPool.addAll(checkSilentArchetypes());
+
     }
 
     private static class Locator extends SpireInsertLocator {
