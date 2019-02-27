@@ -23,13 +23,14 @@ public class SilentCardPoolPatch {
 
     public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         System.out.println("START ARCHETYPE PATCH");
-
         System.out.println("Initial tmpPool at start of patch is: " + tmpPool);
         System.out.println("Adding enumerators");
-        silentArchetypesEnums.add(theSilentArchetypes.CardArchsSilentEnum.BASIC);
 
+
+        silentArchetypesEnums.add(theSilentArchetypes.CardArchsSilentEnum.BASIC);
         System.out.println("tmpPool: " + tmpPool + " will retain only contained inside: " + theSilentArchetypes.addCardsFromArchetypes());
         tmpPool.retainAll(theSilentArchetypes.addCardsFromArchetypes());
+
 
         System.out.println("END ARCHETYPE PATCH");
         System.out.println(tmpPool);
