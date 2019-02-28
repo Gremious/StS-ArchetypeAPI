@@ -1,6 +1,6 @@
 package archetypeAPI;
 
-import archetypeAPI.archetypes.cards.DiscardPoisonTestCard;
+import archetypeAPI.archetypes.tests.cards.DiscardPoisonTestCard;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
@@ -35,17 +35,6 @@ public class ArchetypeAPI implements
     private static final String AUTHOR = "Gremious";
     private static final String DESCRIPTION = "An API for Slay the Spire to sort/select/add/generate card Archetypes in basegame classes.";
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
-
-    // =============== MAKE IMAGE PATHS =================
-
-    public static String makeCardPath(String resourcePath) {
-        return getModID() + "Resources/images/archetypes/" + resourcePath;
-    }
-
-    // =============== /MAKE IMAGE PATHS/ =================
-
-
-    // =============== SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE =================
 
     public ArchetypeAPI() {
         logger.info("Subscribe to BaseMod hooks");
@@ -103,9 +92,6 @@ public class ArchetypeAPI implements
         logger.info("Archetype API is on.");
     }
 
-    // ============== /SUBSCRIBE, CREATE THE COLOR_GRAY, INITIALIZE/ =================
-
-
     // =============== POST-INITIALIZE =================
 
     @Override
@@ -116,7 +102,7 @@ public class ArchetypeAPI implements
 
         // Create the Mod Menu
         ModPanel settingsPanel = new ModPanel();
-        settingsPanel.addUIElement(new ModLabel("ArchetypeAPI doesn't have any settings! An example of those may come later.", 400.0f, 700.0f,
+        settingsPanel.addUIElement(new ModLabel("ArchetypeAPI doesn't have any settings!", 400.0f, 700.0f,
                 settingsPanel, (me) -> {
         }));
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);

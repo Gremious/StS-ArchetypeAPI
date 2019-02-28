@@ -1,4 +1,4 @@
-package archetypeAPI.archetypes.characters;
+package archetypeAPI.archetypes;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 

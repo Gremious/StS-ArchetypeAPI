@@ -1,7 +1,6 @@
 package archetypeAPI.archetypes.tests;
 
-import archetypeAPI.archetypes.characters.theSilentArchetypes;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import archetypeAPI.archetypes.theSilent.basicArchetype;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.green.Catalyst;
 import com.megacrit.cardcrawl.cards.green.CripplingPoison;
@@ -10,7 +9,7 @@ import com.megacrit.cardcrawl.cards.green.PoisonedStab;
 
 import java.util.ArrayList;
 
-public class AddToExistingArchetype extends theSilentArchetypes {
+public class AddToExistingArchetype {
     // Let's say we want to add a whole new archetype that totally DOESN'T exist in the silent: Poison!
     // We'll need to declare an array list of Enums that will contain the Enums of any archetypes we add
     // (in this case, just the 1 : Poison)
@@ -25,16 +24,6 @@ public class AddToExistingArchetype extends theSilentArchetypes {
     // The selection card we create will add this to the array list to enable the archetype.
     // Iterate through the whole list of enums, and only add cards to the pool that the enums are present for.
 
-    @Override
-    public void addCardsFromArchetypes() {
-        for (ClassEnums e : mySilentEnums) {
-            if (e == ClassEnums.POISON) {
-                addToWholeFinalList(poisonCards.group);
-            }
-        }
-
-        super.addCardsFromArchetypes();
-    }
 
     // Card pool of the Archetype cards. You can just fill out an array too, if you want. This is just cleaner.
     private static CardGroup poisonCards;
@@ -47,6 +36,4 @@ public class AddToExistingArchetype extends theSilentArchetypes {
         poisonCards.addToTop(new Catalyst());
 
     }
-
-
 }

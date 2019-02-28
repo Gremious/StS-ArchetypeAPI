@@ -1,6 +1,6 @@
 package archetypeAPI.archetypes.tests;
 
-import archetypeAPI.archetypes.characters.Archetypes;
+import archetypeAPI.archetypes.Archetypes;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.green.Catalyst;

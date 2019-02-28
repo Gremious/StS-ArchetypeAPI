@@ -1,4 +1,4 @@
-package archetypeAPI.archetypes.cards;
+package archetypeAPI.archetypes.tests.cards;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
