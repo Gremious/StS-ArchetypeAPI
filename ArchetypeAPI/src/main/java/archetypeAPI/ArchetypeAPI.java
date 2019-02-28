@@ -1,10 +1,12 @@
 package archetypeAPI;
 
+import archetypeAPI.archetypes.cards.DiscardPoisonTestCard;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
 import basemod.ModLabel;
 import basemod.ModPanel;
+import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
@@ -23,7 +25,8 @@ import java.nio.charset.StandardCharsets;
 @SpireInitializer
 public class ArchetypeAPI implements
         EditStringsSubscriber,
-        PostInitializeSubscriber {
+        PostInitializeSubscriber,
+        EditCardsSubscriber {
     public static final Logger logger = LogManager.getLogger(ArchetypeAPI.class.getName());
     private static String modID;
 
@@ -146,4 +149,8 @@ public class ArchetypeAPI implements
     }
 
 
+    @Override
+    public void receiveEditCards() {
+        BaseMod.addCard(new DiscardPoisonTestCard());
+    }
 }
