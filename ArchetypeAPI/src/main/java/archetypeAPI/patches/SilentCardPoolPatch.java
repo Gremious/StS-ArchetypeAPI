@@ -26,7 +26,7 @@ public class SilentCardPoolPatch {
         System.out.println("Initial tmpPool at start of patch is: " + tmpPool);
 
         System.out.println("Adding enumerators");
-        silentArchetypesEnums.add(theSilentArchetypes.CardArchsSilentEnum.BASIC);
+        silentArchetypesEnums.add(theSilentArchetypes.ClassEnums.BASIC);
 
         System.out.println("The entire list of cards (tmpPool) is: " + tmpPool);
         System.out.println("It will retain only retain these cards: " + theSilentArchetypes.addCardsFromArchetypes());

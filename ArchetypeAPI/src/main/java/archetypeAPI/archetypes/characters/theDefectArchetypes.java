@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 public class theDefectArchetypes {
 
+
     // Create array lists filled with cards of the archetypes.
     public static ArrayList<AbstractCard> BasicSilentCards = new ArrayList<>();
     public static ArrayList<AbstractCard> PoisonSilentCards = new ArrayList<>();
@@ -16,7 +17,6 @@ public class theDefectArchetypes {
     public static ArrayList<AbstractCard> BlockSilentCards = new ArrayList<>();
 
     public static ArrayList<CardArchsDefect> silentArchetypesEnums = new ArrayList<>();
-
 
     public ArrayList<AbstractCard> addCardsFromArchetypes(ArrayList<AbstractCard> addCardsFromArchetypes) {
         ArrayList<AbstractCard> UsedArchetypesCombined = new ArrayList<>();
