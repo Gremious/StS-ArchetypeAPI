@@ -53,7 +53,7 @@ public class theSilentArchetypes {
         System.out.println("filling basic cards");
         BasicSilentCards.add(new DaggerSpray());
         BasicSilentCards.add(new Outmaneuver());
-        BasicSilentCards.add(new AThousandCuts());
+        BasicSilentCards.add(new Acrobatics());
 
         BasicSilentCards.add(new AllOutAttack());
         BasicSilentCards.add(new LegSweep());
