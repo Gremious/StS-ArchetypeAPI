@@ -1,9 +1,12 @@
 package archetypeAPI.archetypes.characters;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.green.*;
+import com.megacrit.cardcrawl.cards.green.DaggerSpray;
+import com.megacrit.cardcrawl.cards.green.DeadlyPoison;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class theSilentArchetypes {
 
@@ -45,31 +48,41 @@ public class theSilentArchetypes {
                 UsedArchetypesCombined.addAll(PoisonSilentCards);
             }
         }
+
+        Set<AbstractCard> dupeRemoveSet = new LinkedHashSet<>();
+        dupeRemoveSet.addAll(UsedArchetypesCombined);
+        UsedArchetypesCombined.clear();
+        UsedArchetypesCombined.addAll(dupeRemoveSet);
+        dupeRemoveSet.clear();
+
         System.out.println("Final List of cards is " + UsedArchetypesCombined);
         return UsedArchetypesCombined;
     }
 
     public static void fillBasicArray() {
-        System.out.println("filling basic cards");
+        System.out.println("Filling non-Archetype cards");
         BasicSilentCards.add(new DaggerSpray());
-        BasicSilentCards.add(new Outmaneuver());
-        BasicSilentCards.add(new Acrobatics());
-
-        BasicSilentCards.add(new AllOutAttack());
-        BasicSilentCards.add(new LegSweep());
-        BasicSilentCards.add(new Caltrops());
-
-        BasicSilentCards.add(new DieDieDie());
-        BasicSilentCards.add(new Adrenaline());
-        BasicSilentCards.add(new AfterImage());
 
     }
 
     public static void fillPoisonArray() {
-        System.out.println("filling poison cards");
+        System.out.println("Filling poison cards");
         PoisonSilentCards.add(new DeadlyPoison());
-        PoisonSilentCards.add(new BouncingFlask());
-        PoisonSilentCards.add(new PoisonedStab());
+    }
+
+    public static void fillDiscardArray() {
+        System.out.println("Filling discard cards");
+
+    }
+
+    public static void fillShivArray() {
+        System.out.println("Filling shiv cards");
+
+    }
+
+    public static void fillBlockArray() {
+        System.out.println("Filling block cards");
+
     }
 
 }
