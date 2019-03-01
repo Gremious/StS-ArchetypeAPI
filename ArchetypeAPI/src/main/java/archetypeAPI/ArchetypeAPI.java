@@ -1,7 +1,6 @@
 package archetypeAPI;
 
 import archetypeAPI.actions.ui.SelectArchetypeAction;
-import archetypeAPI.archetypes.tests.brandNewMod.archetype.poisonArchetype;
 import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
 import archetypeAPI.archetypes.theSilent.basicSilent;
 import archetypeAPI.util.IDCheckDontTouchPls;
@@ -20,6 +19,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -187,10 +187,19 @@ public class ArchetypeAPI implements
         }// NO
     }// NO
 
-    @Override
-    public void receiveStartGame() {
-        AbstractDungeon.actionManager.addToTop(new SelectArchetypeAction());
-    }
     // ====== YOU CAN EDIT AGAIN ======
 
+    @Override
+    public void receiveStartGame() {
+        ArchetypeAPI.archetypeCards.addToTop(new DiscardPoisonTestCard());
+
+        AbstractDungeon.actionManager.addToTop(new SelectArchetypeAction());
+    }
+
+    public static CardGroup archetypeCards;
+
+    static {
+        archetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        //archetypeCards.addToTop();
+    }
 }

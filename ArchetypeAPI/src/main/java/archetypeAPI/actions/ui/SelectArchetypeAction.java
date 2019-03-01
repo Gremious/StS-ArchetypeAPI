@@ -1,5 +1,6 @@
 package archetypeAPI.actions.ui;
 
+import archetypeAPI.ArchetypeAPI;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
@@ -20,7 +21,7 @@ public class SelectArchetypeAction extends AbstractGameAction {
     public void update() {
         if (duration == Settings.ACTION_DUR_FAST) {
             if (selectArchetypes) {
-                AbstractDungeon.gridSelectScreen.open(archetypeCards, 999, true, "Select Your Archetypes");
+                AbstractDungeon.gridSelectScreen.open(ArchetypeAPI.archetypeCards, 999, true, "Select Your Archetypes");
                 AbstractDungeon.actionManager.addToBottom(new WaitAction(0.25F));
                 this.tickDuration();
             } else {
@@ -42,9 +43,4 @@ public class SelectArchetypeAction extends AbstractGameAction {
         }
     }
 
-    public CardGroup archetypeCards;
-    {
-        archetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        //archetypeCards.addToTop();
-    }
 }
