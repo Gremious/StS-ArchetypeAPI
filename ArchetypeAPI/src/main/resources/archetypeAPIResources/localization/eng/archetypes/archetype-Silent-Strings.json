@@ -1,8 +1,20 @@
 {
   "archetypeAPI:BasicSilent": {
     "NAME": "Basic",
-    "DESCRIPTION": "Standard non-archetype cards.",
-    "TOOLTIP_DESCRIPTION": "Adds non-archetype specific cards. NL Features #gDagger #gSpray, #bBackstab, #yAdrenaline.",
+    "CARD_IDS": [
+      "Outmaneuver",
+      "Acrobatics",
+      "All Out Attack",
+      "Dagger Spray",
+      "Leg Sweep",
+      "Caltrops",
+      "Die Die Die",
+      "Adrenaline",
+      "After Image"
+    ]
+  },
+  "archetypeAPI:PoisonSilent": {
+    "NAME": "Basic",
     "CARD_IDS": [
       "Dagger Spray",
       "Outmaneuver",

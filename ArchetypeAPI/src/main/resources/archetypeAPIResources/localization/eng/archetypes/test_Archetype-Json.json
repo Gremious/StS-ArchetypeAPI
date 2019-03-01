@@ -1,0 +1,14 @@
+{
+  "testMod:Poison": {
+    "NAME": "Poison",
+    "CARD_IDS": [
+      "DiscardPoisonTestCard"
+    ]
+  },
+  "testMod:Discard": {
+    "NAME": "Discard",
+    "CARD_IDS": [
+      "DiscardPoisonTestCard"
+    ]
+  }
+}

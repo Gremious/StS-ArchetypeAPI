@@ -1,6 +1,8 @@
 package archetypeAPI;
 
-import archetypeAPI.archetypes.tests.cards.DiscardPoisonTestCard;
+import archetypeAPI.archetypes.tests.brandNewMod.archetype.poisonArchetype;
+import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
+import archetypeAPI.archetypes.theSilent.basicSilent;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
@@ -108,6 +110,11 @@ public class ArchetypeAPI implements
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
 
         logger.info("Done loading badge Image and mod options");
+
+
+        basicSilent basicSilent = new basicSilent(true, true);
+        poisonArchetype poisonArchetype = new poisonArchetype(true, false);
+        System.out.println();
     }
 
     // =============== / POST-INITIALIZE/ =================
