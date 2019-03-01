@@ -6,23 +6,32 @@ import archetypeAPI.archetypes.theSilent.basicSilent;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
-import basemod.ModLabel;
+import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
+import basemod.ReflectionHacks;
 import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
+import com.megacrit.cardcrawl.screens.charSelect.CharacterSelectScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Properties;
 
 @SpireInitializer
 public class ArchetypeAPI implements
@@ -38,11 +47,105 @@ public class ArchetypeAPI implements
     private static final String DESCRIPTION = "An API for Slay the Spire to sort/select/add/generate card Archetypes in basegame classes.";
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
 
+    public static Properties archetypeSettingsDefaults = new Properties();
+
+    public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
+    public static final String PROP_NUMBER_OF_ARCHETYPES = "numOfArchetypes";
+    public static boolean selectArchetypes = false;
+    public static int numOfArchetypes = 0;
+
     public ArchetypeAPI() {
         logger.info("Subscribe to BaseMod hooks");
         BaseMod.subscribe(this);
         setModID("archetypeAPI");
+
+        archetypeSettingsDefaults.setProperty(PROP_SELECT_ARCHETYPES, "FALSE");
+        archetypeSettingsDefaults.setProperty(PROP_NUMBER_OF_ARCHETYPES, "5");
+        try {
+            SpireConfig config = new SpireConfig("archetypeAPI", "ArchetypeAPIConfig", archetypeSettingsDefaults);
+            config.load();
+            selectArchetypes = config.getBool(PROP_SELECT_ARCHETYPES);
+            numOfArchetypes = config.getInt(PROP_NUMBER_OF_ARCHETYPES);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         logger.info("Done subscribing");
+    }
+
+
+    @SuppressWarnings("unused")
+    public static void initialize() {
+        ArchetypeAPI ArchetypeApiInit = new ArchetypeAPI();
+        logger.info("Archetype API is on.");
+    }
+
+    // =============== POST-INITIALIZE =================
+
+    @Override
+    public void receivePostInitialize() {
+        logger.info("Loading badge image and mod options");
+        // Load the Mod Badge
+        Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
+
+        // Create the Mod Menu
+        ModPanel settingsPanel = new ModPanel();
+
+        logger.info("Done loading badge Image and mod options");
+
+
+        ModLabeledToggleButton crazyBtn = new ModLabeledToggleButton("Replace 2 of your starting Ceremony cards with Crazy Rituals.",
+                350.0f, 700.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                selectArchetypes, settingsPanel, (label) -> {
+        }, (button) -> {
+            selectArchetypes = button.enabled;
+            try {
+                SpireConfig config = new SpireConfig("archetypeAPI", "ArchetypeAPIConfig", archetypeSettingsDefaults);
+                config.setBool(PROP_SELECT_ARCHETYPES, selectArchetypes);
+                config.save();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            resetCharSelect();
+        });
+        settingsPanel.addUIElement(crazyBtn);
+
+        basicSilent basicSilent = new basicSilent(true);
+        poisonArchetype poisonArchetype = new poisonArchetype(true);
+
+        BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
+    }
+
+    // =============== / POST-INITIALIZE/ =================
+
+    public void resetCharSelect() {
+        ((ArrayList<CharacterOption>) ReflectionHacks.getPrivate(CardCrawlGame.mainMenuScreen.charSelectScreen, CharacterSelectScreen.class, "options")).clear();
+        CardCrawlGame.mainMenuScreen.charSelectScreen.initialize();
+    }
+    // ================ LOAD THE TEXT ===================
+
+    @Override
+    public void receiveEditStrings() {
+        logger.info("Beginning to edit strings");
+
+        // UI Strings
+        BaseMod.loadCustomStringsFile(UIStrings.class,
+                getModID() + "Resources/localization/eng/" + getModID() + "-UI-Strings.json");
+
+        logger.info("Done edittting strings");
+    }
+
+    // ================ /LOAD THE TEXT/ ===================
+
+    // this adds "ModName:" before the ID of any card/relic/power etc.
+    // in order to avoid conflicts if any other mod uses the same ID.
+    public static String makeID(String idText) {
+        return getModID() + ":" + idText;
+    }
+
+
+    @Override
+    public void receiveEditCards() {
+        BaseMod.addCard(new DiscardPoisonTestCard());
     }
 
     // ====== NO EDIT AREA ======
@@ -87,63 +190,4 @@ public class ArchetypeAPI implements
     }// NO
     // ====== YOU CAN EDIT AGAIN ======
 
-
-    @SuppressWarnings("unused")
-    public static void initialize() {
-        ArchetypeAPI ArchetypeApiInit = new ArchetypeAPI();
-        logger.info("Archetype API is on.");
-    }
-
-    // =============== POST-INITIALIZE =================
-
-    @Override
-    public void receivePostInitialize() {
-        logger.info("Loading badge image and mod options");
-        // Load the Mod Badge
-        Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
-
-        // Create the Mod Menu
-        ModPanel settingsPanel = new ModPanel();
-        settingsPanel.addUIElement(new ModLabel("ArchetypeAPI doesn't have any settings!", 400.0f, 700.0f,
-                settingsPanel, (me) -> {
-        }));
-        BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
-
-        logger.info("Done loading badge Image and mod options");
-
-
-        basicSilent basicSilent = new basicSilent(true, true);
-        poisonArchetype poisonArchetype = new poisonArchetype(true, false);
-        System.out.println();
-    }
-
-    // =============== / POST-INITIALIZE/ =================
-
-
-    // ================ LOAD THE TEXT ===================
-
-    @Override
-    public void receiveEditStrings() {
-        logger.info("Beginning to edit strings");
-
-        // UI Strings
-        BaseMod.loadCustomStringsFile(UIStrings.class,
-                getModID() + "Resources/localization/eng/" + getModID() + "-UI-Strings.json");
-
-        logger.info("Done edittting strings");
-    }
-
-    // ================ /LOAD THE TEXT/ ===================
-
-    // this adds "ModName:" before the ID of any card/relic/power etc.
-    // in order to avoid conflicts if any other mod uses the same ID.
-    public static String makeID(String idText) {
-        return getModID() + ":" + idText;
-    }
-
-
-    @Override
-    public void receiveEditCards() {
-        BaseMod.addCard(new DiscardPoisonTestCard());
-    }
 }
