@@ -1,5 +1,6 @@
 package archetypeAPI;
 
+import archetypeAPI.actions.ui.SelectArchetypeAction;
 import archetypeAPI.archetypes.tests.brandNewMod.archetype.poisonArchetype;
 import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
 import archetypeAPI.archetypes.theSilent.basicSilent;
@@ -12,6 +13,7 @@ import basemod.ReflectionHacks;
 import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
+import basemod.interfaces.StartGameSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,6 +22,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
@@ -37,7 +40,8 @@ import java.util.Properties;
 public class ArchetypeAPI implements
         EditStringsSubscriber,
         PostInitializeSubscriber,
-        EditCardsSubscriber {
+        EditCardsSubscriber,
+        StartGameSubscriber {
     public static final Logger logger = LogManager.getLogger(ArchetypeAPI.class.getName());
     private static String modID;
 
@@ -50,9 +54,7 @@ public class ArchetypeAPI implements
     public static Properties archetypeSettingsDefaults = new Properties();
 
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
-    public static final String PROP_NUMBER_OF_ARCHETYPES = "numOfArchetypes";
     public static boolean selectArchetypes = false;
-    public static int numOfArchetypes = 0;
 
     public ArchetypeAPI() {
         logger.info("Subscribe to BaseMod hooks");
@@ -60,12 +62,10 @@ public class ArchetypeAPI implements
         setModID("archetypeAPI");
 
         archetypeSettingsDefaults.setProperty(PROP_SELECT_ARCHETYPES, "FALSE");
-        archetypeSettingsDefaults.setProperty(PROP_NUMBER_OF_ARCHETYPES, "5");
         try {
             SpireConfig config = new SpireConfig("archetypeAPI", "ArchetypeAPIConfig", archetypeSettingsDefaults);
             config.load();
             selectArchetypes = config.getBool(PROP_SELECT_ARCHETYPES);
-            numOfArchetypes = config.getInt(PROP_NUMBER_OF_ARCHETYPES);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,7 +93,7 @@ public class ArchetypeAPI implements
         logger.info("Done loading badge Image and mod options");
 
 
-        ModLabeledToggleButton crazyBtn = new ModLabeledToggleButton("Replace 2 of your starting Ceremony cards with Crazy Rituals.",
+        ModLabeledToggleButton selectArchetypesButton = new ModLabeledToggleButton("Select Archetypes at the start of each run.",
                 350.0f, 700.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 selectArchetypes, settingsPanel, (label) -> {
         }, (button) -> {
@@ -107,11 +107,9 @@ public class ArchetypeAPI implements
             }
             resetCharSelect();
         });
-        settingsPanel.addUIElement(crazyBtn);
+        settingsPanel.addUIElement(selectArchetypesButton);
 
         basicSilent basicSilent = new basicSilent(true);
-        poisonArchetype poisonArchetype = new poisonArchetype(true);
-
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
     }
 
@@ -188,6 +186,11 @@ public class ArchetypeAPI implements
             }// NO
         }// NO
     }// NO
+
+    @Override
+    public void receiveStartGame() {
+        AbstractDungeon.actionManager.addToTop(new SelectArchetypeAction());
+    }
     // ====== YOU CAN EDIT AGAIN ======
 
 }
