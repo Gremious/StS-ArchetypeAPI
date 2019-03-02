@@ -10,37 +10,31 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
-import static archetypeAPI.ArchetypeAPI.selectArchetypes;
-
 public class SelectArchetypeEffect extends AbstractGameEffect {
+    private boolean cardsWereUsed;
+    private boolean openedGridScreen;
 
     public SelectArchetypeEffect() {
         this.duration = Settings.ACTION_DUR_FAST;
-        AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = false;
+        cardsWereUsed = false;
+        openedGridScreen = false;
     }
 
     @Override
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
-            if (selectArchetypes) {
-                System.out.println("You chose to select your archetype.");
+            if (this.openedGridScreen && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+                tickDuration();
+            } else {
                 AbstractDungeon.gridSelectScreen.open(abstractArchetype.archetypeCards, 999, true, "Select Your Archetypes");
-                System.out.println("The Grid Select Screen has now opened.");
-                this.duration -= Gdx.graphics.getDeltaTime();
-                if (this.duration < 0.0F) {
-                    this.isDone = true;
-                }
-
+                this.openedGridScreen = true;
             }
+
         } else {
-            if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+            if (!cardsWereUsed) {
                 System.out.println("The size of selected cards is: " + AbstractDungeon.gridSelectScreen.selectedCards.size());
                 if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-                    System.out.println("Archetype cards selected: " + AbstractDungeon.gridSelectScreen.selectedCards);
-
                     for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
-                        System.out.println("c instance of check: " + (c instanceof AbstractArchetypeCard));
-
                         if (c instanceof AbstractArchetypeCard) {
                             System.out.println("Card in Loop " + c);
                             ((AbstractArchetypeCard) c).archetypeEffect();
@@ -58,18 +52,22 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
-                AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
+                cardsWereUsed = true;
             }
 
-            this.duration -= Gdx.graphics.getDeltaTime();
-            if (this.duration < 0.0F) {
-                this.isDone = true;
-            }
+            tickDuration();
         }
     }
 
     @Override
     public void render(SpriteBatch spriteBatch) {
+    }
+
+    public void tickDuration() {
+        this.duration -= Gdx.graphics.getDeltaTime();
+        if (this.duration < 0.0F) {
+            this.isDone = true;
+        }
     }
 
     @Override

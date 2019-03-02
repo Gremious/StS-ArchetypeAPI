@@ -1,12 +1,10 @@
 package archetypeAPI.patches;
 
 import archetypeAPI.archetypes.abstractArchetype;
-import archetypeAPI.cards.AbstractArchetypeCard;
 import archetypeAPI.effects.SelectArchetypeEffect;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.neow.NeowEvent;
@@ -30,11 +28,40 @@ public class CleanSelectArchetypesNeowPatch {
         System.out.println("AAAAAAAAAAAAAAAAAAA");
         System.out.println("AAAAAAAAAAAAAAAAAAA");
         System.out.println("Archetype cards: " + abstractArchetype.archetypeCards);
-
         if (!Settings.isEndless || AbstractDungeon.floorNum <= 1) {
             if (Settings.isStandardRun() && (!Settings.isEndless || AbstractDungeon.floorNum > 1)) { // Only the first room ever
-                AbstractDungeon.topLevelEffectsQueue.add(new SelectArchetypeEffect());
+                System.out.println("Kill me pls: start");
 
+
+                if (selectArchetypes) {
+                    AbstractDungeon.effectList.add(new SelectArchetypeEffect());
+                } else {
+                    ArrayList<AbstractCard> randomArchetypes = new ArrayList<>();
+                    CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+
+                    for (AbstractCard c : abstractArchetype.archetypeCards.group) {
+                        //if c has tag
+                        list.addToTop(c);
+                    }
+
+                    while (randomArchetypes.size() < 1) {
+                        AbstractCard c = list.getRandomCard(true);
+                        if (!randomArchetypes.contains(c)) {
+                            randomArchetypes.add(c);
+                        } else if (randomArchetypes.containsAll(list.group)) {
+                            System.out.println("Added every single archetype");
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
+}
+/*
+*
                 if (selectArchetypes) {  // [1.] If you chose to select the archetypes
                     System.out.println("You chose to select your archetype.");
                     AbstractDungeon.gridSelectScreen.open(abstractArchetype.archetypeCards, 999, true, "Select Your Archetypes");
@@ -60,26 +87,5 @@ public class CleanSelectArchetypesNeowPatch {
                     if (!abstractArchetype.UsedArchetypesCombined.isEmpty()) {
                         CardCrawlGame.dungeon.initializeCardPools();
                     }
-                } else {
-                    ArrayList<AbstractCard> randomArchetypes = new ArrayList<>();
-                    CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-
-                    for (AbstractCard c : abstractArchetype.archetypeCards.group) {
-                        //if c has tag
-                        list.addToTop(c);
-                    }
-
-                    while (randomArchetypes.size() < 1) {
-                        AbstractCard c = list.getRandomCard(true);
-                        if (!randomArchetypes.contains(c)) {
-                            randomArchetypes.add(c);
-                        } else if (randomArchetypes.containsAll(list.group)) {
-                            System.out.println("Added every single archetype");
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+*
+*/
