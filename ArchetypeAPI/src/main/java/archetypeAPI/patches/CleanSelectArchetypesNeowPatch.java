@@ -2,7 +2,7 @@ package archetypeAPI.patches;
 
 import archetypeAPI.ArchetypeAPI;
 import archetypeAPI.archetypes.abstractArchetype;
-import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonArchetypeSelectCard;
+import archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards.DiscardPoisonArchetypeSelectCard;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;

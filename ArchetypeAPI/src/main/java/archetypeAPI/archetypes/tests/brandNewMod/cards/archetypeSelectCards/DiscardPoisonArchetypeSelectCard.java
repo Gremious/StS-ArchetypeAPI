@@ -1,12 +1,9 @@
-package archetypeAPI.archetypes.tests.brandNewMod.cards;
+package archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards;
 
 import archetypeAPI.archetypes.tests.brandNewMod.archetype.poisonArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 
 public class DiscardPoisonArchetypeSelectCard extends AbstractArchetypeCard {
 
@@ -26,23 +23,19 @@ public class DiscardPoisonArchetypeSelectCard extends AbstractArchetypeCard {
 
     // STAT DECLARATION
 
-    private static final CardRarity RARITY = CardRarity.COMMON;
+    private static final CardRarity RARITY = CardRarity.SPECIAL;
     private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
     private static final CardType TYPE = CardType.SKILL;
     public static final CardColor COLOR = CardColor.GREEN;
 
     private static final int COST = -2;
 
-    private static final int MAGIC = 5;
-    private static final int UPGRADED_PLUS_MAGIC = 6;
 
     // /STAT DECLARATION/
 
 
     public DiscardPoisonArchetypeSelectCard() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-
-        this.magicNumber = this.baseMagicNumber = MAGIC;
 
     }
 
@@ -52,24 +45,10 @@ public class DiscardPoisonArchetypeSelectCard extends AbstractArchetypeCard {
     }
 
     public void triggerOnManualDiscard() {
-        AbstractMonster m = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(true);
-        AbstractPlayer p = AbstractDungeon.player;
-
-        AbstractDungeon.actionManager.addToBottom(
-                new ApplyPowerAction(m, p, new PoisonPower(m, p, magicNumber), magicNumber));
-
     }
 
     @Override
     public void upgrade() {
-        if (!this.upgraded) {
-            this.upgradeName();
-
-            upgradeMagicNumber(UPGRADED_PLUS_MAGIC);
-
-//          rawDescription = UPGRADE_DESCRIPTION;
-            this.initializeDescription();
-        }
     }
 
     @Override

@@ -1,9 +1,8 @@
 package archetypeAPI;
 
-import archetypeAPI.archetypes.abstractArchetype;
-import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonArchetypeSelectCard;
 import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
-import archetypeAPI.archetypes.theSilent.basicSilent;
+import archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards.BasicSilentArchetypeSelectCard;
+import archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards.DiscardPoisonArchetypeSelectCard;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
@@ -18,7 +17,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
-import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
@@ -29,6 +27,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
+
+import static archetypeAPI.archetypes.abstractArchetype.archetypeCards;
 
 @SpireInitializer
 public class ArchetypeAPI implements
@@ -46,7 +46,6 @@ public class ArchetypeAPI implements
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
 
     public static Properties archetypeSettingsDefaults = new Properties();
-
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
     public static boolean selectArchetypes = false;
 
@@ -102,7 +101,6 @@ public class ArchetypeAPI implements
         });
         settingsPanel.addUIElement(selectArchetypesButton);
 
-        basicSilent basicSilent = new basicSilent(true);
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
     }
 
@@ -133,6 +131,10 @@ public class ArchetypeAPI implements
 
     @Override
     public void receiveEditCards() {
+        // Add Archetype Selection Cards
+        archetypeCards.addToTop(new BasicSilentArchetypeSelectCard());
+        archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
+
         BaseMod.addCard(new DiscardPoisonTestCard());
     }
 
@@ -176,6 +178,7 @@ public class ArchetypeAPI implements
             }// NO
         }// NO
     }// NO
+
 
     // ====== YOU CAN EDIT AGAIN ======
 
