@@ -42,15 +42,15 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 } else {
                     switch (AbstractDungeon.player.chosenClass) {
                         case IRONCLAD:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.ironcladArchetypeCards, 999, true, "Select Your Archetypes");
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.ironcladArchetypeSelectCards, 999, true, "Select Your Archetypes");
                             this.openedGridScreen = true;
                             break;
                         case THE_SILENT:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.silentArchetypeCards, 999, true, "Select Your Archetypes");
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.silentArchetypeSelectCards, 999, true, "Select Your Archetypes");
                             this.openedGridScreen = true;
                             break;
                         case DEFECT:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.defectArchetypeCards, 999, true, "Select Your Archetypes");
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.defectArchetypeSelectCards, 999, true, "Select Your Archetypes");
                             this.openedGridScreen = true;
                             break;
                         default:

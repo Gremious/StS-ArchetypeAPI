@@ -1,5 +1,10 @@
 package archetypeAPI;
 
+import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.cards.archetypeSelectionCards.theSilent.BasicSilentArchetypeSelectCard;
+import archetypeAPI.cards.archetypeSelectionCards.theSilent.DiscardSilentArchetypeSelectCard;
+import archetypeAPI.cards.archetypeSelectionCards.theSilent.PoisonSilentArchetypeSelectCard;
+import archetypeAPI.cards.archetypeSelectionCards.theSilent.ShivSilentArchetypeSelectCard;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
@@ -97,10 +102,29 @@ public class ArchetypeAPI implements
         settingsPanel.addUIElement(selectArchetypesButton);
 
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
+        loadArchetypeSelectCards();
     }
 
     // =============== / POST-INITIALIZE/ =================
+    public void loadArchetypeSelectCards() {
+        // The Ironclad:
 
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
+        // The Silent:
+        abstractArchetype.silentArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.silentArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.silentArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.silentArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
+
+        // The Defect:
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
+    }
 
     // ================ LOAD THE TEXT ===================
 

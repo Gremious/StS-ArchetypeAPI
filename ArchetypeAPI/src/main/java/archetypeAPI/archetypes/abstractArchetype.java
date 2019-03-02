@@ -14,18 +14,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public abstract class abstractArchetype {
-    public static CardGroup silentArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-    public static CardGroup ironcladArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-    public static CardGroup defectArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+    public static CardGroup silentArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+    public static CardGroup ironcladArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+    public static CardGroup defectArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
     public static ArrayList<AbstractCard> UsedArchetypesCombined = new ArrayList<>();
-    private boolean useArchetype;
 
-    public abstractArchetype(String archetypeFile, boolean useArchetype) {
-        this.useArchetype = useArchetype;
-        if (useArchetype) {
-            addCardsFromArchetypes(archetypeFile);
-        }
+    public abstractArchetype(String archetypeFile) {
+        addCardsFromArchetypes(archetypeFile);
     }
 
     public static void addCardsFromArchetypes(String archetypeFile) {

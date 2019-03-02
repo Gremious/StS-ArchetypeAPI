@@ -59,12 +59,12 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
             } else {
                 switch (AbstractDungeon.player.chosenClass) {
                     case IRONCLAD:
-                        for (AbstractCard basicCheckCard : abstractArchetype.ironcladArchetypeCards.group) {
+                        for (AbstractCard basicCheckCard : abstractArchetype.ironcladArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
                         }
-                        for (AbstractCard c : abstractArchetype.ironcladArchetypeCards.group) {
+                        for (AbstractCard c : abstractArchetype.ironcladArchetypeSelectCards.group) {
                             if (c.hasTag(SINGLE)) {
                                 list.addToTop(c);
                             }
@@ -81,12 +81,12 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         }
                         break;
                     case THE_SILENT:
-                        for (AbstractCard basicCheckCard : abstractArchetype.silentArchetypeCards.group) {
+                        for (AbstractCard basicCheckCard : abstractArchetype.silentArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
                         }
-                        for (AbstractCard c : abstractArchetype.silentArchetypeCards.group) {
+                        for (AbstractCard c : abstractArchetype.silentArchetypeSelectCards.group) {
                             if (c.hasTag(SINGLE)) {
                                 list.addToTop(c);
                             }
@@ -103,12 +103,12 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         }
                         break;
                     case DEFECT:
-                        for (AbstractCard basicCheckCard : abstractArchetype.defectArchetypeCards.group) {
+                        for (AbstractCard basicCheckCard : abstractArchetype.defectArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
                         }
-                        for (AbstractCard c : abstractArchetype.defectArchetypeCards.group) {
+                        for (AbstractCard c : abstractArchetype.defectArchetypeSelectCards.group) {
                             if (c.hasTag(SINGLE)) {
                                 list.addToTop(c);
                             }
