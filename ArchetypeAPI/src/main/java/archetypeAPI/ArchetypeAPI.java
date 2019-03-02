@@ -1,8 +1,5 @@
 package archetypeAPI;
 
-import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
-import archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards.BasicSilentArchetypeSelectCard;
-import archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards.DiscardPoisonArchetypeSelectCard;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
@@ -27,8 +24,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
-
-import static archetypeAPI.archetypes.abstractArchetype.silentArchetypeCards;
 
 @SpireInitializer
 public class ArchetypeAPI implements
@@ -131,11 +126,6 @@ public class ArchetypeAPI implements
 
     @Override
     public void receiveEditCards() {
-        // Add Archetype Selection Cards
-        silentArchetypeCards.addToTop(new BasicSilentArchetypeSelectCard());
-        silentArchetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
-
-        BaseMod.addCard(new DiscardPoisonTestCard());
     }
 
     // ====== NO EDIT AREA ======
