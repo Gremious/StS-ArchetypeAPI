@@ -49,48 +49,5 @@
       "Nightmare",
       "Phantasmal Killer"
     ]
-  },
-  "archetypeAPI:PoisonSilent": {
-    "NAME": "Poison",
-    "CARD_IDS": [
-      "Bane",
-      "Deadly Poison",
-      "Poisoned Stab",
-      "Corpse Explosion",
-      "Envenom",
-      "Bouncing Flask",
-      "Catalyst",
-      "Crippling Cloud",
-      "Noxious Fumes"
-    ]
-  },
-  "archetypeAPI:DiscardSilent": {
-    "NAME": "Discard",
-    "CARD_IDS": [
-      "Sneaky Strike",
-      "Eviscerate",
-      "Dagger Throw",
-      "Prepared",
-      "Unload",
-      "Storm of Steel",
-      "Tools of the Trade",
-      "Concentrate",
-      "Calculated Gamble",
-      "All-Out Attack",
-      "Acrobatics",
-      "Tactician",
-      "Reflex",
-      "Reflex"
-    ]
-  },
-  "archetypeAPI:ShivSilent": {
-    "NAME": "Shiv",
-    "CARD_IDS": [
-      "Blade Dance",
-      "Cloak And Dagger",
-      "Infinite Blades",
-      "Accuracy",
-      "Storm of Steel"
-    ]
   }
 }
