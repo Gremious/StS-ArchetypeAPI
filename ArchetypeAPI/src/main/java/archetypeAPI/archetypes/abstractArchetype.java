@@ -4,6 +4,7 @@ import archetypeAPI.jsonClasses.archetypeStringsClass;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 
 import java.io.InputStream;
@@ -13,9 +14,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public abstract class abstractArchetype {
+    public static CardGroup archetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     public static ArrayList<AbstractCard> UsedArchetypesCombined = new ArrayList<>();
     private boolean useArchetype;
-
     public abstractArchetype(String archetypeFile, boolean useArchetype) {
         this.useArchetype = useArchetype;
 

@@ -1,5 +1,6 @@
 package archetypeAPI;
 
+import archetypeAPI.archetypes.abstractArchetype;
 import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonArchetypeSelectCard;
 import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
 import archetypeAPI.archetypes.theSilent.basicSilent;
@@ -36,7 +37,7 @@ public class ArchetypeAPI implements
         EditCardsSubscriber {
     public static final Logger logger = LogManager.getLogger(ArchetypeAPI.class.getName());
     private static String modID;
-    public static CardGroup archetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+
 
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "Archetype API";
@@ -132,7 +133,6 @@ public class ArchetypeAPI implements
 
     @Override
     public void receiveEditCards() {
-        ArchetypeAPI.archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
         BaseMod.addCard(new DiscardPoisonTestCard());
     }
 
