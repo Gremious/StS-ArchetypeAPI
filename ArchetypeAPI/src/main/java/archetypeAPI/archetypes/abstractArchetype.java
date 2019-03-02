@@ -54,7 +54,7 @@ public abstract class abstractArchetype {
         return UsedArchetypesCombined;
     }
 
-    protected static ArrayList<AbstractCard> removeDupes(ArrayList<AbstractCard> listToRemoveDupesFrom) {
+    public static ArrayList<AbstractCard> removeDupes(ArrayList<AbstractCard> listToRemoveDupesFrom) {
         Set<AbstractCard> dupeRemoveSet = new LinkedHashSet<>();
 
         dupeRemoveSet.addAll(listToRemoveDupesFrom);

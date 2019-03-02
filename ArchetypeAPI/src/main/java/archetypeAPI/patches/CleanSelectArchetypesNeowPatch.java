@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.neow.NeowEvent;
 import java.util.ArrayList;
 
 import static archetypeAPI.ArchetypeAPI.selectArchetypes;
+import static archetypeAPI.patches.ArchetypeCardTags.SINGLE_CORE;
 
 @SpirePatch(
         clz = NeowEvent.class,
@@ -24,14 +25,9 @@ import static archetypeAPI.ArchetypeAPI.selectArchetypes;
 public class CleanSelectArchetypesNeowPatch {
 
     public static void Postfix(NeowEvent __instance, boolean isDone) {
-        System.out.println("AAAAAAAAAAAAAAAAAAA");
-        System.out.println("AAAAAAAAAAAAAAAAAAA");
-        System.out.println("AAAAAAAAAAAAAAAAAAA");
         System.out.println("Archetype cards: " + abstractArchetype.archetypeCards);
         if (!Settings.isEndless || AbstractDungeon.floorNum <= 1) {
             if (Settings.isStandardRun() && (!Settings.isEndless || AbstractDungeon.floorNum > 1)) { // Only the first room ever
-                System.out.println("Kill me pls: start");
-
 
                 if (selectArchetypes) {
                     AbstractDungeon.effectList.add(new SelectArchetypeEffect());
@@ -40,8 +36,9 @@ public class CleanSelectArchetypesNeowPatch {
                     CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
                     for (AbstractCard c : abstractArchetype.archetypeCards.group) {
-                        //if c has tag
-                        list.addToTop(c);
+                        if (c.hasTag(SINGLE_CORE)) {
+                            list.addToTop(c);
+                        }
                     }
 
                     while (randomArchetypes.size() < 1) {

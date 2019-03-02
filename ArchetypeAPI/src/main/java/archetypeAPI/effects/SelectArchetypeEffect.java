@@ -10,6 +10,9 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
+import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
+import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
+
 public class SelectArchetypeEffect extends AbstractGameEffect {
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
@@ -43,11 +46,12 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 System.out.println("Full list of archetypes was selected from: " + abstractArchetype.archetypeCards);
                 System.out.println("All the archetype effects should have triggered, adding to the card list");
                 System.out.println("This is the card list:");
-                System.out.println(abstractArchetype.UsedArchetypesCombined);
+                removeDupes(UsedArchetypesCombined);
+                System.out.println(UsedArchetypesCombined);
                 System.out.println("Proceed reinit card pools:");
 
 
-                if (!abstractArchetype.UsedArchetypesCombined.isEmpty()) {
+                if (!UsedArchetypesCombined.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();

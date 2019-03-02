@@ -6,6 +6,8 @@ import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+import static archetypeAPI.patches.ArchetypeCardTags.SINGLE_CORE;
+
 public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
 
@@ -36,6 +38,7 @@ public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     public BasicSilentArchetypeSelectCard() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
+        tags.add(SINGLE_CORE);
     }
 
     @Override
