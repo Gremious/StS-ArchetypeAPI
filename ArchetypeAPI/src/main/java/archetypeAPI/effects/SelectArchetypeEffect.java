@@ -7,10 +7,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.cards.colorless.Shiv;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
@@ -19,8 +19,10 @@ import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
 public class SelectArchetypeEffect extends AbstractGameEffect {
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("theThief:TooltipNames");
+    public static final String UI_TEXT[] = uiStrings.TEXT;
 
-    public  SelectArchetypeEffect() {
+    public SelectArchetypeEffect() {
         this.duration = Settings.ACTION_DUR_FAST;
         cardsWereUsed = false;
         openedGridScreen = false;
@@ -35,7 +37,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 UsedArchetypesCombined.clear();
                 if (AbstractDungeon.player instanceof customCharacterArchetype) {
                     CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-                    AbstractDungeon.gridSelectScreen.open(cardg, 999, true, "Select Your Archetypes");
+                    AbstractDungeon.gridSelectScreen.open(cardg, 999, true, UI_TEXT[0]);
                     this.openedGridScreen = true;
                 } else {
                     switch (AbstractDungeon.player.chosenClass) {

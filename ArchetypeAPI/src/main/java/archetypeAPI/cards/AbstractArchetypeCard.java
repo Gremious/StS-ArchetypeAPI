@@ -1,12 +1,8 @@
 package archetypeAPI.cards;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardGroup;
 
 public abstract class AbstractArchetypeCard extends CustomCard {
-
 
     public AbstractArchetypeCard(final String id,
                                  final String name,
@@ -22,8 +18,6 @@ public abstract class AbstractArchetypeCard extends CustomCard {
     }
 
     public abstract void archetypeEffect();
-
-
 
 }
 
