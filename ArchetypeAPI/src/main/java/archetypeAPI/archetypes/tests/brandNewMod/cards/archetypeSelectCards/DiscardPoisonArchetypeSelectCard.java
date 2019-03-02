@@ -14,9 +14,8 @@ public class DiscardPoisonArchetypeSelectCard extends AbstractArchetypeCard {
 
     public static final String IMG = "archetypeAPIResources/images/ui/missing_texture.png";
 
-    public static final String NAME = "Test Arch Card";
-    public static final String DESCRIPTION = "Whenever you discard this card, apply !M! poison to a rando";
-    public static final String UPGRADE_DESCRIPTION = "Whenever you discard this card, apply !M! poison to a rando";
+    public static final String NAME = "Discard Poison Custom Cardpool";
+    public static final String DESCRIPTION = "Add the Discard Poison card to your Card Draft Pool.";
 
     // /TEXT DECLARATION/
 

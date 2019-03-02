@@ -1,17 +1,16 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.ArchetypeAPI;
 import archetypeAPI.archetypes.abstractArchetype;
-import archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards.DiscardPoisonArchetypeSelectCard;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import com.badlogic.gdx.graphics.Color;
+import archetypeAPI.effects.SelectArchetypeEffect;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.neow.NeowEvent;
-import com.megacrit.cardcrawl.vfx.combat.RoomTintEffect;
+
+import static archetypeAPI.ArchetypeAPI.selectArchetypes;
 
 @SpirePatch(
         clz = NeowEvent.class,
@@ -22,57 +21,46 @@ import com.megacrit.cardcrawl.vfx.combat.RoomTintEffect;
 )
 
 public class CleanSelectArchetypesNeowPatch {
-    private static boolean gridSelectUsed;
 
     public static void Postfix(NeowEvent __instance, boolean isDone) {
         System.out.println("AAAAAAAAAAAAAAAAAAA");
         System.out.println("AAAAAAAAAAAAAAAAAAA");
         System.out.println("AAAAAAAAAAAAAAAAAAA");
-        System.out.println("AAAAAAAAAAAAAAAAAAA");
-        System.out.println("AAAAAAAAAAAAAAAAAAA");
-        System.out.println("AAAAAAAAAAAAAAAAAAA");
-        System.out.println("AAAAAAAAAAAAAAAAAAA");
-        abstractArchetype.archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
-        abstractArchetype.archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
-        abstractArchetype.archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
         System.out.println("Archetype cards: " + abstractArchetype.archetypeCards);
 
-        System.out.println("Settings.isEndless: " + Settings.isEndless);
-        System.out.println("AbstractDungeon.floorNum: " + AbstractDungeon.floorNum);
-        System.out.println("!Settings.isStandardRun(): " + Settings.isStandardRun());
-        System.out.println("Settings.isEndless: " + Settings.isEndless);
-        System.out.println("AbstractDungeon.floorNum: " + AbstractDungeon.floorNum);
-
         if (!Settings.isEndless || AbstractDungeon.floorNum <= 1) {
-            if (Settings.isStandardRun() && (!Settings.isEndless || AbstractDungeon.floorNum > 1)) {
+            if (Settings.isStandardRun() && (!Settings.isEndless || AbstractDungeon.floorNum > 1)) { // Only the first room ever
+                AbstractDungeon.topLevelEffectsQueue.add(new SelectArchetypeEffect());
 
-                if (!gridSelectUsed) {
+                if (selectArchetypes) {  // [1.] If you chose to select the archetypes
+                    System.out.println("You chose to select your archetype.");
                     AbstractDungeon.gridSelectScreen.open(abstractArchetype.archetypeCards, 999, true, "Select Your Archetypes");
-
-                    if (AbstractDungeon.gridSelectScreen.selectedCards.size() != 0) {
-
-                        System.out.println("Cards Selected: " + AbstractDungeon.gridSelectScreen.selectedCards);
-
+                    System.out.println("The Grid Select Screen has now opened.");
+                    System.out.println("The size of selected cards is: " + AbstractDungeon.gridSelectScreen.selectedCards.size());
+                    if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+                        System.out.println("Archetype cards selected: " + AbstractDungeon.gridSelectScreen.selectedCards);
                         for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
+                            System.out.println("c instance of check: " + (c instanceof AbstractArchetypeCard));
+
                             if (c instanceof AbstractArchetypeCard) {
                                 System.out.println("Card in Loop " + c);
                                 ((AbstractArchetypeCard) c).archetypeEffect();
-                                AbstractDungeon.topLevelEffects.add(new RoomTintEffect(Color.GREEN, 1.0f));
                             }
                         }
-
-                        gridSelectUsed = true;
                     }
-
-                }
-                if (ArchetypeAPI.selectArchetypes
-                        && !abstractArchetype.archetypeCards.isEmpty()
-                        && !abstractArchetype.UsedArchetypesCombined.isEmpty()) {
+                    AbstractDungeon.gridSelectScreen.selectedCards.clear();
                     System.out.println("Full list of archetypes was selected from: " + abstractArchetype.archetypeCards);
-                    System.out.println("Full list of cards added: " + abstractArchetype.UsedArchetypesCombined);
+                    System.out.println("All the archetype effects should have triggered, adding to the card list");
+                    System.out.println("This is the card list:");
+                    System.out.println(abstractArchetype.UsedArchetypesCombined);
+                    System.out.println("Proceed reinit card pools:");
+                    if (!abstractArchetype.UsedArchetypesCombined.isEmpty()) {
+                        CardCrawlGame.dungeon.initializeCardPools();
+                    }
+                } else {
 
-                    CardCrawlGame.dungeon.initializeCardPools();
                 }
+
             }
         }
     }

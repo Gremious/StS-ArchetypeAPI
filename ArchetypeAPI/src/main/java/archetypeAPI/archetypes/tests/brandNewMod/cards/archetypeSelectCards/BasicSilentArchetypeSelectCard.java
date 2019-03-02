@@ -1,5 +1,6 @@
 package archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards;
 
+import archetypeAPI.archetypes.abstractArchetype;
 import archetypeAPI.archetypes.theSilent.basicSilent;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,13 +11,12 @@ public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     // TEXT DECLARATION
 
-    public static final String ID = "DiscardPoisonTestCard";
+    public static final String ID = "BasicTestCard";
 
     public static final String IMG = "archetypeAPIResources/images/ui/missing_texture.png";
 
-    public static final String NAME = "Test Arch Card";
-    public static final String DESCRIPTION = "Whenever you discard this card, apply !M! poison to a rando";
-    public static final String UPGRADE_DESCRIPTION = "Whenever you discard this card, apply !M! poison to a rando";
+    public static final String NAME = "Basic Silent";
+    public static final String DESCRIPTION = "Add the Basic Archetype to your Card Draft Pool.";
 
     // /TEXT DECLARATION/
 

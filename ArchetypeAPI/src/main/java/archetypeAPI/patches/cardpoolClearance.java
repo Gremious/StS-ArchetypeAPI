@@ -10,10 +10,9 @@ public class cardpoolClearance {
 
         tmpPool.removeIf(card -> {
                     boolean idCheckBool = true;
-                    System.out.println("oo this is inside a lambda fansy");
-                    System.out.println("We are going to remove " + card);
+                    System.out.println("We will check if this card fits our card pool requirements: " + card);
                     for (AbstractCard c : replaceWith) {
-                        System.out.println("If it's ID is not equal to the ID of " + c);
+                      System.out.println("If it's ID is not equal to the ID of " + c);
                         if (card.cardID.equals(c.cardID)) {
                             idCheckBool = false;
                         }
