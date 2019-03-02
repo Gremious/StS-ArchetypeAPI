@@ -23,11 +23,9 @@ public abstract class abstractArchetype {
 
     public abstractArchetype(String archetypeFile, boolean useArchetype) {
         this.useArchetype = useArchetype;
-
         if (useArchetype) {
             addCardsFromArchetypes(archetypeFile);
         }
-        removeDupes(UsedArchetypesCombined);
     }
 
     public static void addCardsFromArchetypes(String archetypeFile) {

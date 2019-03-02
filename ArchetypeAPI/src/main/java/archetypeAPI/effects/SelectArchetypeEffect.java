@@ -20,7 +20,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
 
-    public SelectArchetypeEffect() {
+    public  SelectArchetypeEffect() {
         this.duration = Settings.ACTION_DUR_FAST;
         cardsWereUsed = false;
         openedGridScreen = false;
@@ -35,7 +35,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 UsedArchetypesCombined.clear();
                 if (AbstractDungeon.player instanceof customCharacterArchetype) {
                     CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-
                     AbstractDungeon.gridSelectScreen.open(cardg, 999, true, "Select Your Archetypes");
                     this.openedGridScreen = true;
                 } else {
@@ -65,7 +64,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             }
         } else {
             if (!cardsWereUsed) {
-                System.out.println("The size of selected cards is: " + AbstractDungeon.gridSelectScreen.selectedCards.size());
                 if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                     for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                         if (c instanceof AbstractArchetypeCard) {

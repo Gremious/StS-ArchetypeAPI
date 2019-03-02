@@ -1,17 +1,21 @@
 package archetypeAPI.effects;
 
 import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.cards.AbstractArchetypeCard;
 import archetypeAPI.characters.customCharacterArchetype;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.util.ArrayList;
 
+import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
+import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
 import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
 import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
@@ -25,6 +29,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
     @Override
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
+            UsedArchetypesCombined.clear();
             ArrayList<AbstractCard> randomArchetypes = new ArrayList<>();
             CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
@@ -126,6 +131,26 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         System.out.println("If top one is false, and bottom one isn't a base-game character, something is really wrong.");
                         break;
                 }
+
+                for (AbstractCard c : list.group) {
+                    if (c instanceof AbstractArchetypeCard) {
+                        System.out.println("Activating " + c);
+                        ((AbstractArchetypeCard) c).archetypeEffect();
+                    }
+                }
+
+                System.out.println("All the archetype effects should have triggered, adding to the card list");
+                System.out.println("This is the card list pre-dupe removal:");
+                System.out.println(UsedArchetypesCombined);
+                System.out.println("This is the card list post-dupe removal:");
+                removeDupes(UsedArchetypesCombined);
+                System.out.println("Writing to card pools.");
+
+
+                if (!UsedArchetypesCombined.isEmpty()) {
+                    CardCrawlGame.dungeon.initializeCardPools();
+                }
+
             }
 
             tickDuration();
