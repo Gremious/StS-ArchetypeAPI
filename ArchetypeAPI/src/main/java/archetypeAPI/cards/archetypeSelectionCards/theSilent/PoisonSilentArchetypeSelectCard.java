@@ -31,7 +31,7 @@ public class PoisonSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        poisonSilent poisonSilent = new poisonSilent(true);
+        poisonSilent poisonSilent = new poisonSilent();
     }
 
 

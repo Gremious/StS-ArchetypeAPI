@@ -31,7 +31,7 @@ public class ShivSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        shivSilent basicSilent = new shivSilent(true);
+        shivSilent basicSilent = new shivSilent();
     }
 
 

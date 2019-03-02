@@ -32,7 +32,7 @@ public class DiscardSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        discardSilent discardSilent = new discardSilent(true);
+        discardSilent discardSilent = new discardSilent();
     }
 
 
