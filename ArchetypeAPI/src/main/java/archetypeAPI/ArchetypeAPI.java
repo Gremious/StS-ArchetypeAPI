@@ -11,7 +11,6 @@ import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.interfaces.EditCardsSubscriber;
-import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -21,7 +20,6 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
-import com.megacrit.cardcrawl.localization.UIStrings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,7 +30,6 @@ import java.util.Properties;
 
 @SpireInitializer
 public class ArchetypeAPI implements
-        EditStringsSubscriber,
         PostInitializeSubscriber,
         EditCardsSubscriber {
     public static final Logger logger = LogManager.getLogger(ArchetypeAPI.class.getName());
@@ -126,20 +123,6 @@ public class ArchetypeAPI implements
         abstractArchetype.defectArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
     }
 
-    // ================ LOAD THE TEXT ===================
-
-    @Override
-    public void receiveEditStrings() {
-        logger.info("Beginning to edit strings");
-
-        // UI Strings
-        BaseMod.loadCustomStringsFile(UIStrings.class,
-                getModID() + "Resources/localization/eng/" + getModID() + "-UI-Strings.json");
-
-        logger.info("Done edittting strings");
-    }
-
-    // ================ /LOAD THE TEXT/ ===================
 
     // this adds "ModName:" before the ID of any card/relic/power etc.
     // in order to avoid conflicts if any other mod uses the same ID.

@@ -3,15 +3,20 @@ package archetypeAPI.effects;
 import archetypeAPI.archetypes.abstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import archetypeAPI.characters.customCharacterArchetype;
+import archetypeAPI.jsonClasses.uiStrings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
 import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
@@ -19,13 +24,16 @@ import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
 public class SelectArchetypeEffect extends AbstractGameEffect {
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("theThief:TooltipNames");
-    public static final String UI_TEXT[] = uiStrings.TEXT;
+    private String gridSelectText;
 
     public SelectArchetypeEffect() {
         this.duration = Settings.ACTION_DUR_FAST;
         cardsWereUsed = false;
         openedGridScreen = false;
+
+        InputStream in = abstractArchetype.class.getResourceAsStream("/archetypeAPIResources/localization/eng/archetypeAPI-UI-Strings.json");
+        uiStrings gridSelectText = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), uiStrings.class);
+        this.gridSelectText = gridSelectText.TEXT;
     }
 
     @Override
@@ -35,22 +43,24 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 tickDuration();
             } else if (!openedGridScreen) {
                 UsedArchetypesCombined.clear();
+
+
                 if (AbstractDungeon.player instanceof customCharacterArchetype) {
                     CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-                    AbstractDungeon.gridSelectScreen.open(cardg, 999, true, UI_TEXT[0]);
+                    AbstractDungeon.gridSelectScreen.open(cardg, 999, true, gridSelectText);
                     this.openedGridScreen = true;
                 } else {
                     switch (AbstractDungeon.player.chosenClass) {
                         case IRONCLAD:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.ironcladArchetypeSelectCards, 999, true, "Select Your Archetypes");
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.ironcladArchetypeSelectCards, 999, true, gridSelectText);
                             this.openedGridScreen = true;
                             break;
                         case THE_SILENT:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.silentArchetypeSelectCards, 999, true, "Select Your Archetypes");
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.silentArchetypeSelectCards, 999, true, gridSelectText);
                             this.openedGridScreen = true;
                             break;
                         case DEFECT:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.defectArchetypeSelectCards, 999, true, "Select Your Archetypes");
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.defectArchetypeSelectCards, 999, true, gridSelectText);
                             this.openedGridScreen = true;
                             break;
                         default:

@@ -1,12 +1,3 @@
 {
-  "archetypeAPI:UI": {
-    "TEXT": [
-      "Select Your Archetypes!"
-    ]
-  },
-  "archetypeAPI:Flavor": {
-    "TEXT": [
-      "Select Your Archetypes!"
-    ]
-  }
+  "TEXT": "Select Your Archetypes!"
 }
