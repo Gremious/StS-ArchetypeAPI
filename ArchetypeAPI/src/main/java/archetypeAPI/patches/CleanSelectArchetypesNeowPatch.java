@@ -5,10 +5,13 @@ import archetypeAPI.cards.AbstractArchetypeCard;
 import archetypeAPI.effects.SelectArchetypeEffect;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.neow.NeowEvent;
+
+import java.util.ArrayList;
 
 import static archetypeAPI.ArchetypeAPI.selectArchetypes;
 
@@ -58,9 +61,24 @@ public class CleanSelectArchetypesNeowPatch {
                         CardCrawlGame.dungeon.initializeCardPools();
                     }
                 } else {
+                    ArrayList<AbstractCard> randomArchetypes = new ArrayList<>();
+                    CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
+                    for (AbstractCard c : abstractArchetype.archetypeCards.group) {
+                        //if c has tag
+                        list.addToTop(c);
+                    }
+
+                    while (randomArchetypes.size() < 1) {
+                        AbstractCard c = list.getRandomCard(true);
+                        if (!randomArchetypes.contains(c)) {
+                            randomArchetypes.add(c);
+                        } else if (randomArchetypes.containsAll(list.group)) {
+                            System.out.println("Added every single archetype");
+                            break;
+                        }
+                    }
                 }
-
             }
         }
     }
