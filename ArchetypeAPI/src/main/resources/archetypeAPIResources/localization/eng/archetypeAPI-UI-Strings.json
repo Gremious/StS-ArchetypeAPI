@@ -1,3 +1,11 @@
 {
-  "TEXT": "Select Your Archetypes!"
+  "archetypeAPI:Flavor": {
+    "TEXT": [
+      "Select Your Archetypes!",
+      "Add the Basic Archetype to your Card Draft Pool.",
+      "Add the Discard Archetype to your Card Draft Pool.",
+      "Add the Poison Archetype to your Card Draft Pool.",
+      "Add the Shiv Archetype to your Card Draft Pool."
+    ]
+  }
 }

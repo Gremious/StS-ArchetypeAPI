@@ -16,8 +16,8 @@ public class DiscardSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     public static final String ID = "archetypeAPI:BasicSilentArchetypeSelectCard";
     public static final String IMG = "archetypeAPIResources/images/ui/missing_texture.png";
-    public static final String NAME = "Basic Silent";
-    public static final String DESCRIPTION = "Add the Basic Archetype to your Card Draft Pool.";
+    public static final String NAME = "Discard Silent";
+    public static final String DESCRIPTION = "Add the Discard Archetype to your Card Draft Pool.";
 
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:Flavor");
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
@@ -39,7 +39,7 @@ public class DiscardSilentArchetypeSelectCard extends AbstractArchetypeCard {
     @Override
     public List<TooltipInfo> getCustomTooltips() {
         List<TooltipInfo> tips = new ArrayList<>();
-        tips.add(new TooltipInfo(FLAVOR_STRINGS[0], FLAVOR_STRINGS[1]));
+        tips.add(new TooltipInfo(FLAVOR_STRINGS[0], FLAVOR_STRINGS[2]));
         return tips;
     }
 

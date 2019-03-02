@@ -31,7 +31,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
         cardsWereUsed = false;
         openedGridScreen = false;
 
-        InputStream in = abstractArchetype.class.getResourceAsStream("/archetypeAPIResources/localization/eng/archetypeAPI-UI-Strings.json");
+        InputStream in = abstractArchetype.class.getResourceAsStream("/archetypeAPIResources/localization/eng/gridSelect-Strings.json");
         uiStrings gridSelectText = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), uiStrings.class);
         this.gridSelectText = gridSelectText.TEXT;
     }

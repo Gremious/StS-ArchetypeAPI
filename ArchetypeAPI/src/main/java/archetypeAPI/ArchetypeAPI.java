@@ -108,11 +108,11 @@ public class ArchetypeAPI implements
     // =============== / POST-INITIALIZE/ =================
     public void loadArchetypeSelectCards() {
         // The Ironclad:
-
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
+
         // The Silent:
         abstractArchetype.silentArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.silentArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
