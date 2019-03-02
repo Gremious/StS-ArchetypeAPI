@@ -14,15 +14,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public abstract class abstractArchetype {
-    public static CardGroup archetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-
     public static CardGroup silentArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     public static CardGroup ironcladArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     public static CardGroup defectArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-
     public static ArrayList<AbstractCard> UsedArchetypesCombined = new ArrayList<>();
     private boolean useArchetype;
+
     public abstractArchetype(String archetypeFile, boolean useArchetype) {
         this.useArchetype = useArchetype;
 

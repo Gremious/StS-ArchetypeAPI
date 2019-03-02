@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.colorless.Shiv;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -34,6 +35,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 UsedArchetypesCombined.clear();
                 if (AbstractDungeon.player instanceof customCharacterArchetype) {
                     CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
+
                     AbstractDungeon.gridSelectScreen.open(cardg, 999, true, "Select Your Archetypes");
                     this.openedGridScreen = true;
                 } else {
@@ -54,6 +56,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                             System.out.println("Archetype selection effect says: ???????????????");
                             System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
                             System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
+                            System.out.println("If top one is false, and bottom one isn't a base-game character, something is really wrong.");
                             break;
                     }
 
