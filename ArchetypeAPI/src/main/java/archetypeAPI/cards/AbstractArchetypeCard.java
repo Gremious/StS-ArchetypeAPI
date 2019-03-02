@@ -1,6 +1,7 @@
 package archetypeAPI.cards;
 
 import basemod.abstracts.CustomCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 
 public abstract class AbstractArchetypeCard extends CustomCard {
 
@@ -19,4 +20,6 @@ public abstract class AbstractArchetypeCard extends CustomCard {
     }
 
     public abstract void archetypeEffect();
+
+
 }

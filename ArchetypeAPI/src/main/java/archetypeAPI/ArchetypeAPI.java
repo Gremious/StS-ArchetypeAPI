@@ -1,6 +1,5 @@
 package archetypeAPI;
 
-import archetypeAPI.actions.ui.SelectArchetypeAction;
 import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
 import archetypeAPI.archetypes.theSilent.basicSilent;
 import archetypeAPI.util.IDCheckDontTouchPls;
@@ -8,11 +7,9 @@ import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
-import basemod.ReflectionHacks;
 import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
-import basemod.interfaces.StartGameSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,30 +17,25 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
-import com.megacrit.cardcrawl.screens.charSelect.CharacterSelectScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Properties;
 
 @SpireInitializer
 public class ArchetypeAPI implements
         EditStringsSubscriber,
         PostInitializeSubscriber,
-        EditCardsSubscriber,
-        StartGameSubscriber {
+        EditCardsSubscriber {
     public static final Logger logger = LogManager.getLogger(ArchetypeAPI.class.getName());
     private static String modID;
+
 
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "Archetype API";
@@ -105,7 +97,6 @@ public class ArchetypeAPI implements
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            resetCharSelect();
         });
         settingsPanel.addUIElement(selectArchetypesButton);
 
@@ -115,10 +106,7 @@ public class ArchetypeAPI implements
 
     // =============== / POST-INITIALIZE/ =================
 
-    public void resetCharSelect() {
-        ((ArrayList<CharacterOption>) ReflectionHacks.getPrivate(CardCrawlGame.mainMenuScreen.charSelectScreen, CharacterSelectScreen.class, "options")).clear();
-        CardCrawlGame.mainMenuScreen.charSelectScreen.initialize();
-    }
+
     // ================ LOAD THE TEXT ===================
 
     @Override
@@ -189,17 +177,5 @@ public class ArchetypeAPI implements
 
     // ====== YOU CAN EDIT AGAIN ======
 
-    @Override
-    public void receiveStartGame() {
-        ArchetypeAPI.archetypeCards.addToTop(new DiscardPoisonTestCard());
 
-        AbstractDungeon.actionManager.addToTop(new SelectArchetypeAction());
-    }
-
-    public static CardGroup archetypeCards;
-
-    static {
-        archetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        //archetypeCards.addToTop();
-    }
 }
