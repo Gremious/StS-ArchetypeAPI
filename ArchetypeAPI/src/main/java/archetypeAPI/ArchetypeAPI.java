@@ -1,5 +1,6 @@
 package archetypeAPI;
 
+import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonArchetypeSelectCard;
 import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
 import archetypeAPI.archetypes.theSilent.basicSilent;
 import archetypeAPI.util.IDCheckDontTouchPls;
@@ -35,12 +36,12 @@ public class ArchetypeAPI implements
         EditCardsSubscriber {
     public static final Logger logger = LogManager.getLogger(ArchetypeAPI.class.getName());
     private static String modID;
-
+    public static CardGroup archetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "Archetype API";
     private static final String AUTHOR = "Gremious";
-    private static final String DESCRIPTION = "An API for Slay the Spire to sort/select/add/generate card Archetypes in basegame classes.";
+    private static final String DESCRIPTION = "An API for Slay the Spire to sort/select/add/generate card Archetypes in game classes.";
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
 
     public static Properties archetypeSettingsDefaults = new Properties();
@@ -131,6 +132,7 @@ public class ArchetypeAPI implements
 
     @Override
     public void receiveEditCards() {
+        ArchetypeAPI.archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
         BaseMod.addCard(new DiscardPoisonTestCard());
     }
 
