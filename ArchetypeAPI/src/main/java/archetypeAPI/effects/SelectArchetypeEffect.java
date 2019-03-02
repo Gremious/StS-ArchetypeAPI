@@ -25,11 +25,10 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             if (this.openedGridScreen && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                 tickDuration();
-            } else {
+            } else if (!openedGridScreen) {
                 AbstractDungeon.gridSelectScreen.open(abstractArchetype.archetypeCards, 999, true, "Select Your Archetypes");
                 this.openedGridScreen = true;
             }
-
         } else {
             if (!cardsWereUsed) {
                 System.out.println("The size of selected cards is: " + AbstractDungeon.gridSelectScreen.selectedCards.size());
