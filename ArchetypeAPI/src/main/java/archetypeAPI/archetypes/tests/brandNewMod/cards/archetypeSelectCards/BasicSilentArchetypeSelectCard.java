@@ -1,12 +1,11 @@
 package archetypeAPI.archetypes.tests.brandNewMod.cards.archetypeSelectCards;
 
-import archetypeAPI.archetypes.abstractArchetype;
 import archetypeAPI.archetypes.theSilent.basicSilent;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import static archetypeAPI.patches.ArchetypeCardTags.SINGLE_CORE;
+import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
 public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
@@ -38,7 +37,7 @@ public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     public BasicSilentArchetypeSelectCard() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        tags.add(SINGLE_CORE);
+        tags.add(SINGLE);
     }
 
     @Override

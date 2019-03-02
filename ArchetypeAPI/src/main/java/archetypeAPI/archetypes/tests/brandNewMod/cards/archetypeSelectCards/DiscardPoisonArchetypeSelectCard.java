@@ -5,7 +5,7 @@ import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-import static archetypeAPI.patches.ArchetypeCardTags.SINGLE_CORE;
+import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
 public class DiscardPoisonArchetypeSelectCard extends AbstractArchetypeCard {
 
@@ -37,7 +37,7 @@ public class DiscardPoisonArchetypeSelectCard extends AbstractArchetypeCard {
 
     public DiscardPoisonArchetypeSelectCard() {
         super(ID, NAME, IMG, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        tags.add(SINGLE_CORE);
+        tags.add(SINGLE);
     }
 
     @Override

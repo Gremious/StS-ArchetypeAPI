@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public class ArchetypeCardTags {
     @SpireEnum
-    public static AbstractCard.CardTags SINGLE_CORE;
+    public static AbstractCard.CardTags SINGLE;
     // For single/core archetypes. Cards that say "poison" and only add the poison archetype and nothing more.
     // KEEP IN MIND THAT IF THE PLAYER DOESN'T HAVE THE "CHOOSE ARCHETYPES ON RUN START" OPTION SELECTED,
     // ONLY CARDS TAGGED WITH THIS WILL BE IN THE RANDOM AUTO-SELECT POOL. TAG UR CARDS.

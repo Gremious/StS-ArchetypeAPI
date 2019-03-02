@@ -1,6 +1,7 @@
 package archetypeAPI.patches;
 
 import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.characters.customCharacterArchetype;
 import archetypeAPI.effects.SelectArchetypeEffect;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -12,7 +13,7 @@ import com.megacrit.cardcrawl.neow.NeowEvent;
 import java.util.ArrayList;
 
 import static archetypeAPI.ArchetypeAPI.selectArchetypes;
-import static archetypeAPI.patches.ArchetypeCardTags.SINGLE_CORE;
+import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
 @SpirePatch(
         clz = NeowEvent.class,
@@ -22,10 +23,9 @@ import static archetypeAPI.patches.ArchetypeCardTags.SINGLE_CORE;
         }
 )
 
-public class CleanSelectArchetypesNeowPatch {
+public class SelectArchetypesNeowPatch {
 
     public static void Postfix(NeowEvent __instance, boolean isDone) {
-        System.out.println("Archetype cards: " + abstractArchetype.archetypeCards);
         if (!Settings.isEndless || AbstractDungeon.floorNum <= 1) {
             if (Settings.isStandardRun() && (!Settings.isEndless || AbstractDungeon.floorNum > 1)) { // Only the first room ever
 
@@ -34,10 +34,41 @@ public class CleanSelectArchetypesNeowPatch {
                 } else {
                     ArrayList<AbstractCard> randomArchetypes = new ArrayList<>();
                     CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-
-                    for (AbstractCard c : abstractArchetype.archetypeCards.group) {
-                        if (c.hasTag(SINGLE_CORE)) {
-                            list.addToTop(c);
+                    if (AbstractDungeon.player instanceof customCharacterArchetype) {
+                        CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
+                        for (AbstractCard c : cardg.group) {
+                            if (c.hasTag(SINGLE)) {
+                                list.addToTop(c);
+                            }
+                        }
+                    } else {
+                        switch (AbstractDungeon.player.chosenClass) {
+                            case IRONCLAD:
+                                for (AbstractCard c : abstractArchetype.ironcladArchetypeCards.group) {
+                                    if (c.hasTag(SINGLE)) {
+                                        list.addToTop(c);
+                                    }
+                                }
+                                break;
+                            case THE_SILENT:
+                                for (AbstractCard c : abstractArchetype.silentArchetypeCards.group) {
+                                    if (c.hasTag(SINGLE)) {
+                                        list.addToTop(c);
+                                    }
+                                }
+                                break;
+                            case DEFECT:
+                                for (AbstractCard c : abstractArchetype.defectArchetypeCards.group) {
+                                    if (c.hasTag(SINGLE)) {
+                                        list.addToTop(c);
+                                    }
+                                }
+                                break;
+                            default:
+                                System.out.println("Archetype selection patch says: ???????????????");
+                                System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
+                                System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
+                                break;
                         }
                     }
 

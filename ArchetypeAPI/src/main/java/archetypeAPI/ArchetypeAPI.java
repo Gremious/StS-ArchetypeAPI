@@ -28,7 +28,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
-import static archetypeAPI.archetypes.abstractArchetype.archetypeCards;
+import static archetypeAPI.archetypes.abstractArchetype.silentArchetypeCards;
 
 @SpireInitializer
 public class ArchetypeAPI implements
@@ -132,8 +132,8 @@ public class ArchetypeAPI implements
     @Override
     public void receiveEditCards() {
         // Add Archetype Selection Cards
-        archetypeCards.addToTop(new BasicSilentArchetypeSelectCard());
-        archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
+        silentArchetypeCards.addToTop(new BasicSilentArchetypeSelectCard());
+        silentArchetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
 
         BaseMod.addCard(new DiscardPoisonTestCard());
     }

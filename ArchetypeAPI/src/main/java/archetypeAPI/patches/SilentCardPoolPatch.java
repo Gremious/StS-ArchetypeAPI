@@ -1,6 +1,5 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.archetypes.abstractArchetype;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.TheSilent;
@@ -20,12 +19,7 @@ public class SilentCardPoolPatch {
     )
 
     public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
-        System.out.println("START ARCHETYPE PATCH");
-
-    //    cardpoolClearance.replaceCardpool(tmpPool, abstractArchetype.UsedArchetypesCombined);
-
-        System.out.println("The entire final list of cards (tmpPool) is: " + tmpPool);
-        System.out.println("END ARCHETYPE PATCH");
+     
     }
 
     private static class Locator extends SpireInsertLocator {

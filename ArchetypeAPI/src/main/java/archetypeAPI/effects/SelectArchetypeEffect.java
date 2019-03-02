@@ -2,9 +2,11 @@ package archetypeAPI.effects;
 
 import archetypeAPI.archetypes.abstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
+import archetypeAPI.characters.customCharacterArchetype;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -29,8 +31,34 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             if (this.openedGridScreen && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                 tickDuration();
             } else if (!openedGridScreen) {
-                AbstractDungeon.gridSelectScreen.open(abstractArchetype.archetypeCards, 999, true, "Select Your Archetypes");
-                this.openedGridScreen = true;
+                UsedArchetypesCombined.clear();
+                if (AbstractDungeon.player instanceof customCharacterArchetype) {
+                    CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
+                    AbstractDungeon.gridSelectScreen.open(cardg, 999, true, "Select Your Archetypes");
+                    this.openedGridScreen = true;
+                } else {
+                    switch (AbstractDungeon.player.chosenClass) {
+                        case IRONCLAD:
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.ironcladArchetypeCards, 999, true, "Select Your Archetypes");
+                            this.openedGridScreen = true;
+                            break;
+                        case THE_SILENT:
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.silentArchetypeCards, 999, true, "Select Your Archetypes");
+                            this.openedGridScreen = true;
+                            break;
+                        case DEFECT:
+                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.defectArchetypeCards, 999, true, "Select Your Archetypes");
+                            this.openedGridScreen = true;
+                            break;
+                        default:
+                            System.out.println("Archetype selection effect says: ???????????????");
+                            System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
+                            System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
+                            break;
+                    }
+
+                }
+
             }
         } else {
             if (!cardsWereUsed) {
@@ -43,17 +71,17 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                         }
                     }
                 }
-                System.out.println("Full list of archetypes was selected from: " + abstractArchetype.archetypeCards);
                 System.out.println("All the archetype effects should have triggered, adding to the card list");
-                System.out.println("This is the card list:");
-                removeDupes(UsedArchetypesCombined);
+                System.out.println("This is the card list pre-dupe removal:");
                 System.out.println(UsedArchetypesCombined);
-                System.out.println("Proceed reinit card pools:");
-
+                System.out.println("This is the card list post-dupe removal:");
+                removeDupes(UsedArchetypesCombined);
+                System.out.println("Writing to card pools.");
 
                 if (!UsedArchetypesCombined.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
+
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
                 cardsWereUsed = true;
             }
