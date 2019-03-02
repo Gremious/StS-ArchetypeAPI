@@ -1,5 +1,7 @@
+/*
 package archetypeAPI.patches;
 
+import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonArchetypeSelectCard;
 import archetypeAPI.archetypes.tests.brandNewMod.cards.DiscardPoisonTestCard;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -18,16 +20,13 @@ import static archetypeAPI.ArchetypeAPI.selectArchetypes;
 )
 
 public class SelectArchetypesNeowPatch {
-    /*  @SpireInsertPatch(
-              locator = Locator.class
-      )*/
-    @SpirePostfixPatch
-    public static void dailyBlessingPatch(NeowEvent __instance) {
+
+    public static void Postfix(NeowEvent __instance) {
         CardGroup archetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         System.out.println("NEOW ARCHETYPE LOG PATCH START");
-        archetypeCards.addToTop(new DiscardPoisonTestCard());
-        archetypeCards.addToTop(new DiscardPoisonTestCard());
-        archetypeCards.addToTop(new DiscardPoisonTestCard());
+        archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
+        archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
+        archetypeCards.addToTop(new DiscardPoisonArchetypeSelectCard());
 
 
         System.out.println("Select Archetypes Options is: " + selectArchetypes);
@@ -68,3 +67,4 @@ public class SelectArchetypesNeowPatch {
 
 
 
+*/
