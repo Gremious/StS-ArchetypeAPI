@@ -14,7 +14,7 @@ import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 public class PoisonSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     public static final String ID = "archetypeAPI:BasicSilentArchetypeSelectCard";
-    public static final String IMG = "archetypeAPIResources/images/ui/missing_texture.png";
+    public static final String IMG = "archetypeAPIResources/images/cards/catalyst.png";
     public static final String NAME = "Poison Silent";
     public static final String DESCRIPTION = "Add the Poison Archetype to your Card Draft Pool.";
 

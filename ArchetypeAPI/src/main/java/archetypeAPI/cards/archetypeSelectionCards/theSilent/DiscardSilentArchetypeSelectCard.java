@@ -15,7 +15,7 @@ import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 public class DiscardSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     public static final String ID = "archetypeAPI:BasicSilentArchetypeSelectCard";
-    public static final String IMG = "archetypeAPIResources/images/ui/missing_texture.png";
+    public static final String IMG = "archetypeAPIResources/images/cards/reflex.png";
     public static final String NAME = "Discard Silent";
     public static final String DESCRIPTION = "Add the Discard Archetype to your Card Draft Pool.";
 

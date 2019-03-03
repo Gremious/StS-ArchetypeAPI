@@ -14,7 +14,7 @@ import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     public static final String ID = "archetypeAPI:BasicSilentArchetypeSelectCard";
-    public static final String IMG = "archetypeAPIResources/images/ui/missing_texture.png";
+    public static final String IMG = "archetypeAPIResources/images/cards/adrenaline.png";
     public static final String NAME = "Basic Silent";
     public static final String DESCRIPTION = "Add the Basic Archetype to your Card Draft Pool.";
 
