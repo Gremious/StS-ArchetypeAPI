@@ -1,5 +1,5 @@
 {
-  "archetypeAPI:BasicDefect": {
+  "archetypeAPI:BasicIronclad": {
     "NAME": "Basic",
     "CARD_IDS": [
       "Anger",
@@ -12,7 +12,6 @@
       "Shrug it Off",
       "Sword Boomerang",
       "Thunderclap",
-      "True Grit",
       "Warcry",
       "Battle Trance",
       "Carnage",
@@ -24,7 +23,6 @@
       "Ghostly Armor",
       "Infernal Blade",
       "Intimidate",
-      "Pummel",
       "Rage",
       "Rampage",
       "Searing Blow",
@@ -36,7 +34,6 @@
       "Bludgeon",
       "Double Tap",
       "Feed",
-      "Impervious",
       "Offering",
       "Reaper"
     ]

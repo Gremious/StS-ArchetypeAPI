@@ -1,17 +1,19 @@
 {
-  "archetypeAPI:BasicDefect": {
-    "NAME": "Basic",
+  "archetypeAPI:BlockIronclad": {
+    "NAME": "Block",
     "CARD_IDS": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "", 
-      ""
+      "Armaments",
+      "Body Slam",
+      "Shrug it Off",
+      "True Grit",
+      "Entrench",
+      "Flame Barrier",
+      "Ghostly Armor",
+      "Metallicize",
+      "Power Through",
+      "Barricade",
+      "Impervious",
+      "Juggernaut"
     ]
   }
 }

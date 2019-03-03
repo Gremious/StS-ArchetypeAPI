@@ -1,17 +1,11 @@
 {
-  "archetypeAPI:BasicDefect": {
-    "NAME": "Basic",
+  "archetypeAPI:StrikeIronclad": {
+    "NAME": "Strike",
     "CARD_IDS": [
+      "Perfected Strike",
       "Pommel Strike",
       "Twin Strike",
-      "Wild Strike",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "", 
-      ""
+      "Wild Strike"
     ]
   }
 }

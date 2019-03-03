@@ -1,17 +1,31 @@
 {
-  "archetypeAPI:BasicDefect": {
-    "NAME": "Basic",
+  "archetypeAPI:ExhaustIronclad": {
+    "NAME": "Exhaust",
     "CARD_IDS": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "", 
-      ""
+      "Havoc",
+      "True Grit",
+      "Warcry",
+      "Burning Pact",
+      "Corruption",
+      "Disarm",
+      "Feel No Pain",
+      "Infernal Blade",
+      "Intimidate",
+      "Pummel",
+      "Second Wind",
+      "Seeing Red",
+      "Sentinel",
+      "Sever Soul",
+      "Shockwave",
+      "Dark Embrace",
+      "Exhume",
+      "Feed",
+      "Fiend Fire",
+      "Impervious",
+      "Offering",
+      "Reaper",
+      "Ghostly Armor",
+      "Carnage"
     ]
   }
 }

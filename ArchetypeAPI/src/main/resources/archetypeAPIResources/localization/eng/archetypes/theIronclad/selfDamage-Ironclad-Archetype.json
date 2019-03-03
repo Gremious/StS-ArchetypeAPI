@@ -1,17 +1,14 @@
 {
-  "archetypeAPI:BasicDefect": {
-    "NAME": "Basic",
+  "archetypeAPI:SelfDamageIronclad": {
+    "NAME": "Self-Damage",
     "CARD_IDS": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "", 
-      ""
+      "Blood for Blood",
+      "Bloodletting",
+      "Combust",
+      "Hemokinesis",
+      "Rupture",
+      "Brutality",
+      "Offering"
     ]
   }
 }

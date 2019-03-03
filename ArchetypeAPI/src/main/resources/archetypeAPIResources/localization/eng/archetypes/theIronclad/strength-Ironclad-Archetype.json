@@ -1,17 +1,18 @@
 {
-  "archetypeAPI:BasicDefect": {
-    "NAME": "Basic",
+  "archetypeAPI:StrengthIronclad": {
+    "NAME": "Strength",
     "CARD_IDS": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "", 
-      ""
+      "Flex",
+      "Heavy Blade",
+      "Disarm",
+      "Inflame",
+      "Rupture",
+      "Spot Weakness",
+      "Demon Form",
+      "Limit Break",
+      "Sword Boomerang",
+      "Pummel",
+      "Whirlwind"
     ]
   }
 }
