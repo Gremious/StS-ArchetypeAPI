@@ -2,7 +2,7 @@
   "modid": "archetypeapi",
   "name": "Archetype API",
   "author_list": ["Gremious"],
-  "credits": "Huge huge huge thanks to kio for helping me figure out gson, Jin for making the selection screens actually work, fiiiiilth for neow patching help, and all of #modding for being nice ^_^ ",
+  "credits": "Huge huge huge thanks to kio for helping me figure out gson, Jin for making the selection screens actually work, fiiiiilth for neow patching help, Vex for archetype card decision, and all of #modding for being nice ^_^ ",
 
   "description": "An API for Slay the Spire to sort/select/add/generate card Archetypes in basegame classes.",
   "version": "${project.version}",

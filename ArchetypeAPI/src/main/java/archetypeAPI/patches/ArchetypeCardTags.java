@@ -7,7 +7,7 @@ public class ArchetypeCardTags {
     @SpireEnum
     public static AbstractCard.CardTags BASIC;
     // For custom characters, tag the archetype selection card of the non-archetype cards/cards you want always included with this.
-    // THE ARCHETYPE TAGGED WITH THIS WILL *ALWAYS* BE ADDED TO THE CARDPOOL.
+    // THE ARCHETYPE TAGGED WITH THIS WILL *ALWAYS* BE ADDED TO THE CARDPOOL WHEN ROLLED RANDOMLY.
     // This is also to make sure you load at least a minimal number of cards. So make sure that pool adds at least 1 of each type and rarity.
 
     public static AbstractCard.CardTags SINGLE;

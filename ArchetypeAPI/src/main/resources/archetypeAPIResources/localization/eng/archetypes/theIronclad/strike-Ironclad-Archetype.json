@@ -1,0 +1,17 @@
+{
+  "archetypeAPI:BasicDefect": {
+    "NAME": "Basic",
+    "CARD_IDS": [
+      "Pommel Strike",
+      "Twin Strike",
+      "Wild Strike",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "", 
+      ""
+    ]
+  }
+}

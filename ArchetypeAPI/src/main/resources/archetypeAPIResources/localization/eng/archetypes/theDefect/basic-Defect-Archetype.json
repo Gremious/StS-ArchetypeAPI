@@ -1,0 +1,8 @@
+{
+  "archetypeAPI:BasicDefect": {
+    "NAME": "Basic",
+    "CARD_IDS": [
+      "Phantasmal Killer"
+    ]
+  }
+}
