@@ -91,7 +91,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                                 list.addToTop(c);
                             }
 
-                            while (randomArchetypes.size() < 4) {
+                            while (randomArchetypes.size() < 5) {
                                 AbstractCard ca = list.getRandomCard(true);
                                 if (!randomArchetypes.contains(ca)) {
                                     randomArchetypes.add(ca);

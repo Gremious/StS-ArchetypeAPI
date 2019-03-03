@@ -1,0 +1,10 @@
+{
+  "archetypeAPI:ShivSilent": {
+    "NAME": "Block",
+    "CARD_IDS": [
+      "Dodge and Roll",
+      "Footwork",
+      "Blur"
+    ]
+  }
+}
