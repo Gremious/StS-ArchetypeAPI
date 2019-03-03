@@ -1,10 +1,7 @@
 package archetypeAPI;
 
 import archetypeAPI.archetypes.abstractArchetype;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.BasicSilentArchetypeSelectCard;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.DiscardSilentArchetypeSelectCard;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.PoisonSilentArchetypeSelectCard;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.ShivSilentArchetypeSelectCard;
+import archetypeAPI.cards.archetypeSelectionCards.theSilent.*;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
@@ -16,6 +13,7 @@ import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
@@ -108,6 +106,7 @@ public class ArchetypeAPI implements
 
     // =============== / POST-INITIALIZE/ =================
     public void loadArchetypeSelectCards() {
+
         // The Ironclad:
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
@@ -119,6 +118,7 @@ public class ArchetypeAPI implements
         abstractArchetype.silentArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.silentArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.silentArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.silentArchetypeSelectCards.addToTop(new BlockSilentArchetypeSelectCard().makeCopy());
 
         // The Defect:
         abstractArchetype.defectArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
