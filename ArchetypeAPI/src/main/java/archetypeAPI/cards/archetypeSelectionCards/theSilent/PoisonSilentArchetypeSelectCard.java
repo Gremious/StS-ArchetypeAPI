@@ -22,10 +22,11 @@ public class PoisonSilentArchetypeSelectCard extends AbstractArchetypeCard {
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
 
     public static final CardColor COLOR = CardColor.GREEN;
+    public static final CardType TYPE = CardType.SKILL;
 
 
     public PoisonSilentArchetypeSelectCard() {
-        super(ID, NAME, IMG, DESCRIPTION, COLOR);
+        super(ID, NAME, IMG, DESCRIPTION, TYPE, COLOR);
         tags.add(SINGLE);
     }
 

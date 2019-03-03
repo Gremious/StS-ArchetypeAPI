@@ -9,8 +9,9 @@ public abstract class AbstractArchetypeCard extends CustomCard {
                                  final String name,
                                  final String img,
                                  final String rawDescription,
+                                 final CardType type,
                                  final CardColor color) {
-        super(id, name, img, -2, rawDescription, CardType.SKILL, color, CardRarity.SPECIAL, CardTarget.NONE);
+        super(id, name, img, -2, rawDescription, type, color, CardRarity.SPECIAL, CardTarget.NONE);
     }
 
     public abstract void archetypeEffect();

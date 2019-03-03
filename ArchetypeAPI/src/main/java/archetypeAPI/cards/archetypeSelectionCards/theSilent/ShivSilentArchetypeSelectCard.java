@@ -3,6 +3,7 @@ package archetypeAPI.cards.archetypeSelectionCards.theSilent;
 import archetypeAPI.archetypes.theSilent.shivSilent;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.cards.colorless.Shiv;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
@@ -14,7 +15,7 @@ import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 public class ShivSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     public static final String ID = "archetypeAPI:BasicSilentArchetypeSelectCard";
-    public static final String IMG = "archetypeAPIResources/images/ui/missing_texture.png";
+    public static final String IMG = "colorless/attack/shiv.png";
     public static final String NAME = "Shiv Silent";
     public static final String DESCRIPTION = "Add the Shiv Archetype to your Card Draft Pool.";
 
@@ -22,10 +23,10 @@ public class ShivSilentArchetypeSelectCard extends AbstractArchetypeCard {
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
 
     public static final CardColor COLOR = CardColor.GREEN;
-
+    public static final CardType TYPE = CardType.ATTACK;
 
     public ShivSilentArchetypeSelectCard() {
-        super(ID, NAME, IMG, DESCRIPTION, COLOR);
+        super(ID, NAME, IMG, DESCRIPTION, TYPE, COLOR);
         tags.add(SINGLE);
     }
 
