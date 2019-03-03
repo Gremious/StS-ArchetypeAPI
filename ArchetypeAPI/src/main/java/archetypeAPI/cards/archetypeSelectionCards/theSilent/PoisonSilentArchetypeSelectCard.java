@@ -39,10 +39,13 @@ public class PoisonSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
 
     @Override
-    public List<TooltipInfo> getCustomTooltips() {
-        List<TooltipInfo> tips = new ArrayList<>();
-        tips.add(new TooltipInfo(FLAVOR_STRINGS[0], FLAVOR_STRINGS[3]));
-        return tips;
+    public String getTooltipName() {
+        return FLAVOR_STRINGS[0];
+    }
+
+    @Override
+    public String getTooltipDesc() {
+        return FLAVOR_STRINGS[3];
     }
 
 }

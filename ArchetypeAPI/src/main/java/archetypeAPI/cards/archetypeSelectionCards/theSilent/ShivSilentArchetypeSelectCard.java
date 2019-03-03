@@ -36,12 +36,15 @@ public class ShivSilentArchetypeSelectCard extends AbstractArchetypeCard {
         shivSilent shivSilent = new shivSilent();
     }
 
+    @Override
+    public String getTooltipName() {
+        return FLAVOR_STRINGS[0];
+    }
 
     @Override
-    public List<TooltipInfo> getCustomTooltips() {
-        List<TooltipInfo> tips = new ArrayList<>();
-        tips.add(new TooltipInfo(FLAVOR_STRINGS[0], FLAVOR_STRINGS[4]));
-        return tips;
+    public String getTooltipDesc() {
+        return FLAVOR_STRINGS[4];
     }
+
 
 }

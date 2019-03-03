@@ -18,7 +18,7 @@ public abstract class abstractArchetype {
     public static CardGroup ironcladArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     public static CardGroup defectArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-    public static ArrayList<AbstractCard> UsedArchetypesCombined = new ArrayList<>();
+    public static CardGroup UsedArchetypesCombined = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
     public abstractArchetype(String archetypeFile) {
         addCardsFromArchetypes(archetypeFile);
@@ -42,29 +42,24 @@ public abstract class abstractArchetype {
                 currentArchetype.add(CardLibrary.getCopy(ID));
             }
 
-            UsedArchetypesCombined.addAll(currentArchetype);
+            UsedArchetypesCombined.group.addAll(currentArchetype);
         }
     }
 
 
-    public static ArrayList<AbstractCard> getArchetypes() {
+    public static CardGroup getArchetypes() {
         removeDupes(UsedArchetypesCombined);
         return UsedArchetypesCombined;
     }
 
-    public static ArrayList<AbstractCard> removeDupes(ArrayList<AbstractCard> listToRemoveDupesFrom) {
+    public static CardGroup removeDupes(CardGroup listToRemoveDupesFrom) {
         Set<AbstractCard> dupeRemoveSet = new LinkedHashSet<>();
 
-        dupeRemoveSet.addAll(listToRemoveDupesFrom);
+        dupeRemoveSet.addAll(listToRemoveDupesFrom.group);
         listToRemoveDupesFrom.clear();
-        listToRemoveDupesFrom.addAll(dupeRemoveSet);
+        listToRemoveDupesFrom.group.addAll(dupeRemoveSet);
 
         return listToRemoveDupesFrom;
     }
-
-    public static boolean canSoloUse() {
-        return 2 == 2;
-    }
-
 
 }

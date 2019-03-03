@@ -1,15 +1,10 @@
 package archetypeAPI.cards.archetypeSelectionCards.theSilent;
 
 import archetypeAPI.archetypes.theSilent.blockSilent;
-import archetypeAPI.archetypes.theSilent.shivSilent;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
@@ -39,10 +34,12 @@ public class BlockSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
 
     @Override
-    public List<TooltipInfo> getCustomTooltips() {
-        List<TooltipInfo> tips = new ArrayList<>();
-        tips.add(new TooltipInfo(FLAVOR_STRINGS[0], FLAVOR_STRINGS[5]));
-        return tips;
+    public String getTooltipName() {
+        return FLAVOR_STRINGS[0];
     }
 
+    @Override
+    public String getTooltipDesc() {
+        return FLAVOR_STRINGS[5];
+    }
 }
