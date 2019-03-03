@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.colorless.Shiv;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -43,8 +44,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 tickDuration();
             } else if (!openedGridScreen) {
                 UsedArchetypesCombined.clear();
-
-
                 if (AbstractDungeon.player instanceof customCharacterArchetype) {
                     CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
                     AbstractDungeon.gridSelectScreen.open(cardg, 999, true, gridSelectText);
@@ -85,15 +84,21 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                     }
                 }
                 System.out.println("All the archetype effects should have triggered, adding to the card list");
-                System.out.println("This is the card list pre-dupe removal:");
+                System.out.println("This is the card list pre-dupe removal: Amount: " + UsedArchetypesCombined.size() + " Cards: ");
                 System.out.println(UsedArchetypesCombined);
-                System.out.println("This is the card list post-dupe removal:");
                 removeDupes(UsedArchetypesCombined);
+                System.out.println("This is the card list post-dupe removal:  Amount:  " + UsedArchetypesCombined.size() + " Cards: ");
+                System.out.println(UsedArchetypesCombined);
                 System.out.println("Writing to card pools.");
 
                 if (!UsedArchetypesCombined.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
+
+                for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
+                    c.stopGlowing();
+                }
+
 
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
                 cardsWereUsed = true;

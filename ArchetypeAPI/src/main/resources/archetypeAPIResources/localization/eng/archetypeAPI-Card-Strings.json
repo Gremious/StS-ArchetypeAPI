@@ -1,0 +1,18 @@
+{
+  "archetypeAPI:BasicSilentArchetypeSelectCard": {
+    "NAME": "Basic",
+    "DESCRIPTION": "Add the Basic Archetype to your Card Draft Pool."
+  },
+  "archetypeAPI:DiscardSilentArchetypeSelectCard": {
+    "NAME": "Discard",
+    "DESCRIPTION": "Add the Discard Archetype to your Card Draft Pool."
+  },
+  "archetypeAPI:PoisonSilentArchetypeSelectCard": {
+    "NAME": "Poison",
+    "DESCRIPTION": "Add the Poison Archetype to your Card Draft Pool."
+  },
+  "archetypeAPI:ShivSilentArchetypeSelectCard": {
+    "NAME": "Shiv",
+    "DESCRIPTION": "Add the Shiv Archetype to your Card Draft Pool."
+  }
+}

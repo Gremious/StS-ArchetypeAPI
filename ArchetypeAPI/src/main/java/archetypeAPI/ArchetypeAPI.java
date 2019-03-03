@@ -21,6 +21,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -135,6 +136,10 @@ public class ArchetypeAPI implements
         // UI Strings
         BaseMod.loadCustomStringsFile(UIStrings.class,
                 getModID() + "Resources/localization/eng/" + getModID() + "-UI-Strings.json");
+
+        // Card Strings
+        BaseMod.loadCustomStringsFile(CardStrings.class,
+                getModID() + "Resources/localization/eng/" + getModID() + "-Card-Strings.json");
 
         logger.info("Done edittting strings");
     }

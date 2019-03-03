@@ -2,7 +2,7 @@
   "archetypeAPI:DiscardSilent": {
     "NAME": "Discard",
     "CARD_IDS": [
-      "Sneaky Strike",
+      "Underhanded Strike",
       "Eviscerate",
       "Dagger Throw",
       "Prepared",
@@ -11,10 +11,9 @@
       "Tools of the Trade",
       "Concentrate",
       "Calculated Gamble",
-      "All-Out Attack",
+      "All Out Attack",
       "Acrobatics",
       "Tactician",
-      "Reflex",
       "Reflex"
     ]
   }
