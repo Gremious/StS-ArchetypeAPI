@@ -61,4 +61,10 @@ public abstract class abstractArchetype {
 
         return listToRemoveDupesFrom;
     }
+
+    public static boolean canSoloUse() {
+        return 2 == 2;
+    }
+
+
 }
