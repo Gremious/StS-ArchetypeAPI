@@ -14,10 +14,11 @@
     "TEXT": [
       "Select Your Archetypes!",
       "Add the Basic Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
-      "Add the Block Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
-      "Add the Exhaust Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
-      "Add the Self-Damage Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
-      "Add the Strike Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering"
+      "Add the Block Archetype to your Card Draft Pool. NL Features: #gArmaments, #bFlame #bBarrier, #yImpervious",
+      "Add the Exhaust Archetype to your Card Draft Pool. NL Features: #gHavoc, #bCorruption, #yDark #yEmbrace",
+      "Add the Strength Archetype to your Card Draft Pool. NL Features: #gHeavy #gBlade, #bInflame, #yLimit #yBreak",
+      "Add the Self-Damage Archetype to your Card Draft Pool. NL Features: #bBlood #bfor #bBlood, #bHemokinesis, #yBrutality",
+      "Add the Strike Archetype to your Card Draft Pool. NL Features: #bPommel #bStrike,  #bWild #bStrike, #bPerfected #bStrike,"
     ]
   }
 }
