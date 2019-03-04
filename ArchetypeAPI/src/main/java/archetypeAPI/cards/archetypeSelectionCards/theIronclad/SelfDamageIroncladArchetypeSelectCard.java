@@ -1,6 +1,7 @@
 package archetypeAPI.cards.archetypeSelectionCards.theIronclad;
 
 import archetypeAPI.archetypes.theIronclad.BasicIronclad;
+import archetypeAPI.archetypes.theIronclad.SelfDamageIronclad;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -10,9 +11,9 @@ import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
 public class SelfDamageIroncladArchetypeSelectCard extends AbstractArchetypeCard {
 
-    public static final String ID = "archetypeAPI:BasicIroncladArchetypeSelectCard";
+    public static final String ID = "archetypeAPI:SelfDamageIroncladArchetypeSelectCard";
 
-    public static final String IMG = "archetypeAPIResources/images/cards/offering.png";
+    public static final String IMG = "archetypeAPIResources/images/cards/blood_for_blood.png";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -22,7 +23,7 @@ public class SelfDamageIroncladArchetypeSelectCard extends AbstractArchetypeCard
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
 
     public static final CardColor COLOR = CardColor.RED;
-    public static final CardType TYPE = CardType.SKILL;
+    public static final CardType TYPE = CardType.ATTACK;
 
     public SelfDamageIroncladArchetypeSelectCard() {
         super(ID, NAME, IMG, DESCRIPTION, TYPE, COLOR);
@@ -31,7 +32,7 @@ public class SelfDamageIroncladArchetypeSelectCard extends AbstractArchetypeCard
 
     @Override
     public void archetypeEffect() {
-        BasicIronclad basicIronclad = new BasicIronclad();
+        SelfDamageIronclad SelfDamageIronclad = new SelfDamageIronclad();
     }
 
     @Override
@@ -41,7 +42,7 @@ public class SelfDamageIroncladArchetypeSelectCard extends AbstractArchetypeCard
 
     @Override
     public String getTooltipDesc() {
-        return FLAVOR_STRINGS[1];
+        return FLAVOR_STRINGS[5];
     }
 
 }
