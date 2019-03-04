@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
 import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
 import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
+import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
     private boolean cardsWereUsed;
@@ -135,17 +136,10 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
         }
     }
 
-    private void CheckPoolsInner(AbstractCard c) {
-        System.out.println("Starting a check.");
-
+    private void CheckPools() {
         ArrayList<AbstractCard> commonCheck = new ArrayList<>();
         ArrayList<AbstractCard> uncommonCheck = new ArrayList<>();
         ArrayList<AbstractCard> rareCheck = new ArrayList<>();
-        CardGroup temp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        temp.group.addAll(UsedArchetypesCombined.group);
-
-        System.out.println("the card pool right now is: " + temp.toString() + " and that's not enough cards.");
-
 
         for (AbstractCard ca : UsedArchetypesCombined.group) {
             if (ca.rarity == AbstractArchetypeCard.CardRarity.COMMON) commonCheck.add(ca);
@@ -153,80 +147,30 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             if (ca.rarity == AbstractArchetypeCard.CardRarity.RARE) rareCheck.add(ca);
         }
 
-        System.out.println("Common Check Size: " + commonCheck.size());
-        System.out.println("uncommon Check   Size: " + uncommonCheck.size());
-        System.out.println("rare Check   Size: " + rareCheck.size());
-
         if (commonCheck.size() < 3) {
             needReinst = true;
-            UsedArchetypesCombined.clear();
-            ((AbstractArchetypeCard) c).archetypeEffect();
 
             for (int i = commonCheck.size(); i < 3; i++) {
-                temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.COMMON));
+                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.COMMON);
             }
-            UsedArchetypesCombined.clear();
-            UsedArchetypesCombined.group.addAll(temp.group);
 
         }
         if (uncommonCheck.size() < 3) {
             needReinst = true;
-            UsedArchetypesCombined.clear();
-            ((AbstractArchetypeCard) c).archetypeEffect();
 
-            for (int i = uncommonCheck.size(); i < 3; i++) {
-                temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.UNCOMMON));
+            for (int i = commonCheck.size(); i < 3; i++) {
+                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
             }
-
-            UsedArchetypesCombined.clear();
-            UsedArchetypesCombined.group.addAll(temp.group);
 
         }
         if (rareCheck.size() < 3) {
             needReinst = true;
-            UsedArchetypesCombined.clear();
-            ((AbstractArchetypeCard) c).archetypeEffect();
-
-            for (int i = rareCheck.size(); i < 3; i++) {
-                temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.RARE));
-            }
-
-            UsedArchetypesCombined.clear();
-            UsedArchetypesCombined.group.addAll(temp.group);
-        }
-    }
-
-    private void CheckPools() {
-        System.out.println("Check pool start");
-        System.out.println("Play class: " + AbstractDungeon.player.chosenClass.toString());
-
-        if (AbstractDungeon.player instanceof customCharacterArchetype) {
-            CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-            CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    list.addToTop(basicCheckCard);
-                }
-            }
-            if (!cardg.isEmpty()) {
-                CheckPoolsInner(cardg.getTopCard().makeCopy());
-            }
-        } else {
-            switch (AbstractDungeon.player.chosenClass) {
-                case IRONCLAD:
-                    CheckPoolsInner(new BasicIroncladArchetypeSelectCard().makeCopy());
-                    break;
-                case THE_SILENT:
-                    CheckPoolsInner(new BasicSilentArchetypeSelectCard().makeCopy());
-                    break;
-                case DEFECT:
-                    CheckPoolsInner(new BasicSilentArchetypeSelectCard().makeCopy());
-                    break;
-                default:
-                    break;
+            for (int i = commonCheck.size(); i < 3; i++) {
+                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.RARE);
             }
         }
     }
+
 
     @Override
     public void render(SpriteBatch spriteBatch) {

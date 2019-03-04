@@ -20,8 +20,8 @@ public class cardpoolClearance {
         tmpPool.removeIf(card -> {
                     boolean idCheckBool = true;
                     for (AbstractCard c : replaceWith.group) {
-                    //    System.out.println("Only keeping identical cards:");
-                    //    System.out.println("Card ID 1: " + card.cardID + " and Card ID 2: " + c.cardID);
+                        //    System.out.println("Only keeping identical cards:");
+                        //    System.out.println("Card ID 1: " + card.cardID + " and Card ID 2: " + c.cardID);
                         if (card.cardID.equals(c.cardID)) {
                             idCheckBool = false;
                         }
@@ -32,56 +32,25 @@ public class cardpoolClearance {
     }
 
 
-    private void extendSpecificRarityWithBasics(int by, AbstractCard.CardRarity rarity) {
-        CardGroup temp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        temp.group.addAll(UsedArchetypesCombined.group);
-        UsedArchetypesCombined.clear();
-        // Replace UsedArchetypesCombined with a temp group
-
-
+    public static void extendSpecificRarityWithBasics(int by, AbstractCard.CardRarity rarity) {
         if (AbstractDungeon.player instanceof customCharacterArchetype) {
             CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
 
             for (AbstractCard basicCheckCard : cardg.group) {
                 if (basicCheckCard.hasTag(BASIC)) {
-                    ((AbstractArchetypeCard) basicCheckCard).archetypeEffect();
+                    extendSpecificRarirtyInner(by, rarity, basicCheckCard);
                 }
             }
-
-            // Activate all BASIC cards
-
-            ArrayList<AbstractCard> mini = new ArrayList<>();
-            for (AbstractCard c : UsedArchetypesCombined.group) {
-                if (c.rarity == rarity) {
-                    mini.add(c);
-                }
-            }
-            UsedArchetypesCombined.group.clear();
-            UsedArchetypesCombined.group.addAll(mini);
-
-            // Keep only those of the specific Rarirty
-
-            for (int i = 0; i < by; i++) {
-                if (!temp.group.containsAll(UsedArchetypesCombined.group)) {
-                    temp.addToRandomSpot(UsedArchetypesCombined.getRandomCard(true));
-                } else {
-                    temp.addToRandomSpot(CardLibrary.getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng));
-                }
-            }
-            // Add a random basic card, unless we exhausted the pool of commons, then add a totally random card.
-
-            UsedArchetypesCombined.clear();
-            UsedArchetypesCombined.group.addAll(temp.group);
         } else {
             switch (AbstractDungeon.player.chosenClass) {
                 case IRONCLAD:
-                    new BasicIroncladArchetypeSelectCard().makeCopy();
+                    extendSpecificRarirtyInner(by, rarity, new BasicIroncladArchetypeSelectCard().makeCopy());
                     break;
                 case THE_SILENT:
-                    new BasicSilentArchetypeSelectCard().makeCopy();
+                    extendSpecificRarirtyInner(by, rarity, new BasicSilentArchetypeSelectCard().makeCopy());
                     break;
                 case DEFECT:
-                    new BasicSilentArchetypeSelectCard().makeCopy();
+                    extendSpecificRarirtyInner(by, rarity, new BasicSilentArchetypeSelectCard().makeCopy());
                     break;
                 default:
                     break;
@@ -89,4 +58,46 @@ public class cardpoolClearance {
         }
     }
 
+    public static void extendSpecificRarirtyInner(int by, AbstractCard.CardRarity rarity, AbstractCard basicArchetypeCard) {
+        CardGroup temp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        temp.group.addAll(UsedArchetypesCombined.group);
+        UsedArchetypesCombined.clear();
+
+        ((AbstractArchetypeCard) basicArchetypeCard).archetypeEffect();
+
+        ArrayList<AbstractCard> mini = new ArrayList<>();
+        for (AbstractCard c : UsedArchetypesCombined.group) {
+            if (c.rarity == rarity) {
+                mini.add(c);
+            }
+        }
+        UsedArchetypesCombined.group.clear();
+        UsedArchetypesCombined.group.addAll(mini);
+
+        // Keep only those of the specific Rarirty
+        int i = 0;
+        do {
+            if (!temp.group.containsAll(UsedArchetypesCombined.group)) {
+                AbstractCard c = UsedArchetypesCombined.getRandomCard(true);
+
+                if (!temp.contains(c)) {
+                    temp.addToRandomSpot(c);
+                    i++;
+                }
+
+            } else {
+                AbstractCard c = CardLibrary.getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng);
+                if (!temp.contains(c)) {
+                    temp.addToRandomSpot(c);
+                    i++;
+                }
+            }
+        } while (i < by);
+
+        // Add a random basic card, unless we exhausted the pool of commons, then add a totally random card.
+
+        UsedArchetypesCombined.clear();
+        UsedArchetypesCombined.group.addAll(temp.group);
+        // Replace UsedArchetypesCombined with a temp group
+    }
 }

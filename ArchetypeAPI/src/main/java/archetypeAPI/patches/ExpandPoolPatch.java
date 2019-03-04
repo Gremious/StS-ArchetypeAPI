@@ -1,10 +1,6 @@
 package archetypeAPI.patches;
 
 import archetypeAPI.archetypes.abstractArchetype;
-import archetypeAPI.cards.AbstractArchetypeCard;
-import archetypeAPI.cards.archetypeSelectionCards.theIronclad.BasicIroncladArchetypeSelectCard;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.BasicSilentArchetypeSelectCard;
-import archetypeAPI.characters.customCharacterArchetype;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -12,8 +8,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
 
-import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
-import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
+import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics;
 
 @SpirePatch(
         clz = AbstractDungeon.class,
@@ -42,16 +37,22 @@ public class ExpandPoolPatch {
         switch (rarity) {
             case COMMON:
                 if (commonCheck() < numCheck) {
-
+                    for (int i = commonCheck(); i < numCheck; i++) {
+                        extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.COMMON);
+                    }
                 }
             case UNCOMMON:
                 if (uncommonCheck() < numCheck) {
-
+                    for (int i = commonCheck(); i < numCheck; i++) {
+                        extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
+                    }
                 }
                 break;
             case RARE:
                 if (rareCheck() < numCheck) {
-
+                    for (int i = commonCheck(); i < numCheck; i++) {
+                        extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.RARE);
+                    }
                 }
                 break;
             default:
@@ -93,37 +94,6 @@ public class ExpandPoolPatch {
         return rares;
     }
 
-    private void addCommonCards() {
-        CardGroup temp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        temp.group.addAll(UsedArchetypesCombined.group);
-
-        if (AbstractDungeon.player instanceof customCharacterArchetype) {
-            UsedArchetypesCombined.clear();
-            CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    ((AbstractArchetypeCard) basicCheckCard).archetypeEffect();
-                }
-            }
-            temp.addToRandomSpot(UsedArchetypesCombined.getRandomCard(true, AbstractCard.CardRarity.COMMON));
-            UsedArchetypesCombined.clear();
-            UsedArchetypesCombined.group.addAll(temp.group);
-        } else {
-            switch (AbstractDungeon.player.chosenClass) {
-                case IRONCLAD:
-                    new BasicIroncladArchetypeSelectCard().makeCopy();
-                    break;
-                case THE_SILENT:
-                    new BasicSilentArchetypeSelectCard().makeCopy();
-                    break;
-                case DEFECT:
-                    new BasicSilentArchetypeSelectCard().makeCopy();
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
 
     private static class numCardsCheckLocator extends SpireInsertLocator {
         @Override
