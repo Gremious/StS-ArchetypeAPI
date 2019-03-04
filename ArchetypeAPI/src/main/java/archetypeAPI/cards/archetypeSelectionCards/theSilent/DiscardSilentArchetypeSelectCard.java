@@ -1,6 +1,6 @@
 package archetypeAPI.cards.archetypeSelectionCards.theSilent;
 
-import archetypeAPI.archetypes.theSilent.discardSilent;
+import archetypeAPI.archetypes.theSilent.DiscardSilent;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -29,7 +29,7 @@ public class DiscardSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        discardSilent discardSilent = new discardSilent();
+        DiscardSilent discardSilent = new DiscardSilent();
     }
 
 

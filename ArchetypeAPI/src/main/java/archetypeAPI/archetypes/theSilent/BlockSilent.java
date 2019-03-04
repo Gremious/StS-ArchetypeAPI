@@ -2,10 +2,10 @@ package archetypeAPI.archetypes.theSilent;
 
 import archetypeAPI.archetypes.abstractArchetype;
 
-public class blockSilent extends abstractArchetype {
+public class BlockSilent extends abstractArchetype {
     private static String archetypeFile = "archetypeAPIResources/localization/eng/archetypes/theSilent/block-Silent-Archetype.json";
 
-    public blockSilent() {
+    public BlockSilent() {
         super(archetypeFile);
     }
 }

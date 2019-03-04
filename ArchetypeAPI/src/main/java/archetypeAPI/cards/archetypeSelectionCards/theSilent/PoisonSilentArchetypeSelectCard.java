@@ -1,14 +1,10 @@
 package archetypeAPI.cards.archetypeSelectionCards.theSilent;
 
-import archetypeAPI.archetypes.theSilent.poisonSilent;
+import archetypeAPI.archetypes.theSilent.PoisonSilent;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
@@ -34,7 +30,7 @@ public class PoisonSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        poisonSilent poisonSilent = new poisonSilent();
+        PoisonSilent poisonSilent = new PoisonSilent();
     }
 
 

@@ -2,10 +2,10 @@ package archetypeAPI.archetypes.theIronclad;
 
 import archetypeAPI.archetypes.abstractArchetype;
 
-public class blockIronclad extends abstractArchetype {
+public class BlockIronclad extends abstractArchetype {
     private static String archetypeFile = "archetypeAPIResources/localization/eng/archetypes/theIronclad/block-Ironclad-Archetype.json";
 
-    public blockIronclad() {
+    public BlockIronclad() {
         super(archetypeFile);
     }
 }

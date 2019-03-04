@@ -1,7 +1,7 @@
 package archetypeAPI;
 
 import archetypeAPI.archetypes.abstractArchetype;
-import archetypeAPI.cards.archetypeSelectionCards.theIronclad.BasicIroncladArchetypeSelectCard;
+import archetypeAPI.cards.archetypeSelectionCards.theIronclad.*;
 import archetypeAPI.cards.archetypeSelectionCards.theSilent.*;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
@@ -110,9 +110,11 @@ public class ArchetypeAPI implements
 
         // The Ironclad:
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BasicIroncladArchetypeSelectCard().makeCopy());
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BlockIroncladArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new ExhaustIroncladArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new SelfDamageIroncladArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new StrengthIroncladArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new StrikeIroncladArchetypeSelectCard().makeCopy());
 
         // The Silent:
         abstractArchetype.silentArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());

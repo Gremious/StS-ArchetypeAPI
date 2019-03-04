@@ -2,10 +2,10 @@ package archetypeAPI.archetypes.theSilent;
 
 import archetypeAPI.archetypes.abstractArchetype;
 
-public class shivSilent extends abstractArchetype {
+public class ShivSilent extends abstractArchetype {
     private static String archetypeFile = "archetypeAPIResources/localization/eng/archetypes/theSilent/shiv-Silent-Archetype.json";
 
-    public shivSilent() {
+    public ShivSilent() {
         super(archetypeFile);
     }
 }

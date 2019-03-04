@@ -1,14 +1,10 @@
 package archetypeAPI.cards.archetypeSelectionCards.theSilent;
 
-import archetypeAPI.archetypes.theSilent.shivSilent;
+import archetypeAPI.archetypes.theSilent.ShivSilent;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import basemod.helpers.TooltipInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
@@ -33,7 +29,7 @@ public class ShivSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        shivSilent shivSilent = new shivSilent();
+        ShivSilent shivSilent = new ShivSilent();
     }
 
     @Override

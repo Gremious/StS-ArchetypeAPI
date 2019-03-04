@@ -13,8 +13,11 @@
   "archetypeAPI:FlavorIronclad": {
     "TEXT": [
       "Select Your Archetypes!",
-      "Add the Basic Archetype to your Card Draft Pool. NL Features:",
-      "Add this Archetype to your Card Draft Pool!"
+      "Add the Basic Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
+      "Add the Block Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
+      "Add the Exhaust Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
+      "Add the Self-Damage Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
+      "Add the Strike Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering"
     ]
   }
 }

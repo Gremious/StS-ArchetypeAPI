@@ -1,6 +1,6 @@
 package archetypeAPI.cards.archetypeSelectionCards.theSilent;
 
-import archetypeAPI.archetypes.theSilent.blockSilent;
+import archetypeAPI.archetypes.theSilent.BlockSilent;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -29,7 +29,7 @@ public class BlockSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        blockSilent blockSilent = new blockSilent();
+        BlockSilent blockSilent = new BlockSilent();
     }
 
 
