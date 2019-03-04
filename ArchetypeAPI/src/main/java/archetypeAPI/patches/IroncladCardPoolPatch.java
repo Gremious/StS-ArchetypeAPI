@@ -1,9 +1,9 @@
 package archetypeAPI.patches;
 
+import archetypeAPI.util.cardpoolClearance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.Ironclad;
-import com.megacrit.cardcrawl.characters.TheSilent;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import javassist.CtBehavior;
 

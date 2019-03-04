@@ -1,10 +1,9 @@
 package archetypeAPI.patches;
 
+import archetypeAPI.util.cardpoolClearance;
 import basemod.abstracts.CustomPlayer;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.Ironclad;
 
 import java.util.ArrayList;
 

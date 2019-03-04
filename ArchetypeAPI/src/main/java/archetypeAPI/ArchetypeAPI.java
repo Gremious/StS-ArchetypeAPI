@@ -14,7 +14,6 @@ import basemod.interfaces.PostInitializeSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
@@ -48,6 +47,7 @@ public class ArchetypeAPI implements
     public static Properties archetypeSettingsDefaults = new Properties();
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
     public static boolean selectArchetypes = false;
+
 
     public ArchetypeAPI() {
         logger.info("Subscribe to BaseMod hooks");

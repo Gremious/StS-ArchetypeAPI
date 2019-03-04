@@ -128,19 +128,11 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
         }
     }
 
-    @Override
-    public void render(SpriteBatch spriteBatch) {
-    }
-
     public void tickDuration() {
         this.duration -= Gdx.graphics.getDeltaTime();
         if (this.duration < 0.0F) {
             this.isDone = true;
         }
-    }
-
-    @Override
-    public void dispose() {
     }
 
     private void CheckPoolsInner(AbstractCard c) {
@@ -234,5 +226,13 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                     break;
             }
         }
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch) {
+    }
+
+    @Override
+    public void dispose() {
     }
 }
