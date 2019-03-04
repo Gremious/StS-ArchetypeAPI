@@ -2,6 +2,7 @@ package archetypeAPI.effects;
 
 import archetypeAPI.archetypes.abstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
+import archetypeAPI.cards.archetypeSelectionCards.theIronclad.BasicIroncladArchetypeSelectCard;
 import archetypeAPI.cards.archetypeSelectionCards.theSilent.BasicSilentArchetypeSelectCard;
 import archetypeAPI.characters.customCharacterArchetype;
 import com.badlogic.gdx.Gdx;
@@ -253,7 +254,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
         } else {
             switch (AbstractDungeon.player.chosenClass) {
                 case IRONCLAD:
-                    CheckPoolsInner(new BasicSilentArchetypeSelectCard().makeCopy());
+                    CheckPoolsInner(new BasicIroncladArchetypeSelectCard().makeCopy());
                     break;
                 case THE_SILENT:
                     CheckPoolsInner(new BasicSilentArchetypeSelectCard().makeCopy());

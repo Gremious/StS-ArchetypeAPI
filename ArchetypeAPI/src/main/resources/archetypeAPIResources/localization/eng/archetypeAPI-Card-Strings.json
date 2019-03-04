@@ -18,5 +18,9 @@
   "archetypeAPI:BlockSilentArchetypeSelectCard": {
     "NAME": "Dexterity",
     "DESCRIPTION": "Add the Dexterity Archetype to your Card Draft Pool."
+  },
+  "archetypeAPI:BasicIroncladArchetypeSelectCard": {
+    "NAME": "Basic",
+    "DESCRIPTION": "Add the Basic Archetype to your Card Draft Pool."
   }
 }

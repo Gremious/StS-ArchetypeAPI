@@ -1,10 +1,16 @@
 {
-  "archetypeAPI:ShivSilent": {
+  "archetypeAPI:BlockSilent": {
     "NAME": "Block",
     "CARD_IDS": [
       "Dodge and Roll",
       "Footwork",
-      "Blur"
+      "Blur",
+      "Deflect",
+      "Dash",
+      "Escape Plan",
+      "Leg Sweep",
+      "After Image",
+      "Cloak And Dagger"
     ]
   }
 }

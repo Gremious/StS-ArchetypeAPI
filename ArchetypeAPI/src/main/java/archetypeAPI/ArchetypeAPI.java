@@ -1,6 +1,7 @@
 package archetypeAPI;
 
 import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.cards.archetypeSelectionCards.theIronclad.BasicIroncladArchetypeSelectCard;
 import archetypeAPI.cards.archetypeSelectionCards.theSilent.*;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
@@ -108,7 +109,7 @@ public class ArchetypeAPI implements
     public void loadArchetypeSelectCards() {
 
         // The Ironclad:
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BasicIroncladArchetypeSelectCard().makeCopy());
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
