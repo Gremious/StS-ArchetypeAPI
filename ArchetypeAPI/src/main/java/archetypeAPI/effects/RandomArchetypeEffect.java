@@ -202,7 +202,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
             UsedArchetypesCombined.clear();
             ((AbstractArchetypeCard) c).archetypeEffect();
 
-            for (int i = 0; i < commonCheck.size(); i++) {
+            for (int i = commonCheck.size(); i < 3; i++) {
                 temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.COMMON));
             }
             UsedArchetypesCombined.clear();
@@ -214,7 +214,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
             UsedArchetypesCombined.clear();
             ((AbstractArchetypeCard) c).archetypeEffect();
 
-            for (int i = 0; i < uncommonCheck.size(); i++) {
+            for (int i = uncommonCheck.size(); i < 3; i++) {
                 temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.UNCOMMON));
             }
 
@@ -227,7 +227,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
             UsedArchetypesCombined.clear();
             ((AbstractArchetypeCard) c).archetypeEffect();
 
-            for (int i = 0; i < rareCheck.size(); i++) {
+            for (int i = rareCheck.size(); i < 3; i++) {
                 temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.RARE));
             }
 

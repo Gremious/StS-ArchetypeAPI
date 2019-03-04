@@ -102,10 +102,20 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                     c.stopGlowing();
                 }
 
+                System.out.println("CARD POOLS INITIALIZED ONCE, BACK TO EFFECT");
+                System.out.println("CARD POOLS INITIALIZED ONCE, BACK TO EFFECT");
+                System.out.println("CARD POOLS INITIALIZED ONCE, BACK TO EFFECT");
+
                 CheckPools();
+                System.out.println("Checked the pool, need to reinstantiate them: " + needReinst);
+                System.out.println("UsedArchetypesCombined is empty? " + UsedArchetypesCombined.isEmpty());
 
                 if (needReinst && !UsedArchetypesCombined.isEmpty()) {
                     System.out.println("Card Pool too small! Adding some basic cards.");
+                    System.out.println("Card Pool too small! Adding some basic cards.");
+                    System.out.println("Card Pool too small! Adding some basic cards.");
+                    System.out.println("New card pool is: " + UsedArchetypesCombined.group.toString());
+
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
 
@@ -133,11 +143,16 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
     }
 
     private void CheckPoolsInner(AbstractCard c) {
+        System.out.println("Starting a check.");
+
         ArrayList<AbstractCard> commonCheck = new ArrayList<>();
         ArrayList<AbstractCard> uncommonCheck = new ArrayList<>();
         ArrayList<AbstractCard> rareCheck = new ArrayList<>();
         CardGroup temp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         temp.group.addAll(UsedArchetypesCombined.group);
+
+        System.out.println("the card pool right now is: " + temp.toString() + " and that's not enough cards.");
+
 
         for (AbstractCard ca : UsedArchetypesCombined.group) {
             if (ca.rarity == AbstractArchetypeCard.CardRarity.COMMON) commonCheck.add(ca);
@@ -145,12 +160,16 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             if (ca.rarity == AbstractArchetypeCard.CardRarity.RARE) rareCheck.add(ca);
         }
 
+        System.out.println("Common Check Size: " + commonCheck.size());
+        System.out.println("uncommon Check   Size: " + uncommonCheck.size());
+        System.out.println("rare Check   Size: " + rareCheck.size());
+
         if (commonCheck.size() < 3) {
             needReinst = true;
             UsedArchetypesCombined.clear();
             ((AbstractArchetypeCard) c).archetypeEffect();
 
-            for (int i = 0; i < commonCheck.size(); i++) {
+            for (int i = commonCheck.size(); i < 3; i++) {
                 temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.COMMON));
             }
             UsedArchetypesCombined.clear();
@@ -162,7 +181,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             UsedArchetypesCombined.clear();
             ((AbstractArchetypeCard) c).archetypeEffect();
 
-            for (int i = 0; i < uncommonCheck.size(); i++) {
+            for (int i = uncommonCheck.size(); i < 3; i++) {
                 temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.UNCOMMON));
             }
 
@@ -175,7 +194,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             UsedArchetypesCombined.clear();
             ((AbstractArchetypeCard) c).archetypeEffect();
 
-            for (int i = 0; i < rareCheck.size(); i++) {
+            for (int i = rareCheck.size(); i < 3; i++) {
                 temp.addToTop(UsedArchetypesCombined.getRandomCard(false, AbstractCard.CardRarity.RARE));
             }
 
@@ -185,6 +204,8 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
     }
 
     private void CheckPools() {
+        System.out.println("Check pool start");
+        System.out.println("Play class: " + AbstractDungeon.player.chosenClass.toString());
 
         if (AbstractDungeon.player instanceof customCharacterArchetype) {
             CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
@@ -197,7 +218,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             if (!cardg.isEmpty()) {
                 CheckPoolsInner(cardg.getTopCard().makeCopy());
             }
-
         } else {
             switch (AbstractDungeon.player.chosenClass) {
                 case IRONCLAD:
@@ -213,6 +233,5 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                     break;
             }
         }
-
     }
 }
