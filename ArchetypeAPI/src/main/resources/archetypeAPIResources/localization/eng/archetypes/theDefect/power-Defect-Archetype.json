@@ -1,0 +1,19 @@
+{
+  "archetypeAPI:ClawDefect": {
+    "NAME": "Claw",
+    "CARD_IDS": [
+      "Machine Learning",
+      "Amplify",
+      "Self Repair",
+      "Hello World",
+      "Heatsinks",
+      "White Noise",
+      "Buffer",
+      "Echo Form",
+      "Creative AI",
+      "Force Field",
+      "Storm",
+      "Static Discharge?????"
+    ]
+  }
+}

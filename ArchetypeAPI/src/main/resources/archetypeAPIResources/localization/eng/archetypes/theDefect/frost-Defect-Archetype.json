@@ -1,0 +1,13 @@
+{
+  "archetypeAPI:FrostDefect": {
+    "NAME": "Frost",
+    "CARD_IDS": [
+      "Cold Snap",
+      "Coolheaded",
+      "Blizzard",
+      "Chill",
+      "Glacier",
+      "Rainbow"
+    ]
+  }
+}

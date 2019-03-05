@@ -1,0 +1,14 @@
+{
+  "archetypeAPI:LightningDefect": {
+    "NAME": "Lightning",
+    "CARD_IDS": [
+      "Ball Lightning",
+      "Static Discharge",
+      "Storm",
+      "Tempest",
+      "Electrodynamics",
+      "Rainbow",
+      "Thunder Strike"
+    ]
+  }
+}

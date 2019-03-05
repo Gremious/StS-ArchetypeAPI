@@ -1,0 +1,10 @@
+{
+  "archetypeAPI:DarkDefect": {
+    "NAME": "Dark",
+    "CARD_IDS": [
+      "Darkness",
+      "Doom and Gloom",
+      "Rainbow"
+    ]
+  }
+}

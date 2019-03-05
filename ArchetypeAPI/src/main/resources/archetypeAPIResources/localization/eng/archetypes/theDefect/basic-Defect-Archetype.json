@@ -2,7 +2,41 @@
   "archetypeAPI:BasicDefect": {
     "NAME": "Basic",
     "CARD_IDS": [
-      "Phantasmal Killer"
+      "Go for the Eyes",
+      "Hologram",
+      "Leap",
+      "Rebound",
+      "Stack",
+      "Steam Barrier",
+      "Streamline",
+      "Sweeping Beam",
+      "TURBO",
+      "Aggregate",
+      "Auto-Shields",
+      "Boot Sequence",
+      "Double Energy",
+      "Equilibrium",
+      "FTL",
+      "Genetic Algorithm",
+      "Glacier",
+      "Hello World",
+      "Melter",
+      "Overclock",
+      "Recycle",
+      "Reinforced Body",
+      "Reprogram",
+      "Rip and Tear",
+      "Self Repair",
+      "Skim",
+      "Sunder",
+      "White Noise",
+      "Buffer",
+      "Core Surge",
+      "Echo Form",
+      "Machine Learning",
+      "Reboot",
+      "Seek",
+      "Hyperbeam???????"
     ]
   }
 }

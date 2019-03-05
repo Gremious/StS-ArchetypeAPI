@@ -1,0 +1,9 @@
+{
+  "archetypeAPI:PlasmaDefect": {
+    "NAME": "Plasma",
+    "CARD_IDS": [
+      "Fusion",
+      "Meteor Strike"
+    ]
+  }
+}
