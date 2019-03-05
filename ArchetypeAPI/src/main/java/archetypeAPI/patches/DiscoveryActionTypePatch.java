@@ -36,7 +36,7 @@ public class DiscoveryActionTypePatch {
         }
 
         if (cleanCards.isEmpty()) {
-            CardsGet.populateTrulyFullCardList(AbstractDungeon.player.getCardColor());
+            CardsGet.populateTrulyFullClassCardList(AbstractDungeon.player.getCardColor());
         }
 
         switch (type) {
