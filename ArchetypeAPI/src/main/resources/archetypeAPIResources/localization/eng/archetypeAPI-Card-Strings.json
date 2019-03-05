@@ -43,6 +43,10 @@
     "NAME": "Strike",
     "DESCRIPTION": "Add the Strike Archetype to your Card Draft Pool."
   },
+  "archetypeAPI:BasicDefectArchetypeSelectCard": {
+    "NAME": "Basic",
+    "DESCRIPTION": "Add the Basic Archetype to your Card Draft Pool."
+  },
   "archetypeAPI:ClawDefectArchetypeSelectCard": {
     "NAME": "Claw",
     "DESCRIPTION": "Add the Claw Archetype to your Card Draft Pool."

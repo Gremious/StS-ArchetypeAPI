@@ -20,5 +20,18 @@
       "Add the Self-Damage Archetype to your Card Draft Pool. NL Features: #bBlood #bfor #bBlood, #bHemokinesis, #yBrutality",
       "Add the Strike Archetype to your Card Draft Pool. NL Features: #bPommel #bStrike,  #bWild #bStrike, #bPerfected #bStrike,"
     ]
+  },
+  "archetypeAPI:FlavorDefect": {
+    "TEXT": [
+      "Select Your Archetypes!",
+      "Add the Basic Archetype to your Card Draft Pool. NL Features: #gLeap, #bHello #bWorld, #yEcho #yForm",
+      "Add the Claw Archetype to your Card Draft Pool. NL Features: #gClaw, #bBoot #bSequence, #yAll #yFor #yOne",
+      "Add the Dark Archetype to your Card Draft Pool. NL Features: #bDarkness, #bDoom #band #bGloom, #Rainbow",
+      "Add the Frost Archetype to your Card Draft Pool. NL Features: #gCold #gSnap, #bGlacier, #bBlizzard",
+      "Add the Lightning Archetype to your Card Draft Pool. NL Features: #gBall #gLightning, #bTempest, #yThunder #yStrike",
+      "Add the Orb Support Archetype to your Card Draft Pool. NL Features: #gBarrage, #bLoop, #yHyperbeam,",
+      "Add the Plasma Archetype to your Card Draft Pool. NL Features: #gTURBO, #bLoop, #yMeteor #yStrike",
+      "Add the Power Archetype to your Card Draft Pool. NL Features: #gWhite #gNoise, #bForce #bField, #yCreative #yAI,"
+    ]
   }
 }
