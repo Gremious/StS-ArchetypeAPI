@@ -20,29 +20,31 @@ public abstract class abstractArchetype {
 
     public static CardGroup UsedArchetypesCombined = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-    public abstractArchetype(String archetypeFile) {
-        addCardsFromArchetypes(archetypeFile);
+    public abstractArchetype(ArrayList<String> archetypeFiles) {
+        addCardsFromArchetypes(archetypeFiles);
     }
 
-    public static void addCardsFromArchetypes(String archetypeFile) {
+    public static void addCardsFromArchetypes(ArrayList<String> archetypeFiles) {
         ArrayList<AbstractCard> currentArchetype = new ArrayList<>();
 
-        InputStream in = abstractArchetype.class.getResourceAsStream("/" + archetypeFile);
-        Type mapType = new TypeToken<Map<String, archetypeStringsClass>>() {
-        }.getType();
+        for (String archetypeFile : archetypeFiles) {
+            InputStream in = abstractArchetype.class.getResourceAsStream("/" + archetypeFile);
+            Type mapType = new TypeToken<Map<String, archetypeStringsClass>>() {
+            }.getType();
 
-        Map<String, archetypeStringsClass> allString = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), mapType);
+            Map<String, archetypeStringsClass> allString = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), mapType);
 
-        for (Map.Entry<String, archetypeStringsClass> entry : allString.entrySet()) {
-            System.out.println("Adding " + entry.getKey() + " to archetypes; Name: " + entry.getValue().NAME);
-            System.out.println("Adding Cards: " + Arrays.toString(entry.getValue().CARD_IDS));
+            for (Map.Entry<String, archetypeStringsClass> entry : allString.entrySet()) {
+                System.out.println("Adding " + entry.getKey() + " to archetypes; Name: " + entry.getValue().NAME);
+                System.out.println("Adding Cards: " + Arrays.toString(entry.getValue().CARD_IDS));
 
-            for (String ID : entry.getValue().CARD_IDS) {
-                System.out.println("Adding Card: " + ID);
-                currentArchetype.add(CardLibrary.getCopy(ID));
+                for (String ID : entry.getValue().CARD_IDS) {
+                    System.out.println("Adding Card: " + ID);
+                    currentArchetype.add(CardLibrary.getCopy(ID));
+                }
+
+                UsedArchetypesCombined.group.addAll(currentArchetype);
             }
-
-            UsedArchetypesCombined.group.addAll(currentArchetype);
         }
     }
 

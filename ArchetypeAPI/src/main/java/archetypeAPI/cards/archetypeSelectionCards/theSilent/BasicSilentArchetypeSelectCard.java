@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
+import static archetypeAPI.archetypes.theSilent.BasicSilent.basicSilentArchetypeFiles;
 import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
 public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
@@ -31,6 +32,7 @@ public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
+     //   basicSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/basic-Silent-Archetype.json");
         BasicSilent basicSilent = new BasicSilent();
     }
 

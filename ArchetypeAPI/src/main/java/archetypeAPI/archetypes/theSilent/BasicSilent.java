@@ -1,13 +1,14 @@
 package archetypeAPI.archetypes.theSilent;
 
 import archetypeAPI.archetypes.abstractArchetype;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+
+import java.util.ArrayList;
 
 public class BasicSilent extends abstractArchetype {
-    private static String archetypeFile = "archetypeAPIResources/localization/eng/archetypes/theSilent/basic-Silent-Archetype.json";
+
+    public static ArrayList<String> basicSilentArchetypeFiles = new ArrayList<>();
 
     public BasicSilent() {
-        super(archetypeFile);
+        super(basicSilentArchetypeFiles);
     }
 }
