@@ -157,9 +157,6 @@ public class ArchetypeAPI implements
 
         // The Defect:
         abstractArchetype.defectArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
     }
 
     // ================ LOAD THE TEXT ===================
