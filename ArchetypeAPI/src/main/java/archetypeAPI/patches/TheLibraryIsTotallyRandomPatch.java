@@ -18,6 +18,7 @@ public class TheLibraryIsTotallyRandomPatch {
             locator = Locator.class,
             localvars={"card"}
     )
+
     public static void insert(TheLibrary __instance, int buttonPressed, @ByRef AbstractCard[] card) {
         card[0] = CardsGet.getSuperRandomCard(AbstractDungeon.rollRarity()).makeCopy();
     }
