@@ -13,16 +13,16 @@ import static archetypeAPI.util.CardsGet.cleanCards;
 @SpirePatch(
         clz = AbstractDungeon.class,
         method = "returnTrulyRandomCardInCombat",
-        paramtypez = {}
+        paramtypez = {AbstractCard.CardType.class}
 )
 
-public class DiscoveryActionPatch {
+public class DiscoveryActionTypePatch {
     @SpireInsertPatch(
             locator = Locator.class
             , localvars = {"list"}
     )
 
-    public static void Insert(ArrayList<AbstractCard> list) {
+    public static void Insert(AbstractCard.CardType type, ArrayList<AbstractCard> list) {
         int attackCheck = 0;
         int skillCheck = 0;
         int powerCheck = 0;
@@ -39,38 +39,42 @@ public class DiscoveryActionPatch {
             CardsGet.populateTrulyFullCardList(AbstractDungeon.player.getCardColor());
         }
 
-        if (attackCheck < 3) {
-            while (attackCheck < ExpandPoolPatch.numCheck) {
-                AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.ATTACK, true);
-                if (!list.contains(c)) {
-                    list.add(c);
-                    attackCheck++;
+        switch (type) {
+            case ATTACK:
+                if (attackCheck < 3) {
+                    while (attackCheck < ExpandPoolPatch.numCheck) {
+                        AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.ATTACK, true);
+                        if (!list.contains(c)) {
+                            list.add(c);
+                            attackCheck++;
+                        }
+                    }
                 }
-            }
-        }
-
-        if (skillCheck < 3) {
-            while (skillCheck < ExpandPoolPatch.numCheck) {
-                AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.SKILL, true);
-                if (!list.contains(c)) {
-                    list.add(c);
-                    skillCheck++;
+                break;
+            case SKILL:
+                if (skillCheck < 3) {
+                    while (skillCheck < ExpandPoolPatch.numCheck) {
+                        AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.SKILL, true);
+                        if (!list.contains(c)) {
+                            list.add(c);
+                            skillCheck++;
+                        }
+                    }
                 }
-            }
-        }
-
-        if (powerCheck < 3) {
-            while (powerCheck < ExpandPoolPatch.numCheck) {
-                AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.POWER, true);
-                if (!list.contains(c)) {
-                    list.add(c);
-                    powerCheck++;
+                break;
+            case POWER:
+                if (powerCheck < 3) {
+                    while (powerCheck < ExpandPoolPatch.numCheck) {
+                        AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.POWER, true);
+                        if (!list.contains(c)) {
+                            list.add(c);
+                            powerCheck++;
+                        }
+                    }
                 }
-            }
+                break;
         }
-
     }
-
 
     private static class Locator extends SpireInsertLocator {
         @Override
