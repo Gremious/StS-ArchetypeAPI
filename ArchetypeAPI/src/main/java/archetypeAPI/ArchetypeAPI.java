@@ -29,7 +29,12 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
+import static archetypeAPI.archetypes.theIronclad.BasicIronclad.basicIroncladArchetypeFiles;
 import static archetypeAPI.archetypes.theSilent.BasicSilent.basicSilentArchetypeFiles;
+import static archetypeAPI.archetypes.theSilent.BlockSilent.blockSilentArchetypeFiles;
+import static archetypeAPI.archetypes.theSilent.DiscardSilent.discardSilentArchetypeFiles;
+import static archetypeAPI.archetypes.theSilent.PoisonSilent.poisonSilentArchetypeFiles;
+import static archetypeAPI.archetypes.theSilent.ShivSilent.shivSilentArchetypeFiles;
 
 @SpireInitializer
 public class ArchetypeAPI implements
@@ -112,20 +117,38 @@ public class ArchetypeAPI implements
 
         // The Ironclad:
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BasicIroncladArchetypeSelectCard().makeCopy());
+        basicIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/basic-Ironclad-Archetype.json");
+
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BlockIroncladArchetypeSelectCard().makeCopy());
+        basicIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/block-Ironclad-Archetype.json");
+
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new ExhaustIroncladArchetypeSelectCard().makeCopy());
+        basicIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/exhaust-Ironclad-Archetype.json");
+
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new SelfDamageIroncladArchetypeSelectCard().makeCopy());
+        basicIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/selfDamage-Ironclad-Archetype.json");
+
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new StrengthIroncladArchetypeSelectCard().makeCopy());
+        basicIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/strength-Ironclad-Archetype.json");
+
         abstractArchetype.ironcladArchetypeSelectCards.addToTop(new StrikeIroncladArchetypeSelectCard().makeCopy());
+        basicIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/strike-Ironclad-Archetype.json");
 
         // The Silent:
         abstractArchetype.silentArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
         basicSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/basic-Silent-Archetype.json");
 
-        abstractArchetype.silentArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
         abstractArchetype.silentArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
-        abstractArchetype.silentArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
+        poisonSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/poison-Silent-Archetype.json");
+
+        abstractArchetype.silentArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
+        shivSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/shiv-Silent-Archetype.json");
+
         abstractArchetype.silentArchetypeSelectCards.addToTop(new BlockSilentArchetypeSelectCard().makeCopy());
+        blockSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/block-Silent-Archetype.json");
+
+        abstractArchetype.silentArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/discard-Silent-Archetype.json");
 
         // The Defect:
         abstractArchetype.defectArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class BlockSilent extends abstractArchetype {
     public static ArrayList<String> blockSilentArchetypeFiles = new ArrayList<>();
 
-    private static String archetypeFile = "archetypeAPIResources/localization/eng/archetypes/theSilent/block-Silent-Archetype.json";
 
     public BlockSilent() {
         super(blockSilentArchetypeFiles);
