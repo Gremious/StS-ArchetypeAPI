@@ -32,8 +32,7 @@ public class ExpandPoolPatch {
             locator = fixCardPoolsLocator.class,
             localvars = {"rarity"}
     )
-    public static void fixCardPools(int numCards, AbstractCard.CardRarity rarity) {
-        numCheck = numCards;
+    public static void fixCardPools(AbstractCard.CardRarity rarity) {
         switch (rarity) {
             case COMMON:
                 if (commonCheck() < numCheck) {
