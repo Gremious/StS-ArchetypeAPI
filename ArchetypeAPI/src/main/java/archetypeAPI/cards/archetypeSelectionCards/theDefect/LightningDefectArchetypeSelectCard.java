@@ -42,7 +42,7 @@ public class LightningDefectArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public String getTooltipDesc() {
-        return FLAVOR_STRINGS[1];
+        return FLAVOR_STRINGS[5];
     }
 
 }
