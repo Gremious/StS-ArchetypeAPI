@@ -18,7 +18,7 @@ public class BasicDefectArchetypeSelectCard extends AbstractArchetypeCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:Flavor");
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:FlavorDefect");
 
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
 

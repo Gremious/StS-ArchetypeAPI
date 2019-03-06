@@ -10,14 +10,14 @@ import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
 public class DarkDefectArchetypeSelectCard extends AbstractArchetypeCard {
 
-    public static final String ID = "archetypeAPI:BasicDefectArchetypeSelectCard";
+    public static final String ID = "archetypeAPI:DarkDefectArchetypeSelectCard";
 
     public static final String IMG = "archetypeAPIResources/images/cards/adrenaline.png";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:Flavor");
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:FlavorDefect");
 
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
 
