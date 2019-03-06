@@ -1,6 +1,7 @@
 package archetypeAPI.cards.archetypeSelectionCards.theDefect;
 
 import archetypeAPI.archetypes.theDefect.BasicDefect;
+import archetypeAPI.archetypes.theDefect.PlasmaDefect;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -31,7 +32,7 @@ public class PlasmaDefectArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        BasicDefect basicDefect = new BasicDefect();
+        PlasmaDefect plasmaDefect = new PlasmaDefect();
     }
 
     @Override
