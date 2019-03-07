@@ -1,6 +1,7 @@
 package archetypeAPI;
 
 import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.cards.archetypeSelectionCards.theDefect.*;
 import archetypeAPI.cards.archetypeSelectionCards.theIronclad.*;
 import archetypeAPI.cards.archetypeSelectionCards.theSilent.*;
 import archetypeAPI.util.IDCheckDontTouchPls;
@@ -156,7 +157,29 @@ public class ArchetypeAPI implements
         discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/discard-Silent-Archetype.json");
 
         // The Defect:
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new BasicDefectArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/basic-Defect-Archetype.json");
+
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new ClawLowCostDefectArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/clawLowCost-Defect-Archetype.json");
+
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new DarkDefectArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/dark-Defect-Archetype.json");
+
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new FrostDefectArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/frost-Defect-Archetype.json");
+
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new LightningDefectArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/lightning-Defect-Archetype.json");
+
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new OrbSupportDefectArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/orb-Defect-Archetype.json");
+
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new PlasmaDefectArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/plasma-Defect-Archetype.json");
+
+        abstractArchetype.defectArchetypeSelectCards.addToTop(new PowerDefectArchetypeSelectCard().makeCopy());
+        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/power-Defect-Archetype.json");
     }
 
     // ================ LOAD THE TEXT ===================
