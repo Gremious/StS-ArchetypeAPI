@@ -54,7 +54,7 @@ public class ArchetypeAPI implements
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "Archetype API";
     private static final String AUTHOR = "Gremious";
-    private static final String DESCRIPTION = "An API for Slay the Spire to sort/select/add/generate card Archetypes in game classes.";
+    private static final String DESCRIPTION = "An API for Slay the Spire to select/add card Archetypes for any characters.";
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
 
     public static Properties archetypeSettingsDefaults = new Properties();
@@ -253,8 +253,5 @@ public class ArchetypeAPI implements
         }// NO
     }// NO
 
-
     // ====== YOU CAN EDIT AGAIN ======
-
-
 }
