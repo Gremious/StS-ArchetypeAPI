@@ -16,8 +16,7 @@ import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
 import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
-import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
-import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
+import static archetypeAPI.patches.ArchetypeCardTags.*;
 import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics;
 
 public class RandomArchetypeEffect extends AbstractGameEffect {
@@ -51,8 +50,24 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                 }
                 while (randomArchetypes.size() < defaultNum) {
                     AbstractCard ca = list.getRandomCard(true);
+                    boolean canSupport = false;
+
+
+                    for (AbstractCard card : randomArchetypes) {
+                        if (card.hasTag(INCLUDE_SUPPORT)) {
+                            canSupport = true;
+                        }
+                    }
+
                     if (!randomArchetypes.contains(ca)) {
-                        randomArchetypes.add(ca);
+                        if (ca.hasTag(SUPPORT)) {
+                            if (canSupport) {
+                                randomArchetypes.add(ca);
+                            }
+                        } else {
+                            randomArchetypes.add(ca);
+                        }
+
                     } else if (randomArchetypes.containsAll(list.group)) {
                         System.out.println("Added every single archetype");
                         break;
@@ -73,8 +88,23 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
 
                             while (randomArchetypes.size() < 6) {
                                 AbstractCard ca = list.getRandomCard(true);
+                                boolean canSupport = false;
+
+
+                                for (AbstractCard card : randomArchetypes) {
+                                    if (card.hasTag(INCLUDE_SUPPORT)) {
+                                        canSupport = true;
+                                    }
+                                }
+
                                 if (!randomArchetypes.contains(ca)) {
-                                    randomArchetypes.add(ca);
+                                    if (ca.hasTag(SUPPORT)) {
+                                        if (canSupport) {
+                                            randomArchetypes.add(ca);
+                                        }
+                                    } else {
+                                        randomArchetypes.add(ca);
+                                    }
                                 } else if (randomArchetypes.containsAll(list.group)) {
                                     System.out.println("Added every single archetype");
                                     break;
@@ -166,7 +196,9 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
 
             tickDuration();
         }
+
         tickDuration();
+
     }
 
     @Override
