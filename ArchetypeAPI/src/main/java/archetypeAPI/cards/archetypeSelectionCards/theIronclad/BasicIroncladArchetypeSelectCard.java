@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
+import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
 import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
 
 public class BasicIroncladArchetypeSelectCard extends AbstractArchetypeCard {
@@ -27,6 +28,7 @@ public class BasicIroncladArchetypeSelectCard extends AbstractArchetypeCard {
     public BasicIroncladArchetypeSelectCard() {
         super(ID, NAME, IMG, DESCRIPTION, TYPE, COLOR);
         tags.add(SINGLE);
+        tags.add(BASIC);
     }
 
     @Override
