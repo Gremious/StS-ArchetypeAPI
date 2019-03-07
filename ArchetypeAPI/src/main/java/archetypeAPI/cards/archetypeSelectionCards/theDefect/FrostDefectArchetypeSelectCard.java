@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
-import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
+import static archetypeAPI.patches.ArchetypeCardTags.*;
 
 public class FrostDefectArchetypeSelectCard extends AbstractArchetypeCard {
 
@@ -28,6 +28,7 @@ public class FrostDefectArchetypeSelectCard extends AbstractArchetypeCard {
     public FrostDefectArchetypeSelectCard() {
         super(ID, NAME, IMG, DESCRIPTION, TYPE, COLOR);
         tags.add(SINGLE);
+        tags.add(INCLUDE_SUPPORT);
     }
 
     @Override

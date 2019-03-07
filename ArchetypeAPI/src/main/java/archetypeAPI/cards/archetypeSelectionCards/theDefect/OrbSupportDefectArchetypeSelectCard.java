@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
 import static archetypeAPI.patches.ArchetypeCardTags.SINGLE;
+import static archetypeAPI.patches.ArchetypeCardTags.SUPPORT;
 
 public class OrbSupportDefectArchetypeSelectCard extends AbstractArchetypeCard {
 
@@ -28,6 +29,7 @@ public class OrbSupportDefectArchetypeSelectCard extends AbstractArchetypeCard {
     public OrbSupportDefectArchetypeSelectCard() {
         super(ID, NAME, IMG, DESCRIPTION, TYPE, COLOR);
         tags.add(SINGLE);
+        tags.add(SUPPORT);
     }
 
     @Override
