@@ -1,2 +1,3 @@
-# StS-Grems-Reliquary
-A mod that adds any nice relic ideas I have to Slay the Spire
+# StS-ArchetypeAPI
+
+An API for Slay the Spire to add/select/edit card Archetypes for any characters! Check the wiki to get started!
