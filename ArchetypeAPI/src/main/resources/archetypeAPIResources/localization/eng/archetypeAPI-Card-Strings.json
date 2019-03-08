@@ -47,7 +47,7 @@
     "NAME": "Basic",
     "DESCRIPTION": "Add the Basic Archetype to your Card Draft Pool."
   },
-  "archetypeAPI:ClawDefectArchetypeSelectCard": {
+  "archetypeAPI:ClawLowCostDefectArchetypeSelectCard": {
     "NAME": "Claw",
     "DESCRIPTION": "Add the Claw Archetype to your Card Draft Pool."
   },

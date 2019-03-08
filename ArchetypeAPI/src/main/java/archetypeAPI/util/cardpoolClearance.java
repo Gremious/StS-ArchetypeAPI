@@ -77,17 +77,17 @@ public class cardpoolClearance {
         // Keep only those of the specific Rarirty
         int i = 0;
         do {
-            if (!temp.group.containsAll(UsedArchetypesCombined.group)) {
+            if (!containsGroupByID(temp.group, UsedArchetypesCombined.group)) {
                 AbstractCard c = UsedArchetypesCombined.getRandomCard(true);
 
-                if (!temp.contains(c)) {
+                if (!containsID(temp.group, c)) {
                     temp.addToRandomSpot(c);
                     i++;
                 }
 
             } else {
                 AbstractCard c = CardLibrary.getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng);
-                if (!temp.contains(c)) {
+                if (!containsID(temp.group, c)) {
                     temp.addToRandomSpot(c);
                     i++;
                 }
@@ -99,5 +99,33 @@ public class cardpoolClearance {
         UsedArchetypesCombined.clear();
         UsedArchetypesCombined.group.addAll(temp.group);
         // Replace UsedArchetypesCombined with a temp group
+    }
+
+    public static boolean containsID(ArrayList<AbstractCard> poolToCheck, AbstractCard cardWithID) {
+        boolean idCheckBool = false;
+        for (AbstractCard c : poolToCheck) {
+            if (c.cardID.equals(cardWithID.cardID)) {
+                idCheckBool = true;
+            }
+        }
+        return idCheckBool;
+    }
+
+    public static boolean containsGroupByID(ArrayList<AbstractCard> poolToCheck, ArrayList<AbstractCard> checkAgainst) {
+        ArrayList<AbstractCard> tempCheck = new ArrayList<>(poolToCheck);
+        ArrayList<AbstractCard> tempAgains = new ArrayList<>(checkAgainst);
+
+        tempCheck.removeIf(card -> {
+                    boolean idCheckBool = false;
+                    for (AbstractCard c : tempAgains) {
+                        if (card.cardID.equals(c.cardID)) {
+                            idCheckBool = true;
+                        }
+                    }
+                    return idCheckBool;
+                }
+        );
+
+        return tempCheck.isEmpty();
     }
 }

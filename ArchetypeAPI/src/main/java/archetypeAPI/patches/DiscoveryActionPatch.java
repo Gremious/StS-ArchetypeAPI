@@ -8,6 +8,7 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
+import static archetypeAPI.util.cardpoolClearance.containsID;
 import static archetypeAPI.util.CardsGet.cleanCards;
 
 @SpirePatch(
@@ -27,7 +28,6 @@ public class DiscoveryActionPatch {
         int skillCheck = 0;
         int powerCheck = 0;
         ArrayList<AbstractCard> rewardForNearlyNoReason = AbstractDungeon.getRewardCards();
-        System.out.println("DIISCOVER PATCH: LIST IS " + list + " oof");
 
         for (AbstractCard c : list) {
             if (c.type == AbstractCard.CardType.ATTACK) attackCheck++;
@@ -42,7 +42,7 @@ public class DiscoveryActionPatch {
         if (attackCheck < 3) {
             while (attackCheck < ExpandPoolPatch.numCheck) {
                 AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.ATTACK, true);
-                if (!list.contains(c)) {
+                if (!containsID(list, c)) {
                     list.add(c);
                     attackCheck++;
                 }
@@ -52,7 +52,7 @@ public class DiscoveryActionPatch {
         if (skillCheck < 3) {
             while (skillCheck < ExpandPoolPatch.numCheck) {
                 AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.SKILL, true);
-                if (!list.contains(c)) {
+                if (!containsID(list, c)) {
                     list.add(c);
                     skillCheck++;
                 }
@@ -62,7 +62,7 @@ public class DiscoveryActionPatch {
         if (powerCheck < 3) {
             while (powerCheck < ExpandPoolPatch.numCheck) {
                 AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.POWER, true);
-                if (!list.contains(c)) {
+                if (!containsID(list, c)) {
                     list.add(c);
                     powerCheck++;
                 }

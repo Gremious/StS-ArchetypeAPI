@@ -15,7 +15,6 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
-import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
 import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics;
 
@@ -100,25 +99,14 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         System.out.println("Archetype selection patch says: ???????????????");
                         System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
                         System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
-                        System.out.println("If top one is false, and bottom one isn't a base-game character, something is really wrong.");
                         break;
                 }
 
                 for (AbstractCard c : list.group) {
                     if (c instanceof AbstractArchetypeCard) {
-                        System.out.println("Activating " + c);
                         ((AbstractArchetypeCard) c).archetypeEffect();
                     }
                 }
-
-                System.out.println("All the archetype effects should have triggered, adding to the card list");
-                System.out.println("This is the card list pre-dupe removal:");
-                System.out.println(UsedArchetypesCombined);
-                removeDupes(UsedArchetypesCombined);
-                System.out.println("This is the card list post-dupe removal:");
-                System.out.println(UsedArchetypesCombined);
-                System.out.println("Writing to card pools.");
-
 
                 if (!UsedArchetypesCombined.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
@@ -167,7 +155,6 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                 }
 
             } else if (randomArchetypes.containsAll(list.group)) {
-                System.out.println("Added every single archetype");
                 break;
             } else if (!canSupport && iHopeYouDontTriggerThis) {
                 boolean uhOh = true;
@@ -179,7 +166,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
 
                 if (uhOh) {
                     System.out.println("You have archetypes tagged SUPPORT, and yet, you don't have any tagged CAN_SUPPORT");
-                    System.out.println("I'm mildly disappointed, please fix this.");
+                    System.out.println("Please fix this.");
                     break;
                 }
 

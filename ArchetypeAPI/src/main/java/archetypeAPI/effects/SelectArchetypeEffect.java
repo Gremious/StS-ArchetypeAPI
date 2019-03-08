@@ -2,8 +2,6 @@ package archetypeAPI.effects;
 
 import archetypeAPI.archetypes.abstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import archetypeAPI.cards.archetypeSelectionCards.theIronclad.BasicIroncladArchetypeSelectCard;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.BasicSilentArchetypeSelectCard;
 import archetypeAPI.characters.customCharacterArchetype;
 import archetypeAPI.jsonClasses.uiStrings;
 import com.badlogic.gdx.Gdx;
@@ -22,8 +20,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
-import static archetypeAPI.archetypes.abstractArchetype.removeDupes;
-import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
 import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
@@ -71,7 +67,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                             System.out.println("Archetype selection effect says: ???????????????");
                             System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
                             System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
-                            System.out.println("If top one is false, and bottom one isn't a base-game character, something is really wrong.");
                             break;
                     }
 
@@ -83,18 +78,10 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                     for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                         if (c instanceof AbstractArchetypeCard) {
-                            System.out.println("Card in Loop " + c);
                             ((AbstractArchetypeCard) c).archetypeEffect();
                         }
                     }
                 }
-                System.out.println("All the archetype effects should have triggered, adding to the card list");
-                System.out.println("This is the card list pre-dupe removal: Amount: " + UsedArchetypesCombined.size() + " Cards: ");
-                System.out.println(UsedArchetypesCombined);
-                removeDupes(UsedArchetypesCombined);
-                System.out.println("This is the card list post-dupe removal:  Amount:  " + UsedArchetypesCombined.size() + " Cards: ");
-                System.out.println(UsedArchetypesCombined);
-                System.out.println("Writing to card pools.");
 
                 if (!UsedArchetypesCombined.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
@@ -104,20 +91,10 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                     c.stopGlowing();
                 }
 
-                System.out.println("CARD POOLS INITIALIZED ONCE, BACK TO EFFECT");
-                System.out.println("CARD POOLS INITIALIZED ONCE, BACK TO EFFECT");
-                System.out.println("CARD POOLS INITIALIZED ONCE, BACK TO EFFECT");
 
                 CheckPools();
-                System.out.println("Checked the pool, need to reinstantiate them: " + needReinst);
-                System.out.println("UsedArchetypesCombined is empty? " + UsedArchetypesCombined.isEmpty());
 
                 if (needReinst && !UsedArchetypesCombined.isEmpty()) {
-                    System.out.println("Card Pool too small! Adding some basic cards.");
-                    System.out.println("Card Pool too small! Adding some basic cards.");
-                    System.out.println("Card Pool too small! Adding some basic cards.");
-                    System.out.println("New card pool is: " + UsedArchetypesCombined.group.toString());
-
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
 

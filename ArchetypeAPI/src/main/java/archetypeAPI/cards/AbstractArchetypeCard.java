@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractArchetypeCard extends CustomCard {
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:Flavor");
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:FlavorSilent");
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
 
     public AbstractArchetypeCard(final String id,

@@ -9,6 +9,7 @@ import javassist.CtBehavior;
 import java.util.ArrayList;
 
 import static archetypeAPI.util.CardsGet.cleanCards;
+import static archetypeAPI.util.cardpoolClearance.containsID;
 
 @SpirePatch(
         clz = AbstractDungeon.class,
@@ -27,7 +28,6 @@ public class DiscoveryActionTypePatch {
         int skillCheck = 0;
         int powerCheck = 0;
         ArrayList<AbstractCard> rewardForNearlyNoReason = AbstractDungeon.getRewardCards();
-        System.out.println("DIISCOVER PATCH: LIST IS " + list + " oof");
 
         for (AbstractCard c : list) {
             if (c.type == AbstractCard.CardType.ATTACK) attackCheck++;
@@ -44,7 +44,7 @@ public class DiscoveryActionTypePatch {
                 if (attackCheck < 3) {
                     while (attackCheck < ExpandPoolPatch.numCheck) {
                         AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.ATTACK, true);
-                        if (!list.contains(c)) {
+                        if (!containsID(list, c)) {
                             list.add(c);
                             attackCheck++;
                         }
@@ -55,7 +55,7 @@ public class DiscoveryActionTypePatch {
                 if (skillCheck < 3) {
                     while (skillCheck < ExpandPoolPatch.numCheck) {
                         AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.SKILL, true);
-                        if (!list.contains(c)) {
+                        if (!containsID(list, c)) {
                             list.add(c);
                             skillCheck++;
                         }
@@ -66,7 +66,7 @@ public class DiscoveryActionTypePatch {
                 if (powerCheck < 3) {
                     while (powerCheck < ExpandPoolPatch.numCheck) {
                         AbstractCard c = cleanCards.getRandomCard(AbstractCard.CardType.POWER, true);
-                        if (!list.contains(c)) {
+                        if (!containsID(list, c)) {
                             list.add(c);
                             powerCheck++;
                         }
