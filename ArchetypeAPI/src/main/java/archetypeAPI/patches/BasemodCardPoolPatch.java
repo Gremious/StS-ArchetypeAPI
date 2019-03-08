@@ -20,6 +20,7 @@ public class BasemodCardPoolPatch {
         if (!UsedArchetypesCombined.isEmpty()) {
             cardpoolClearance.replaceCardpool(__result, UsedArchetypesCombined);
         }
+        System.out.println("Archetype API Log: Custom Character card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         return __result;
 
     }

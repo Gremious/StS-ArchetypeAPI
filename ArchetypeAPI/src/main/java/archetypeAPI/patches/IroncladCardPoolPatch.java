@@ -25,6 +25,7 @@ public class IroncladCardPoolPatch {
         if (!UsedArchetypesCombined.isEmpty()) {
             cardpoolClearance.replaceCardpool(tmpPool, UsedArchetypesCombined);
         }
+        System.out.println("Archetype API Log: Ironclad card pool patch. You are playing with: " + tmpPool.size() + " cards.");
     }
 
     private static class Locator extends SpireInsertLocator {

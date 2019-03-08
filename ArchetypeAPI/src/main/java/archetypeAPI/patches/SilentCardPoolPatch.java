@@ -26,6 +26,7 @@ public class SilentCardPoolPatch {
         if (!UsedArchetypesCombined.isEmpty()) {
             cardpoolClearance.replaceCardpool(tmpPool, UsedArchetypesCombined);
         }
+        System.out.println("Archetype API Log: Silent card pool patch. You are playing with: " + tmpPool.size() + " cards.");
   }
 
     private static class Locator extends SpireInsertLocator {
