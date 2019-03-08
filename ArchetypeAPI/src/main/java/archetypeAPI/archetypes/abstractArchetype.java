@@ -38,6 +38,7 @@ public abstract class abstractArchetype {
             for (Map.Entry<String, archetypeStringsClass> entry : allString.entrySet()) {
 
                 for (String ID : entry.getValue().CARD_IDS) {
+                    System.out.println("Adding " + ID);
                     currentArchetype.add(CardLibrary.getCopy(ID));
                 }
 

@@ -16,11 +16,15 @@ import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
-import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics;
+import static archetypeAPI.util.cardpoolClearance.*;
 
 public class RandomArchetypeEffect extends AbstractGameEffect {
     // This is totally an effect. Yes.
     private boolean needReinst = false;
+    private static ArrayList<AbstractCard> randomArchetypes = new ArrayList<>();
+    public static int ironcladBase = 6;
+    public static int silentBase = 5;
+    public static int defectBase = 8;
 
     public RandomArchetypeEffect() {
         this.duration = Settings.ACTION_DUR_FAST;
@@ -30,7 +34,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             UsedArchetypesCombined.clear();
-            ArrayList<AbstractCard> randomArchetypes = new ArrayList<>();
+
             CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
             if (AbstractDungeon.player instanceof customCharacterArchetype) {
@@ -49,51 +53,54 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                     }
                 }
 
-                addArchetype(randomArchetypes, list, defaultNum);
+                addArchetype(list, defaultNum);
 
             } else {
                 switch (AbstractDungeon.player.chosenClass) {
                     case IRONCLAD:
+                        System.out.println("Here is the entire initial archetype card pool from which we will pick randoms: " + abstractArchetype.ironcladArchetypeSelectCards.group.toString());
+
                         for (AbstractCard basicCheckCard : abstractArchetype.ironcladArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
                         }
                         for (AbstractCard c : abstractArchetype.ironcladArchetypeSelectCards.group) {
-                            if (c.hasTag(SINGLE)) {
+                            if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
                                 list.addToTop(c);
                             }
-
-                            addArchetype(randomArchetypes, list, 6);
                         }
+                        addArchetype(list, ironcladBase);
                         break;
                     case THE_SILENT:
                         for (AbstractCard basicCheckCard : abstractArchetype.silentArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
-                        }
-                        for (AbstractCard c : abstractArchetype.silentArchetypeSelectCards.group) {
-                            if (c.hasTag(SINGLE)) {
-                                list.addToTop(c);
-                            }
 
-                            addArchetype(randomArchetypes, list, 5);
+                            for (AbstractCard c : abstractArchetype.silentArchetypeSelectCards.group) {
+                                if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
+                                    list.addToTop(c);
+                                }
+
+                            }
                         }
+                        addArchetype(list, silentBase);
                         break;
                     case DEFECT:
                         for (AbstractCard basicCheckCard : abstractArchetype.defectArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
-                        }
-                        for (AbstractCard c : abstractArchetype.defectArchetypeSelectCards.group) {
-                            if (c.hasTag(SINGLE)) {
-                                list.addToTop(c);
-                            }
 
-                            addArchetype(randomArchetypes, list, 8);
+                            for (AbstractCard c : abstractArchetype.defectArchetypeSelectCards.group) {
+                                if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
+                                    list.addToTop(c);
+                                }
+
+                            }
                         }
+                        addArchetype(list, defectBase);
                         break;
                     default:
                         System.out.println("Archetype selection patch says: ???????????????");
@@ -101,12 +108,16 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
                         break;
                 }
+                System.out.println("addArchetype() is done.");
+                System.out.println("Randomly generated archetype select cards: " + randomArchetypes.toString());
 
-                for (AbstractCard c : list.group) {
+                for (AbstractCard c : randomArchetypes) {
                     if (c instanceof AbstractArchetypeCard) {
+                        System.out.println("Activating the archetype effect of " + c);
                         ((AbstractArchetypeCard) c).archetypeEffect();
                     }
                 }
+                System.out.println("All effects activated. Pool is: " + UsedArchetypesCombined.toString());
 
                 if (!UsedArchetypesCombined.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
@@ -129,38 +140,80 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
 
     }
 
-    private void addArchetype(ArrayList<AbstractCard> randomArchetypes, CardGroup list, int baseNum) {
-        while (randomArchetypes.size() < baseNum) {  // A list of all archetypes tagged single and basic
-            AbstractCard ca = list.getRandomCard(true);
-            boolean canSupport = false;
-            boolean iHopeYouDontTriggerThis = false;
+    private static void addArchetype(CardGroup list, int baseNum) {
+        boolean canSupport = false;
+        boolean isSupport = false;
 
-            for (AbstractCard card : randomArchetypes) {
-                if (card.hasTag(INCLUDE_SUPPORT)) {
-                    canSupport = true;
+        System.out.println("The list of only Basic and Single archetypes for this class is: " + list.group.toString());
+
+        int i = 0;
+        while (i < baseNum) {
+            System.out.println("i = " + i);
+            System.out.println("baseNum = " + baseNum);
+
+            for (AbstractCard c : randomArchetypes) {
+                if (c.hasTag(INCLUDE_SUPPORT)) {
+                    canSupport = true;      // Check whether we can support every at every iteration
                 }
 
-                if (card.hasTag(SUPPORT)) {
-                    iHopeYouDontTriggerThis = true;
+                if (c.hasTag(SUPPORT)) {
+                    isSupport = true;
                 }
             }
 
-            if (!randomArchetypes.contains(ca)) {
-                if (ca.hasTag(SUPPORT)) {
+            System.out.println("canSupport: " + canSupport);
+
+            AbstractCard c = list.getRandomCard(true);
+
+            System.out.println("Random Card: " + c);
+            System.out.println("Does randomArchetypes: " + randomArchetypes.toString());
+            System.out.println("Contains card? (if false, adding card): " + (containsID(randomArchetypes, c)));
+
+
+            if (!containsID(randomArchetypes, c)) {
+                System.out.println("If !Cointains triggered.");
+                System.out.println("The card: " + c + " with ID: " + c.cardID + " has the following tags: ");
+
+                System.out.println("c has tag basic?" + (c.hasTag(BASIC)));
+                System.out.println("c has tag single?: " + (c.hasTag(SINGLE)));
+                System.out.println("c has tag support?: " + (c.hasTag(SUPPORT)));
+                System.out.println("c has tag support??: " + (c.hasTag(SUPPORT)));
+                System.out.println("Are you sure about that?: " + (c.hasTag(SUPPORT)));
+
+                if (c.hasTag(SUPPORT)) {
+                    System.out.println(c.cardID + " c is a Support card");
                     if (canSupport) {
-                        randomArchetypes.add(ca);
+                        System.out.println("And we can add those, so adding c");
+                        System.out.println("Pre add: " + randomArchetypes.toString());
+                        randomArchetypes.add(c);
+                        System.out.println("Post add: " + randomArchetypes.toString());
+                        i++;
                     }
                 } else {
-                    randomArchetypes.add(ca);
-                }
+                    System.out.println("Pre add: " + randomArchetypes.toString());
+                    randomArchetypes.add(c);
+                    System.out.println("Post add: " + randomArchetypes.toString());
 
-            } else if (randomArchetypes.containsAll(list.group)) {
+                    System.out.println("Pre-increment: " + i);
+                    i++;
+                    System.out.println("Post-increment: " + i);
+                }
+            }
+
+            System.out.println("Does randomArch: " + randomArchetypes.toString());
+            System.out.println("Contain the whole list" + list.group.toString());
+            System.out.println("by ID?: " + (containsGroupByID(randomArchetypes, list.group)));
+
+            if (containsGroupByID(randomArchetypes, list.group)) {
+                System.out.println("Every single archetype was added to the pool.");
                 break;
-            } else if (!canSupport && iHopeYouDontTriggerThis) {
+            }
+
+            if (!canSupport && isSupport) {
                 boolean uhOh = true;
 
-                for (AbstractCard c : list.group) {
-                    if (c.hasTag(INCLUDE_SUPPORT))
+                for (AbstractCard ca : list.group) {
+                    if (ca.hasTag(INCLUDE_SUPPORT))
                         uhOh = false;
                 }
 
@@ -173,6 +226,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
             }
         }
     }
+
 
     private void tickDuration() {
         this.duration -= Gdx.graphics.getDeltaTime();

@@ -32,7 +32,7 @@ public class BlockIroncladArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        BlockIronclad BlockIronclad = new BlockIronclad();
+        BlockIronclad blockIronclad = new BlockIronclad();
     }
 
     @Override

@@ -102,30 +102,23 @@ public class cardpoolClearance {
     }
 
     public static boolean containsID(ArrayList<AbstractCard> poolToCheck, AbstractCard cardWithID) {
-        boolean idCheckBool = false;
         for (AbstractCard c : poolToCheck) {
             if (c.cardID.equals(cardWithID.cardID)) {
-                idCheckBool = true;
+                return true;
             }
         }
-        return idCheckBool;
+        return false;
     }
 
     public static boolean containsGroupByID(ArrayList<AbstractCard> poolToCheck, ArrayList<AbstractCard> checkAgainst) {
-        ArrayList<AbstractCard> tempCheck = new ArrayList<>(poolToCheck);
-        ArrayList<AbstractCard> tempAgains = new ArrayList<>(checkAgainst);
+        int count = checkAgainst.size();
 
-        tempCheck.removeIf(card -> {
-                    boolean idCheckBool = false;
-                    for (AbstractCard c : tempAgains) {
-                        if (card.cardID.equals(c.cardID)) {
-                            idCheckBool = true;
-                        }
-                    }
-                    return idCheckBool;
-                }
-        );
+        for (AbstractCard ca : poolToCheck) {
+            if (containsID(checkAgainst, ca)) {
+                count--;
+            }
+        }
 
-        return tempCheck.isEmpty();
+        return (count <= 0);
     }
 }
