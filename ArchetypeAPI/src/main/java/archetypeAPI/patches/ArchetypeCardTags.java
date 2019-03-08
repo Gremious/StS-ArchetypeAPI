@@ -13,6 +13,7 @@ public class ArchetypeCardTags {
     // smoother playing experience. In the future, an option to disable that will be added.
     // A mod option to disable "Always Basic" will be added in the future.
 
+    @SpireEnum
     public static AbstractCard.CardTags SINGLE; // MOST IMPORTANT!!!
     // For single/core archetypes. Cards that say "poison" and only add the poison archetype and nothing more.
     // KEEP IN MIND THAT IF THE PLAYER DOESN'T HAVE THE "CHOOSE ARCHETYPES ON RUN START" OPTION SELECTED,
@@ -20,20 +21,24 @@ public class ArchetypeCardTags {
     // This is to prevent OPTIONS/MIXES from being randomly selected in place of an actual archetype:
     // A mod option to enable custom mixes will be added in the future.
 
+    @SpireEnum
     public static AbstractCard.CardTags INCLUDE_SUPPORT;
     // If you are adding *new* orb archetypes, tag them with this. This API checks for this tag to know
     // whether or not it can add the "Orb Support" archetype to the pool. That archetype would not be added if you don't
     // roll any orbs.
 
+    @SpireEnum
     public static AbstractCard.CardTags SUPPORT;
     // SUPPORT is excluded from the RNG selection pool unless a card with INCLUDE_SUPPORT is rolled as an archetype.
     // There are cards that support Defect Orbs but would be useless if the player has NO orbs in the game (Focus cards for example).
     // Of course, if you are making a custom character that uses MECHANIC and SUPPORT_MECHANIC - feel free to use these tags too.
 
+    @SpireEnum
     public static AbstractCard.CardTags CUSTOM_MIX;
     // For exmaple, an option card that says "Poison + Discard" and adds a specific selection of only cards in those archetypes to a run.
     // Or maybe "Nothing but Claw and Double-tap."
 
+    @SpireEnum
     public static AbstractCard.CardTags OPTION;
     // For a card that doesn't add an archetype to the pool itself, but perhaps edits it in some other way
     // For exmaple "Upgrade all poison cards if any" or something like that.

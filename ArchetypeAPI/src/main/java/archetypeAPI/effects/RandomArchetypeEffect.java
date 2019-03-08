@@ -177,8 +177,6 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                 System.out.println("c has tag basic?" + (c.hasTag(BASIC)));
                 System.out.println("c has tag single?: " + (c.hasTag(SINGLE)));
                 System.out.println("c has tag support?: " + (c.hasTag(SUPPORT)));
-                System.out.println("c has tag support??: " + (c.hasTag(SUPPORT)));
-                System.out.println("Are you sure about that?: " + (c.hasTag(SUPPORT)));
 
                 if (c.hasTag(SUPPORT)) {
                     System.out.println(c.cardID + " c is a Support card");

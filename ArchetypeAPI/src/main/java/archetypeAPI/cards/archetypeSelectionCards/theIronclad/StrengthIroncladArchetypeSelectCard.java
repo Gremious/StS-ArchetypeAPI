@@ -1,6 +1,7 @@
 package archetypeAPI.cards.archetypeSelectionCards.theIronclad;
 
 import archetypeAPI.archetypes.theIronclad.BasicIronclad;
+import archetypeAPI.archetypes.theIronclad.StrengthIronclad;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -31,7 +32,7 @@ public class StrengthIroncladArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-        BasicIronclad basicIronclad = new BasicIronclad();
+        StrengthIronclad strengthIronclad = new StrengthIronclad();
     }
 
     @Override
