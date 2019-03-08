@@ -13,7 +13,7 @@ public class LightningDefectArchetypeSelectCard extends AbstractArchetypeCard {
 
     public static final String ID = "archetypeAPI:LightningDefectArchetypeSelectCard";
 
-    public static final String IMG = "archetypeAPIResources/images/cards/adrenaline.png";
+    public static final String IMG = "archetypeAPIResources/images/cards/thunder_strike.png";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -23,7 +23,7 @@ public class LightningDefectArchetypeSelectCard extends AbstractArchetypeCard {
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
 
     public static final CardColor COLOR = CardColor.BLUE;
-    public static final CardType TYPE = CardType.SKILL;
+    public static final CardType TYPE = CardType.ATTACK;
 
     public LightningDefectArchetypeSelectCard() {
         super(ID, NAME, IMG, DESCRIPTION, TYPE, COLOR);

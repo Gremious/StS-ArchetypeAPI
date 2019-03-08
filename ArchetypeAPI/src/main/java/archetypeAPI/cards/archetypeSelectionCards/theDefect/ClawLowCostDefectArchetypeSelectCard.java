@@ -13,7 +13,7 @@ public class ClawLowCostDefectArchetypeSelectCard extends AbstractArchetypeCard 
 
     public static final String ID = "archetypeAPI:ClawLowCostDefectArchetypeSelectCard";
 
-    public static final String IMG = "archetypeAPIResources/images/cards/adrenaline.png";
+    public static final String IMG = "archetypeAPIResources/images/cards/claw.png";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

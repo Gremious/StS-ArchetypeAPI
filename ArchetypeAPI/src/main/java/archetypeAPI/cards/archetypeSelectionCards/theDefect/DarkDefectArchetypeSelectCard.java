@@ -13,7 +13,7 @@ public class DarkDefectArchetypeSelectCard extends AbstractArchetypeCard {
 
     public static final String ID = "archetypeAPI:DarkDefectArchetypeSelectCard";
 
-    public static final String IMG = "archetypeAPIResources/images/cards/adrenaline.png";
+    public static final String IMG = "archetypeAPIResources/images/cards/darkness.png";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
