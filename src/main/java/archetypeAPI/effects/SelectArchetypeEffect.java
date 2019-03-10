@@ -67,6 +67,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                             System.out.println("Archetype selection effect says: ???????????????");
                             System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
                             System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
+                            isDone = true;
                             break;
                     }
 

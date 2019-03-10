@@ -100,6 +100,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         System.out.println("Archetype selection patch says: ???????????????");
                         System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
                         System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
+                        isDone= true;
                         break;
                 }
                 System.out.println("addArchetype() is done.");

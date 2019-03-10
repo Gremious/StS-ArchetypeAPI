@@ -79,7 +79,6 @@ public class cardpoolClearance {
         do {
             if (!containsGroupByID(temp.group, UsedArchetypesCombined.group)) {
                 AbstractCard c = UsedArchetypesCombined.getRandomCard(true);
-
                 if (!containsID(temp.group, c)) {
                     temp.addToRandomSpot(c);
                     i++;
