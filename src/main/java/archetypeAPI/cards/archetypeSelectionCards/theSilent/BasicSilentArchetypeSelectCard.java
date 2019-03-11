@@ -34,7 +34,6 @@ public class BasicSilentArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
-     //   basicSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/basic-Silent-Archetype.json");
         BasicSilent basicSilent = new BasicSilent();
     }
 
