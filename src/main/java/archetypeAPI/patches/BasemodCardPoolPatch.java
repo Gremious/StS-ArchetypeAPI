@@ -2,7 +2,10 @@ package archetypeAPI.patches;
 
 import archetypeAPI.util.cardpoolClearance;
 import basemod.abstracts.CustomPlayer;
+import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import java.util.ArrayList;
@@ -16,10 +19,13 @@ import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
 
 public class BasemodCardPoolPatch {
 
-    public static ArrayList<AbstractCard> Postfix(ArrayList<AbstractCard> __result, CustomPlayer __instance, ArrayList<AbstractCard> tmpPool) {
+    @SpirePrefixPatch
+    public static SpireReturn<ArrayList<AbstractCard>> Prefix(CustomPlayer __instance, ArrayList<AbstractCard> tmpPool) {
         if (!UsedArchetypesCombined.isEmpty()) {
             ArrayList<AbstractCard> testPool = new ArrayList<>(tmpPool);
-            cardpoolClearance.replaceCardpool(__result, UsedArchetypesCombined);
+
+            cardpoolClearance.replaceCardpool(tmpPool, UsedArchetypesCombined);
+
             if (!UsedArchetypesCombined.isEmpty()) {
                 testPool.removeIf(card -> {
                             boolean idCheckBool = false;
@@ -39,10 +45,13 @@ public class BasemodCardPoolPatch {
                     }
                 }
             }
+
+            System.out.println("Archetype API Log: Custom Character card pool patch. You are playing with: " + tmpPool.size() + " cards.");
+            System.out.println("These cards are: " + tmpPool.toString());
+
+            return SpireReturn.Return(tmpPool);
         }
-        System.out.println("Archetype API Log: Custom Character card pool patch. You are playing with: " + tmpPool.size() + " cards.");
-        System.out.println("These cards are: " + tmpPool.toString());
-        return __result;
+            return SpireReturn.Continue();
 
     }
 

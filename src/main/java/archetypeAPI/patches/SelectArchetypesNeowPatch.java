@@ -27,7 +27,6 @@ public class SelectArchetypesNeowPatch {
                         && (AbstractDungeon.player.chosenClass != AbstractPlayer.PlayerClass.THE_SILENT)
                         && (AbstractDungeon.player.chosenClass != AbstractPlayer.PlayerClass.DEFECT)
                         && !(AbstractDungeon.player instanceof customCharacterArchetype)) {
-
                 } else {
                     if (selectArchetypes) {
                         AbstractDungeon.effectList.add(new SelectArchetypeEffect());

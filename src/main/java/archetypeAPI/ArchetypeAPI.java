@@ -12,12 +12,14 @@ import basemod.ModPanel;
 import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
+import basemod.interfaces.PreStartGameSubscriber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -30,6 +32,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
+import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
 import static archetypeAPI.archetypes.theDefect.BasicDefect.basicDefectArchetypeFiles;
 import static archetypeAPI.archetypes.theDefect.ClawLowCostDefect.clawLowCostDefectDefectArchetypeFiles;
 import static archetypeAPI.archetypes.theDefect.DarkDefect.darkDefectArchetypeFiles;
@@ -54,7 +57,8 @@ import static archetypeAPI.archetypes.theSilent.ShivSilent.shivSilentArchetypeFi
 public class ArchetypeAPI implements
         EditStringsSubscriber,
         PostInitializeSubscriber,
-        EditCardsSubscriber {
+        EditCardsSubscriber,
+        PreStartGameSubscriber {
     public static final Logger logger = LogManager.getLogger(ArchetypeAPI.class.getName());
     private static String modID;
 
@@ -260,6 +264,13 @@ public class ArchetypeAPI implements
             }// NO
         }// NO
     }// NO
+
+    @Override
+    public void receivePreStartGame() {
+        if (!CardCrawlGame.loadingSave) {
+            UsedArchetypesCombined.clear();
+        }
+    }
 
     // ====== YOU CAN EDIT AGAIN ======
 }

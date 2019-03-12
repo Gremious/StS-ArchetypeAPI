@@ -13,7 +13,7 @@ import javassist.CtBehavior;
         method = "buttonEffect"
 )
 
-public class TheLibraryIsTotallyRandomPatch {
+public class TheLibraryEventIsTotallyRandomPatch {
     @SpireInsertPatch(
             locator = Locator.class,
             localvars={"card"}
