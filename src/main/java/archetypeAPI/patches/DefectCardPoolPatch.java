@@ -4,6 +4,7 @@ import archetypeAPI.util.cardpoolClearance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.Defect;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import javassist.CtBehavior;
 
@@ -46,6 +47,8 @@ public class DefectCardPoolPatch {
                     }
                 }
             }
+        } else {
+            CardLibrary.addBlueCards(tmpPool);
         }
         System.out.println("Archetype API Log: Defect card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         System.out.println("These cards are: " + tmpPool.toString());
