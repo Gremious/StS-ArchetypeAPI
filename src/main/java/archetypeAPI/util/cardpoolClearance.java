@@ -6,6 +6,7 @@ import archetypeAPI.cards.archetypeSelectionCards.theSilent.BasicSilentArchetype
 import archetypeAPI.characters.customCharacterArchetype;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 
@@ -59,35 +60,34 @@ public class cardpoolClearance {
     }
 
     public static void extendSpecificRarirtyInner(int by, AbstractCard.CardRarity rarity, AbstractCard basicArchetypeCard) {
-        CardGroup temp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        temp.group.addAll(UsedArchetypesCombined.group);
-        UsedArchetypesCombined.clear();
+        CardGroup holder = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        holder.group.addAll(UsedArchetypesCombined.group);
 
-        ((AbstractArchetypeCard) basicArchetypeCard).archetypeEffect();
+        UsedArchetypesCombined.clear(); // Clear all cards
+        ((AbstractArchetypeCard) basicArchetypeCard).archetypeEffect(); // And only activate the basic archetype
 
-        ArrayList<AbstractCard> mini = new ArrayList<>();
-        for (AbstractCard c : UsedArchetypesCombined.group) {
-            if (c.rarity == rarity) {
-                mini.add(c);
+        CardGroup cardsOfTheRarity = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        for (AbstractCard c : UsedArchetypesCombined.group) {   // Fill this card group with basics
+            if (c.rarity == rarity) {                           // off the right rarity
+                cardsOfTheRarity.addToTop(c);
             }
         }
-        UsedArchetypesCombined.group.clear();
-        UsedArchetypesCombined.group.addAll(mini);
+
 
         // Keep only those of the specific Rarirty
         int i = 0;
         do {
-            if (!containsGroupByID(temp.group, UsedArchetypesCombined.group)) {
+            if (!containsGroupByID(holder.group, UsedArchetypesCombined.group)) {
                 AbstractCard c = UsedArchetypesCombined.getRandomCard(true);
-                if (!containsID(temp.group, c)) {
-                    temp.addToRandomSpot(c);
+                if (!containsID(holder.group, c)) {
+                    holder.addToRandomSpot(c);
                     i++;
                 }
 
             } else {
                 AbstractCard c = CardLibrary.getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng);
-                if (!containsID(temp.group, c)) {
-                    temp.addToRandomSpot(c);
+                if (!containsID(holder.group, c)) {
+                    holder.addToRandomSpot(c);
                     i++;
                 }
             }
@@ -96,7 +96,8 @@ public class cardpoolClearance {
         // Add a random basic card, unless we exhausted the pool of commons, then add a totally random card.
 
         UsedArchetypesCombined.clear();
-        UsedArchetypesCombined.group.addAll(temp.group);
+        UsedArchetypesCombined.group.addAll(holder.group);
+        CardCrawlGame.dungeon.initializeCardPools();
         // Replace UsedArchetypesCombined with a temp group
     }
 

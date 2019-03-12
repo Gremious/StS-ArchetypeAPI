@@ -4,7 +4,6 @@ import archetypeAPI.archetypes.abstractArchetype;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
 
@@ -17,42 +16,38 @@ import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics
 
 public class ExpandPoolPatch {
     public static int numCheck;
-    public static CardGroup UsedArchetypesCombinedTemp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-
-    @SpireInsertPatch(
-            locator = numCardsCheckLocator.class,
-            localvars = {"numCards"}
-    )
-    public static void numCardsCheck(int numCards) {
-        numCheck = numCards;
-    }
-
 
     @SpireInsertPatch(
             locator = fixCardPoolsLocator.class,
             localvars = {"rarity", "numCards"}
     )
     public static void fixCardPools(AbstractCard.CardRarity rarity, int numCards) {
+        numCheck = numCards;
         System.out.println("RARITY IS: " + rarity);
         System.out.println("numCards is " + numCards);
+        System.out.println("numCheck is " + numCheck);
+        System.out.println("There are this many commons: " + cardRarityCheck(AbstractCard.CardRarity.COMMON));
+        System.out.println("There are this many uncommons: " + cardRarityCheck(AbstractCard.CardRarity.UNCOMMON));
+        System.out.println("There are this many rares: " + cardRarityCheck(AbstractCard.CardRarity.RARE));
 
         switch (rarity) {
             case COMMON:
-                if (commonCheck() < numCheck) {
-                    for (int i = commonCheck(); i < numCheck; i++) {
+                if (cardRarityCheck(AbstractCard.CardRarity.COMMON) < numCheck) {
+                    for (int i = cardRarityCheck(AbstractCard.CardRarity.COMMON); i < numCheck; i++) {
                         extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.COMMON);
+
                     }
                 }
             case UNCOMMON:
-                if (uncommonCheck() < numCheck) {
-                    for (int i = commonCheck(); i < numCheck; i++) {
+                if (cardRarityCheck(AbstractCard.CardRarity.UNCOMMON) < numCheck) {
+                    for (int i = cardRarityCheck(AbstractCard.CardRarity.UNCOMMON); i < numCheck; i++) {
                         extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
                     }
                 }
                 break;
             case RARE:
-                if (rareCheck() < numCheck) {
-                    for (int i = commonCheck(); i < numCheck; i++) {
+                if (cardRarityCheck(AbstractCard.CardRarity.RARE) < numCheck) {
+                    for (int i = cardRarityCheck(AbstractCard.CardRarity.RARE); i < numCheck; i++) {
                         extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.RARE);
                     }
                 }
@@ -63,47 +58,20 @@ public class ExpandPoolPatch {
 
     }
 
-    private static int commonCheck() {
-        int commons = 0;
+    private static int cardRarityCheck(AbstractCard.CardRarity rarity) {
+        System.out.println("New Check Start");
+        int count = 0;
+        CardGroup UsedArchetypesCombinedTemp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         UsedArchetypesCombinedTemp.group.addAll(abstractArchetype.UsedArchetypesCombined.group);
+
         for (AbstractCard c : UsedArchetypesCombinedTemp.group) {
-            if (c.rarity == AbstractCard.CardRarity.COMMON) {
-                commons++;
+            System.out.println("cardRarityCheck for rarity " + rarity.toString() + " is " + c);
+            if (c.rarity == rarity) {
+                count++;
             }
         }
-        return commons;
-    }
-
-    private static int uncommonCheck() {
-        int uncommon = 0;
-        UsedArchetypesCombinedTemp.group.addAll(abstractArchetype.UsedArchetypesCombined.group);
-        for (AbstractCard c : UsedArchetypesCombinedTemp.group) {
-            if (c.rarity == AbstractCard.CardRarity.UNCOMMON) {
-                uncommon++;
-            }
-        }
-        return uncommon;
-    }
-
-    private static int rareCheck() {
-        int rares = 0;
-        UsedArchetypesCombinedTemp.group.addAll(abstractArchetype.UsedArchetypesCombined.group);
-        for (AbstractCard c : UsedArchetypesCombinedTemp.group) {
-            if (c.rarity == AbstractCard.CardRarity.RARE) {
-                rares++;
-            }
-        }
-        return rares;
-    }
-
-
-    private static class numCardsCheckLocator extends SpireInsertLocator {
-        @Override
-        public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
-            Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractPlayer.class, "hasRelic");
-            return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
-            //  return new int[]{LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[0]};
-        }
+        System.out.println("Final Count:" + count);
+        return count;
     }
 
     private static class fixCardPoolsLocator extends SpireInsertLocator {
@@ -111,7 +79,7 @@ public class ExpandPoolPatch {
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
             Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.class, "rollRarity");
             //  return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
-            return new int[]{LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[0] + 2};
+            return new int[]{LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[0] + 1};
         }
     }
 }
