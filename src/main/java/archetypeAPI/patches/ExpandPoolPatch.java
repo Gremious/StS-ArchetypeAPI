@@ -30,9 +30,12 @@ public class ExpandPoolPatch {
 
     @SpireInsertPatch(
             locator = fixCardPoolsLocator.class,
-            localvars = {"rarity"}
+            localvars = {"rarity", "numCards"}
     )
-    public static void fixCardPools(AbstractCard.CardRarity rarity) {
+    public static void fixCardPools(AbstractCard.CardRarity rarity, int numCards) {
+        System.out.println("RARITY IS: " + rarity);
+        System.out.println("numCards is " + numCards);
+
         switch (rarity) {
             case COMMON:
                 if (commonCheck() < numCheck) {
@@ -108,7 +111,7 @@ public class ExpandPoolPatch {
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {
             Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractDungeon.class, "rollRarity");
             //  return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
-            return new int[]{LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[0] + 1};
+            return new int[]{LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[0] + 2};
         }
     }
 }
