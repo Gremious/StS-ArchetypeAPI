@@ -39,13 +39,13 @@ public class IroncladCardPoolPatch {
                             return idCheckBool;
                         }
                 );
-                if (!testPool.isEmpty()) {
+         /*       if (!testPool.isEmpty()) {
                     for (AbstractCard c : testPool) {
                         System.out.println("You missed a couple: ");
                         System.out.println("Name: " + c.name + " ID: " + c.cardID);
                         System.out.println("(This list excludes starter deck cards.)");
                     }
-                }
+                }*/
             }
         } else {
             CardLibrary.addRedCards(tmpPool);

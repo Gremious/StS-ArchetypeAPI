@@ -3,6 +3,7 @@ package archetypeAPI.effects;
 import archetypeAPI.archetypes.abstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import archetypeAPI.characters.customCharacterArchetype;
+import archetypeAPI.util.cardpoolClearance;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -252,7 +253,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
             needReinst = true;
 
             for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.COMMON);
+                cardpoolClearance.extendWithBasics(1, AbstractCard.CardRarity.COMMON);
             }
 
         }
@@ -260,14 +261,14 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
             needReinst = true;
 
             for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
+                cardpoolClearance.extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
             }
 
         }
         if (rareCheck.size() < 3) {
             needReinst = true;
             for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.RARE);
+                cardpoolClearance.extendWithBasics(1, AbstractCard.CardRarity.RARE);
             }
         }
     }

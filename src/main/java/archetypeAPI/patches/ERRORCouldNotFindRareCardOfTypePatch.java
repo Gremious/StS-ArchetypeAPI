@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
-import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.rareCardPool;
 
 @SpirePatch(
         clz = AbstractDungeon.class,
@@ -53,9 +52,9 @@ public class ERRORCouldNotFindRareCardOfTypePatch {
         if (need) {
             patchLogger.info("You need a " + type + " my dude. You only have " + tempCheck);
             if (type != AbstractCard.CardType.POWER) {
-                cardpoolClearance.extendSpecificTypeWithBasics(2 - tempCheck, rarity, type);
+                cardpoolClearance.extendWithBasics(2 - tempCheck, rarity, type);
             } else {
-                cardpoolClearance.extendSpecificTypeWithBasics(1, rarity, type);
+                cardpoolClearance.extendWithBasics(1, rarity, type);
             }
         }
 
@@ -97,9 +96,9 @@ public class ERRORCouldNotFindRareCardOfTypePatch {
         if (need) {
             patchLogger.info("You need a " + type + " my dude. You only have " + tempCheck);
             if (type != AbstractCard.CardType.POWER) {
-                cardpoolClearance.extendSpecificTypeWithBasics(2 - tempCheck, rarity, type);
+                cardpoolClearance.extendWithBasics(2 - tempCheck, rarity, type);
             } else {
-                cardpoolClearance.extendSpecificTypeWithBasics(1, rarity, type);
+                cardpoolClearance.extendWithBasics(1, rarity, type);
             }
         }
 
@@ -141,9 +140,9 @@ public class ERRORCouldNotFindRareCardOfTypePatch {
         if (need) {
             patchLogger.info("You need a " + type + " my dude. You only have " + tempCheck);
             if (type != AbstractCard.CardType.POWER) {
-                cardpoolClearance.extendSpecificTypeWithBasics(2 - tempCheck, rarity, type);
+                cardpoolClearance.extendWithBasics(2 - tempCheck, rarity, type);
             } else {
-                cardpoolClearance.extendSpecificTypeWithBasics(1, rarity, type);
+                cardpoolClearance.extendWithBasics(1, rarity, type);
             }
         }
 

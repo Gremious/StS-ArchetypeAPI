@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.io.InputStream;
@@ -21,7 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
-import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics;
+import static archetypeAPI.util.cardpoolClearance.extendWithBasics;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
     private boolean cardsWereUsed;
@@ -43,12 +42,14 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             if (this.openedGridScreen && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+
                 tickDuration();
             } else if (!openedGridScreen) {
                 UsedArchetypesCombined.clear();
                 if (AbstractDungeon.player instanceof customCharacterArchetype) {
                     CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
                     AbstractDungeon.gridSelectScreen.open(cardg, 999, true, gridSelectText);
+
                     this.openedGridScreen = true;
                 } else {
                     switch (AbstractDungeon.player.chosenClass) {
@@ -130,7 +131,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             needReinst = true;
 
             for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.COMMON);
+                extendWithBasics(1, AbstractCard.CardRarity.COMMON);
             }
 
         }
@@ -138,14 +139,14 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             needReinst = true;
 
             for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
+                extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
             }
 
         }
         if (rareCheck.size() < 3) {
             needReinst = true;
             for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.RARE);
+                extendWithBasics(1, AbstractCard.CardRarity.RARE);
             }
         }
     }
