@@ -34,7 +34,9 @@ public class BasicDefectArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public void archetypeEffect() {
+
         BasicDefect basicDefect = new BasicDefect();
+
     }
 
     @Override

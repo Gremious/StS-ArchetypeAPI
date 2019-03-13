@@ -14,8 +14,10 @@ import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
 import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
+import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.rollRarity;
 
 public class cardpoolClearance {
+    public static CardGroup cleanCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
     public static void replaceCardpool(ArrayList<AbstractCard> tmpPool, CardGroup replaceWith) {
         tmpPool.removeIf(card -> {
@@ -30,6 +32,107 @@ public class cardpoolClearance {
                     return idCheckBool;
                 }
         );
+    }
+
+    public static void extendSpecificTypeWithBasics(int by, AbstractCard.CardRarity rarity, AbstractCard.CardType type) {
+        if (AbstractDungeon.player instanceof customCharacterArchetype) {
+            CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
+
+            for (AbstractCard basicCheckCard : cardg.group) {
+                if (basicCheckCard.hasTag(BASIC)) {
+                    extendSpecificRarirtyInner(by, rarity, basicCheckCard);
+                }
+            }
+        } else {
+            switch (AbstractDungeon.player.chosenClass) {
+                case IRONCLAD:
+                    extendSpecificRarirtyInner(by, rarity, new BasicIroncladArchetypeSelectCard().makeCopy());
+                    break;
+                case THE_SILENT:
+                    extendSpecificRarirtyInner(by, rarity, new BasicSilentArchetypeSelectCard().makeCopy());
+                    break;
+                case DEFECT:
+                    extendSpecificRarirtyInner(by, rarity, new BasicSilentArchetypeSelectCard().makeCopy());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public static void extendSpecificTypeWithBasics(int by, AbstractCard.CardType type) {
+        if (AbstractDungeon.player instanceof customCharacterArchetype) {
+            CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
+
+            for (AbstractCard basicCheckCard : cardg.group) {
+                if (basicCheckCard.hasTag(BASIC)) {
+                    extendSpecificTypeWithBasicsInner(by, type, basicCheckCard);
+                }
+            }
+        } else {
+            switch (AbstractDungeon.player.chosenClass) {
+                case IRONCLAD:
+                    extendSpecificTypeWithBasicsInner(by, type, new BasicIroncladArchetypeSelectCard().makeCopy());
+                    break;
+                case THE_SILENT:
+                    extendSpecificTypeWithBasicsInner(by, type, new BasicSilentArchetypeSelectCard().makeCopy());
+                    break;
+                case DEFECT:
+                    extendSpecificTypeWithBasicsInner(by, type, new BasicSilentArchetypeSelectCard().makeCopy());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public static void extendSpecificTypeWithBasicsInner(int by, AbstractCard.CardType type, AbstractCard basicArchetypeCard) {
+        AbstractCard.CardRarity rarity = rollRarity();
+        extendSpecificTypeWithBasicsInner(by, rarity, type, basicArchetypeCard);
+    }
+
+    public static void extendSpecificTypeWithBasicsInner(int by, AbstractCard.CardRarity rarity, AbstractCard.CardType type, AbstractCard basicArchetypeCard) {
+        CardGroup holder = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        holder.group.addAll(UsedArchetypesCombined.group);
+
+        UsedArchetypesCombined.clear(); // Clear all cards
+        ((AbstractArchetypeCard) basicArchetypeCard).archetypeEffect(); // And only activate the basic archetype
+
+        CardGroup cardsOfTheType = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        for (AbstractCard c : UsedArchetypesCombined.group) {   // Fill this card group with basics
+            if (c.type == type) {                               // of the right type
+                cardsOfTheType.addToTop(c);
+            }
+        }
+
+        if (!cardsOfTheType.isEmpty()) {
+            cardsOfTheType.group.removeIf(card -> card.rarity != rarity);
+        }
+
+        // Keep only those of the specific Rarirty
+        int i = 0;
+        do {
+
+            if (!cardsOfTheType.isEmpty() && !containsGroupByID(holder.group, UsedArchetypesCombined.group)) {
+                AbstractCard c = UsedArchetypesCombined.getRandomCard(true);
+                if (!containsID(holder.group, c)) {
+                    holder.addToRandomSpot(c);
+                    i++;
+                }
+
+            } else {
+                AbstractCard c = CardLibrary.getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng);
+                if (!containsID(holder.group, c)) {
+                    holder.addToRandomSpot(c);
+                    i++;
+                }
+            }
+        } while (i < by);
+
+        UsedArchetypesCombined.clear();
+        UsedArchetypesCombined.group.addAll(holder.group);
+        CardCrawlGame.dungeon.initializeCardPools();
+        // Replace UsedArchetypesCombined with a temp group
     }
 
 
@@ -68,7 +171,7 @@ public class cardpoolClearance {
 
         CardGroup cardsOfTheRarity = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         for (AbstractCard c : UsedArchetypesCombined.group) {   // Fill this card group with basics
-            if (c.rarity == rarity) {                           // off the right rarity
+            if (c.rarity == rarity) {                           // of the right rarity
                 cardsOfTheRarity.addToTop(c);
             }
         }
@@ -83,7 +186,6 @@ public class cardpoolClearance {
                     holder.addToRandomSpot(c);
                     i++;
                 }
-
             } else {
                 AbstractCard c = CardLibrary.getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng);
                 if (!containsID(holder.group, c)) {
@@ -120,5 +222,27 @@ public class cardpoolClearance {
         }
 
         return (count <= 0);
+    }
+
+
+
+    public static void populateTrulyFullClassCardList(AbstractCard.CardColor CardColor) {
+        ArrayList<AbstractCard> allCards = new ArrayList<>();
+        allCards.addAll(CardLibrary.getAllCards());
+
+        for (AbstractCard c : allCards) {
+            if (c.color == CardColor
+                    && c.rarity != AbstractCard.CardRarity.SPECIAL
+                    && c.rarity != AbstractCard.CardRarity.BASIC) {
+                cleanCards.addToTop(c);
+            }
+        }
+    }
+
+    public static AbstractCard getSuperRandomCard(AbstractCard.CardRarity rarity) {
+        if (cleanCards.isEmpty()) {
+            populateTrulyFullClassCardList(AbstractDungeon.player.getCardColor());
+        }
+        return cleanCards.getRandomCard(true, rarity);
     }
 }
