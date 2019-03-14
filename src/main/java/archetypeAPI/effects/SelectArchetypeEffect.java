@@ -12,18 +12,19 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
-import static archetypeAPI.util.cardpoolClearance.extendSpecificRarityWithBasics;
+import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.util.cardpoolClearance.extendWithBasics;
+import static archetypeAPI.util.cardpoolClearance.makeSureWeMeetMinimum;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
+
+
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
     private String gridSelectText;
@@ -43,12 +44,14 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             if (this.openedGridScreen && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+
                 tickDuration();
             } else if (!openedGridScreen) {
-                UsedArchetypesCombined.clear();
+                cardsOfTheArchetypesInUse.clear();
                 if (AbstractDungeon.player instanceof customCharacterArchetype) {
                     CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
                     AbstractDungeon.gridSelectScreen.open(cardg, 999, true, gridSelectText);
+
                     this.openedGridScreen = true;
                 } else {
                     switch (AbstractDungeon.player.chosenClass) {
@@ -85,18 +88,13 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                     }
                 }
 
-                if (!UsedArchetypesCombined.isEmpty()) {
-                    CardCrawlGame.dungeon.initializeCardPools();
-                }
-
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                     c.stopGlowing();
                 }
 
+                makeSureWeMeetMinimum();
 
-                CheckPools();
-
-                if (needReinst && !UsedArchetypesCombined.isEmpty()) {
+                if (!cardsOfTheArchetypesInUse.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
 
@@ -112,41 +110,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
         this.duration -= Gdx.graphics.getDeltaTime();
         if (this.duration < 0.0F) {
             this.isDone = true;
-        }
-    }
-
-    private void CheckPools() {
-        ArrayList<AbstractCard> commonCheck = new ArrayList<>();
-        ArrayList<AbstractCard> uncommonCheck = new ArrayList<>();
-        ArrayList<AbstractCard> rareCheck = new ArrayList<>();
-
-        for (AbstractCard ca : UsedArchetypesCombined.group) {
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.COMMON) commonCheck.add(ca);
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.UNCOMMON) uncommonCheck.add(ca);
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.RARE) rareCheck.add(ca);
-        }
-
-        if (commonCheck.size() < 3) {
-            needReinst = true;
-
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.COMMON);
-            }
-
-        }
-        if (uncommonCheck.size() < 3) {
-            needReinst = true;
-
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
-            }
-
-        }
-        if (rareCheck.size() < 3) {
-            needReinst = true;
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.RARE);
-            }
         }
     }
 

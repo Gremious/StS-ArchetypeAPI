@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
+import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
 import static archetypeAPI.util.cardpoolClearance.*;
 
@@ -33,7 +33,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
     @Override
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
-            UsedArchetypesCombined.clear();
+            cardsOfTheArchetypesInUse.clear();
 
             CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
@@ -100,7 +100,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         System.out.println("Archetype selection patch says: ???????????????");
                         System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
                         System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
-                        isDone= true;
+                        isDone = true;
                         break;
                 }
                 System.out.println("addArchetype() is done.");
@@ -112,18 +112,13 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         ((AbstractArchetypeCard) c).archetypeEffect();
                     }
                 }
-                //System.out.println("All effects activated. Pool is: " + UsedArchetypesCombined.toString());
 
-                if (!UsedArchetypesCombined.isEmpty()) {
+                makeSureWeMeetMinimum();
+
+                if (!cardsOfTheArchetypesInUse.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
 
-                CheckPools();
-
-                if (needReinst && !UsedArchetypesCombined.isEmpty()) {
-                    System.out.println("Card Pool too small! Adding some basic cards.");
-                    CardCrawlGame.dungeon.initializeCardPools();
-                }
 
             }
 
@@ -236,41 +231,6 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
         }
     }
 
-
-    private void CheckPools() {
-        ArrayList<AbstractCard> commonCheck = new ArrayList<>();
-        ArrayList<AbstractCard> uncommonCheck = new ArrayList<>();
-        ArrayList<AbstractCard> rareCheck = new ArrayList<>();
-
-        for (AbstractCard ca : UsedArchetypesCombined.group) {
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.COMMON) commonCheck.add(ca);
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.UNCOMMON) uncommonCheck.add(ca);
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.RARE) rareCheck.add(ca);
-        }
-
-        if (commonCheck.size() < 3) {
-            needReinst = true;
-
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.COMMON);
-            }
-
-        }
-        if (uncommonCheck.size() < 3) {
-            needReinst = true;
-
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
-            }
-
-        }
-        if (rareCheck.size() < 3) {
-            needReinst = true;
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendSpecificRarityWithBasics(1, AbstractCard.CardRarity.RARE);
-            }
-        }
-    }
 
     @Override
     public void dispose() {
