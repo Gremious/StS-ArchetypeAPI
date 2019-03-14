@@ -54,8 +54,6 @@ public class ExpandPoolPatch {
                 break;
             default:
         }
-
-
     }
 
     private static int cardRarityCheck(AbstractCard.CardRarity rarity) {
