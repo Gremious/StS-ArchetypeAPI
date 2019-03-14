@@ -286,7 +286,6 @@ public class cardpoolClearance {
                         type = AbstractCard.CardType.SKILL;
                 }
             }
-
         }
 
         for (AbstractCard c : cardsOfTheArchetypesInUse.group) {
