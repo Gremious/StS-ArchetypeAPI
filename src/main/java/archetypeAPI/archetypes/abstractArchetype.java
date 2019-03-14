@@ -6,6 +6,8 @@ import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,11 +17,13 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public abstract class abstractArchetype {
+    protected static final Logger logger = LogManager.getLogger(abstractArchetype.class.getName());
+
     public static CardGroup silentArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     public static CardGroup ironcladArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     public static CardGroup defectArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-    public static CardGroup UsedArchetypesCombined = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+    public static CardGroup cardsOfTheArchetypesInUse = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
     public abstractArchetype(ArrayList<String> archetypeFiles) {
         addCardsFromArchetypes(archetypeFiles);
@@ -38,11 +42,11 @@ public abstract class abstractArchetype {
             for (Map.Entry<String, archetypeStringsClass> entry : allString.entrySet()) {
 
                 for (String ID : entry.getValue().CARD_IDS) {
-                    System.out.println("Adding " + ID);
+                    //logger.info("Adding " + ID);
                     currentArchetype.add(CardLibrary.getCopy(ID));
                 }
 
-                UsedArchetypesCombined.group.addAll(currentArchetype);
+                cardsOfTheArchetypesInUse.group.addAll(currentArchetype);
             }
         }
     }

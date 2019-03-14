@@ -9,15 +9,18 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
+import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
-import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.cardRandomRng;
-import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.rollRarity;
+import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
 
 public class cardpoolClearance {
+    protected static final Logger logger = LogManager.getLogger(cardpoolClearance.class.getName());
+
     public static CardGroup cleanCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
     public static void replaceCardpool(ArrayList<AbstractCard> tmpPool, CardGroup replaceWith) {
@@ -221,8 +224,8 @@ public class cardpoolClearance {
         int i = 0;
         do {
             AbstractCard c = CardLibrary.getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng);
-            if (!containsID(UsedArchetypesCombined.group, c)) {
-                UsedArchetypesCombined.addToRandomSpot(c);
+            if (!containsID(cardsOfTheArchetypesInUse.group, c)) {
+                cardsOfTheArchetypesInUse.addToRandomSpot(c);
                 i++;
             }
 
@@ -245,8 +248,8 @@ public class cardpoolClearance {
     public static void extendWithBasicsInner(int by, AbstractCard.CardRarity rarity, AbstractCard.CardType type, AbstractCard basicArchetypeCard) {
 
         CardGroup holder = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        holder.group.addAll(UsedArchetypesCombined.group);
-        UsedArchetypesCombined.clear(); // Clear all cards
+        holder.group.addAll(cardsOfTheArchetypesInUse.group);
+        cardsOfTheArchetypesInUse.clear(); // Clear all cards
         CardGroup cardsThatFit = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
         ((AbstractArchetypeCard) basicArchetypeCard).archetypeEffect(); // And only activate the basic archetype
@@ -264,12 +267,12 @@ public class cardpoolClearance {
                     type = AbstractCard.CardType.POWER;
                     break;
                 default:
-                    System.out.println("arch api says nani? Let's just go for uhhhh skills then");
+                    logger.info("nani? Let's just go for uhhhh skills then");
                     type = AbstractCard.CardType.SKILL;
             }
         }
 
-        for (AbstractCard c : UsedArchetypesCombined.group) {
+        for (AbstractCard c : cardsOfTheArchetypesInUse.group) {
             if (c.type == type && c.rarity == rarity) {
                 cardsThatFit.addToTop(c);
             }
@@ -279,11 +282,13 @@ public class cardpoolClearance {
         do {
             if (!cardsThatFit.isEmpty() && !containsGroupByID(holder.group, cardsThatFit.group)) {
                 AbstractCard c = cardsThatFit.getRandomCard(cardRandomRng);
+                logger.info("We have cards that fit. Adding + " + c.name + " if you don't already have it.");
                 if (!containsID(holder.group, c)) {
                     holder.addToRandomSpot(c);
                     i++;
                 }
             } else {
+                logger.info("The pool of fitting cards has been exhausted. Adding a totally random card.");
                 AbstractCard c = getSuperRandomCard(rarity, type);
                 if (!containsID(holder.group, c)) {
                     holder.addToRandomSpot(c);
@@ -292,10 +297,10 @@ public class cardpoolClearance {
             }
         } while (i < by);
 
-        UsedArchetypesCombined.clear();
-        UsedArchetypesCombined.group.addAll(holder.group);
-        CardCrawlGame.dungeon.initializeCardPools();
-        // Replace UsedArchetypesCombined with a temp group
+        cardsOfTheArchetypesInUse.clear();
+        cardsOfTheArchetypesInUse.group.addAll(holder.group);
+        // CardCrawlGame.dungeon.initializeCardPools();
+        // Replace cardsOfTheArchetypesInUse with a temp group
     }
 
     // ===================
@@ -304,12 +309,12 @@ public class cardpoolClearance {
         int commons = 0;
         int uncommons = 0;
         int rares = 0;
-        int attacks = UsedArchetypesCombined.getAttacks().size();
-        int skills = UsedArchetypesCombined.getSkills().size();
-        int powers = UsedArchetypesCombined.getPowers().size();
+        int attacks = cardsOfTheArchetypesInUse.getAttacks().size();
+        int skills = cardsOfTheArchetypesInUse.getSkills().size();
+        int powers = cardsOfTheArchetypesInUse.getPowers().size();
 
 
-        for (AbstractCard c : UsedArchetypesCombined.group) {
+        for (AbstractCard c : cardsOfTheArchetypesInUse.group) {
             switch (c.rarity) {
                 case COMMON:
                     commons++;
@@ -325,26 +330,45 @@ public class cardpoolClearance {
 
 
         while (attacks < 3) {
-
+            logger.info("You have too little attacks!: " + attacks);
             if (commons < 3) {
                 extendWithBasics(1, AbstractCard.CardRarity.COMMON, AbstractCard.CardType.ATTACK);
+                commons++;
             } else if (uncommons < 3) {
                 extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardType.ATTACK);
+                uncommons++;
             } else if (rares < 3) {
                 extendWithBasics(1, AbstractCard.CardRarity.RARE, AbstractCard.CardType.ATTACK);
+                rares++;
             } else {
-                extendWithBasics(1, AbstractCard.CardType.ATTACK);
+                AbstractCard.CardRarity rarity = rollRarity();
+                extendWithBasics(1, rarity, AbstractCard.CardType.ATTACK);
+                switch (rarity) {
+                    case COMMON:
+                        commons++;
+                        break;
+                    case UNCOMMON:
+                        uncommons++;
+                        break;
+                    case RARE:
+                        rares++;
+                        break;
+                }
             }
             attacks++;
         }
 
         while (skills < 3) {
+            logger.info("You have too little skills!: " + skills);
             if (commons < 3) {
                 extendWithBasics(1, AbstractCard.CardRarity.COMMON, AbstractCard.CardType.SKILL);
+                commons++;
             } else if (uncommons < 3) {
                 extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardType.SKILL);
+                uncommons++;
             } else if (rares < 3) {
                 extendWithBasics(1, AbstractCard.CardRarity.RARE, AbstractCard.CardType.SKILL);
+                rares++;
             } else {
                 extendWithBasics(1, AbstractCard.CardType.SKILL);
             }
@@ -352,29 +376,54 @@ public class cardpoolClearance {
         }
 
         while (powers < 3) {
+            logger.info("You have too little powers!: " + powers);
             if (uncommons < 3) {
                 extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardType.POWER);
             } else if (rares < 3) {
                 extendWithBasics(1, AbstractCard.CardRarity.RARE, AbstractCard.CardType.POWER);
             } else {
-                extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardType.POWER);
+
+                AbstractCard.CardRarity rarity = rollRareOrUncommon(0.25f);
+
+                switch (rarity) {
+                    case UNCOMMON:
+                        uncommons++;
+                        break;
+                    case RARE:
+                        rares++;
+                        break;
+                }
+
+                extendWithBasics(1, rarity, AbstractCard.CardType.POWER);
             }
             powers++;
         }
 
         while (commons < 3) {
+            logger.info("You have too little commons!: " + commons);
             extendWithBasics(1, AbstractCard.CardRarity.COMMON);
             commons++;
         }
 
         while (uncommons < 3) {
+            logger.info("You have too little uncommons!: " + uncommons);
             extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
             uncommons++;
         }
 
         while (rares < 3) {
+            logger.info("You have too little rares!: " + rares);
             extendWithBasics(1, AbstractCard.CardRarity.RARE);
             rares++;
         }
     }
+
+    // ===================
+
+    public static void reinitializeCardPools() {
+        if (!cardsOfTheArchetypesInUse.isEmpty()) {
+            CardCrawlGame.dungeon.initializeCardPools();
+        }
+    }
+
 }

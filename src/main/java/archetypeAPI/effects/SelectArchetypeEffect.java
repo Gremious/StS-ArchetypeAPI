@@ -17,13 +17,14 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
+import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.util.cardpoolClearance.extendWithBasics;
 import static archetypeAPI.util.cardpoolClearance.makeSureWeMeetMinimum;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
+
+
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
     private String gridSelectText;
@@ -46,7 +47,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
 
                 tickDuration();
             } else if (!openedGridScreen) {
-                UsedArchetypesCombined.clear();
+                cardsOfTheArchetypesInUse.clear();
                 if (AbstractDungeon.player instanceof customCharacterArchetype) {
                     CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
                     AbstractDungeon.gridSelectScreen.open(cardg, 999, true, gridSelectText);
@@ -93,7 +94,7 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
 
                 makeSureWeMeetMinimum();
 
-                if (!UsedArchetypesCombined.isEmpty()) {
+                if (!cardsOfTheArchetypesInUse.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
 

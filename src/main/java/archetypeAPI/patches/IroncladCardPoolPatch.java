@@ -4,13 +4,13 @@ import archetypeAPI.util.cardpoolClearance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.Ironclad;
-import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
+import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.util.cardpoolClearance.makeSureWeMeetMinimum;
 
 @SpirePatch(
         clz = Ironclad.class,
@@ -23,32 +23,8 @@ public class IroncladCardPoolPatch {
     )
 
     public static void insert(Ironclad __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
-        if (!UsedArchetypesCombined.isEmpty()) {
-            ArrayList<AbstractCard> testPool = new ArrayList<>(tmpPool);
-
-            cardpoolClearance.replaceCardpool(tmpPool, UsedArchetypesCombined);
-
-            if (!UsedArchetypesCombined.isEmpty()) {
-                testPool.removeIf(card -> {
-                            boolean idCheckBool = false;
-                            for (AbstractCard c : tmpPool) {
-                                if (card.cardID.equals(c.cardID)) {
-                                    idCheckBool = true;
-                                }
-                            }
-                            return idCheckBool;
-                        }
-                );
-         /*       if (!testPool.isEmpty()) {
-                    for (AbstractCard c : testPool) {
-                        System.out.println("You missed a couple: ");
-                        System.out.println("Name: " + c.name + " ID: " + c.cardID);
-                        System.out.println("(This list excludes starter deck cards.)");
-                    }
-                }*/
-            }
-        } else {
-            CardLibrary.addRedCards(tmpPool);
+        if (!cardsOfTheArchetypesInUse.isEmpty()) {
+            cardpoolClearance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
         }
         System.out.println("Archetype API Log: Ironclad card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         System.out.println("These cards are: " + tmpPool.toString());

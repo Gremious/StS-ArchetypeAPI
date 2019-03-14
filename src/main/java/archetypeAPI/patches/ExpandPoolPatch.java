@@ -30,7 +30,7 @@ public class ExpandPoolPatch {
         System.out.println("There are this many uncommons: " + cardRarityCheck(AbstractCard.CardRarity.UNCOMMON));
         System.out.println("There are this many rares: " + cardRarityCheck(AbstractCard.CardRarity.RARE));
 
-        switch (rarity) {
+   /*     switch (rarity) {
             case COMMON:
                 if (cardRarityCheck(AbstractCard.CardRarity.COMMON) < numCheck) {
                     for (int i = cardRarityCheck(AbstractCard.CardRarity.COMMON); i < numCheck; i++) {
@@ -53,14 +53,14 @@ public class ExpandPoolPatch {
                 }
                 break;
             default:
-        }
+        }*/
     }
 
     private static int cardRarityCheck(AbstractCard.CardRarity rarity) {
         System.out.println("New Check Start");
         int count = 0;
         CardGroup UsedArchetypesCombinedTemp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        UsedArchetypesCombinedTemp.group.addAll(abstractArchetype.UsedArchetypesCombined.group);
+        UsedArchetypesCombinedTemp.group.addAll(abstractArchetype.cardsOfTheArchetypesInUse.group);
 
         for (AbstractCard c : UsedArchetypesCombinedTemp.group) {
             System.out.println("cardRarityCheck for rarity " + rarity.toString() + " is " + c);

@@ -32,7 +32,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
-import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
+import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.archetypes.theDefect.BasicDefect.basicDefectArchetypeFiles;
 import static archetypeAPI.archetypes.theDefect.ClawLowCostDefect.clawLowCostDefectDefectArchetypeFiles;
 import static archetypeAPI.archetypes.theDefect.DarkDefect.darkDefectArchetypeFiles;
@@ -268,7 +268,7 @@ public class ArchetypeAPI implements
     @Override
     public void receivePreStartGame() {
         if (!CardCrawlGame.loadingSave) {
-            UsedArchetypesCombined.clear();
+            cardsOfTheArchetypesInUse.clear();
         }
     }
 
