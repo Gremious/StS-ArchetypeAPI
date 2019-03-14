@@ -7,8 +7,6 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
 
-import static archetypeAPI.util.cardpoolClearance.extendWithBasics;
-
 @SpirePatch(
         clz = AbstractDungeon.class,
         method = "getRewardCards"
@@ -62,9 +60,11 @@ public class ExpandPoolPatch {
         CardGroup UsedArchetypesCombinedTemp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         UsedArchetypesCombinedTemp.group.addAll(abstractArchetype.cardsOfTheArchetypesInUse.group);
 
+        System.out.println("Your  " + rarity.toString() + "'S are:");
         for (AbstractCard c : UsedArchetypesCombinedTemp.group) {
-            System.out.println("cardRarityCheck for rarity " + rarity.toString() + " is " + c);
+            //    System.out.println("cardRarityCheck for rarity " + rarity.toString() + " is " + c);
             if (c.rarity == rarity) {
+                System.out.println(c);
                 count++;
             }
         }

@@ -1,6 +1,7 @@
 package archetypeAPI.util;
 
 import archetypeAPI.cards.AbstractArchetypeCard;
+import archetypeAPI.cards.archetypeSelectionCards.theDefect.BasicDefectArchetypeSelectCard;
 import archetypeAPI.cards.archetypeSelectionCards.theIronclad.BasicIroncladArchetypeSelectCard;
 import archetypeAPI.cards.archetypeSelectionCards.theSilent.BasicSilentArchetypeSelectCard;
 import archetypeAPI.characters.customCharacterArchetype;
@@ -134,7 +135,7 @@ public class cardpoolClearance {
                     extendWithBasicsInner(by, new BasicSilentArchetypeSelectCard().makeCopy());
                     break;
                 case DEFECT:
-                    extendWithBasicsInner(by, new BasicSilentArchetypeSelectCard().makeCopy());
+                    extendWithBasicsInner(by, new BasicDefectArchetypeSelectCard().makeCopy());
                     break;
                 default:
                     break;
@@ -160,7 +161,7 @@ public class cardpoolClearance {
                     extendWithBasicsInner(by, type, new BasicSilentArchetypeSelectCard().makeCopy());
                     break;
                 case DEFECT:
-                    extendWithBasicsInner(by, type, new BasicSilentArchetypeSelectCard().makeCopy());
+                    extendWithBasicsInner(by, type, new BasicDefectArchetypeSelectCard().makeCopy());
                     break;
                 default:
                     break;
@@ -186,7 +187,7 @@ public class cardpoolClearance {
                     extendWithBasicsInner(by, rarity, new BasicSilentArchetypeSelectCard().makeCopy());
                     break;
                 case DEFECT:
-                    extendWithBasicsInner(by, rarity, new BasicSilentArchetypeSelectCard().makeCopy());
+                    extendWithBasicsInner(by, rarity, new BasicDefectArchetypeSelectCard().makeCopy());
                     break;
                 default:
                     break;
@@ -212,7 +213,7 @@ public class cardpoolClearance {
                     extendWithBasicsInner(by, rarity, type, new BasicSilentArchetypeSelectCard().makeCopy());
                     break;
                 case DEFECT:
-                    extendWithBasicsInner(by, rarity, type, new BasicSilentArchetypeSelectCard().makeCopy());
+                    extendWithBasicsInner(by, rarity, type, new BasicDefectArchetypeSelectCard().makeCopy());
                     break;
                 default:
                     break;
@@ -255,21 +256,37 @@ public class cardpoolClearance {
         ((AbstractArchetypeCard) basicArchetypeCard).archetypeEffect(); // And only activate the basic archetype
 
         if (type == null) {
-            int roll = AbstractDungeon.miscRng.random(2);
-            switch (roll) {
-                case 0:
-                    type = AbstractCard.CardType.ATTACK;
-                    break;
-                case 1:
-                    type = AbstractCard.CardType.SKILL;
-                    break;
-                case 2:
-                    type = AbstractCard.CardType.POWER;
-                    break;
-                default:
-                    logger.info("nani? Let's just go for uhhhh skills then");
-                    type = AbstractCard.CardType.SKILL;
+            if (rarity != AbstractCard.CardRarity.COMMON) {
+                int roll = AbstractDungeon.miscRng.random(2);
+                switch (roll) {
+                    case 0:
+                        type = AbstractCard.CardType.ATTACK;
+                        break;
+                    case 1:
+                        type = AbstractCard.CardType.SKILL;
+                        break;
+                    case 2:
+                        type = AbstractCard.CardType.POWER;
+                        break;
+                    default:
+                        logger.info("nani? Let's just go for uhhhh skills then");
+                        type = AbstractCard.CardType.SKILL;
+                }
+            } else {
+                int roll = AbstractDungeon.miscRng.random(1);
+                switch (roll) {
+                    case 0:
+                        type = AbstractCard.CardType.ATTACK;
+                        break;
+                    case 1:
+                        type = AbstractCard.CardType.SKILL;
+                        break;
+                    default:
+                        logger.info("nani? Let's just go for uhhhh skills then");
+                        type = AbstractCard.CardType.SKILL;
+                }
             }
+
         }
 
         for (AbstractCard c : cardsOfTheArchetypesInUse.group) {
@@ -280,6 +297,10 @@ public class cardpoolClearance {
 
         int i = 0;
         do {
+            logger.info("You have requested a/an " + rarity + " " + type);
+            logger.info("The entire list of basic cards is: " + holder);
+            logger.info("We can add any of these: " + cardsThatFit + " unless you already have all of them.");
+
             if (!cardsThatFit.isEmpty() && !containsGroupByID(holder.group, cardsThatFit.group)) {
                 AbstractCard c = cardsThatFit.getRandomCard(cardRandomRng);
                 logger.info("We have cards that fit. Adding + " + c.name + " if you don't already have it.");
