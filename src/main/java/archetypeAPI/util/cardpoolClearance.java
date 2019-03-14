@@ -297,4 +297,50 @@ public class cardpoolClearance {
         CardCrawlGame.dungeon.initializeCardPools();
         // Replace UsedArchetypesCombined with a temp group
     }
+
+    // ===================
+
+    public static void makeSureWeMeetMinimum() {
+        int commons = 0;
+        int uncommons = 0;
+        int rares = 0;
+        int attacks = 0;
+        int skills = 0;
+        int powers = 0;
+
+        for (AbstractCard c : UsedArchetypesCombined.group) {
+            switch (c.rarity) {
+                case COMMON:
+                    commons++;
+                    break;
+                case UNCOMMON:
+                    uncommons++;
+                    break;
+                case RARE:
+                    rares++;
+                    break;
+            }
+            switch (c.type) {
+                case ATTACK:
+                    attacks++;
+                    break;
+                case SKILL:
+                    skills++;
+                    break;
+                case POWER:
+                    powers++;
+                    break;
+            }
+        }
+
+        if (commons < 3) {
+            extendWithBasics(3 - commons, AbstractCard.CardRarity.COMMON);
+        }
+        if (uncommons < 3) {
+            extendWithBasics(3 - uncommons, AbstractCard.CardRarity.UNCOMMON);
+        }
+        if (rares < 3) {
+            extendWithBasics(3 - rares, AbstractCard.CardRarity.RARE);
+        }
+    }
 }

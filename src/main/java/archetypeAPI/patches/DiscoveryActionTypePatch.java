@@ -26,7 +26,7 @@ public class DiscoveryActionTypePatch {
         int attackCheck = 0;
         int skillCheck = 0;
         int powerCheck = 0;
-        ArrayList<AbstractCard> rewardForNearlyNoReason = AbstractDungeon.getRewardCards();
+        ArrayList<AbstractCard> rewardForAGoodReason = AbstractDungeon.getRewardCards();
 
         for (AbstractCard c : list) {
             if (c.type == AbstractCard.CardType.ATTACK) attackCheck++;
