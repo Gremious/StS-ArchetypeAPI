@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.abstractArchetype.UsedArchetypesCombined;
 import static archetypeAPI.util.cardpoolClearance.extendWithBasics;
+import static archetypeAPI.util.cardpoolClearance.makeSureWeMeetMinimum;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
     private boolean cardsWereUsed;
@@ -86,18 +87,13 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                     }
                 }
 
-                if (!UsedArchetypesCombined.isEmpty()) {
-                    CardCrawlGame.dungeon.initializeCardPools();
-                }
-
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                     c.stopGlowing();
                 }
 
+                makeSureWeMeetMinimum();
 
-                CheckPools();
-
-                if (needReinst && !UsedArchetypesCombined.isEmpty()) {
+                if (!UsedArchetypesCombined.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
 
@@ -113,41 +109,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
         this.duration -= Gdx.graphics.getDeltaTime();
         if (this.duration < 0.0F) {
             this.isDone = true;
-        }
-    }
-
-    private void CheckPools() {
-        ArrayList<AbstractCard> commonCheck = new ArrayList<>();
-        ArrayList<AbstractCard> uncommonCheck = new ArrayList<>();
-        ArrayList<AbstractCard> rareCheck = new ArrayList<>();
-
-        for (AbstractCard ca : UsedArchetypesCombined.group) {
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.COMMON) commonCheck.add(ca);
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.UNCOMMON) uncommonCheck.add(ca);
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.RARE) rareCheck.add(ca);
-        }
-
-        if (commonCheck.size() < 3) {
-            needReinst = true;
-
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendWithBasics(1, AbstractCard.CardRarity.COMMON);
-            }
-
-        }
-        if (uncommonCheck.size() < 3) {
-            needReinst = true;
-
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
-            }
-
-        }
-        if (rareCheck.size() < 3) {
-            needReinst = true;
-            for (int i = commonCheck.size(); i < 3; i++) {
-                extendWithBasics(1, AbstractCard.CardRarity.RARE);
-            }
         }
     }
 

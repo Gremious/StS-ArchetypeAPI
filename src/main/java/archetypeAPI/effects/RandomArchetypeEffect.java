@@ -115,16 +115,12 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                 }
                 //System.out.println("All effects activated. Pool is: " + UsedArchetypesCombined.toString());
 
+                makeSureWeMeetMinimum();
+
                 if (!UsedArchetypesCombined.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
 
-                CheckPools();
-
-                if (needReinst && !UsedArchetypesCombined.isEmpty()) {
-                    System.out.println("Card Pool too small! Adding some basic cards.");
-                    CardCrawlGame.dungeon.initializeCardPools();
-                }
 
             }
 
@@ -237,41 +233,6 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
         }
     }
 
-
-    private void CheckPools() {
-        ArrayList<AbstractCard> commonCheck = new ArrayList<>();
-        ArrayList<AbstractCard> uncommonCheck = new ArrayList<>();
-        ArrayList<AbstractCard> rareCheck = new ArrayList<>();
-
-        for (AbstractCard ca : UsedArchetypesCombined.group) {
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.COMMON) commonCheck.add(ca);
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.UNCOMMON) uncommonCheck.add(ca);
-            if (ca.rarity == AbstractArchetypeCard.CardRarity.RARE) rareCheck.add(ca);
-        }
-
-        if (commonCheck.size() < 3) {
-            needReinst = true;
-
-            for (int i = commonCheck.size(); i < 3; i++) {
-                cardpoolClearance.extendWithBasics(1, AbstractCard.CardRarity.COMMON);
-            }
-
-        }
-        if (uncommonCheck.size() < 3) {
-            needReinst = true;
-
-            for (int i = commonCheck.size(); i < 3; i++) {
-                cardpoolClearance.extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
-            }
-
-        }
-        if (rareCheck.size() < 3) {
-            needReinst = true;
-            for (int i = commonCheck.size(); i < 3; i++) {
-                cardpoolClearance.extendWithBasics(1, AbstractCard.CardRarity.RARE);
-            }
-        }
-    }
 
     @Override
     public void dispose() {

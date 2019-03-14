@@ -304,9 +304,10 @@ public class cardpoolClearance {
         int commons = 0;
         int uncommons = 0;
         int rares = 0;
-        int attacks = 0;
-        int skills = 0;
-        int powers = 0;
+        int attacks = UsedArchetypesCombined.getAttacks().size();
+        int skills = UsedArchetypesCombined.getSkills().size();
+        int powers = UsedArchetypesCombined.getPowers().size();
+
 
         for (AbstractCard c : UsedArchetypesCombined.group) {
             switch (c.rarity) {
@@ -320,27 +321,60 @@ public class cardpoolClearance {
                     rares++;
                     break;
             }
-            switch (c.type) {
-                case ATTACK:
-                    attacks++;
-                    break;
-                case SKILL:
-                    skills++;
-                    break;
-                case POWER:
-                    powers++;
-                    break;
-            }
         }
 
-        if (commons < 3) {
-            extendWithBasics(3 - commons, AbstractCard.CardRarity.COMMON);
+
+        while (attacks < 3) {
+
+            if (commons < 3) {
+                extendWithBasics(1, AbstractCard.CardRarity.COMMON, AbstractCard.CardType.ATTACK);
+            } else if (uncommons < 3) {
+                extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardType.ATTACK);
+            } else if (rares < 3) {
+                extendWithBasics(1, AbstractCard.CardRarity.RARE, AbstractCard.CardType.ATTACK);
+            } else {
+                extendWithBasics(1, AbstractCard.CardType.ATTACK);
+            }
+            attacks++;
         }
-        if (uncommons < 3) {
-            extendWithBasics(3 - uncommons, AbstractCard.CardRarity.UNCOMMON);
+
+        while (skills < 3) {
+            if (commons < 3) {
+                extendWithBasics(1, AbstractCard.CardRarity.COMMON, AbstractCard.CardType.SKILL);
+            } else if (uncommons < 3) {
+                extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardType.SKILL);
+            } else if (rares < 3) {
+                extendWithBasics(1, AbstractCard.CardRarity.RARE, AbstractCard.CardType.SKILL);
+            } else {
+                extendWithBasics(1, AbstractCard.CardType.SKILL);
+            }
+            skills++;
         }
-        if (rares < 3) {
-            extendWithBasics(3 - rares, AbstractCard.CardRarity.RARE);
+
+        while (powers < 3) {
+            if (uncommons < 3) {
+                extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardType.POWER);
+            } else if (rares < 3) {
+                extendWithBasics(1, AbstractCard.CardRarity.RARE, AbstractCard.CardType.POWER);
+            } else {
+                extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardType.POWER);
+            }
+            powers++;
+        }
+
+        while (commons < 3) {
+            extendWithBasics(1, AbstractCard.CardRarity.COMMON);
+            commons++;
+        }
+
+        while (uncommons < 3) {
+            extendWithBasics(1, AbstractCard.CardRarity.UNCOMMON);
+            uncommons++;
+        }
+
+        while (rares < 3) {
+            extendWithBasics(1, AbstractCard.CardRarity.RARE);
+            rares++;
         }
     }
 }
