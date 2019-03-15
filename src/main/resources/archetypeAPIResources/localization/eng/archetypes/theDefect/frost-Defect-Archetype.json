@@ -1,5 +1,6 @@
 {
   "archetypeAPI:FrostDefect": {
+    "CHARACTER": "DEFECT",
     "NAME": "Frost",
     "CARD_IDS": [
       "Cold Snap",

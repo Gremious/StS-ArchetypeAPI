@@ -1,5 +1,6 @@
 {
   "archetypeAPI:BlockIronclad": {
+    "CHARACTER": "IRONCLAD",
     "NAME": "Block",
     "CARD_IDS": [
       "Armaments",

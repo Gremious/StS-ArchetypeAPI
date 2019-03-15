@@ -1,5 +1,6 @@
 {
   "archetypeAPI:BasicSilent": {
+    "CHARACTER": "THE_SILENT",
     "NAME": "Basic",
     "CARD_IDS": [
       "Sucker Punch",

@@ -1,5 +1,6 @@
 {
   "archetypeAPI:StrengthIronclad": {
+    "CHARACTER": "IRONCLAD",
     "NAME": "Strength",
     "CARD_IDS": [
       "Flex",

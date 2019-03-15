@@ -1,5 +1,6 @@
 {
   "archetypeAPI:PlasmaDefect": {
+    "CHARACTER": "DEFECT",
     "NAME": "Plasma",
     "CARD_IDS": [
       "Fusion",

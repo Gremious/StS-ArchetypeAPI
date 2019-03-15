@@ -1,5 +1,6 @@
 {
   "archetypeAPI:SelfDamageIronclad": {
+    "CHARACTER": "IRONCLAD",
     "NAME": "Self-Damage",
     "CARD_IDS": [
       "Blood for Blood",

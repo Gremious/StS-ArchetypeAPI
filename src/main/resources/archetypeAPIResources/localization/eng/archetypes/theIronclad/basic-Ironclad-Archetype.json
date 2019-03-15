@@ -1,5 +1,6 @@
 {
   "archetypeAPI:BasicIronclad": {
+    "CHARACTER": "IRONCLAD",
     "NAME": "Basic",
     "CARD_IDS": [
       "Anger",

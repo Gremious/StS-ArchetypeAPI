@@ -1,5 +1,6 @@
 {
   "archetypeAPI:DarkDefect": {
+    "CHARACTER": "DEFECT",
     "NAME": "Dark",
     "CARD_IDS": [
       "Darkness",

@@ -1,5 +1,6 @@
 {
   "archetypeAPI:DiscardSilent": {
+    "CHARACTER": "THE_SILENT",
     "NAME": "Discard",
     "CARD_IDS": [
       "Underhanded Strike",

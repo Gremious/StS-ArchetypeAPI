@@ -1,5 +1,6 @@
 {
   "archetypeAPI:BasicDefect": {
+    "CHARACTER": "DEFECT",
     "NAME": "Basic",
     "CARD_IDS": [
       "Go for the Eyes",

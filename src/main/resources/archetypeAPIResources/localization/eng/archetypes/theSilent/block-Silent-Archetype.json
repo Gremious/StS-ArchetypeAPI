@@ -1,5 +1,6 @@
 {
   "archetypeAPI:BlockSilent": {
+    "CHARACTER": "THE_SILENT",
     "NAME": "Block",
     "CARD_IDS": [
       "Dodge and Roll",

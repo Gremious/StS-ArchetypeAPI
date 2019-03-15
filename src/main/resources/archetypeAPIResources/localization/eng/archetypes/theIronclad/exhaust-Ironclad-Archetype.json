@@ -1,5 +1,6 @@
 {
   "archetypeAPI:ExhaustIronclad": {
+    "CHARACTER": "IRONCLAD",
     "NAME": "Exhaust",
     "CARD_IDS": [
       "Havoc",

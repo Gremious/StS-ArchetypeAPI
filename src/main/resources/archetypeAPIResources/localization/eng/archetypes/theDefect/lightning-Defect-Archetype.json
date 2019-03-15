@@ -1,5 +1,6 @@
 {
   "archetypeAPI:LightningDefect": {
+    "CHARACTER": "DEFECT",
     "NAME": "Lightning",
     "CARD_IDS": [
       "Ball Lightning",

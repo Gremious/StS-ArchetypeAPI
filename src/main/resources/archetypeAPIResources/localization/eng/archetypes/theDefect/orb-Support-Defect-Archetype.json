@@ -1,5 +1,6 @@
 {
   "archetypeAPI:OrbSupportDefect": {
+    "CHARACTER": "DEFECT",
     "NAME": "Orb Support",
     "CARD_IDS": [
       "Barrage",

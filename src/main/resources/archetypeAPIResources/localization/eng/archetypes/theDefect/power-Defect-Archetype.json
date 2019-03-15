@@ -1,5 +1,6 @@
 {
   "archetypeAPI:ClawDefect": {
+    "CHARACTER": "DEFECT",
     "NAME": "Claw",
     "CARD_IDS": [
       "Machine Learning",

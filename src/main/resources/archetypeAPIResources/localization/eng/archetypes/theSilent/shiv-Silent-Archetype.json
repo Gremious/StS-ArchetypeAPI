@@ -1,5 +1,6 @@
 {
   "archetypeAPI:ShivSilent": {
+    "CHARACTER": "THE_SILENT",
     "NAME": "Shiv",
     "CARD_IDS": [
       "Blade Dance",

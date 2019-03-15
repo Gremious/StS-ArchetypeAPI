@@ -1,5 +1,6 @@
 {
   "archetypeAPI:PoisonSilent": {
+    "CHARACTER": "THE_SILENT",
     "NAME": "Poison",
     "CARD_IDS": [
       "Bane",
