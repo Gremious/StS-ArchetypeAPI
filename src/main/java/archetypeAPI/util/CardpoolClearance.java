@@ -1,9 +1,7 @@
 package archetypeAPI.util;
 
+import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import archetypeAPI.cards.archetypeSelectionCards.theDefect.BasicDefectArchetypeSelectCard;
-import archetypeAPI.cards.archetypeSelectionCards.theIronclad.BasicIroncladArchetypeSelectCard;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.BasicSilentArchetypeSelectCard;
 import archetypeAPI.characters.customCharacterArchetype;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -127,18 +125,17 @@ public class CardpoolClearance {
             }
 
         } else {
-            switch (AbstractDungeon.player.chosenClass) {
-                case IRONCLAD:
-                    extendWithBasicsInner(by, new BasicIroncladArchetypeSelectCard().makeCopy());
-                    break;
-                case THE_SILENT:
-                    extendWithBasicsInner(by, new BasicSilentArchetypeSelectCard().makeCopy());
-                    break;
-                case DEFECT:
-                    extendWithBasicsInner(by, new BasicDefectArchetypeSelectCard().makeCopy());
-                    break;
-                default:
-                    break;
+            CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
+            boolean hasBasic = false;
+
+            for (AbstractCard basicCheckCard : cardg.group) {
+                if (basicCheckCard.hasTag(BASIC)) {
+                    hasBasic = true;
+                    extendWithBasicsInner(by, basicCheckCard);
+                }
+            }
+            if (!hasBasic) {
+                extendWithRandomCard(by);
             }
         }
     }
@@ -153,18 +150,12 @@ public class CardpoolClearance {
                 }
             }
         } else {
-            switch (AbstractDungeon.player.chosenClass) {
-                case IRONCLAD:
-                    extendWithBasicsInner(by, type, new BasicIroncladArchetypeSelectCard().makeCopy());
-                    break;
-                case THE_SILENT:
-                    extendWithBasicsInner(by, type, new BasicSilentArchetypeSelectCard().makeCopy());
-                    break;
-                case DEFECT:
-                    extendWithBasicsInner(by, type, new BasicDefectArchetypeSelectCard().makeCopy());
-                    break;
-                default:
-                    break;
+            CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
+
+            for (AbstractCard basicCheckCard : cardg.group) {
+                if (basicCheckCard.hasTag(BASIC)) {
+                    extendWithBasicsInner(by, type, basicCheckCard);
+                }
             }
         }
     }
@@ -179,18 +170,12 @@ public class CardpoolClearance {
                 }
             }
         } else {
-            switch (AbstractDungeon.player.chosenClass) {
-                case IRONCLAD:
-                    extendWithBasicsInner(by, rarity, new BasicIroncladArchetypeSelectCard().makeCopy());
-                    break;
-                case THE_SILENT:
-                    extendWithBasicsInner(by, rarity, new BasicSilentArchetypeSelectCard().makeCopy());
-                    break;
-                case DEFECT:
-                    extendWithBasicsInner(by, rarity, new BasicDefectArchetypeSelectCard().makeCopy());
-                    break;
-                default:
-                    break;
+            CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
+
+            for (AbstractCard basicCheckCard : cardg.group) {
+                if (basicCheckCard.hasTag(BASIC)) {
+                    extendWithBasicsInner(by, rarity, basicCheckCard);
+                }
             }
         }
     }
@@ -205,18 +190,12 @@ public class CardpoolClearance {
                 }
             }
         } else {
-            switch (AbstractDungeon.player.chosenClass) {
-                case IRONCLAD:
-                    extendWithBasicsInner(by, rarity, type, new BasicIroncladArchetypeSelectCard().makeCopy());
-                    break;
-                case THE_SILENT:
-                    extendWithBasicsInner(by, rarity, type, new BasicSilentArchetypeSelectCard().makeCopy());
-                    break;
-                case DEFECT:
-                    extendWithBasicsInner(by, rarity, type, new BasicDefectArchetypeSelectCard().makeCopy());
-                    break;
-                default:
-                    break;
+            CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
+
+            for (AbstractCard basicCheckCard : cardg.group) {
+                if (basicCheckCard.hasTag(BASIC)) {
+                    extendWithBasicsInner(by, rarity, type, basicCheckCard);
+                }
             }
         }
     }

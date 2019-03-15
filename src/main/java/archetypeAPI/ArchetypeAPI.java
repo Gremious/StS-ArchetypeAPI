@@ -1,9 +1,6 @@
 package archetypeAPI;
 
 import archetypeAPI.archetypes.AbstractArchetype;
-import archetypeAPI.cards.archetypeSelectionCards.theDefect.*;
-import archetypeAPI.cards.archetypeSelectionCards.theIronclad.*;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.*;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
@@ -39,25 +36,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.archetypes.theDefect.BasicDefect.basicDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.ClawLowCostDefect.clawLowCostDefectDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.DarkDefect.darkDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.FrostDefect.frostDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.LightningDefect.lightningDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.OrbSupportDefect.orbSupporDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.PlasmaDefect.plasmaDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.PowerDefect.powerDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.BasicIronclad.basicIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.BlockIronclad.blockIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.ExhaustIronclad.exhaustIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.SelfDamageIronclad.selfDamageIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.StrengthIronclad.strengthIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.StrikeIronclad.strikeIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.BasicSilent.basicSilentArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.BlockSilent.blockSilentArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.DiscardSilent.discardSilentArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.PoisonSilent.poisonSilentArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.ShivSilent.shivSilentArchetypeFiles;
 
 @SpireInitializer
 public class ArchetypeAPI implements
