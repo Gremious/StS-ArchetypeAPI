@@ -1,14 +1,18 @@
 {
-  "archetypeAPI:FrostDefect": {
-    "CHARACTER": "DEFECT",
-    "NAME": "Frost",
-    "CARD_IDS": [
-      "Cold Snap",
-      "Coolheaded",
-      "Blizzard",
-      "Chill",
-      "Glacier",
-      "Rainbow"
-    ]
-  }
+  "CHARACTER": "DEFECT",
+  "NAME": "Frost",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "archetypeAPIResources/images/cards/blizzard.png",
+  "TAGS": [
+    "SINGLE",
+    "INCLUDE_SUPPORT"
+  ],
+  "CARD_IDS": [
+    "Cold Snap",
+    "Coolheaded",
+    "Blizzard",
+    "Chill",
+    "Glacier",
+    "Rainbow"
+  ]
 }

@@ -1,20 +1,23 @@
 {
-  "archetypeAPI:ClawDefect": {
-    "CHARACTER": "DEFECT",
-    "NAME": "Claw",
-    "CARD_IDS": [
-      "Machine Learning",
-      "Amplify",
-      "Self Repair",
-      "Hello World",
-      "Heatsinks",
-      "White Noise",
-      "Buffer",
-      "Echo Form",
-      "Creative AI",
-      "Force Field",
-      "Storm",
-      "Static Discharge"
-    ]
-  }
+  "CHARACTER": "DEFECT",
+  "NAME": "Power",
+  "CARD_TYPE": "POWER",
+  "IMG": "archetypeAPIResources/images/cards/creative_ai.png",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "CARD_IDS": [
+    "Machine Learning",
+    "Amplify",
+    "Self Repair",
+    "Hello World",
+    "Heatsinks",
+    "White Noise",
+    "Buffer",
+    "Echo Form",
+    "Creative AI",
+    "Force Field",
+    "Storm",
+    "Static Discharge"
+  ]
 }

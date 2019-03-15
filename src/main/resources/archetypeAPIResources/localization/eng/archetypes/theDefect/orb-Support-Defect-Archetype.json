@@ -1,21 +1,25 @@
 {
-  "archetypeAPI:OrbSupportDefect": {
-    "CHARACTER": "DEFECT",
-    "NAME": "Orb Support",
-    "CARD_IDS": [
-      "Barrage",
-      "Compile Driver",
-      "Redo",
-      "Capacitor",
-      "Consume",
-      "Defragment",
-      "Loop",
-      "Fission",
-      "Multi-Cast",
-      "Biased Cognition",
-      "Hyperbeam",
-      "Chaos",
-      "Lockon"
-    ]
-  }
+  "CHARACTER": "DEFECT",
+  "NAME": "Orb Support",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "archetypeAPIResources/images/cards/barrage.png",
+  "TAGS": [
+    "SINGLE",
+    "SUPPORT"
+  ],
+  "CARD_IDS": [
+    "Barrage",
+    "Compile Driver",
+    "Redo",
+    "Capacitor",
+    "Consume",
+    "Defragment",
+    "Loop",
+    "Fission",
+    "Multi-Cast",
+    "Biased Cognition",
+    "Hyperbeam",
+    "Chaos",
+    "Lockon"
+  ]
 }
