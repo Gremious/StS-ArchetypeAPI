@@ -5,16 +5,17 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public class ArchetypeCardTags {
     @SpireEnum
-    public static AbstractCard.CardTags BASIC;
+    public static AbstractCard.CardTags BASIC; // IMPORTANT!!!
     // For custom characters, this is the tag for the archetype selection card of the non-archetype cards,
     // or, cards you want always included.
     // THE ARCHETYPE TAGGED WITH THIS WILL *ALWAYS* BE ADDED TO THE CARDPOOL WHEN ROLLED RANDOMLY.
+    // YOU MUST HAVE AT LEAST 1 ARCHETYPE CARD TAGGED WITH THIS FOR A CUSTOM CHARACTER!
     // This is also to make sure you load at least a minimal number of cards rather than generating random ones and for a
-    // smoother playing experience. In the future, an option to disable that will be added.
+    // smoother playing experience.
     // A mod option to disable "Always Basic" will be added in the future.
 
     @SpireEnum
-    public static AbstractCard.CardTags SINGLE; // MOST IMPORTANT!!!
+    public static AbstractCard.CardTags SINGLE; // IMPORTANT!!!
     // For single/core archetypes. Cards that say "poison" and only add the poison archetype and nothing more.
     // KEEP IN MIND THAT IF THE PLAYER DOESN'T HAVE THE "CHOOSE ARCHETYPES ON RUN START" OPTION SELECTED,
     // ONLY CARDS TAGGED WITH THIS WILL BE IN THE RANDOM AUTO-SELECT POOL. TAG YOUR CARDS!
@@ -42,5 +43,7 @@ public class ArchetypeCardTags {
     public static AbstractCard.CardTags OPTION;
     // For a card that doesn't add an archetype to the pool itself, but perhaps edits it in some other way
     // For exmaple "Upgrade all poison cards if any" or something like that.
+
+    // The latter 2 tags aren't currently utilized, but exist for future-proofing.
 
 }
