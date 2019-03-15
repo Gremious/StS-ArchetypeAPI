@@ -1,17 +1,20 @@
 {
-  "archetypeAPI:PoisonSilent": {
-    "CHARACTER": "THE_SILENT",
-    "NAME": "Poison",
-    "CARD_IDS": [
-      "Bane",
-      "Deadly Poison",
-      "Poisoned Stab",
-      "Corpse Explosion",
-      "Envenom",
-      "Bouncing Flask",
-      "Catalyst",
-      "Crippling Poison",
-      "Noxious Fumes"
-    ]
-  }
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Poison",
+  "CARD_TYPE": "POWER",
+  "IMG": "archetypeAPIResources/images/cards/noxious_fumes.png",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "CARD_IDS": [
+    "Bane",
+    "Deadly Poison",
+    "Poisoned Stab",
+    "Corpse Explosion",
+    "Envenom",
+    "Bouncing Flask",
+    "Catalyst",
+    "Crippling Poison",
+    "Noxious Fumes"
+  ]
 }

@@ -1,13 +1,16 @@
 {
-  "archetypeAPI:ShivSilent": {
-    "CHARACTER": "THE_SILENT",
-    "NAME": "Shiv",
-    "CARD_IDS": [
-      "Blade Dance",
-      "Cloak And Dagger",
-      "Infinite Blades",
-      "Accuracy",
-      "Storm of Steel"
-    ]
-  }
+  "CHARACTER": "THE_SILENT",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "archetypeAPIResources/images/cards/shiv.png",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "NAME": "Shiv",
+  "CARD_IDS": [
+    "Blade Dance",
+    "Cloak And Dagger",
+    "Infinite Blades",
+    "Accuracy",
+    "Storm of Steel"
+  ]
 }

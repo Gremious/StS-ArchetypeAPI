@@ -1,21 +1,24 @@
 {
-  "archetypeAPI:DiscardSilent": {
-    "CHARACTER": "THE_SILENT",
-    "NAME": "Discard",
-    "CARD_IDS": [
-      "Underhanded Strike",
-      "Eviscerate",
-      "Dagger Throw",
-      "Prepared",
-      "Unload",
-      "Storm of Steel",
-      "Tools of the Trade",
-      "Concentrate",
-      "Calculated Gamble",
-      "All Out Attack",
-      "Acrobatics",
-      "Tactician",
-      "Reflex"
-    ]
-  }
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Discard",
+  "CARD_TYPE": "SKILL",
+  "IMG": "archetypeAPIResources/images/cards/reflex.png",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "CARD_IDS": [
+    "Underhanded Strike",
+    "Eviscerate",
+    "Dagger Throw",
+    "Prepared",
+    "Unload",
+    "Storm of Steel",
+    "Tools of the Trade",
+    "Concentrate",
+    "Calculated Gamble",
+    "All Out Attack",
+    "Acrobatics",
+    "Tactician",
+    "Reflex"
+  ]
 }
