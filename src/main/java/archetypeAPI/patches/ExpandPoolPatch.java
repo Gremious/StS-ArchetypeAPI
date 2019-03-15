@@ -7,6 +7,8 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
 
+import static archetypeAPI.util.cardpoolClearance.extendWithBasics;
+
 @SpirePatch(
         clz = AbstractDungeon.class,
         method = "getRewardCards"
@@ -28,7 +30,7 @@ public class ExpandPoolPatch {
         System.out.println("There are this many uncommons: " + cardRarityCheck(AbstractCard.CardRarity.UNCOMMON));
         System.out.println("There are this many rares: " + cardRarityCheck(AbstractCard.CardRarity.RARE));
 
-   /*     switch (rarity) {
+        switch (rarity) {
             case COMMON:
                 if (cardRarityCheck(AbstractCard.CardRarity.COMMON) < numCheck) {
                     for (int i = cardRarityCheck(AbstractCard.CardRarity.COMMON); i < numCheck; i++) {
@@ -51,7 +53,7 @@ public class ExpandPoolPatch {
                 }
                 break;
             default:
-        }*/
+        }
     }
 
     private static int cardRarityCheck(AbstractCard.CardRarity rarity) {
