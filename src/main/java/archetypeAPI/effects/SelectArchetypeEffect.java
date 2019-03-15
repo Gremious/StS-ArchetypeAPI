@@ -1,9 +1,9 @@
 package archetypeAPI.effects;
 
-import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import archetypeAPI.characters.customCharacterArchetype;
-import archetypeAPI.jsonClasses.uiStrings;
+import archetypeAPI.jsonClasses.UiStrings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.google.gson.Gson;
@@ -18,9 +18,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.util.cardpoolClearance.extendWithBasics;
-import static archetypeAPI.util.cardpoolClearance.makeSureWeMeetMinimum;
+import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.util.CardpoolClearance.extendWithBasics;
+import static archetypeAPI.util.CardpoolClearance.makeSureWeMeetMinimum;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
 
@@ -35,8 +35,8 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
         cardsWereUsed = false;
         openedGridScreen = false;
 
-        InputStream in = abstractArchetype.class.getResourceAsStream("/archetypeAPIResources/localization/eng/gridSelect-Strings.json");
-        uiStrings gridSelectText = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), uiStrings.class);
+        InputStream in = AbstractArchetype.class.getResourceAsStream("/archetypeAPIResources/localization/eng/gridSelect-Strings.json");
+        UiStrings gridSelectText = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), UiStrings.class);
         this.gridSelectText = gridSelectText.TEXT;
     }
 
@@ -56,15 +56,15 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 } else {
                     switch (AbstractDungeon.player.chosenClass) {
                         case IRONCLAD:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.ironcladArchetypeSelectCards, 999, true, gridSelectText);
+                            AbstractDungeon.gridSelectScreen.open(AbstractArchetype.ironcladArchetypeSelectCards, 999, true, gridSelectText);
                             this.openedGridScreen = true;
                             break;
                         case THE_SILENT:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.silentArchetypeSelectCards, 999, true, gridSelectText);
+                            AbstractDungeon.gridSelectScreen.open(AbstractArchetype.silentArchetypeSelectCards, 999, true, gridSelectText);
                             this.openedGridScreen = true;
                             break;
                         case DEFECT:
-                            AbstractDungeon.gridSelectScreen.open(abstractArchetype.defectArchetypeSelectCards, 999, true, gridSelectText);
+                            AbstractDungeon.gridSelectScreen.open(AbstractArchetype.defectArchetypeSelectCards, 999, true, gridSelectText);
                             this.openedGridScreen = true;
                             break;
                         default:

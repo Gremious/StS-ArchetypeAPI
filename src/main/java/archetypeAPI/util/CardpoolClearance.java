@@ -15,12 +15,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
 
-public class cardpoolClearance {
-    protected static final Logger logger = LogManager.getLogger(cardpoolClearance.class.getName());
+public class CardpoolClearance {
+    protected static final Logger logger = LogManager.getLogger(CardpoolClearance.class.getName());
 
     public static CardGroup cleanCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 

@@ -1,6 +1,6 @@
 package archetypeAPI.jsonClasses;
 
-public class archetypeStringsClass {
+public class ArchetypeStringsClass {
     public String NAME;
     public String[] CARD_IDS;
 }

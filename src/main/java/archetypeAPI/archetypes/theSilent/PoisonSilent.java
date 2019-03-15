@@ -1,10 +1,10 @@
 package archetypeAPI.archetypes.theSilent;
 
-import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.archetypes.AbstractArchetype;
 
 import java.util.ArrayList;
 
-public class PoisonSilent extends abstractArchetype {
+public class PoisonSilent extends AbstractArchetype {
     public static ArrayList<String> poisonSilentArchetypeFiles = new ArrayList<>();
 
     public PoisonSilent() {

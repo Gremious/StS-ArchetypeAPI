@@ -1,6 +1,6 @@
 package archetypeAPI.effects;
 
-import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
 import archetypeAPI.characters.customCharacterArchetype;
 import com.badlogic.gdx.Gdx;
@@ -14,9 +14,9 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
-import static archetypeAPI.util.cardpoolClearance.*;
+import static archetypeAPI.util.CardpoolClearance.*;
 
 public class RandomArchetypeEffect extends AbstractGameEffect {
     // This is totally an effect. Yes.
@@ -54,12 +54,12 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                     case IRONCLAD:
                         //System.out.println("Here is the entire initial archetype card pool from which we will pick randoms: " + abstractArchetype.ironcladArchetypeSelectCards.group.toString());
 
-                        for (AbstractCard basicCheckCard : abstractArchetype.ironcladArchetypeSelectCards.group) {
+                        for (AbstractCard basicCheckCard : AbstractArchetype.ironcladArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
                         }
-                        for (AbstractCard c : abstractArchetype.ironcladArchetypeSelectCards.group) {
+                        for (AbstractCard c : AbstractArchetype.ironcladArchetypeSelectCards.group) {
                             if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
                                 list.addToTop(c);
                             }
@@ -67,12 +67,12 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         addArchetype(list, ironcladBase);
                         break;
                     case THE_SILENT:
-                        for (AbstractCard basicCheckCard : abstractArchetype.silentArchetypeSelectCards.group) {
+                        for (AbstractCard basicCheckCard : AbstractArchetype.silentArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
 
-                            for (AbstractCard c : abstractArchetype.silentArchetypeSelectCards.group) {
+                            for (AbstractCard c : AbstractArchetype.silentArchetypeSelectCards.group) {
                                 if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
                                     list.addToTop(c);
                                 }
@@ -82,12 +82,12 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
                         addArchetype(list, silentBase);
                         break;
                     case DEFECT:
-                        for (AbstractCard basicCheckCard : abstractArchetype.defectArchetypeSelectCards.group) {
+                        for (AbstractCard basicCheckCard : AbstractArchetype.defectArchetypeSelectCards.group) {
                             if (basicCheckCard.hasTag(BASIC)) {
                                 list.addToTop(basicCheckCard);
                             }
 
-                            for (AbstractCard c : abstractArchetype.defectArchetypeSelectCards.group) {
+                            for (AbstractCard c : AbstractArchetype.defectArchetypeSelectCards.group) {
                                 if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
                                     list.addToTop(c);
                                 }

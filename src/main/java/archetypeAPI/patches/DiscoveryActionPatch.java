@@ -1,6 +1,6 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.util.cardpoolClearance;
+import archetypeAPI.util.CardpoolClearance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -8,8 +8,8 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.util.cardpoolClearance.containsID;
-import static archetypeAPI.util.cardpoolClearance.cleanCards;
+import static archetypeAPI.util.CardpoolClearance.containsID;
+import static archetypeAPI.util.CardpoolClearance.cleanCards;
 
 @SpirePatch(
         clz = AbstractDungeon.class,
@@ -36,7 +36,7 @@ public class DiscoveryActionPatch {
         }
 
         if (cleanCards.isEmpty()) {
-            cardpoolClearance.populateTrulyFullClassCardList(AbstractDungeon.player.getCardColor());
+            CardpoolClearance.populateTrulyFullClassCardList(AbstractDungeon.player.getCardColor());
         }
 
         if (attackCheck < 3) {

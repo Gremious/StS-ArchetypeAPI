@@ -1,10 +1,10 @@
 package archetypeAPI.archetypes.theDefect;
 
-import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.archetypes.AbstractArchetype;
 
 import java.util.ArrayList;
 
-public class BasicDefect extends abstractArchetype {
+public class BasicDefect extends AbstractArchetype {
 
     public static ArrayList<String> basicDefectArchetypeFiles = new ArrayList<>();
 

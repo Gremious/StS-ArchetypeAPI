@@ -1,6 +1,6 @@
 package archetypeAPI.archetypes;
 
-import archetypeAPI.jsonClasses.archetypeStringsClass;
+import archetypeAPI.jsonClasses.ArchetypeStringsClass;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -16,8 +16,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Map;
 
-public abstract class abstractArchetype {
-    protected static final Logger logger = LogManager.getLogger(abstractArchetype.class.getName());
+public abstract class AbstractArchetype {
+    protected static final Logger logger = LogManager.getLogger(AbstractArchetype.class.getName());
 
     public static CardGroup silentArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     public static CardGroup ironcladArchetypeSelectCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
@@ -25,7 +25,7 @@ public abstract class abstractArchetype {
 
     public static CardGroup cardsOfTheArchetypesInUse = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-    public abstractArchetype(ArrayList<String> archetypeFiles) {
+    public AbstractArchetype(ArrayList<String> archetypeFiles) {
         addCardsFromArchetypes(archetypeFiles);
     }
 
@@ -33,13 +33,13 @@ public abstract class abstractArchetype {
         ArrayList<AbstractCard> currentArchetype = new ArrayList<>();
 
         for (String archetypeFile : archetypeFiles) {
-            InputStream in = abstractArchetype.class.getResourceAsStream("/" + archetypeFile);
-            Type mapType = new TypeToken<Map<String, archetypeStringsClass>>() {
+            InputStream in = AbstractArchetype.class.getResourceAsStream("/" + archetypeFile);
+            Type mapType = new TypeToken<Map<String, ArchetypeStringsClass>>() {
             }.getType();
 
-            Map<String, archetypeStringsClass> allString = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), mapType);
+            Map<String, ArchetypeStringsClass> allString = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), mapType);
 
-            for (Map.Entry<String, archetypeStringsClass> entry : allString.entrySet()) {
+            for (Map.Entry<String, ArchetypeStringsClass> entry : allString.entrySet()) {
 
                 for (String ID : entry.getValue().CARD_IDS) {
                     //logger.info("Adding " + ID);

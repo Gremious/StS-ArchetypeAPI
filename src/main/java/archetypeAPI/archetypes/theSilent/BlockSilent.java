@@ -1,10 +1,10 @@
 package archetypeAPI.archetypes.theSilent;
 
-import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.archetypes.AbstractArchetype;
 
 import java.util.ArrayList;
 
-public class BlockSilent extends abstractArchetype {
+public class BlockSilent extends AbstractArchetype {
     public static ArrayList<String> blockSilentArchetypeFiles = new ArrayList<>();
 
 

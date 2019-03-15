@@ -1,6 +1,6 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.util.cardpoolClearance;
+import archetypeAPI.util.CardpoolClearance;
 import basemod.abstracts.CustomPlayer;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
@@ -9,8 +9,8 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.util.cardpoolClearance.makeSureWeMeetMinimum;
+import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.util.CardpoolClearance.makeSureWeMeetMinimum;
 
 @SpirePatch(
         clz = CustomPlayer.class,
@@ -23,7 +23,7 @@ public class BasemodCardPoolPatch {
     public static SpireReturn<ArrayList<AbstractCard>> Prefix(CustomPlayer __instance, ArrayList<AbstractCard> tmpPool) {
         if (!cardsOfTheArchetypesInUse.isEmpty()) {
             makeSureWeMeetMinimum();
-            cardpoolClearance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
+            CardpoolClearance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
 
             System.out.println("Archetype API Log: Custom Character card pool patch. You are playing with: " + tmpPool.size() + " cards.");
             System.out.println("These cards are: " + tmpPool.toString());

@@ -1,10 +1,10 @@
 package archetypeAPI.archetypes.theIronclad;
 
-import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.archetypes.AbstractArchetype;
 
 import java.util.ArrayList;
 
-public class ExhaustIronclad extends abstractArchetype {
+public class ExhaustIronclad extends AbstractArchetype {
     public static ArrayList<String> exhaustIroncladArchetypeFiles = new ArrayList<>();
 
     public ExhaustIronclad() {
