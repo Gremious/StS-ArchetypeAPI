@@ -1,4 +1,11 @@
 {
+  "archetypeAPI:ArchetypeSelect": {
+    "TEXT": [
+      "Add the %s Archetype to your Card Draft Pool.",
+      "Select Your Archetypes!",
+      ""
+    ]
+  },
   "archetypeAPI:FlavorSilent": {
     "TEXT": [
       "Select Your Archetypes!",

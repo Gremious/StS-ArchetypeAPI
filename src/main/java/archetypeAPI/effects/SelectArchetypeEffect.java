@@ -44,7 +44,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
             if (this.openedGridScreen && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
-
                 tickDuration();
             } else if (!openedGridScreen) {
                 cardsOfTheArchetypesInUse.clear();
@@ -54,27 +53,9 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
 
                     this.openedGridScreen = true;
                 } else {
-                    switch (AbstractDungeon.player.chosenClass) {
-                        case IRONCLAD:
-                            AbstractDungeon.gridSelectScreen.open(AbstractArchetype.ironcladArchetypeSelectCards, 999, true, gridSelectText);
-                            this.openedGridScreen = true;
-                            break;
-                        case THE_SILENT:
-                            AbstractDungeon.gridSelectScreen.open(AbstractArchetype.silentArchetypeSelectCards, 999, true, gridSelectText);
-                            this.openedGridScreen = true;
-                            break;
-                        case DEFECT:
-                            AbstractDungeon.gridSelectScreen.open(AbstractArchetype.defectArchetypeSelectCards, 999, true, gridSelectText);
-                            this.openedGridScreen = true;
-                            break;
-                        default:
-                            System.out.println("Archetype selection effect says: ???????????????");
-                            System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
-                            System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
-                            isDone = true;
-                            break;
-                    }
-
+                    CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
+                    AbstractDungeon.gridSelectScreen.open(cardg, Integer.MAX_VALUE, true, gridSelectText);
+                    this.openedGridScreen = true;
                 }
 
             }
