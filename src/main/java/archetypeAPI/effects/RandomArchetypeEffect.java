@@ -2,7 +2,6 @@ package archetypeAPI.effects;
 
 import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import archetypeAPI.characters.customCharacterArchetype;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -25,6 +24,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
     public static int ironcladBase = 6;
     public static int silentBase = 5;
     public static int defectBase = 8;
+    public static int defaultBase = Integer.MAX_VALUE;
 
     public RandomArchetypeEffect() {
         this.duration = Settings.ACTION_DUR_FAST;
@@ -37,55 +37,40 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
 
             CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-            if (AbstractDungeon.player instanceof customCharacterArchetype) {
-                CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-                int defaultNum = ((customCharacterArchetype) AbstractDungeon.player).numberOfDefaultArchetypes();
-
-                for (AbstractCard c : cardg.group) {
-                    if (c.hasTag(SINGLE)) {
-                        list.addToTop(c);
-                    }
+            for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
+                if (c.hasTag(BASIC) || c.hasTag(SINGLE)) {
+                    list.addToTop(c);
                 }
+            }
+            switch (AbstractDungeon.player.chosenClass) {
+                case IRONCLAD:
+                    addArchetype(list, ironcladBase);
+                    break;
+                case THE_SILENT:
+                    addArchetype(list, silentBase);
+                    break;
+                case DEFECT:
+                    addArchetype(list, defectBase);
+                    break;
+                default:
+                    addArchetype(list, defaultBase);
+                    break;
+            }
 
-                addArchetype(list, defaultNum);
-            } else {
-                for (AbstractCard basicCheckCard : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
-                    if (basicCheckCard.hasTag(BASIC)) {
-                        list.addToTop(basicCheckCard);
-                    }
-                }
-                for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
-                    if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
-                        list.addToTop(c);
-                    }
-                }
-                switch (AbstractDungeon.player.chosenClass) {
-                    case IRONCLAD:
-                        addArchetype(list, ironcladBase);
-                        break;
-                    case THE_SILENT:
-                        addArchetype(list, silentBase);
-                        break;
-                    case DEFECT:
-                        addArchetype(list, defectBase);
-                        break;
-                }
+            System.out.println("addArchetype() is done.");
+            System.out.println("Randomly generated archetype select cards: " + randomArchetypes.toString());
 
-                System.out.println("addArchetype() is done.");
-                System.out.println("Randomly generated archetype select cards: " + randomArchetypes.toString());
-
-                for (AbstractCard c : randomArchetypes) {
-                    if (c instanceof AbstractArchetypeCard) {
-                        //System.out.println("Activating the archetype effect of " + c);
-                        ((AbstractArchetypeCard) c).archetypeEffect();
-                    }
+            for (AbstractCard c : randomArchetypes) {
+                if (c instanceof AbstractArchetypeCard) {
+                    //System.out.println("Activating the archetype effect of " + c);
+                    ((AbstractArchetypeCard) c).archetypeEffect();
                 }
+            }
 
-                makeSureWeMeetMinimum();
+            makeSureWeMeetMinimum();
 
-                if (!cardsOfTheArchetypesInUse.isEmpty()) {
-                    CardCrawlGame.dungeon.initializeCardPools();
-                }
+            if (!cardsOfTheArchetypesInUse.isEmpty()) {
+                CardCrawlGame.dungeon.initializeCardPools();
             }
 
             tickDuration();

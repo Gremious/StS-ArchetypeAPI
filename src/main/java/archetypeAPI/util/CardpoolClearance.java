@@ -2,7 +2,6 @@ package archetypeAPI.util;
 
 import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import archetypeAPI.characters.customCharacterArchetype;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -104,98 +103,46 @@ public class CardpoolClearance {
     // ===================
 
     public static void extendWithBasics(int by) {
-        if (AbstractDungeon.player instanceof customCharacterArchetype) {
-            CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-            boolean hasBasic = false;
+        CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
+        boolean hasBasic = false;
 
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    hasBasic = true;
-                }
+        for (AbstractCard basicCheckCard : cardg.group) {
+            if (basicCheckCard.hasTag(BASIC)) {
+                hasBasic = true;
+                extendWithBasicsInner(by, basicCheckCard);
             }
-
-            if (hasBasic) {
-                for (AbstractCard basicCheckCard : cardg.group) {
-                    if (basicCheckCard.hasTag(BASIC)) {
-                        extendWithBasicsInner(by, basicCheckCard);
-                    }
-                }
-            } else {
-                extendWithRandomCard(by);
-            }
-
-        } else {
-            CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
-            boolean hasBasic = false;
-
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    hasBasic = true;
-                    extendWithBasicsInner(by, basicCheckCard);
-                }
-            }
-            if (!hasBasic) {
-                extendWithRandomCard(by);
-            }
+        }
+        if (!hasBasic) {
+            extendWithRandomCard(by);
         }
     }
 
     public static void extendWithBasics(int by, AbstractCard.CardType type) {
-        if (AbstractDungeon.player instanceof customCharacterArchetype) {
-            CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
+        CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
 
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    extendWithBasicsInner(by, type, basicCheckCard);
-                }
-            }
-        } else {
-            CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
-
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    extendWithBasicsInner(by, type, basicCheckCard);
-                }
+        for (AbstractCard basicCheckCard : cardg.group) {
+            if (basicCheckCard.hasTag(BASIC)) {
+                extendWithBasicsInner(by, type, basicCheckCard);
             }
         }
     }
 
     public static void extendWithBasics(int by, AbstractCard.CardRarity rarity) {
-        if (AbstractDungeon.player instanceof customCharacterArchetype) {
-            CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
+        CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
 
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    extendWithBasicsInner(by, rarity, basicCheckCard);
-                }
-            }
-        } else {
-            CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
-
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    extendWithBasicsInner(by, rarity, basicCheckCard);
-                }
+        for (AbstractCard basicCheckCard : cardg.group) {
+            if (basicCheckCard.hasTag(BASIC)) {
+                extendWithBasicsInner(by, rarity, basicCheckCard);
             }
         }
     }
 
     public static void extendWithBasics(int by, AbstractCard.CardRarity rarity, AbstractCard.CardType type) {
-        if (AbstractDungeon.player instanceof customCharacterArchetype) {
-            CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
+        CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
 
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    extendWithBasicsInner(by, rarity, type, basicCheckCard);
-                }
-            }
-        } else {
-            CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
-
-            for (AbstractCard basicCheckCard : cardg.group) {
-                if (basicCheckCard.hasTag(BASIC)) {
-                    extendWithBasicsInner(by, rarity, type, basicCheckCard);
-                }
+        for (AbstractCard basicCheckCard : cardg.group) {
+            if (basicCheckCard.hasTag(BASIC)) {
+                extendWithBasicsInner(by, rarity, type, basicCheckCard);
             }
         }
     }

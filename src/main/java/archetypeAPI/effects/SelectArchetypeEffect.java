@@ -2,7 +2,6 @@ package archetypeAPI.effects;
 
 import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import archetypeAPI.characters.customCharacterArchetype;
 import archetypeAPI.jsonClasses.UiStrings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,12 +18,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.util.CardpoolClearance.extendWithBasics;
 import static archetypeAPI.util.CardpoolClearance.makeSureWeMeetMinimum;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
-
-
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
     private String gridSelectText;
@@ -47,17 +43,9 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 tickDuration();
             } else if (!openedGridScreen) {
                 cardsOfTheArchetypesInUse.clear();
-                if (AbstractDungeon.player instanceof customCharacterArchetype) {
-                    CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-                    AbstractDungeon.gridSelectScreen.open(cardg, 999, true, gridSelectText);
-
-                    this.openedGridScreen = true;
-                } else {
-                    CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
-                    AbstractDungeon.gridSelectScreen.open(cardg, Integer.MAX_VALUE, true, gridSelectText);
-                    this.openedGridScreen = true;
-                }
-
+                CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
+                AbstractDungeon.gridSelectScreen.open(cardg, Integer.MAX_VALUE, true, gridSelectText);
+                this.openedGridScreen = true;
             }
         } else {
             if (!cardsWereUsed) {
@@ -93,7 +81,6 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             this.isDone = true;
         }
     }
-
 
     @Override
     public void render(SpriteBatch spriteBatch) {
