@@ -27,7 +27,7 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
     }
 
     private static CardColor getCardColor(ArchetypeStringsClass archetype) {
-        AbstractPlayer player = CardCrawlGame.characterManager.getCharacter(archetype.CHARACTER);
+        AbstractPlayer player = CardCrawlGame.characterManager.getCharacter(archetype.getCHARACTER());
         if (player == null) {
             return CardColor.COLORLESS;
         }
