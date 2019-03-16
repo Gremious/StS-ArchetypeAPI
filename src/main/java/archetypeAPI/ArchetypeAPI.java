@@ -111,28 +111,38 @@ public class ArchetypeAPI implements
         settingsPanel.addUIElement(selectArchetypesButton);
 
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
-        loadArchetypeSelectCards();
+        loadBaseArchetypes();
     }
 
     // =============== / POST-INITIALIZE/ =================
-    public void loadArchetypeSelectCards() {
-        // Find files
-        CodeSource src = ArchetypeAPI.class.getProtectionDomain().getCodeSource();
-        if (src != null) {
-            URL jarURL = src.getLocation();
-            try {
-                JarFile jarFile = new JarFile(jarURL.getFile());
-                Enumeration<JarEntry> entries = jarFile.entries();
-                while (entries.hasMoreElements()) {
-                    JarEntry entry = entries.nextElement();
-                    if (entry.getName().startsWith("archetypeAPIResources/localization/eng/archetypes/") && entry.getName().endsWith(".json")) {
-                        FileHandle file = Gdx.files.internal(entry.getName());
-                        AbstractArchetype.readArchetypeJsonFile(file);
+    private static void loadBaseArchetypes() {
+        loadArchetypes("archetypeAPIResources/localization/eng/archetypes/");
+    }
+
+    public static void loadArchetypes(String pathPrefix) {
+        try {
+            Class<?> caller = Class.forName(Thread.currentThread().getStackTrace()[2].getClassName());
+            // Find files
+            CodeSource src = caller.getProtectionDomain().getCodeSource();
+            if (src != null) {
+                URL jarURL = src.getLocation();
+                try {
+                    JarFile jarFile = new JarFile(jarURL.getFile());
+                    Enumeration<JarEntry> entries = jarFile.entries();
+                    while (entries.hasMoreElements()) {
+                        JarEntry entry = entries.nextElement();
+                        if (entry.getName().startsWith(pathPrefix) && entry.getName().endsWith(".json")) {
+                            FileHandle file = Gdx.files.internal(entry.getName());
+                            AbstractArchetype.readArchetypeJsonFile(file);
+                        }
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (ClassNotFoundException e) {
+            // TODO
+            e.printStackTrace();
         }
     }
 
