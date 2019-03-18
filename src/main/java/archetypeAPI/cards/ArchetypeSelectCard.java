@@ -6,6 +6,8 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
+import java.util.Arrays;
+
 public class ArchetypeSelectCard extends AbstractArchetypeCard {
     private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:ArchetypeSelect");
     public static final String TEXT[] = uiStrings.TEXT;
@@ -17,9 +19,7 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
 
         stringsClass = archetype;
 
-        for (String tag : archetype.TAGS) {
-            tags.add(CardTags.valueOf(tag));
-        }
+        tags.addAll(Arrays.asList(archetype.TAGS));
     }
 
     private static String makeDescription(ArchetypeStringsClass archetype) {
@@ -27,7 +27,7 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
     }
 
     private static CardColor getCardColor(ArchetypeStringsClass archetype) {
-        AbstractPlayer player = CardCrawlGame.characterManager.getCharacter(archetype.getCHARACTER());
+        AbstractPlayer player = CardCrawlGame.characterManager.getCharacter(archetype.CHARACTER);
         if (player == null) {
             return CardColor.COLORLESS;
         }

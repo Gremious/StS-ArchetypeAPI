@@ -32,8 +32,8 @@ public abstract class AbstractArchetype {
         ArchetypeStringsClass archetype = new Gson().fromJson(new InputStreamReader(file.read(), StandardCharsets.UTF_8), ArchetypeStringsClass.class);
 
         if (archetype.CHARACTER != null) {
-            archetypeSelectCards.putIfAbsent(archetype.getCHARACTER(), new CardGroup(CardGroup.CardGroupType.UNSPECIFIED));
-            archetypeSelectCards.computeIfPresent(archetype.getCHARACTER(), (k,v) -> { v.addToTop(new ArchetypeSelectCard(archetype)); return v; });
+            archetypeSelectCards.putIfAbsent(archetype.CHARACTER, new CardGroup(CardGroup.CardGroupType.UNSPECIFIED));
+            archetypeSelectCards.computeIfPresent(archetype.CHARACTER, (k,v) -> { v.addToTop(new ArchetypeSelectCard(archetype)); return v; });
         }
     }
 
