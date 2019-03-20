@@ -3,7 +3,9 @@
     "TEXT": [
       "Add the %s Archetype to your Card Draft Pool.",
       "Select Your Archetypes!",
-      ""
+      " NL Features: ",
+      ", ",
+      "."
     ]
   },
   "archetypeAPI:FlavorSilent": {

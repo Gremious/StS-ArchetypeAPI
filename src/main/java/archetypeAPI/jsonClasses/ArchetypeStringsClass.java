@@ -9,5 +9,6 @@ public class ArchetypeStringsClass {
     public String IMG;
     public AbstractCard.CardType CARD_TYPE;
     public AbstractCard.CardTags[] TAGS;
+    public String[] FEATURES;
     public String[] CARD_IDS;
 }
