@@ -7,6 +7,11 @@
     "SINGLE",
     "BASIC"
   ],
+  "FEATURES": [
+    "Cleave",
+    "Searing Blow",
+    "Offering"
+  ],
   "CARD_IDS": [
     "Anger",
     "Armaments",

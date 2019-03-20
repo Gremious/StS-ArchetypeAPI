@@ -6,6 +6,11 @@
   "TAGS": [
     "SINGLE"
   ],
+  "FEATURES": [
+    "Armaments",
+    "Flame Barrier",
+    "Impervious"
+  ],
   "CARD_IDS": [
     "Armaments",
     "Body Slam",

@@ -6,6 +6,11 @@
   "TAGS": [
     "SINGLE"
   ],
+  "FEATURES": [
+    "Pommel Strike",
+    "Wild Strike",
+    "Perfected Strike"
+  ],
   "CARD_IDS": [
     "Perfected Strike",
     "Pommel Strike",
