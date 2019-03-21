@@ -27,7 +27,7 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
     }
 
     private static String makeDescription(ArchetypeStringsClass archetype) {
-        return String.format(TEXT[0], archetype.NAME);
+        return String.format(TEXT[1], archetype.NAME);
     }
 
     private static CardColor getCardColor(ArchetypeStringsClass archetype) {
@@ -45,7 +45,7 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
 
     @Override
     public String getTooltipName() {
-        return TEXT[1];
+        return TEXT[2];
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
             return null;
         }
 
-        StringBuilder desc = new StringBuilder(makeDescription(stringsClass) + TEXT[2]);
+        StringBuilder desc = new StringBuilder(makeDescription(stringsClass) + TEXT[3]);
         String features = Arrays.stream(stringsClass.FEATURES)
                 .map(CardLibrary::getCard)
                 .map(Optional::ofNullable)
@@ -69,8 +69,8 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
                     }
                     return FontHelper.colorString(card.name, color);
                 })
-                .collect(Collectors.joining(TEXT[3]));
-        desc.append(features).append(TEXT[4]);
+                .collect(Collectors.joining(TEXT[4]));
+        desc.append(features).append(TEXT[5]);
         return desc.toString();
     }
 }
