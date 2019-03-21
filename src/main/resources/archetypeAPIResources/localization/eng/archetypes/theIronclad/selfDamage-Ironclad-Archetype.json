@@ -2,7 +2,7 @@
   "CHARACTER": "IRONCLAD",
   "NAME": "Self-Damage",
   "CARD_TYPE": "ATTACK",
-  "IMG": "archetypeAPIResources/images/cards/blood_for_blood.png",
+  "IMG": "red/attack/blood_for_blood",
   "TAGS": [
     "SINGLE"
   ],

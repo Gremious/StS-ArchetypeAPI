@@ -2,7 +2,7 @@
   "CHARACTER": "IRONCLAD",
   "NAME": "Strength",
   "CARD_TYPE": "POWER",
-  "IMG": "archetypeAPIResources/images/cards/demon_form.png",
+  "IMG": "red/power/demon_form",
   "TAGS": [
     "SINGLE"
   ],

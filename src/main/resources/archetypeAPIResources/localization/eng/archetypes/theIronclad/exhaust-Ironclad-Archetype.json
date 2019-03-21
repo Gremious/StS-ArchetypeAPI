@@ -2,7 +2,7 @@
   "CHARACTER": "IRONCLAD",
   "NAME": "Exhaust",
   "CARD_TYPE": "POWER",
-  "IMG": "archetypeAPIResources/images/cards/corruption.png",
+  "IMG": "red/power/corruption",
   "TAGS": [
     "SINGLE"
   ],

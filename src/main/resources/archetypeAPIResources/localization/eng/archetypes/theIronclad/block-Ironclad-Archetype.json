@@ -2,7 +2,7 @@
   "CHARACTER": "IRONCLAD",
   "NAME": "Block",
   "CARD_TYPE": "POWER",
-  "IMG": "archetypeAPIResources/images/cards/barricade.png",
+  "IMG": "red/power/barricade",
   "TAGS": [
     "SINGLE"
   ],

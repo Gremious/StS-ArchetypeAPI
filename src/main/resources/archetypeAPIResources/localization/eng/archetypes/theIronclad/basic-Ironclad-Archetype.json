@@ -2,7 +2,7 @@
   "CHARACTER": "IRONCLAD",
   "NAME": "Basic",
   "CARD_TYPE": "SKILL",
-  "IMG": "archetypeAPIResources/images/cards/offering.png",
+  "IMG": "red/skill/offering",
   "TAGS": [
     "SINGLE",
     "BASIC"

@@ -2,7 +2,7 @@
   "CHARACTER": "IRONCLAD",
   "NAME": "Strike",
   "CARD_TYPE": "ATTACK",
-  "IMG": "archetypeAPIResources/images/cards/perfected_strike.png",
+  "IMG": "red/attack/perfected_strike",
   "TAGS": [
     "SINGLE"
   ],
