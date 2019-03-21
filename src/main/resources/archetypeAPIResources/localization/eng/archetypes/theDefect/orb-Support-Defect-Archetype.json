@@ -7,6 +7,11 @@
     "SINGLE",
     "SUPPORT"
   ],
+  "FEATURES": [
+    "Barrage",
+    "Loop",
+    "Hyperbeam"
+  ],
   "CARD_IDS": [
     "Barrage",
     "Compile Driver",

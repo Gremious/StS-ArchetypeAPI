@@ -6,6 +6,11 @@
   "TAGS": [
     "SINGLE"
   ],
+  "FEATURES": [
+    "Gash",
+    "BootSequence",
+    "All For One"
+  ],
   "CARD_IDS": [
     "Beam Cell",
     "Gash",

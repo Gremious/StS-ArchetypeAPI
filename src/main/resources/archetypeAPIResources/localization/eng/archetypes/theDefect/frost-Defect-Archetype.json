@@ -7,6 +7,11 @@
     "SINGLE",
     "INCLUDE_SUPPORT"
   ],
+  "FEATURES": [
+    "Cold Snap",
+    "Glacier",
+    "Blizzard"
+  ],
   "CARD_IDS": [
     "Cold Snap",
     "Coolheaded",

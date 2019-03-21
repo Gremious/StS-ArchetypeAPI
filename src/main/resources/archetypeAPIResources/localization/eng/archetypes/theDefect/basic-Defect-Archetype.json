@@ -7,6 +7,11 @@
     "SINGLE",
     "BASIC"
   ],
+  "FEATURES": [
+    "Leap",
+    "Hello World",
+    "Echo Form"
+  ],
   "CARD_IDS": [
     "Go for the Eyes",
     "Hologram",

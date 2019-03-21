@@ -7,6 +7,11 @@
     "SINGLE",
     "INCLUDE_SUPPORT"
   ],
+  "FEATURES": [
+    "Ball Lightning",
+    "Tempest",
+    "Thunder Strike"
+  ],
   "CARD_IDS": [
     "Ball Lightning",
     "Static Discharge",
