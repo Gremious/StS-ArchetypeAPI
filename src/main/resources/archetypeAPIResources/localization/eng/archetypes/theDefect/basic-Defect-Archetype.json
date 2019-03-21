@@ -2,7 +2,7 @@
   "CHARACTER": "DEFECT",
   "NAME": "Basic",
   "CARD_TYPE": "POWER",
-  "IMG": "archetypeAPIResources/images/cards/echo_form.png",
+  "IMG": "blue/power/echo_form",
   "TAGS": [
     "SINGLE",
     "BASIC"

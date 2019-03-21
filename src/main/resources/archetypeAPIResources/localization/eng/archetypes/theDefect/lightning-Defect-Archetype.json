@@ -2,7 +2,7 @@
   "CHARACTER": "DEFECT",
   "NAME": "Lightning",
   "CARD_TYPE": "ATTACK",
-  "IMG": "archetypeAPIResources/images/cards/thunder_strike.png",
+  "IMG": "blue/attack/thunder_strike",
   "TAGS": [
     "SINGLE",
     "INCLUDE_SUPPORT"

@@ -2,7 +2,7 @@
   "CHARACTER": "DEFECT",
   "NAME": "Dark",
   "CARD_TYPE": "SKILL",
-  "IMG": "archetypeAPIResources/images/cards/darkness.png",
+  "IMG": "blue/skill/darkness",
   "TAGS": [
     "SINGLE",
     "INCLUDE_SUPPORT"

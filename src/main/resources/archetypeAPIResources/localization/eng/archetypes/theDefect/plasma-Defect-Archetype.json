@@ -2,7 +2,7 @@
   "CHARACTER": "DEFECT",
   "NAME": "Plasma",
   "CARD_TYPE": "ATTACK",
-  "IMG": "archetypeAPIResources/images/cards/meteor_strike.png",
+  "IMG": "blue/attack/meteor_strike",
   "TAGS": [
     "SINGLE",
     "INCLUDE_SUPPORT"

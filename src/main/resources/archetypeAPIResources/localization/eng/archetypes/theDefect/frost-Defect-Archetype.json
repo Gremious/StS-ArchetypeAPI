@@ -2,7 +2,7 @@
   "CHARACTER": "DEFECT",
   "NAME": "Frost",
   "CARD_TYPE": "ATTACK",
-  "IMG": "archetypeAPIResources/images/cards/blizzard.png",
+  "IMG": "blue/attack/blizzard",
   "TAGS": [
     "SINGLE",
     "INCLUDE_SUPPORT"

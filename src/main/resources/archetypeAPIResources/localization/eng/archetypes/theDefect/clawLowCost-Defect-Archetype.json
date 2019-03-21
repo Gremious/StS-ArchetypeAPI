@@ -2,7 +2,7 @@
   "CHARACTER": "DEFECT",
   "NAME": "Claw",
   "CARD_TYPE": "ATTACK",
-  "IMG": "archetypeAPIResources/images/cards/claw.png",
+  "IMG": "blue/attack/claw",
   "TAGS": [
     "SINGLE"
   ],

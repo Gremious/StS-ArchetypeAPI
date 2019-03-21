@@ -2,7 +2,7 @@
   "CHARACTER": "DEFECT",
   "NAME": "Orb Support",
   "CARD_TYPE": "ATTACK",
-  "IMG": "archetypeAPIResources/images/cards/barrage.png",
+  "IMG": "blue/attack/barrage",
   "TAGS": [
     "SINGLE",
     "SUPPORT"
