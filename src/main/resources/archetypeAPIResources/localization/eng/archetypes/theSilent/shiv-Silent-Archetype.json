@@ -1,7 +1,7 @@
 {
   "CHARACTER": "THE_SILENT",
   "CARD_TYPE": "ATTACK",
-  "IMG": "archetypeAPIResources/images/cards/shiv.png",
+  "IMG": "colorless/attack/shiv",
   "TAGS": [
     "SINGLE"
   ],

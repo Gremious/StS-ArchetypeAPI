@@ -2,7 +2,7 @@
   "CHARACTER": "THE_SILENT",
   "NAME": "Block",
   "CARD_TYPE": "SKILL",
-  "IMG": "archetypeAPIResources/images/cards/blur.png",
+  "IMG": "green/skill/blur",
   "TAGS": [
     "SINGLE"
   ],

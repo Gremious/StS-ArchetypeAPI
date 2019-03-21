@@ -2,7 +2,7 @@
   "CHARACTER": "THE_SILENT",
   "NAME": "Discard",
   "CARD_TYPE": "SKILL",
-  "IMG": "archetypeAPIResources/images/cards/reflex.png",
+  "IMG": "green/skill/reflex",
   "TAGS": [
     "SINGLE"
   ],

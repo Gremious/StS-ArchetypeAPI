@@ -2,7 +2,7 @@
   "CHARACTER": "THE_SILENT",
   "NAME": "Poison",
   "CARD_TYPE": "POWER",
-  "IMG": "archetypeAPIResources/images/cards/noxious_fumes.png",
+  "IMG": "green/power/noxious_fumes",
   "TAGS": [
     "SINGLE"
   ],
