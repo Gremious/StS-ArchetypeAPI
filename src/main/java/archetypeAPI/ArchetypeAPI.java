@@ -19,14 +19,11 @@ import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.CodeSource;
@@ -52,6 +49,8 @@ public class ArchetypeAPI implements
     private static final String AUTHOR = "Gremious";
     private static final String DESCRIPTION = "An API for Slay the Spire to select/add card Archetypes for any characters.";
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
+
+    private static final String ARCHETYPES_DIR = "archetypes";
 
     public static Properties archetypeSettingsDefaults = new Properties();
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
@@ -112,6 +111,7 @@ public class ArchetypeAPI implements
 
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
         loadBaseArchetypes();
+        loadArchetypesDirectory();
     }
 
     // =============== / POST-INITIALIZE/ =================
@@ -143,6 +143,22 @@ public class ArchetypeAPI implements
         } catch (ClassNotFoundException e) {
             // TODO
             e.printStackTrace();
+        }
+    }
+
+    private static void loadArchetypesDirectory() {
+        File dir = new File(ARCHETYPES_DIR);
+        if (!dir.exists() || !dir.isDirectory()) {
+            return;
+        }
+
+        File[] files = dir.listFiles((d, name) -> name.toLowerCase().endsWith(".json"));
+        if (files == null) {
+            return;
+        }
+
+        for (File file : files) {
+            AbstractArchetype.readArchetypeJsonFile(new FileHandle(file));
         }
     }
 
