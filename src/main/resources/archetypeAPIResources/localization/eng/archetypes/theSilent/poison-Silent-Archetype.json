@@ -6,6 +6,11 @@
   "TAGS": [
     "SINGLE"
   ],
+  "FEATURES": [
+    "Deadly Poison",
+    "Catalyst",
+    "Corpse Explosion"
+  ],
   "CARD_IDS": [
     "Bane",
     "Deadly Poison",

@@ -6,6 +6,11 @@
   "TAGS": [
     "SINGLE"
   ],
+  "FEATURES": [
+    "Dodge and Roll",
+    "Blur",
+    "Footwork"
+  ],
   "CARD_IDS": [
     "Dodge and Roll",
     "Footwork",

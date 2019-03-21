@@ -5,6 +5,11 @@
   "TAGS": [
     "SINGLE"
   ],
+  "FEATURES": [
+    "Blade Dance",
+    "Accuracy",
+    "Storm of Steel"
+  ],
   "NAME": "Shiv",
   "CARD_IDS": [
     "Blade Dance",

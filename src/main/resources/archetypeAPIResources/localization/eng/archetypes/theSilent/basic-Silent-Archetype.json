@@ -7,6 +7,11 @@
     "SINGLE",
     "BASIC"
   ],
+  "FEATURES": [
+    "Dagger Spray",
+    "Caltrops",
+    "Adrenaline"
+  ],
   "CARD_IDS": [
     "Sucker Punch",
     "Backflip",
