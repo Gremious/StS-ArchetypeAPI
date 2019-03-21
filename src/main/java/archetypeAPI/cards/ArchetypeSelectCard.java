@@ -2,6 +2,9 @@ package archetypeAPI.cards;
 
 import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.jsonClasses.ArchetypeStringsClass;
+import basemod.ReflectionHacks;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
@@ -36,6 +39,18 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
             return CardColor.COLORLESS;
         }
         return player.getCardColor();
+    }
+
+    @Override
+    public void loadCardImage(String img) {
+        TextureAtlas cardAtlas = (TextureAtlas) ReflectionHacks.getPrivateStatic(AbstractCard.class, "cardAtlas");
+        TextureAtlas.AtlasRegion atlasRegion = cardAtlas.findRegion(img);
+        if (atlasRegion != null) {
+            textureImg = null;
+            ReflectionHacks.setPrivate(this, AbstractCard.class, "portrait", atlasRegion);
+        } else {
+            super.loadCardImage(img);
+        }
     }
 
     @Override
