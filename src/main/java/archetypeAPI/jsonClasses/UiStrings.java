@@ -1,5 +1,5 @@
 package archetypeAPI.jsonClasses;
 
-public class uiStrings {
+public class UiStrings {
     public String TEXT;
 }

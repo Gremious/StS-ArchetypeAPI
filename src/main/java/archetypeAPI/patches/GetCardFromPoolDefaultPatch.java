@@ -7,8 +7,8 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
 import org.apache.logging.log4j.Logger;
 
-import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.util.cardpoolClearance.getSuperRandomCard;
+import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.util.CardpoolClearance.getSuperRandomCard;
 
 @SpirePatch(
         clz = AbstractDungeon.class,
@@ -17,7 +17,7 @@ import static archetypeAPI.util.cardpoolClearance.getSuperRandomCard;
                 AbstractCard.CardType.class,
                 boolean.class}
 )
-public class getCardFromPoolDefaultPatch {
+public class GetCardFromPoolDefaultPatch {
 
     @SpireInsertPatch(
             locator = Locator.class

@@ -1,13 +1,23 @@
 {
-  "archetypeAPI:LightningDefect": {
-    "NAME": "Lightning",
-    "CARD_IDS": [
-      "Ball Lightning",
-      "Static Discharge",
-      "Tempest",
-      "Electrodynamics",
-      "Rainbow",
-      "Thunder Strike"
-    ]
-  }
+  "CHARACTER": "DEFECT",
+  "NAME": "Lightning",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "blue/attack/thunder_strike",
+  "TAGS": [
+    "SINGLE",
+    "INCLUDE_SUPPORT"
+  ],
+  "FEATURES": [
+    "Ball Lightning",
+    "Tempest",
+    "Thunder Strike"
+  ],
+  "CARD_IDS": [
+    "Ball Lightning",
+    "Static Discharge",
+    "Tempest",
+    "Electrodynamics",
+    "Rainbow",
+    "Thunder Strike"
+  ]
 }

@@ -1,6 +1,6 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.archetypes.AbstractArchetype;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -60,7 +60,7 @@ public class ExpandPoolPatch {
         System.out.println("New Check Start");
         int count = 0;
         CardGroup UsedArchetypesCombinedTemp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        UsedArchetypesCombinedTemp.group.addAll(abstractArchetype.cardsOfTheArchetypesInUse.group);
+        UsedArchetypesCombinedTemp.group.addAll(AbstractArchetype.cardsOfTheArchetypesInUse.group);
 
         System.out.println("Your  " + rarity.toString() + "'S are:");
         for (AbstractCard c : UsedArchetypesCombinedTemp.group) {

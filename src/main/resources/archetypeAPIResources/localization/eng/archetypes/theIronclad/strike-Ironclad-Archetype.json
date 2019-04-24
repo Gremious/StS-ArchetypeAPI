@@ -1,11 +1,20 @@
 {
-  "archetypeAPI:StrikeIronclad": {
-    "NAME": "Strike",
-    "CARD_IDS": [
-      "Perfected Strike",
-      "Pommel Strike",
-      "Twin Strike",
-      "Wild Strike"
-    ]
-  }
+  "CHARACTER": "IRONCLAD",
+  "NAME": "Strike",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "red/attack/perfected_strike",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "Pommel Strike",
+    "Wild Strike",
+    "Perfected Strike"
+  ],
+  "CARD_IDS": [
+    "Perfected Strike",
+    "Pommel Strike",
+    "Twin Strike",
+    "Wild Strike"
+  ]
 }

@@ -1,19 +1,28 @@
 {
-  "archetypeAPI:BlockIronclad": {
-    "NAME": "Block",
-    "CARD_IDS": [
-      "Armaments",
-      "Body Slam",
-      "Shrug It Off",
-      "True Grit",
-      "Entrench",
-      "Flame Barrier",
-      "Ghostly Armor",
-      "Metallicize",
-      "Power Through",
-      "Barricade",
-      "Impervious",
-      "Juggernaut"
-    ]
-  }
+  "CHARACTER": "IRONCLAD",
+  "NAME": "Block",
+  "CARD_TYPE": "POWER",
+  "IMG": "red/power/barricade",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "Armaments",
+    "Flame Barrier",
+    "Impervious"
+  ],
+  "CARD_IDS": [
+    "Armaments",
+    "Body Slam",
+    "Shrug It Off",
+    "True Grit",
+    "Entrench",
+    "Flame Barrier",
+    "Ghostly Armor",
+    "Metallicize",
+    "Power Through",
+    "Barricade",
+    "Impervious",
+    "Juggernaut"
+  ]
 }

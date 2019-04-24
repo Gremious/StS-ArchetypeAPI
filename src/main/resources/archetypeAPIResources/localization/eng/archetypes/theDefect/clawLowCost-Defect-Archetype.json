@@ -1,20 +1,29 @@
 {
-  "archetypeAPI:ClawDefect": {
-    "NAME": "Claw",
-    "CARD_IDS": [
-      "Beam Cell",
-      "Gash",
-      "Go for the Eyes",
-      "Steam",
-      "BootSequence",
-      "FTL",
-      "Steam Power",
-      "Reprogram",
-      "Reboot",
-      "Seek",
-      "Scrape",
-      "All For One",
-      "Skim"
-    ]
-  }
+  "CHARACTER": "DEFECT",
+  "NAME": "Claw",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "blue/attack/claw",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "Gash",
+    "BootSequence",
+    "All For One"
+  ],
+  "CARD_IDS": [
+    "Beam Cell",
+    "Gash",
+    "Go for the Eyes",
+    "Steam",
+    "BootSequence",
+    "FTL",
+    "Steam Power",
+    "Reprogram",
+    "Reboot",
+    "Seek",
+    "Scrape",
+    "All For One",
+    "Skim"
+  ]
 }

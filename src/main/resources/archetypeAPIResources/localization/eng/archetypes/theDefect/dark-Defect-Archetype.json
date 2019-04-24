@@ -1,10 +1,20 @@
 {
-  "archetypeAPI:DarkDefect": {
-    "NAME": "Dark",
-    "CARD_IDS": [
-      "Darkness",
-      "Doom and Gloom",
-      "Rainbow"
-    ]
-  }
+  "CHARACTER": "DEFECT",
+  "NAME": "Dark",
+  "CARD_TYPE": "SKILL",
+  "IMG": "blue/skill/darkness",
+  "TAGS": [
+    "SINGLE",
+    "INCLUDE_SUPPORT"
+  ],
+  "FEATURES": [
+    "Darkness",
+    "Doom and Gloom",
+    "Rainbow"
+  ],
+  "CARD_IDS": [
+    "Darkness",
+    "Doom and Gloom",
+    "Rainbow"
+  ]
 }

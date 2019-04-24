@@ -1,17 +1,27 @@
 {
-  "archetypeAPI:PlasmaDefect": {
-    "NAME": "Plasma",
-    "CARD_IDS": [
-      "Fusion",
-      "Meteor Strike",
-      "Double Energy",
-      "Turbo",
-      "Conserve Battery",
-      "Recycle",
-      "Tempest",
-      "Reinforced Body",
-      "Multi-Cast",
-      "Hyperbeam"
-    ]
-  }
+  "CHARACTER": "DEFECT",
+  "NAME": "Plasma",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "blue/attack/meteor_strike",
+  "TAGS": [
+    "SINGLE",
+    "INCLUDE_SUPPORT"
+  ],
+  "FEATURES": [
+    "Turbo",
+    "Double Energy",
+    "Meteor Strike"
+  ],
+  "CARD_IDS": [
+    "Fusion",
+    "Meteor Strike",
+    "Double Energy",
+    "Turbo",
+    "Conserve Battery",
+    "Recycle",
+    "Tempest",
+    "Reinforced Body",
+    "Multi-Cast",
+    "Hyperbeam"
+  ]
 }

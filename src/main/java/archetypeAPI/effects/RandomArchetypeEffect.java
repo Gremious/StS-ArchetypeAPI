@@ -1,8 +1,7 @@
 package archetypeAPI.effects;
 
-import archetypeAPI.archetypes.abstractArchetype;
+import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
-import archetypeAPI.characters.customCharacterArchetype;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,9 +13,9 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
-import static archetypeAPI.util.cardpoolClearance.*;
+import static archetypeAPI.util.CardpoolClearance.*;
 
 public class RandomArchetypeEffect extends AbstractGameEffect {
     // This is totally an effect. Yes.
@@ -25,6 +24,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
     public static int ironcladBase = 6;
     public static int silentBase = 5;
     public static int defectBase = 8;
+    public static int defaultBase = Integer.MAX_VALUE;
 
     public RandomArchetypeEffect() {
         this.duration = Settings.ACTION_DUR_FAST;
@@ -37,97 +37,46 @@ public class RandomArchetypeEffect extends AbstractGameEffect {
 
             CardGroup list = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
-            if (AbstractDungeon.player instanceof customCharacterArchetype) {
-                CardGroup cardg = ((customCharacterArchetype) AbstractDungeon.player).getArchetypeSelectionCardsPool();
-                int defaultNum = ((customCharacterArchetype) AbstractDungeon.player).numberOfDefaultArchetypes();
-
-                for (AbstractCard c : cardg.group) {
-                    if (c.hasTag(SINGLE)) {
-                        list.addToTop(c);
-                    }
+            for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
+                if (c.hasTag(BASIC) || c.hasTag(SINGLE)) {
+                    list.addToTop(c);
                 }
-
-                addArchetype(list, defaultNum);
-
-            } else {
-                switch (AbstractDungeon.player.chosenClass) {
-                    case IRONCLAD:
-                        //System.out.println("Here is the entire initial archetype card pool from which we will pick randoms: " + abstractArchetype.ironcladArchetypeSelectCards.group.toString());
-
-                        for (AbstractCard basicCheckCard : abstractArchetype.ironcladArchetypeSelectCards.group) {
-                            if (basicCheckCard.hasTag(BASIC)) {
-                                list.addToTop(basicCheckCard);
-                            }
-                        }
-                        for (AbstractCard c : abstractArchetype.ironcladArchetypeSelectCards.group) {
-                            if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
-                                list.addToTop(c);
-                            }
-                        }
-                        addArchetype(list, ironcladBase);
-                        break;
-                    case THE_SILENT:
-                        for (AbstractCard basicCheckCard : abstractArchetype.silentArchetypeSelectCards.group) {
-                            if (basicCheckCard.hasTag(BASIC)) {
-                                list.addToTop(basicCheckCard);
-                            }
-
-                            for (AbstractCard c : abstractArchetype.silentArchetypeSelectCards.group) {
-                                if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
-                                    list.addToTop(c);
-                                }
-
-                            }
-                        }
-                        addArchetype(list, silentBase);
-                        break;
-                    case DEFECT:
-                        for (AbstractCard basicCheckCard : abstractArchetype.defectArchetypeSelectCards.group) {
-                            if (basicCheckCard.hasTag(BASIC)) {
-                                list.addToTop(basicCheckCard);
-                            }
-
-                            for (AbstractCard c : abstractArchetype.defectArchetypeSelectCards.group) {
-                                if (c.hasTag(SINGLE) && !c.hasTag(BASIC)) {
-                                    list.addToTop(c);
-                                }
-
-                            }
-                        }
-                        addArchetype(list, defectBase);
-                        break;
-                    default:
-                        System.out.println("Archetype selection patch says: ???????????????");
-                        System.out.println("Is (AbstractDungeon.player instanceof customCharacterArchetype)?: " + ((AbstractDungeon.player instanceof customCharacterArchetype)));
-                        System.out.println("AbstractDungeon.player.chosenClass: " + (AbstractDungeon.player.chosenClass.toString()));
-                        isDone = true;
-                        break;
-                }
-                System.out.println("addArchetype() is done.");
-                System.out.println("Randomly generated archetype select cards: " + randomArchetypes.toString());
-
-                for (AbstractCard c : randomArchetypes) {
-                    if (c instanceof AbstractArchetypeCard) {
-                        //System.out.println("Activating the archetype effect of " + c);
-                        ((AbstractArchetypeCard) c).archetypeEffect();
-                    }
-                }
-
-                makeSureWeMeetMinimum();
-
-                if (!cardsOfTheArchetypesInUse.isEmpty()) {
-                    CardCrawlGame.dungeon.initializeCardPools();
-                }
-
-
+            }
+            switch (AbstractDungeon.player.chosenClass) {
+                case IRONCLAD:
+                    addArchetype(list, ironcladBase);
+                    break;
+                case THE_SILENT:
+                    addArchetype(list, silentBase);
+                    break;
+                case DEFECT:
+                    addArchetype(list, defectBase);
+                    break;
+                default:
+                    addArchetype(list, defaultBase);
+                    break;
             }
 
+            System.out.println("addArchetype() is done.");
+            System.out.println("Randomly generated archetype select cards: " + randomArchetypes.toString());
+
+            for (AbstractCard c : randomArchetypes) {
+                if (c instanceof AbstractArchetypeCard) {
+                    //System.out.println("Activating the archetype effect of " + c);
+                    ((AbstractArchetypeCard) c).archetypeEffect();
+                }
+            }
+
+            makeSureWeMeetMinimum();
+
+            if (!cardsOfTheArchetypesInUse.isEmpty()) {
+                CardCrawlGame.dungeon.initializeCardPools();
+            }
 
             tickDuration();
         }
 
         tickDuration();
-
     }
 
     private static void addArchetype(CardGroup list, int baseNum) {

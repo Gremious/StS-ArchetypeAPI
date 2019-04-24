@@ -1,37 +1,12 @@
 {
-  "archetypeAPI:FlavorSilent": {
+  "archetypeAPI:ArchetypeSelect": {
     "TEXT": [
+      "Add this Archetype to your Card Draft Pool!",
+      "Add the %s Archetype to your Card Draft Pool.",
       "Select Your Archetypes!",
-      "Add the Basic Archetype to your Card Draft Pool. NL Features: #gDagger #gSpray, #bCaltrops, #yAdrenaline.",
-      "Add the Discard Archetype to your Card Draft Pool. NL Features: #gPrepared, #bReflex, #yTools #yof #ythe #yTrade.",
-      "Add the Poison Archetype to your Card Draft Pool. NL Features: #gDeadly #gPoison, #bCatalyst, #yCorpse #yExplosion.",
-      "Add the Shiv Archetype to your Card Draft Pool. NL Features: #gBlade #gDance, #bAccuracy, #yStorm #yof #ySteel.",
-      "Add the Dexterous Archetype to your Card Draft Pool. NL Features: #gDodge #gand #gRoll, #bBlur, #bFootwork.",
-      "Add this Archetype to your Card Draft Pool!"
-    ]
-  },
-  "archetypeAPI:FlavorIronclad": {
-    "TEXT": [
-      "Select Your Archetypes!",
-      "Add the Basic Archetype to your Card Draft Pool. NL Features: #gCleave, #bSearing #bBlow, #yOffering",
-      "Add the Block Archetype to your Card Draft Pool. NL Features: #gArmaments, #bFlame #bBarrier, #yImpervious",
-      "Add the Exhaust Archetype to your Card Draft Pool. NL Features: #gHavoc, #bCorruption, #yDark #yEmbrace",
-      "Add the Strength Archetype to your Card Draft Pool. NL Features: #gHeavy #gBlade, #bInflame, #yLimit #yBreak",
-      "Add the Self-Damage Archetype to your Card Draft Pool. NL Features: #bBlood #bfor #bBlood, #bHemokinesis, #yBrutality",
-      "Add the Strike Archetype to your Card Draft Pool. NL Features: #bPommel #bStrike,  #bWild #bStrike, #bPerfected #bStrike,"
-    ]
-  },
-  "archetypeAPI:FlavorDefect": {
-    "TEXT": [
-      "Select Your Archetypes!",
-      "Add the Basic Archetype to your Card Draft Pool. NL Features: #gLeap, #bHello #bWorld, #yEcho #yForm",
-      "Add the Claw Archetype to your Card Draft Pool. NL Features: #gClaw, #bBoot #bSequence, #yAll #yFor #yOne",
-      "Add the Dark Archetype to your Card Draft Pool. NL Features: #bDarkness, #bDoom #band #bGloom, #Rainbow",
-      "Add the Frost Archetype to your Card Draft Pool. NL Features: #gCold #gSnap, #bGlacier, #bBlizzard",
-      "Add the Lightning Archetype to your Card Draft Pool. NL Features: #gBall #gLightning, #bTempest, #yThunder #yStrike",
-      "Add the Orb Support Archetype to your Card Draft Pool. NL Features: #gBarrage, #bLoop, #yHyperbeam,",
-      "Add the Plasma Archetype to your Card Draft Pool. NL Features: #gTURBO, #bLoop, #yMeteor #yStrike",
-      "Add the Power Archetype to your Card Draft Pool. NL Features: #gWhite #gNoise, #bForce #bField, #yCreative #yAI,"
+      " NL Features: ",
+      ", ",
+      "."
     ]
   }
 }

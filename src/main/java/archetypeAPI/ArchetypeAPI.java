@@ -1,9 +1,6 @@
 package archetypeAPI;
 
-import archetypeAPI.archetypes.abstractArchetype;
-import archetypeAPI.cards.archetypeSelectionCards.theDefect.*;
-import archetypeAPI.cards.archetypeSelectionCards.theIronclad.*;
-import archetypeAPI.cards.archetypeSelectionCards.theSilent.*;
+import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
@@ -22,36 +19,20 @@ import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
-import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.security.CodeSource;
+import java.util.Enumeration;
 import java.util.Properties;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
-import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.archetypes.theDefect.BasicDefect.basicDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.ClawLowCostDefect.clawLowCostDefectDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.DarkDefect.darkDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.FrostDefect.frostDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.LightningDefect.lightningDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.OrbSupportDefect.orbSupporDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.PlasmaDefect.plasmaDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theDefect.PowerDefect.powerDefectArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.BasicIronclad.basicIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.BlockIronclad.blockIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.ExhaustIronclad.exhaustIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.SelfDamageIronclad.selfDamageIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.StrengthIronclad.strengthIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theIronclad.StrikeIronclad.strikeIroncladArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.BasicSilent.basicSilentArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.BlockSilent.blockSilentArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.DiscardSilent.discardSilentArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.PoisonSilent.poisonSilentArchetypeFiles;
-import static archetypeAPI.archetypes.theSilent.ShivSilent.shivSilentArchetypeFiles;
+import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 
 @SpireInitializer
 public class ArchetypeAPI implements
@@ -68,6 +49,8 @@ public class ArchetypeAPI implements
     private static final String AUTHOR = "Gremious";
     private static final String DESCRIPTION = "An API for Slay the Spire to select/add card Archetypes for any characters.";
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
+
+    private static final String ARCHETYPES_DIR = "archetypes";
 
     public static Properties archetypeSettingsDefaults = new Properties();
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
@@ -127,71 +110,56 @@ public class ArchetypeAPI implements
         settingsPanel.addUIElement(selectArchetypesButton);
 
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
-        loadArchetypeSelectCards();
+        loadBaseArchetypes();
+        loadArchetypesDirectory();
     }
 
     // =============== / POST-INITIALIZE/ =================
-    public void loadArchetypeSelectCards() {
+    private static void loadBaseArchetypes() {
+        loadArchetypes("archetypeAPIResources/localization/eng/archetypes/");
+    }
 
-        // The Ironclad:
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BasicIroncladArchetypeSelectCard().makeCopy());
-        basicIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/basic-Ironclad-Archetype.json");
+    public static void loadArchetypes(String pathPrefix) {
+        try {
+            Class<?> caller = Class.forName(Thread.currentThread().getStackTrace()[2].getClassName());
+            // Find files
+            CodeSource src = caller.getProtectionDomain().getCodeSource();
+            if (src != null) {
+                URL jarURL = src.getLocation();
+                try {
+                    JarFile jarFile = new JarFile(jarURL.getFile());
+                    Enumeration<JarEntry> entries = jarFile.entries();
+                    while (entries.hasMoreElements()) {
+                        JarEntry entry = entries.nextElement();
+                        if (entry.getName().startsWith(pathPrefix) && entry.getName().endsWith(".json")) {
+                            FileHandle file = Gdx.files.internal(entry.getName());
+                            AbstractArchetype.readArchetypeJsonFile(file);
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            // TODO
+            e.printStackTrace();
+        }
+    }
 
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new BlockIroncladArchetypeSelectCard().makeCopy());
-        blockIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/block-Ironclad-Archetype.json");
+    private static void loadArchetypesDirectory() {
+        File dir = new File(ARCHETYPES_DIR);
+        if (!dir.exists() || !dir.isDirectory()) {
+            return;
+        }
 
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new ExhaustIroncladArchetypeSelectCard().makeCopy());
-        exhaustIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/exhaust-Ironclad-Archetype.json");
+        File[] files = dir.listFiles((d, name) -> name.toLowerCase().endsWith(".json"));
+        if (files == null) {
+            return;
+        }
 
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new SelfDamageIroncladArchetypeSelectCard().makeCopy());
-        selfDamageIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/selfDamage-Ironclad-Archetype.json");
-
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new StrengthIroncladArchetypeSelectCard().makeCopy());
-        strengthIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/strength-Ironclad-Archetype.json");
-
-        abstractArchetype.ironcladArchetypeSelectCards.addToTop(new StrikeIroncladArchetypeSelectCard().makeCopy());
-        strikeIroncladArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theIronclad/strike-Ironclad-Archetype.json");
-
-        // The Silent:
-        abstractArchetype.silentArchetypeSelectCards.addToTop(new BasicSilentArchetypeSelectCard().makeCopy());
-        basicSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/basic-Silent-Archetype.json");
-
-        abstractArchetype.silentArchetypeSelectCards.addToTop(new PoisonSilentArchetypeSelectCard().makeCopy());
-        poisonSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/poison-Silent-Archetype.json");
-
-        abstractArchetype.silentArchetypeSelectCards.addToTop(new ShivSilentArchetypeSelectCard().makeCopy());
-        shivSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/shiv-Silent-Archetype.json");
-
-        abstractArchetype.silentArchetypeSelectCards.addToTop(new BlockSilentArchetypeSelectCard().makeCopy());
-        blockSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/block-Silent-Archetype.json");
-
-        abstractArchetype.silentArchetypeSelectCards.addToTop(new DiscardSilentArchetypeSelectCard().makeCopy());
-        discardSilentArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theSilent/discard-Silent-Archetype.json");
-
-        // The Defect:
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new BasicDefectArchetypeSelectCard().makeCopy());
-        basicDefectArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/basic-Defect-Archetype.json");
-
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new ClawLowCostDefectArchetypeSelectCard().makeCopy());
-        clawLowCostDefectDefectArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/clawLowCost-Defect-Archetype.json");
-
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new DarkDefectArchetypeSelectCard().makeCopy());
-        darkDefectArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/dark-Defect-Archetype.json");
-
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new FrostDefectArchetypeSelectCard().makeCopy());
-        frostDefectArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/frost-Defect-Archetype.json");
-
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new LightningDefectArchetypeSelectCard().makeCopy());
-        lightningDefectArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/lightning-Defect-Archetype.json");
-
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new OrbSupportDefectArchetypeSelectCard().makeCopy());
-        orbSupporDefectArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/orb-Support-Defect-Archetype.json");
-
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new PlasmaDefectArchetypeSelectCard().makeCopy());
-        plasmaDefectArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/plasma-Defect-Archetype.json");
-
-        abstractArchetype.defectArchetypeSelectCards.addToTop(new PowerDefectArchetypeSelectCard().makeCopy());
-        powerDefectArchetypeFiles.add("archetypeAPIResources/localization/eng/archetypes/theDefect/power-Defect-Archetype.json");
+        for (File file : files) {
+            AbstractArchetype.readArchetypeJsonFile(new FileHandle(file));
+        }
     }
 
     // ================ LOAD THE TEXT ===================
@@ -203,10 +171,6 @@ public class ArchetypeAPI implements
         // UI Strings
         BaseMod.loadCustomStringsFile(UIStrings.class,
                 getModID() + "Resources/localization/eng/" + getModID() + "-UI-Strings.json");
-
-        // Card Strings
-        BaseMod.loadCustomStringsFile(CardStrings.class,
-                getModID() + "Resources/localization/eng/" + getModID() + "-Card-Strings.json");
 
         logger.info("Done edittting strings");
     }

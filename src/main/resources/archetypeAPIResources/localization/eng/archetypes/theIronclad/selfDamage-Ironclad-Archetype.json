@@ -1,15 +1,24 @@
 {
-  "archetypeAPI:SelfDamageIronclad": {
-    "NAME": "Self-Damage",
-    "CARD_IDS": [
-      "Blood for Blood",
-      "Bloodletting",
-      "Combust",
-      "Hemokinesis",
-      "Rupture",
-      "Brutality",
-      "Offering",
-      "Immolate"
-    ]
-  }
+  "CHARACTER": "IRONCLAD",
+  "NAME": "Self-Damage",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "red/attack/blood_for_blood",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "Blood for Blood",
+    "Hemokinesis",
+    "Brutality"
+  ],
+  "CARD_IDS": [
+    "Blood for Blood",
+    "Bloodletting",
+    "Combust",
+    "Hemokinesis",
+    "Rupture",
+    "Brutality",
+    "Offering",
+    "Immolate"
+  ]
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractArchetypeCard extends CustomCard {
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:FlavorSilent");
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("archetypeAPI:ArchetypeSelect");
     public static final String FLAVOR_STRINGS[] = uiStrings.TEXT;
 
     public AbstractArchetypeCard(final String id,
@@ -51,13 +51,13 @@ public abstract class AbstractArchetypeCard extends CustomCard {
         if (getTooltipName() != null) {
             tooltipName = getTooltipName();
         } else {
-            tooltipName = FLAVOR_STRINGS[0];
+            tooltipName = FLAVOR_STRINGS[2];
         }
 
         if (getTooltipDesc() != null) {
             tooltipDesc = getTooltipDesc();
         } else {
-            tooltipDesc = FLAVOR_STRINGS[6];
+            tooltipDesc = FLAVOR_STRINGS[0];
         }
 
         List<TooltipInfo> tips = new ArrayList<>();

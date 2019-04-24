@@ -1,6 +1,6 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.util.cardpoolClearance;
+import archetypeAPI.util.CardpoolClearance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.TheSilent;
@@ -10,8 +10,8 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.archetypes.abstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.util.cardpoolClearance.makeSureWeMeetMinimum;
+import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
+import static archetypeAPI.util.CardpoolClearance.makeSureWeMeetMinimum;
 
 @SpirePatch(
         clz = TheSilent.class,
@@ -26,7 +26,7 @@ public class SilentCardPoolPatch {
     public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         if (!cardsOfTheArchetypesInUse.isEmpty()) {
             makeSureWeMeetMinimum();
-            cardpoolClearance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
+            CardpoolClearance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
         } else {
             CardLibrary.addGreenCards(tmpPool);
         }

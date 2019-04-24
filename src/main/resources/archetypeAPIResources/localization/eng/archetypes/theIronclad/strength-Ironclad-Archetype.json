@@ -1,18 +1,27 @@
 {
-  "archetypeAPI:StrengthIronclad": {
-    "NAME": "Strength",
-    "CARD_IDS": [
-      "Flex",
-      "Heavy Blade",
-      "Disarm",
-      "Inflame",
-      "Spot Weakness",
-      "Demon Form",
-      "Limit Break",
-      "Sword Boomerang",
-      "Pummel",
-      "Whirlwind",
-      "Reaper"
-    ]
-  }
+  "CHARACTER": "IRONCLAD",
+  "NAME": "Strength",
+  "CARD_TYPE": "POWER",
+  "IMG": "red/power/demon_form",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "Heavy Blade",
+    "Inflame",
+    "Limit Break"
+  ],
+  "CARD_IDS": [
+    "Flex",
+    "Heavy Blade",
+    "Disarm",
+    "Inflame",
+    "Spot Weakness",
+    "Demon Form",
+    "Limit Break",
+    "Sword Boomerang",
+    "Pummel",
+    "Whirlwind",
+    "Reaper"
+  ]
 }

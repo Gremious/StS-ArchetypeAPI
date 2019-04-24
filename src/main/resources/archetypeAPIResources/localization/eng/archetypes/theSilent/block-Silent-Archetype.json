@@ -1,16 +1,25 @@
 {
-  "archetypeAPI:BlockSilent": {
-    "NAME": "Block",
-    "CARD_IDS": [
-      "Dodge and Roll",
-      "Footwork",
-      "Blur",
-      "Deflect",
-      "Dash",
-      "Escape Plan",
-      "Leg Sweep",
-      "After Image",
-      "Cloak And Dagger"
-    ]
-  }
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Block",
+  "CARD_TYPE": "SKILL",
+  "IMG": "green/skill/blur",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "Dodge and Roll",
+    "Blur",
+    "Footwork"
+  ],
+  "CARD_IDS": [
+    "Dodge and Roll",
+    "Footwork",
+    "Blur",
+    "Deflect",
+    "Dash",
+    "Escape Plan",
+    "Leg Sweep",
+    "After Image",
+    "Cloak And Dagger"
+  ]
 }

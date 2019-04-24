@@ -1,6 +1,5 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.util.cardpoolClearance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -8,7 +7,7 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.util.cardpoolClearance.*;
+import static archetypeAPI.util.CardpoolClearance.*;
 
 @SpirePatch(
         clz = AbstractDungeon.class,
