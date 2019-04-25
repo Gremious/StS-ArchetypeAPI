@@ -29,9 +29,12 @@ public abstract class AbstractArchetype {
 
     public static void readArchetypeJsonFile(FileHandle file) {
         ArchetypeStringsClass archetype = new Gson().fromJson(new InputStreamReader(file.read(), StandardCharsets.UTF_8), ArchetypeStringsClass.class);
-
         if (archetype.CHARACTER != null) {
+            // If the player class (declared in the json) doesn't yet have a card group associated with it, map one to it
             archetypeSelectCards.putIfAbsent(archetype.CHARACTER, new CardGroup(CardGroup.CardGroupType.UNSPECIFIED));
+            
+            // Then, if the the card groups exists, add a new archetype selection card,
+            // passing the current json (pre-converted as an object) to it for it to infer all the info
             archetypeSelectCards.computeIfPresent(archetype.CHARACTER, (k,v) -> { v.addToTop(new ArchetypeSelectCard(archetype)); return v; });
         }
     }
