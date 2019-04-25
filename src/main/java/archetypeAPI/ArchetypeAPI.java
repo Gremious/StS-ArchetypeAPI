@@ -16,6 +16,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -33,6 +35,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -59,6 +63,8 @@ public class ArchetypeAPI implements
     public static Properties archetypeSettingsDefaults = new Properties();
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
     public static boolean selectArchetypes = false;
+    
+    public static Map<AbstractPlayer.PlayerClass, Integer> characterCardNums = new HashMap<>();
     
     public ArchetypeAPI() {
         logger.info("Subscribe to BaseMod hooks");
@@ -112,6 +118,11 @@ public class ArchetypeAPI implements
         settingsPanel.addUIElement(selectArchetypesButton);
         
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
+        
+        characterCardNums.putIfAbsent(AbstractPlayer.PlayerClass.IRONCLAD, 72);
+        characterCardNums.putIfAbsent(AbstractPlayer.PlayerClass.THE_SILENT, 71);
+        characterCardNums.putIfAbsent(AbstractPlayer.PlayerClass.DEFECT, 71);
+        
         loadBaseArchetypes();
         loadArchetypesDirectory();
     }
@@ -119,6 +130,10 @@ public class ArchetypeAPI implements
     // =============== / POST-INITIALIZE/ =================
     private static void loadBaseArchetypes() {
         loadArchetypes("archetypeAPIResources/localization/eng/archetypes/");
+    }
+    
+    public static void setCharacterDefaultNumOfCards(AbstractPlayer.PlayerClass characterEnum, int numberOfCards){
+        characterCardNums.putIfAbsent(characterEnum, numberOfCards);
     }
     
     /**

@@ -5,6 +5,7 @@ import archetypeAPI.jsonClasses.ArchetypeStringsClass;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
@@ -57,7 +58,12 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
     public void archetypeEffect() {
         AbstractArchetype.addCardsFromArchetypes(stringsClass.CARD_IDS);
     }
-
+    
+    
+    public void archetypeEffect(CardGroup groupToAdd) {
+        AbstractArchetype.addCardsFromArchetypes(stringsClass.CARD_IDS, groupToAdd);
+    }
+    
     @Override
     public String getTooltipName() {
         return TEXT[2];

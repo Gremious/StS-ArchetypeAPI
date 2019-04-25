@@ -2,6 +2,7 @@ package archetypeAPI.cards;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.TooltipInfo;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.UIStrings;
