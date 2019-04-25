@@ -24,8 +24,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -127,7 +129,7 @@ public class ArchetypeAPI implements
             if (src != null) {
                 URL jarURL = src.getLocation();
                 try {
-                    JarFile jarFile = new JarFile(jarURL.getFile());
+                    JarFile jarFile = new JarFile(Paths.get(jarURL.toURI()).toFile());
                     Enumeration<JarEntry> entries = jarFile.entries();
                     while (entries.hasMoreElements()) {
                         JarEntry entry = entries.nextElement();
@@ -136,7 +138,7 @@ public class ArchetypeAPI implements
                             AbstractArchetype.readArchetypeJsonFile(file);
                         }
                     }
-                } catch (IOException e) {
+                } catch (IOException | URISyntaxException e) {
                     e.printStackTrace();
                 }
             }

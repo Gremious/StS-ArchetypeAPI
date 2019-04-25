@@ -24,7 +24,6 @@ public abstract class AbstractArchetype {
     protected static final Logger logger = LogManager.getLogger(AbstractArchetype.class.getName());
 
     private static Map<AbstractPlayer.PlayerClass, CardGroup> archetypeSelectCards = new HashMap<>();
-    private static Map<String, ArrayList<String>> archetypeFiles = new HashMap<>();
 
     public static CardGroup cardsOfTheArchetypesInUse = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 
