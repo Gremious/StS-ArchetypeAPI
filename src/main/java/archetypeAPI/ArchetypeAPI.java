@@ -23,7 +23,10 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -44,26 +47,24 @@ public class ArchetypeAPI implements
         PreStartGameSubscriber {
     public static final Logger logger = LogManager.getLogger(ArchetypeAPI.class.getName());
     private static String modID;
-
-
+    
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "Archetype API";
     private static final String AUTHOR = "Gremious";
     private static final String DESCRIPTION = "An API for Slay the Spire to select/add card Archetypes for any characters.";
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
-
+    
     private static final String ARCHETYPES_DIR = "archetypes";
-
+    
     public static Properties archetypeSettingsDefaults = new Properties();
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
     public static boolean selectArchetypes = false;
-
-
+    
     public ArchetypeAPI() {
         logger.info("Subscribe to BaseMod hooks");
         BaseMod.subscribe(this);
         setModID("archetypeAPI");
-
+        
         archetypeSettingsDefaults.setProperty(PROP_SELECT_ARCHETYPES, "FALSE");
         try {
             SpireConfig config = new SpireConfig("archetypeAPI", "ArchetypeAPIConfig", archetypeSettingsDefaults);
@@ -74,28 +75,27 @@ public class ArchetypeAPI implements
         }
         logger.info("Done subscribing");
     }
-
-
+    
     @SuppressWarnings("unused")
     public static void initialize() {
         ArchetypeAPI ArchetypeApiInit = new ArchetypeAPI();
         logger.info("Archetype API is on.");
     }
-
+    
     // =============== POST-INITIALIZE =================
-
+    
     @Override
     public void receivePostInitialize() {
         logger.info("Loading badge image and mod options");
         // Load the Mod Badge
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
-
+        
         // Create the Mod Menu
         ModPanel settingsPanel = new ModPanel();
-
+        
         logger.info("Done loading badge Image and mod options");
-
-
+        
+        
         ModLabeledToggleButton selectArchetypesButton = new ModLabeledToggleButton("Select Archetypes at the start of each run.",
                 350.0f, 700.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 selectArchetypes, settingsPanel, (label) -> {
@@ -110,17 +110,23 @@ public class ArchetypeAPI implements
             }
         });
         settingsPanel.addUIElement(selectArchetypesButton);
-
+        
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
         loadBaseArchetypes();
         loadArchetypesDirectory();
     }
-
+    
     // =============== / POST-INITIALIZE/ =================
     private static void loadBaseArchetypes() {
         loadArchetypes("archetypeAPIResources/localization/eng/archetypes/");
     }
-
+    
+    /**
+     * takes the path to your archetype json directory (not file!) and loads all the archetype jsons found.
+     * @param pathPrefix - the directory of your archetype files
+     * <p> Example:  {@code loadArchetypes("myModResources/localization/eng/archetypes/");}
+     * <p> NOT! {@code loadArchetypes("myModResources/localization/eng/archetypes/archetypeForSilent.json");}
+     */
     public static void loadArchetypes(String pathPrefix) {
         try {
             Class<?> caller = Class.forName(Thread.currentThread().getStackTrace()[2].getClassName());
@@ -147,59 +153,63 @@ public class ArchetypeAPI implements
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Loads any archetype jsons found in the "archetypes" folder in your sts install directory.
+     * <p> This folder is in the same place your "mods" folder and "SlayTheSpire.exe" is.
+     * <p> Keep in mind that both "mods" and "archetypes" folders need to be created manually if they are not there.
+     */
     private static void loadArchetypesDirectory() {
         File dir = new File(ARCHETYPES_DIR);
         if (!dir.exists() || !dir.isDirectory()) {
             return;
         }
-
+        
         File[] files = dir.listFiles((d, name) -> name.toLowerCase().endsWith(".json"));
         if (files == null) {
             return;
         }
-
+        
         for (File file : files) {
             AbstractArchetype.readArchetypeJsonFile(new FileHandle(file));
         }
     }
-
+    
     // ================ LOAD THE TEXT ===================
-
+    
     @Override
     public void receiveEditStrings() {
         logger.info("Beginning to edit strings");
-
+        
         // UI Strings
         BaseMod.loadCustomStringsFile(UIStrings.class,
                 getModID() + "Resources/localization/eng/" + getModID() + "-UI-Strings.json");
-
+        
         logger.info("Done edittting strings");
     }
-
+    
     // ================ /LOAD THE TEXT/ ===================
-
+    
     // this adds "ModName:" before the ID of any card/relic/power etc.
     // in order to avoid conflicts if any other mod uses the same ID.
     public static String makeID(String idText) {
         return getModID() + ":" + idText;
     }
-
-
+    
     @Override
     public void receiveEditCards() {
     }
-
+    
     // ====== NO EDIT AREA ======
     // DON'T TOUCH THIS STUFF. IT IS HERE FOR STANDARDIZATION BETWEEN MODS AND TO ENSURE GOOD CODE PRACTICES.
     // IF YOU MODIFY THIS I WILL HUNT YOU DOWN AND DOWNVOTE YOUR MOD ON WORKSHOP
-
+    
     public static void setModID(String ID) { // DON'T EDIT
         Gson coolG = new Gson(); // EY DON'T EDIT THIS
         //   String IDjson = Gdx.files.internal("IDCheckStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)); // i hate u Gdx.files
         InputStream in = ArchetypeAPI.class.getResourceAsStream("/IDCheckStrings.json"); // DON'T EDIT THIS ETHER
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), IDCheckDontTouchPls.class); // OR THIS, DON'T EDIT IT
-
+        
         if (ID.equals(EXCEPTION_STRINGS.DEFAULTID)) { // DO *NOT* CHANGE THIS ESPECIALLY, TO EDIT YOUR MOD ID, SCROLL UP JUST A LITTLE, IT'S JUST ABOVE
             throw new RuntimeException(EXCEPTION_STRINGS.EXCEPTION); // THIS ALSO DON'T EDIT
         } else if (ID.equals(EXCEPTION_STRINGS.DEVID)) { // NO
@@ -208,17 +218,17 @@ public class ArchetypeAPI implements
             modID = ID; // DON'T WRITE OR CHANGE THINGS HERE NOT EVEN A LITTLE
         } // NO
     } // NO
-
+    
     public static String getModID() { // NO
         return modID; // DOUBLE NO
     } // NU-UH
-
+    
     private static void pathCheck() { // ALSO NO
         Gson coolG = new Gson(); // NNOPE DON'T EDIT THIS
         //   String IDjson = Gdx.files.internal("IDCheckStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)); // i still hate u btw Gdx.files
         InputStream in = ArchetypeAPI.class.getResourceAsStream("/IDCheckStrings.json"); // DON'T EDIT THISSSSS
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), IDCheckDontTouchPls.class); // NAH, NO EDIT
-
+        
         String packageName = ArchetypeAPI.class.getPackage().getName(); // STILL NOT EDIT ZONE
         FileHandle resourcePathExists = Gdx.files.internal(getModID() + "Resources"); // PLEASE DON'T EDIT THINGS HERE, THANKS
         if (!modID.equals(EXCEPTION_STRINGS.DEVID)) { // LEAVE THIS EDIT-LESS
@@ -230,13 +240,13 @@ public class ArchetypeAPI implements
             }// NO
         }// NO
     }// NO
-
+    
     @Override
     public void receivePreStartGame() {
         if (!CardCrawlGame.loadingSave) {
             cardsOfTheArchetypesInUse.clear();
         }
     }
-
+    
     // ====== YOU CAN EDIT AGAIN ======
 }
