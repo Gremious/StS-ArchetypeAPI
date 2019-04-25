@@ -21,14 +21,13 @@ public class SelectArchetypesNeowPatch {
         if (!Settings.isEndless || AbstractDungeon.floorNum <= 1) {
             if (Settings.isStandardRun() && (!Settings.isEndless || AbstractDungeon.floorNum > 1)) { // Only the first room ever ever
 
-                if (AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass) != null) {
                     if (selectArchetypes) {
                         AbstractDungeon.effectList.add(new SelectArchetypeEffect());
                     } else {
                         AbstractDungeon.effectList.add(new RandomArchetypeEffect());
                     }
                 }
-            }
+            
         }
     }
 }
