@@ -1,6 +1,6 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.util.CardpoolClearance;
+import archetypeAPI.util.CardpoolMaintenance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.Defect;
@@ -11,7 +11,7 @@ import javassist.CtBehavior;
 import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.util.CardpoolClearance.makeSureWeMeetMinimum;
+import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
 
 @SpirePatch(
         clz = Defect.class,
@@ -26,7 +26,7 @@ public class DefectCardPoolPatch {
     public static void insert(Defect __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         if (!cardsOfTheArchetypesInUse.isEmpty()) {
             makeSureWeMeetMinimum();
-            CardpoolClearance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
+            CardpoolMaintenance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
         } else {
             CardLibrary.addBlueCards(tmpPool);
         }

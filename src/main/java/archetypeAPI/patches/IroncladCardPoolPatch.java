@@ -1,6 +1,6 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.util.CardpoolClearance;
+import archetypeAPI.util.CardpoolMaintenance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.Ironclad;
@@ -23,7 +23,7 @@ public class IroncladCardPoolPatch {
 
     public static void insert(Ironclad __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         if (!cardsOfTheArchetypesInUse.isEmpty()) {
-            CardpoolClearance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
+            CardpoolMaintenance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
         }
         System.out.println("Archetype API Log: Ironclad card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         System.out.println("These cards are: " + tmpPool.toString());

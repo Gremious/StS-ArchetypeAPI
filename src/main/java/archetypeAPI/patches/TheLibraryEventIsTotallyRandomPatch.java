@@ -1,6 +1,6 @@
 package archetypeAPI.patches;
 
-import archetypeAPI.util.CardpoolClearance;
+import archetypeAPI.util.CardpoolMaintenance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -20,7 +20,7 @@ public class TheLibraryEventIsTotallyRandomPatch {
     )
 
     public static void insert(TheLibrary __instance, int buttonPressed, @ByRef AbstractCard[] card) {
-        card[0] = CardpoolClearance.getSuperRandomCard(AbstractDungeon.rollRarity()).makeCopy();
+        card[0] = CardpoolMaintenance.getSuperRandomCard(AbstractDungeon.rollRarity()).makeCopy();
     }
 
     private static class Locator extends SpireInsertLocator {

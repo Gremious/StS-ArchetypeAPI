@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
 
-import static archetypeAPI.util.CardpoolClearance.extendWithBasics;
+import static archetypeAPI.util.CardpoolMaintenance.extendWithBasics;
 
 @SpirePatch(
         clz = AbstractDungeon.class,

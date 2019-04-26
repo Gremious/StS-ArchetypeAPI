@@ -18,8 +18,8 @@ import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUs
 import static archetypeAPI.patches.ArchetypeCardTags.BASIC;
 import static com.megacrit.cardcrawl.dungeons.AbstractDungeon.*;
 
-public class CardpoolClearance {
-    protected static final Logger logger = LogManager.getLogger(CardpoolClearance.class.getName());
+public class CardpoolMaintenance {
+    protected static final Logger logger = LogManager.getLogger(CardpoolMaintenance.class.getName());
     
     public static CardGroup cleanCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     
@@ -70,6 +70,21 @@ public class CardpoolClearance {
         
         cardGroup.clear();
         cardGroup.group.addAll(noDupes.group);
+    }
+    
+    public static CardGroup getAllEffectiveClassCards(AbstractCard.CardColor color) {
+        CardGroup allCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        CardGroup effectiveClassCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        allCards.group.addAll(CardLibrary.getAllCards());
+        
+        for (AbstractCard c : allCards.group) {
+            if (c.color == color
+                    && c.rarity != AbstractCard.CardRarity.SPECIAL
+                    && c.rarity != AbstractCard.CardRarity.BASIC) {
+                effectiveClassCards.addToTop(c);
+            }
+        }
+        return effectiveClassCards;
     }
     
     public static void populateTrulyFullClassCardList(AbstractCard.CardColor CardColor) {

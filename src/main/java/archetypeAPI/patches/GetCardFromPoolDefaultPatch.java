@@ -8,7 +8,7 @@ import javassist.CtBehavior;
 import org.apache.logging.log4j.Logger;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.util.CardpoolClearance.getSuperRandomCard;
+import static archetypeAPI.util.CardpoolMaintenance.getSuperRandomCard;
 
 @SpirePatch(
         clz = AbstractDungeon.class,

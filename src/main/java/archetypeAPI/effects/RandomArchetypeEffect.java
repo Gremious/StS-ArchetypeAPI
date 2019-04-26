@@ -17,7 +17,8 @@ import org.apache.logging.log4j.Logger;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
-import static archetypeAPI.util.CardpoolClearance.makeSureWeMeetMinimum;
+import static archetypeAPI.util.CardpoolMaintenance.getAllEffectiveClassCards;
+import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
 
 public class RandomArchetypeEffect extends AbstractGameEffect {     // This is totally an effect. Yes.
     protected static final Logger logger = LogManager.getLogger(RandomArchetypeEffect.class.getName());
@@ -30,7 +31,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
     @Override
     public void update() {
         if (duration == Settings.ACTION_DUR_FAST) {
-            cardsOfTheArchetypesInUse.clear(); // Makre sure the list is clean. Don't want archetypes from prior runs.
+            cardsOfTheArchetypesInUse.clear(); // Make sure the list is clean. Don't want archetypes from prior runs.
             
             addArchetypes();
             
@@ -79,6 +80,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
         logger.info("The number of cards you've registered for \"" + AbstractDungeon.player.chosenClass + "\"  with Archetype API is: " + maxNumber);
         logger.info("The number of cards in the card library for  \"" + AbstractDungeon.player.chosenClass + "\"  is " + CardLibrary.getAllCards().stream().filter(c -> c.color == AbstractDungeon.player.getCardColor()).count());
         logger.info("Please keep in mind that special or starter cards should not be registered with Archetype API but will be found in the card library.");
+        logger.info("And modded cards that are not registered with Archetype API will be included and DO NOT count towards the archetype card limit");
         
         // Adds ALL the initial selection cards.
         for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
@@ -121,6 +123,11 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             singleArchetypeCards.removeCard(randomArchetype);
             currentCardListSize = cardsOfTheArchetypesInUse.group.size();
         }
+    }
+    
+    private static void addNonAPICards(){
+        CardGroup charCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        charCards.group.addAll(getAllEffectiveClassCards(AbstractDungeon.player.getCardColor()).group);
     }
     
     private static void supportCheck() {

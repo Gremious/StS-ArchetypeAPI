@@ -8,7 +8,6 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
-import javassist.bytecode.stackmap.BasicBlock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static archetypeAPI.util.CardpoolClearance.removeDuplicatesFromCardGroup;
+import static archetypeAPI.util.CardpoolMaintenance.removeDuplicatesFromCardGroup;
 
 public abstract class AbstractArchetype {
     protected static final Logger logger = LogManager.getLogger(AbstractArchetype.class.getName());

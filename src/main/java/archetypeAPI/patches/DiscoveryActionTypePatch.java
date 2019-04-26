@@ -7,7 +7,7 @@ import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
-import static archetypeAPI.util.CardpoolClearance.*;
+import static archetypeAPI.util.CardpoolMaintenance.*;
 
 @SpirePatch(
         clz = AbstractDungeon.class,
