@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+import static archetypeAPI.ArchetypeAPI.enableNonAPICards;
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
 
@@ -67,11 +68,13 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 
                 logger.info("Added all archetype API selected cards.");
                 logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
-    
+                
+                if (enableNonAPICards) {
                 logger.info("Adding non-API cards");
                 RandomArchetypeEffect.addNonAPICards(); // Too lazy to make an abstract effect.
                 logger.info("Added cards from mods you have that don't have Archetype API support.");
                 logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
+                }
                 
                 logger.info("Making sure we are meeting minimum card requirements.");
                 makeSureWeMeetMinimum();

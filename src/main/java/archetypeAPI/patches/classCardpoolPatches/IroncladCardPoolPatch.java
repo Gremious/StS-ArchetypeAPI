@@ -1,9 +1,9 @@
-package archetypeAPI.patches;
+package archetypeAPI.patches.classCardpoolPatches;
 
 import archetypeAPI.util.CardpoolMaintenance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.Defect;
+import com.megacrit.cardcrawl.characters.Ironclad;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import javassist.CtBehavior;
@@ -11,26 +11,24 @@ import javassist.CtBehavior;
 import java.util.ArrayList;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
-import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
 
 @SpirePatch(
-        clz = Defect.class,
+        clz = Ironclad.class,
         method = "getCardPool"
 )
 
-public class DefectCardPoolPatch {
+public class IroncladCardPoolPatch {
     @SpireInsertPatch(
             locator = Locator.class
     )
 
-    public static void insert(Defect __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
+    public static void insert(Ironclad __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         if (!cardsOfTheArchetypesInUse.isEmpty()) {
-            makeSureWeMeetMinimum();
             CardpoolMaintenance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
-        } else {
-            CardLibrary.addBlueCards(tmpPool);
+        }else {
+            CardLibrary.addRedCards(tmpPool);
         }
-        System.out.println("Archetype API Log: Defect card pool patch. You are playing with: " + tmpPool.size() + " cards.");
+        System.out.println("Archetype API Log: Ironclad card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         System.out.println("These cards are: " + tmpPool.toString());
     }
 

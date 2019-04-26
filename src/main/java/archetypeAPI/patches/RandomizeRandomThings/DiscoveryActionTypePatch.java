@@ -1,3 +1,4 @@
+/*
 package archetypeAPI.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -83,3 +84,4 @@ public class DiscoveryActionTypePatch {
         }
     }
 }
+*/

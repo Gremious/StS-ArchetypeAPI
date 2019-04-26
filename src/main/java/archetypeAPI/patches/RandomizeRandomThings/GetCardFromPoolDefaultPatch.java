@@ -1,4 +1,4 @@
-package archetypeAPI.patches;
+package archetypeAPI.patches.RandomizeRandomThings;
 
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;

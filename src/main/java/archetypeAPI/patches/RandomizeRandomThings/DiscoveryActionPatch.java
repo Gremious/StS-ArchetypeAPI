@@ -1,3 +1,4 @@
+/*
 package archetypeAPI.patches;
 
 import archetypeAPI.util.CardpoolMaintenance;
@@ -81,3 +82,4 @@ public class DiscoveryActionPatch {
         }
     }
 }
+*/

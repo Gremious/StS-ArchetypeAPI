@@ -15,12 +15,10 @@ import static archetypeAPI.ArchetypeAPI.selectArchetypes;
         method = SpirePatch.CONSTRUCTOR,
         paramtypez = {boolean.class}
 )
-public class SelectArchetypesNeowPatch {
-
+public class MainNeowPatch {
     public static void Postfix(NeowEvent __instance, boolean isDone) {
         if (!Settings.isEndless || AbstractDungeon.floorNum <= 1) {
             if (Settings.isStandardRun() && (!Settings.isEndless || AbstractDungeon.floorNum > 1)) { // Only the first room ever ever
-                
                 if (AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass) != null) {
                     if (selectArchetypes) {
                         AbstractDungeon.effectList.add(new SelectArchetypeEffect());

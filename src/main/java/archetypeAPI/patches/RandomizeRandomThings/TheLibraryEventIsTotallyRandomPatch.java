@@ -1,4 +1,4 @@
-package archetypeAPI.patches;
+package archetypeAPI.patches.RandomizeRandomThings;
 
 import archetypeAPI.util.CardpoolMaintenance;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -18,7 +18,7 @@ public class TheLibraryEventIsTotallyRandomPatch {
             locator = Locator.class,
             localvars={"card"}
     )
-
+    
     public static void insert(TheLibrary __instance, int buttonPressed, @ByRef AbstractCard[] card) {
         card[0] = CardpoolMaintenance.getSuperRandomCard(AbstractDungeon.rollRarity()).makeCopy();
     }

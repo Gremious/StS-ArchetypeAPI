@@ -1,4 +1,4 @@
-package archetypeAPI.patches;
+package archetypeAPI.patches.classCardpoolPatches;
 
 import archetypeAPI.util.CardpoolMaintenance;
 import basemod.abstracts.CustomPlayer;

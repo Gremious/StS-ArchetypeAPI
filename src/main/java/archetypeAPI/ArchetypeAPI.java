@@ -65,6 +65,8 @@ public class ArchetypeAPI implements
     public static Properties archetypeSettingsDefaults = new Properties();
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
     public static boolean selectArchetypes = false;
+    public static final String PROP_ENABLE_NON_API_CARDS = "enableNonAPICards";
+    public static boolean enableNonAPICards = false;
     
     public static Map<AbstractPlayer.PlayerClass, Integer> characterCardNums = new HashMap<>();
     
@@ -74,10 +76,12 @@ public class ArchetypeAPI implements
         setModID("archetypeAPI");
         
         archetypeSettingsDefaults.setProperty(PROP_SELECT_ARCHETYPES, "FALSE");
+        archetypeSettingsDefaults.setProperty(PROP_ENABLE_NON_API_CARDS, "FALSE");
         try {
             SpireConfig config = new SpireConfig("archetypeAPI", "ArchetypeAPIConfig", archetypeSettingsDefaults);
             config.load();
             selectArchetypes = config.getBool(PROP_SELECT_ARCHETYPES);
+            enableNonAPICards = config.getBool(PROP_ENABLE_NON_API_CARDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -117,7 +121,22 @@ public class ArchetypeAPI implements
                 e.printStackTrace();
             }
         });
+        ModLabeledToggleButton enableNonAPIButton = new ModLabeledToggleButton("After manually choosing archetypes, should cards from content mods not registered with \n Archetype API be added? \n Example: Choosing only 1 Silent archetype, but having \"Mod with no ArchAPI support installed\", \n ALL the cards from that mod will be added on top of the ones you selected.\n This option has no effect when the 'archetype selection' is off, as non-API mod cards will always be added.",
+                350.0f, 400.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                selectArchetypes, settingsPanel, (label) -> {
+        }, (button) -> {
+            selectArchetypes = button.enabled;
+            try {
+                SpireConfig config = new SpireConfig("archetypeAPI", "ArchetypeAPIConfig", archetypeSettingsDefaults);
+                config.setBool(PROP_ENABLE_NON_API_CARDS, enableNonAPICards);
+                config.save();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         settingsPanel.addUIElement(selectArchetypesButton);
+        settingsPanel.addUIElement(enableNonAPIButton);
+    
         
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
         

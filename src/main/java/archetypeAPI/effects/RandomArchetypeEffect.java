@@ -41,7 +41,6 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             logger.info("Added cards from mods you have that don't have Archetype API support.");
             logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
             
-            
             logger.info("Making sure we are meeting minimum card requirements.");
             makeSureWeMeetMinimum();
             logger.info("We now meet the minimum card requirements.");
@@ -88,7 +87,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
         }
         
         
-        logger.info("The number of cards you've registered for \"" + AbstractDungeon.player.chosenClass + "\"  with Archetype API is: " + maxNumber);
+        logger.info("The number of cards registered for \"" + AbstractDungeon.player.chosenClass + "\"  with Archetype API is: " + maxNumber);
         logger.info("The number of cards in the card library for  \"" + AbstractDungeon.player.chosenClass + "\"  is " + CardLibrary.getAllCards().stream().filter(c -> c.color == AbstractDungeon.player.getCardColor()).count());
         logger.info("Please keep in mind that special or starter cards should not be registered with Archetype API but will be found in the card library.");
         logger.info("Modded cards that are not registered with Archetype API will be included and can bypass the archetype card limit.");
