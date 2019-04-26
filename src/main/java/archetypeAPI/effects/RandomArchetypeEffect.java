@@ -17,8 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
-import static archetypeAPI.util.CardpoolMaintenance.getAllEffectiveClassCards;
-import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
+import static archetypeAPI.util.CardpoolMaintenance.*;
 
 public class RandomArchetypeEffect extends AbstractGameEffect {     // This is totally an effect. Yes.
     protected static final Logger logger = LogManager.getLogger(RandomArchetypeEffect.class.getName());
@@ -34,18 +33,21 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             cardsOfTheArchetypesInUse.clear(); // Make sure the list is clean. Don't want archetypes from prior runs.
             
             addArchetypes();
+            logger.info("Added all archetype API selected cards.");
+            logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
             
-            System.out.println("addArchetypes() is done.");
-
-           /* for (AbstractCard c : randomArchetypes) {
-                if (c instanceof ArchetypeSelectCard) {
-                    //System.out.println("Activating the archetype effect of " + c);
-                    ((ArchetypeSelectCard) c).archetypeEffect();
-                }
-            }*/
-            
+            logger.info("Adding non-API cards");
+            addNonAPICards();
+            logger.info("Added cards from mods you have that don't have Archetype API support.");
+            logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
+    
+    
+            logger.info("Making sure we are meeting minimum card requirements.");
             makeSureWeMeetMinimum();
+            logger.info("We now meet the minimum card requirements.");
+            logger.info("Current and final card list:" + cardsOfTheArchetypesInUse.group.toString());
             
+            logger.info("Re-initializing card pools.");
             if (!cardsOfTheArchetypesInUse.isEmpty()) {
                 CardCrawlGame.dungeon.initializeCardPools();
             }
@@ -80,7 +82,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
         logger.info("The number of cards you've registered for \"" + AbstractDungeon.player.chosenClass + "\"  with Archetype API is: " + maxNumber);
         logger.info("The number of cards in the card library for  \"" + AbstractDungeon.player.chosenClass + "\"  is " + CardLibrary.getAllCards().stream().filter(c -> c.color == AbstractDungeon.player.getCardColor()).count());
         logger.info("Please keep in mind that special or starter cards should not be registered with Archetype API but will be found in the card library.");
-        logger.info("And modded cards that are not registered with Archetype API will be included and DO NOT count towards the archetype card limit");
+        logger.info("Modded cards that are not registered with Archetype API will be included and can bypass the archetype card limit.");
         
         // Adds ALL the initial selection cards.
         for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
@@ -98,7 +100,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             inUseArchetypes.addToTop(basicCard);
             basicArchetypeCards.removeCard(basicCard);
         }
-    
+        
         currentCardListSize = cardsOfTheArchetypesInUse.group.size();
         
         while (currentCardListSize < baseNum) {
@@ -125,9 +127,19 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
         }
     }
     
-    private static void addNonAPICards(){
-        CardGroup charCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        charCards.group.addAll(getAllEffectiveClassCards(AbstractDungeon.player.getCardColor()).group);
+    protected static void addNonAPICards() {
+        CardGroup groupOfAllAPICards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
+            ((ArchetypeSelectCard) c).archetypeEffect(groupOfAllAPICards);
+        }
+        
+        CardGroup groupOfAllCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        groupOfAllCards.group.addAll(getAllEffectiveClassCards(AbstractDungeon.player.getCardColor()).group);
+        
+        removeGroupFromAnotherGroup(groupOfAllCards, groupOfAllAPICards);
+        
+        cardsOfTheArchetypesInUse.group.addAll(groupOfAllCards.group);
+        // removeDuplicatesFromCardGroup(cardsOfTheArchetypesInUse);
     }
     
     private static void supportCheck() {

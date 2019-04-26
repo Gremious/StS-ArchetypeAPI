@@ -62,9 +62,9 @@ public class CardpoolMaintenance {
     
     public static void removeDuplicatesFromCardGroup(CardGroup cardGroup) {
         CardGroup noDupes = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        List<String> noDupeIDs =  cardGroup.group.stream().map(c -> c.cardID).distinct().collect(Collectors.toList());
+        List<String> noDupeIDs = cardGroup.group.stream().map(c -> c.cardID).distinct().collect(Collectors.toList());
         
-        for (String id : noDupeIDs){
+        for (String id : noDupeIDs) {
             noDupes.addToTop(CardLibrary.getCard(id));
         }
         
@@ -72,9 +72,27 @@ public class CardpoolMaintenance {
         cardGroup.group.addAll(noDupes.group);
     }
     
+    public static void removeGroupFromAnotherGroup(CardGroup groupToRemoveFrom, CardGroup groupToRemove) {
+        
+        List<String> IDsOfBaseGroup = groupToRemoveFrom.group.stream()
+                .map(c -> c.cardID)
+                .collect(Collectors.toList());
+        
+        List<String> IDsToRemove = groupToRemove.group.stream()
+                .map(c -> c.cardID)
+                .collect(Collectors.toList());
+        
+        IDsOfBaseGroup.removeAll(IDsToRemove);
+        groupToRemoveFrom.clear();
+        for (String id : IDsOfBaseGroup) {
+            groupToRemoveFrom.addToTop(CardLibrary.getCard(id));
+        }
+    }
+    
     public static CardGroup getAllEffectiveClassCards(AbstractCard.CardColor color) {
         CardGroup allCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CardGroup effectiveClassCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        
         allCards.group.addAll(CardLibrary.getAllCards());
         
         for (AbstractCard c : allCards.group) {
@@ -207,7 +225,6 @@ public class CardpoolMaintenance {
         
         ((ArchetypeSelectCard) basicArchetypeCard).archetypeEffect(basicCards);
         
-        
         if (type == null) {
             if (rarity != AbstractCard.CardRarity.COMMON) {
                 int roll = AbstractDungeon.miscRng.random(2);
@@ -251,20 +268,24 @@ public class CardpoolMaintenance {
         do {
             logger.info("You have requested a/an " + rarity + " " + type);
             logger.info("The entire list of basic cards is: " + basicCards);
-            logger.info("We can add any of these: " + cardsThatFit + " unless you already have all of them.");
+            logger.info("We can add any of these: " + cardsThatFit.group.toString() + " unless you already have all of them.");
             
             if (!cardsThatFit.isEmpty() && !containsGroupByID(cardsOfTheArchetypesInUse.group, cardsThatFit.group)) {
                 AbstractCard c = cardsThatFit.getRandomCard(cardRandomRng);
                 logger.info("We have cards that fit. Adding " + c.name + " if you don't already have it.");
-                if (!containsID(basicCards.group, c)) {
-                    basicCards.addToRandomSpot(c);
+                logger.info(cardsOfTheArchetypesInUse.group.toString() + " contains" + c + "? :" + (containsID(cardsOfTheArchetypesInUse.group, c)));
+                
+                if (!containsID(cardsOfTheArchetypesInUse.group, c)) {
+                    logger.info("Adding + " + c + " and removing it from the list.");
+                    cardsOfTheArchetypesInUse.addToRandomSpot(c);
+                    cardsThatFit.removeCard(c);
                     i++;
                 }
             } else {
                 logger.info("The pool of fitting cards has been exhausted. Adding a totally random card.");
                 AbstractCard c = getSuperRandomCard(rarity, type);
-                if (!containsID(basicCards.group, c)) {
-                    basicCards.addToRandomSpot(c);
+                if (!containsID(cardsOfTheArchetypesInUse.group, c)) {
+                    cardsOfTheArchetypesInUse.addToRandomSpot(c);
                     i++;
                 }
             }
@@ -298,7 +319,6 @@ public class CardpoolMaintenance {
                     break;
             }
         }
-        
         
         while (attacks < 3) {
             logger.info("You have too little attacks!: " + attacks);

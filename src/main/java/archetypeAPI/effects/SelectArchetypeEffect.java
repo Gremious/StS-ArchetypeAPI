@@ -12,6 +12,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,6 +23,8 @@ import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUs
 import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
 
 public class SelectArchetypeEffect extends AbstractGameEffect {
+    private static final Logger logger = LogManager.getLogger(RandomArchetypeEffect.class.getName());
+    
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
     private String gridSelectText;
@@ -60,13 +64,25 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
                 for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
                     c.stopGlowing();
                 }
-
+                
+                logger.info("Added all archetype API selected cards.");
+                logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
+    
+                logger.info("Adding non-API cards");
+                RandomArchetypeEffect.addNonAPICards(); // Too lazy to make an abstract effect.
+                logger.info("Added cards from mods you have that don't have Archetype API support.");
+                logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
+                
+                logger.info("Making sure we are meeting minimum card requirements.");
                 makeSureWeMeetMinimum();
-
+                logger.info("We now meet the minimum card requirements.");
+                logger.info("Current and final card list:" + cardsOfTheArchetypesInUse.group.toString());
+    
+                logger.info("Re-initializing card pools.");
                 if (!cardsOfTheArchetypesInUse.isEmpty()) {
                     CardCrawlGame.dungeon.initializeCardPools();
                 }
-
+                
                 AbstractDungeon.gridSelectScreen.selectedCards.clear();
                 cardsWereUsed = true;
             }
