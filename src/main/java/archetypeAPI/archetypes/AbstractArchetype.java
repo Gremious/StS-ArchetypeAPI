@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static archetypeAPI.util.CardpoolClearance.removeDuplicatesFromCardGroup;
+
 public abstract class AbstractArchetype {
     protected static final Logger logger = LogManager.getLogger(AbstractArchetype.class.getName());
     
@@ -58,6 +60,8 @@ public abstract class AbstractArchetype {
             logger.info("This will usually only happen if you used the archetypeEffect of a card and passed a specific (null) cardGroup as a parameter");
             e.printStackTrace();
         }
+    
+        removeDuplicatesFromCardGroup(groupToAdd);
     }
     
     public static void addCardsFromArchetypes(String[] cardIDs) {
@@ -68,6 +72,7 @@ public abstract class AbstractArchetype {
         }
         
         cardsOfTheArchetypesInUse.group.addAll(currentArchetype);
+        removeDuplicatesFromCardGroup(cardsOfTheArchetypesInUse);
     }
 }
 

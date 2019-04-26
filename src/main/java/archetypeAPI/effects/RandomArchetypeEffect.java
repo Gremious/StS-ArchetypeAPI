@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
-import static archetypeAPI.util.CardpoolClearance.*;
+import static archetypeAPI.util.CardpoolClearance.makeSureWeMeetMinimum;
 
 public class RandomArchetypeEffect extends AbstractGameEffect {     // This is totally an effect. Yes.
     protected static final Logger logger = LogManager.getLogger(RandomArchetypeEffect.class.getName());
@@ -58,7 +58,8 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
     private static void addArchetypes() {
         int currentCardListSize = 0;
         int maxNumber;
-        CardGroup allArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        CardGroup singleArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        CardGroup basicArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CardGroup inUseArchetypes = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CardGroup maxNumberCheckGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         
@@ -81,26 +82,27 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
         
         // Adds ALL the initial selection cards.
         for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
-            if (c.hasTag(BASIC) || c.hasTag(SINGLE)) {
-                allArchetypeCards.addToTop(c);
+            if (c.hasTag(BASIC)) {
+                basicArchetypeCards.addToTop(c);
+            }
+            if (c.hasTag(SINGLE)) {
+                singleArchetypeCards.addToTop(c);
             }
         }
         
-        // Always add all BASIC tagged cards first.
-        for (AbstractCard basicCheckCard : allArchetypeCards.group) {
-            if (basicCheckCard.hasTag(BASIC)) {
-                ((ArchetypeSelectCard) basicCheckCard).archetypeEffect();
-                inUseArchetypes.addToTop(basicCheckCard);
-                allArchetypeCards.removeCard(basicCheckCard);
-                currentCardListSize = cardsOfTheArchetypesInUse.group.size();
-            }
+        while (!basicArchetypeCards.isEmpty()) {
+            AbstractCard basicCard = basicArchetypeCards.getTopCard();
+            ((ArchetypeSelectCard) basicCard).archetypeEffect();
+            inUseArchetypes.addToTop(basicCard);
+            basicArchetypeCards.removeCard(basicCard);
         }
-        
+    
+        currentCardListSize = cardsOfTheArchetypesInUse.group.size();
         
         while (currentCardListSize < baseNum) {
             boolean canSupport = false;
             
-            AbstractCard randomArchetype = allArchetypeCards.getRandomCard(true);
+            AbstractCard randomArchetype = singleArchetypeCards.getRandomCard(true);
             
             for (AbstractCard c : inUseArchetypes.group) {
                 if (c.hasTag(INCLUDE_SUPPORT)) {
@@ -113,24 +115,23 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
                     continue;
                 }
             }
-    
+            
             ((ArchetypeSelectCard) randomArchetype).archetypeEffect();
             inUseArchetypes.addToTop(randomArchetype);
-            allArchetypeCards.removeCard(randomArchetype);
+            singleArchetypeCards.removeCard(randomArchetype);
             currentCardListSize = cardsOfTheArchetypesInUse.group.size();
         }
-        
     }
     
     private static void supportCheck() {
         boolean canSupport = false;
         boolean isSupport = false;
         
-        for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group){
-            if (c.hasTag(SUPPORT)){
+        for (AbstractCard c : AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass).group) {
+            if (c.hasTag(SUPPORT)) {
                 isSupport = true;
             }
-            if (c.hasTag(INCLUDE_SUPPORT)){
+            if (c.hasTag(INCLUDE_SUPPORT)) {
                 canSupport = true;
             }
         }
