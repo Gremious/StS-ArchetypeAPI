@@ -267,7 +267,7 @@ public class CardpoolMaintenance {
         int i = 0;
         do {
             logger.info("You have requested a/an " + rarity + " " + type);
-            logger.info("The entire list of basic cards is: " + basicCards);
+            logger.info("The entire list of basic cards is: " + basicCards.group.toString());
             logger.info("We can add any of these: " + cardsThatFit.group.toString() + " unless you already have all of them.");
             
             if (!cardsThatFit.isEmpty() && !containsGroupByID(cardsOfTheArchetypesInUse.group, cardsThatFit.group)) {

@@ -1,7 +1,7 @@
 {
   "modid": "archetypeapi",
   "name": "Archetype API",
-  "author_list": ["Gremious", "Kiooeht"],
+  "author_list": ["Gremious", "kiooeht"],
   "credits": "Huge huge huge thanks to: Kio for BASICALLY DOING ALL THE FRONT-END WORK WOW THANK YOUUUU, fiiiiilth for neow patching help, Jin for making the selection screens actually work, Vex for archetype card decision and playtesting, Rattus for playetesting and original wiki help, and all of #modding for being nice ^_^",
   "description": "An API for Slay the Spire to select/add card Archetypes for any characters.",
   "version": "${project.version}",

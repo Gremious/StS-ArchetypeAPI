@@ -55,7 +55,9 @@ public class ArchetypeAPI implements
     //This is for the in-game mod settings panel.
     private static final String MODNAME = "Archetype API";
     private static final String AUTHOR = "Gremious";
-    private static final String DESCRIPTION = "An API for Slay the Spire to select/add card Archetypes for any characters.";
+    private static final String DESCRIPTION = "An API for Slay the Spire to select/add card Archetypes for any characters." +
+            " Also stops the overflow of cards if you have a billion content mods installed!" +
+            " \n \n Huge huge huge thanks to: Kio for BASICALLY DOING ALL THE FRONT-END WORK WOW THANK YOUUUU, fiiiiilth for neow patching help, Jin for making the selection screens actually work, Vex for archetype card decision and playtesting, Rattus for playetesting and original wiki help, and all of #modding for being nice ^_^";
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
     
     private static final String ARCHETYPES_DIR = "archetypes";
