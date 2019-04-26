@@ -40,8 +40,8 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             addNonAPICards();
             logger.info("Added cards from mods you have that don't have Archetype API support.");
             logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
-    
-    
+            
+            
             logger.info("Making sure we are meeting minimum card requirements.");
             makeSureWeMeetMinimum();
             logger.info("We now meet the minimum card requirements.");
@@ -61,6 +61,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
     private static void addArchetypes() {
         int currentCardListSize = 0;
         int maxNumber;
+        int baseNum;
         CardGroup singleArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CardGroup basicArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CardGroup inUseArchetypes = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
@@ -78,7 +79,15 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
         
         // Sets the default maximum number of cards we can add to the player if not previously specified.
         maxNumber = maxNumberCheckGroup.size();
-        int baseNum = ArchetypeAPI.characterCardNums.getOrDefault(AbstractDungeon.player.chosenClass, maxNumber);
+        if (maxNumber < ArchetypeAPI.characterCardNums.get(AbstractDungeon.player.chosenClass)) {
+            logger.info("YOU SET THE AMOUNT OF CARDS IN ARCHETYPE API TO LOAD FOR " + AbstractDungeon.player.chosenClass + " TO BE " + ArchetypeAPI.characterCardNums.get(AbstractDungeon.player.chosenClass) + " BUT THE AMOUNT OF CARDS YOU REGISTERED WITH IT IS" + maxNumber);
+            logger.info("FIX THAT AND BE CAREFUL NEXT TIME");
+            baseNum = maxNumber;
+        } else {
+            baseNum = ArchetypeAPI.characterCardNums.getOrDefault(AbstractDungeon.player.chosenClass, maxNumber);
+        }
+        
+        
         logger.info("The number of cards you've registered for \"" + AbstractDungeon.player.chosenClass + "\"  with Archetype API is: " + maxNumber);
         logger.info("The number of cards in the card library for  \"" + AbstractDungeon.player.chosenClass + "\"  is " + CardLibrary.getAllCards().stream().filter(c -> c.color == AbstractDungeon.player.getCardColor()).count());
         logger.info("Please keep in mind that special or starter cards should not be registered with Archetype API but will be found in the card library.");

@@ -134,6 +134,7 @@ public class ArchetypeAPI implements
         loadArchetypes("archetypeAPIResources/localization/eng/archetypes/");
     }
     
+    @SuppressWarnings("unused")
     public static void setCharacterDefaultNumOfCards(AbstractPlayer.PlayerClass characterEnum, int numberOfCards){
         characterCardNums.putIfAbsent(characterEnum, numberOfCards);
     }
