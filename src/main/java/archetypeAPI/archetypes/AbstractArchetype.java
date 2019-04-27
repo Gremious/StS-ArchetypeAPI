@@ -52,14 +52,7 @@ public abstract class AbstractArchetype {
             currentArchetype.add(CardLibrary.getCopy(ID));
         }
         
-        try {
-            groupToAdd.group.addAll(currentArchetype);}
-        catch (NullPointerException e){
-            logger.info("YOU TRIED CALLING addCardsFromArchetypes() WITH A NULL GROUP");
-            logger.info("This will usually only happen if you used the archetypeEffect of a card and passed a specific (null) cardGroup as a parameter");
-            e.printStackTrace();
-        }
-    
+        groupToAdd.group.addAll(currentArchetype);
         removeDuplicatesFromCardGroup(groupToAdd);
     }
     

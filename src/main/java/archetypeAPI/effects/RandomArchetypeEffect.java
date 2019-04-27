@@ -35,7 +35,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             cardsOfTheArchetypesInUse.clear(); // Make sure the list is clean. Don't want archetypes from prior runs.
             
             addArchetypes();
-            logger.info("Added all archetype API selected cards.");
+            logger.info("Added all selected archetypes.");
             logger.info("Current card list:" + cardsOfTheArchetypesInUse.group.toString());
             
             logger.info("Adding non-API cards");
@@ -60,7 +60,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
     }
     
     private static void addArchetypes() {
-        int currentCardListSize = 0;
+        int currentCardListSize;
         int maxNumber;
         int baseNum;
         CardGroup singleArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
@@ -133,7 +133,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             }
             
             ((ArchetypeSelectCard) randomArchetype).archetypeEffect(); // Add the current archetype.
-    
+            
             for (ArchetypeSelectCard arch : archNames.keySet()) { // Add all archetypes sharing the same archetype name
                 if (arch.getArchetypeName().equals(((ArchetypeSelectCard) randomArchetype).getArchetypeName())) {
                     arch.archetypeEffect();
@@ -142,9 +142,9 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
                 }
             }
             
-            inUseArchetypes.addToTop(randomArchetype); // add it to the "currenlty in use archetypes"
-            singleArchetypeCards.removeCard(randomArchetype); // Remove it from the random pool
-            currentCardListSize = cardsOfTheArchetypesInUse.group.size(); // Count up card number
+            inUseArchetypes.addToTop(randomArchetype);
+            singleArchetypeCards.removeCard(randomArchetype);
+            currentCardListSize = cardsOfTheArchetypesInUse.group.size();
         }
     }
     
