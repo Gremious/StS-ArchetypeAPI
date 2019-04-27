@@ -27,7 +27,7 @@ public class IroncladCardPoolPatch {
     @SpireInsertPatch(
             locator = Locator.class
     )
-
+    
     public static void insert(Ironclad __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         final Logger logger = LogManager.getLogger(IroncladCardPoolPatch.class.getName());
         
@@ -37,15 +37,19 @@ public class IroncladCardPoolPatch {
             
             // Save the card pools
             CustomSavable<List<String>> IrconladCardpoolSave = new CardpoolSavable(tmpPool);
-            BaseMod.addSaveField("defectArchetypeCardRewards", IrconladCardpoolSave);
+            
+            if (BaseMod.getSaveFields().get("ironcladArchetypeCardRewards") == null) {
+                BaseMod.addSaveField("ironcladArchetypeCardRewards", IrconladCardpoolSave);
+            }
+            
             IrconladCardpoolSave.onSave();
-        }else {
+        } else {
             CardLibrary.addRedCards(tmpPool);
         }
         System.out.println("Archetype API Log: Ironclad card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         System.out.println("These cards are: " + tmpPool.toString());
     }
-
+    
     private static class Locator extends SpireInsertLocator {
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {

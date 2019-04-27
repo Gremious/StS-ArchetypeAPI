@@ -37,7 +37,11 @@ public class DefectCardPoolPatch {
             
             // Save the card pools
             CustomSavable<List<String>> DefectCardpoolSave = new CardpoolSavable(tmpPool);
-            BaseMod.addSaveField("defectArchetypeCardRewards", DefectCardpoolSave);
+            
+            if (BaseMod.getSaveFields().get("defectArchetypeCardRewards") == null) {
+                BaseMod.addSaveField("defectArchetypeCardRewards", DefectCardpoolSave);
+            }
+            
             DefectCardpoolSave.onSave();
         } else {
             CardLibrary.addBlueCards(tmpPool);

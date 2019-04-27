@@ -27,7 +27,7 @@ public class SilentCardPoolPatch {
     @SpireInsertPatch(
             locator = Locator.class
     )
-
+    
     public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         final Logger logger = LogManager.getLogger(SilentCardPoolPatch.class.getName());
         
@@ -37,7 +37,11 @@ public class SilentCardPoolPatch {
             
             // Save the card pools
             CustomSavable<List<String>> SilentCardpoolSave = new CardpoolSavable(tmpPool);
-            BaseMod.addSaveField("defectArchetypeCardRewards", SilentCardpoolSave);
+            
+            if (BaseMod.getSaveFields().get("silentArchetypeCardRewards") == null) {
+                BaseMod.addSaveField("silentArchetypeCardRewards", SilentCardpoolSave);
+            }
+            
             SilentCardpoolSave.onSave();
         } else {
             CardLibrary.addGreenCards(tmpPool);
@@ -45,7 +49,7 @@ public class SilentCardPoolPatch {
         System.out.println("Archetype API Log: Silent card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         System.out.println("These cards are: " + tmpPool.toString());
     }
-
+    
     private static class Locator extends SpireInsertLocator {
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception {

@@ -30,7 +30,10 @@ public class BasemodCardPoolPatch {
             
             // Save the card pools
             CustomSavable<List<String>> CustomCharacterCardpoolSave = new CardpoolSavable(tmpPool);
-            BaseMod.addSaveField("defectArchetypeCardRewards", CustomCharacterCardpoolSave);
+       
+            if (BaseMod.getSaveFields().get("customCharacterArchetypeCardRewards") == null) {
+                BaseMod.addSaveField("customCharacterArchetypeCardRewards", CustomCharacterCardpoolSave);
+            }
             CustomCharacterCardpoolSave.onSave();
             
             System.out.println("Archetype API Log: Custom Character card pool patch. You are playing with: " + tmpPool.size() + " cards.");
