@@ -35,7 +35,7 @@ public class CardpoolSavable implements CustomSavable<List<String>> {
     public void onLoad(List<String> listOfIDs) {
         if (cardsOfTheArchetypesInUse.isEmpty()) {
             logger.info("In use cardpool is empty, looking for save");
-            if (!listOfIDs.isEmpty()) {
+            if (!(listOfIDs == null )&& !listOfIDs.isEmpty()) {
                 logger.info("List of ID's to load pre-load: " + listOfIDs.toString());
                 
                 for (String id : listOfIDs) {
