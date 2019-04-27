@@ -126,7 +126,7 @@ public class ArchetypeAPI implements
                 e.printStackTrace();
             }
         });
-        ModLabeledToggleButton enableNonAPIButton = new ModLabeledToggleButton("After manually choosing archetypes, should cards from content mods not registered with \n Archetype API be added? \n Example: Choosing only 1 Silent archetype, but having \"Mod with no ArchAPI support installed\", \n ALL the cards from that mod will be added on top of the ones you selected.\n This option has no effect when the 'archetype selection' is off, as non-API mod cards will always be added.",
+        ModLabeledToggleButton enableNonAPIButton = new ModLabeledToggleButton("After manually choosing archetypes, should cards from mods not registered with \n Archetype API be added? \n Example: Choosing only 1 Silent archetype, but having \"Mod with no ArchAPI support installed\", \n ALL the cards from that mod will be added on top of the ones you selected.\n This option has no effect when the 'archetype selection' is off, \n as non-API mod cards will always be added.",
                 350.0f, 450.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 selectArchetypes, settingsPanel, (label) -> {
         }, (button) -> {
@@ -139,8 +139,8 @@ public class ArchetypeAPI implements
                 e.printStackTrace();
             }
         });
-        ModLabeledToggleButton combineArchetypesButton = new ModLabeledToggleButton("When manually choosing basegame archetypes, combine all of the same type. \n Example: Selecting the base 'Poison' archetype will also add ALL modded poison archetypes without needing to select them.",
-                350.0f, 200.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+        ModLabeledToggleButton combineArchetypesButton = new ModLabeledToggleButton("When manually choosing basegame archetypes, combine all of the same type. \n Example: Selecting the base 'Poison' archetype will also add ALL modded poison archetypes \n without needing to select them.",
+                350.0f, 300.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 selectArchetypes, settingsPanel, (label) -> {
         }, (button) -> {
             selectArchetypes = button.enabled;

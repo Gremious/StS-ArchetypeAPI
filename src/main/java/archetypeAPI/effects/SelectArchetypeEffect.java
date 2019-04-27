@@ -2,6 +2,7 @@ package archetypeAPI.effects;
 
 import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.cards.AbstractArchetypeCard;
+import archetypeAPI.cards.ArchetypeSelectCard;
 import archetypeAPI.jsonClasses.UiStrings;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,7 +19,10 @@ import org.apache.logging.log4j.Logger;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
+import static archetypeAPI.ArchetypeAPI.combineArchetypes;
 import static archetypeAPI.ArchetypeAPI.enableNonAPICards;
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
@@ -29,8 +33,8 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
     private boolean cardsWereUsed;
     private boolean openedGridScreen;
     private String gridSelectText;
-    private boolean needReinst = false;
-
+    private static Map<ArchetypeSelectCard, String> archNames = new HashMap<>();
+    
     public SelectArchetypeEffect() {
         this.duration = Settings.ACTION_DUR_FAST;
         cardsWereUsed = false;
@@ -49,6 +53,9 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             } else if (!openedGridScreen) {
                 cardsOfTheArchetypesInUse.clear();
                 CardGroup cardg = AbstractArchetype.getArchetypeSelectCards(AbstractDungeon.player.chosenClass);
+                for (AbstractCard c : cardg.group){
+                    archNames.putIfAbsent(((ArchetypeSelectCard) c), ((ArchetypeSelectCard) c).getArchetypeName());
+                }
                 AbstractDungeon.gridSelectScreen.open(cardg, Integer.MAX_VALUE, true, gridSelectText);
                 this.openedGridScreen = true;
             }
@@ -56,9 +63,16 @@ public class SelectArchetypeEffect extends AbstractGameEffect {
             if (!cardsWereUsed) {
                 if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
                     for (AbstractCard c : AbstractDungeon.gridSelectScreen.selectedCards) {
-                        if (c instanceof AbstractArchetypeCard) {
                             ((AbstractArchetypeCard) c).archetypeEffect();
-                        }
+                            
+                            if (combineArchetypes){
+                                for (ArchetypeSelectCard arch : archNames.keySet()) { // Add all archetypes sharing the same archetype name
+                                    if (arch.getArchetypeName().equals(((ArchetypeSelectCard) c).getArchetypeName())) {
+                                        arch.archetypeEffect();
+                                    }
+                                }
+                            }
+                        
                     }
                 }
 
