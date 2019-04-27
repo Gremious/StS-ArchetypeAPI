@@ -34,6 +34,7 @@ public class CardpoolSavable implements CustomSavable<List<String>> {
     
     @Override
     public void onLoad(List<String> listOfIDs) {
+        //TODO: Gate this behind a cardsOfTheArchetypesInUse.isEmpty() check
         logger.info("In use cardpool pre-clear " + cardsOfTheArchetypesInUse.group.toString());
         cardsOfTheArchetypesInUse.clear();
         
