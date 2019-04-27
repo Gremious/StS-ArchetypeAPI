@@ -22,7 +22,6 @@ public class CardpoolSavable implements CustomSavable<List<String>> {
     CardpoolSavable(ArrayList<AbstractCard> tmpPool) {
         this.tmpTmpPool.addAll(tmpPool);
         IDList = tmpTmpPool.stream().map(c -> c.cardID).collect(Collectors.toList());
-    
     }
     
     @Override
@@ -34,21 +33,21 @@ public class CardpoolSavable implements CustomSavable<List<String>> {
     
     @Override
     public void onLoad(List<String> listOfIDs) {
-        //TODO: Gate this behind a cardsOfTheArchetypesInUse.isEmpty() check
-        logger.info("In use cardpool pre-clear " + cardsOfTheArchetypesInUse.group.toString());
-        cardsOfTheArchetypesInUse.clear();
-        
-        logger.info("List of ID's to load pre-load: " + listOfIDs.toString());
-        for (String id : listOfIDs) {
-            logger.info("Attempting to load tmpPool from ID list: " + listOfIDs.toString());
-            logger.info("id: " + id);
-            cardsOfTheArchetypesInUse.addToTop(CardLibrary.getCard(id));
-        }
-        
-        makeSureWeMeetMinimum();
-        if (!cardsOfTheArchetypesInUse.isEmpty()) {
-            logger.info("Cardpool loaded successfully, initialising.");
-            CardCrawlGame.dungeon.initializeCardPools();
+        if (cardsOfTheArchetypesInUse.isEmpty()) {
+            logger.info("In use cardpool is empty, loading from save");
+            logger.info("List of ID's to load pre-load: " + listOfIDs.toString());
+            
+            for (String id : listOfIDs) {
+                logger.info("Attempting to load tmpPool from ID list: " + listOfIDs.toString());
+                logger.info("id: " + id);
+                cardsOfTheArchetypesInUse.addToTop(CardLibrary.getCard(id));
+            }
+            
+            makeSureWeMeetMinimum();
+            if (!cardsOfTheArchetypesInUse.isEmpty()) {
+                logger.info("Cardpool loaded successfully, initialising.");
+                CardCrawlGame.dungeon.initializeCardPools();
+            }
         }
     }
 }

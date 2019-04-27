@@ -43,8 +43,6 @@ public class DefectCardPoolPatch {
             }
             
             DefectCardpoolSave.onSave();
-        } else {
-            CardLibrary.addBlueCards(tmpPool);
         }
         
         System.out.println("Archetype API Log: Defect card pool patch. You are playing with: " + tmpPool.size() + " cards.");

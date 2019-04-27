@@ -43,8 +43,6 @@ public class IroncladCardPoolPatch {
             }
             
             IrconladCardpoolSave.onSave();
-        } else {
-            CardLibrary.addRedCards(tmpPool);
         }
         System.out.println("Archetype API Log: Ironclad card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         System.out.println("These cards are: " + tmpPool.toString());
