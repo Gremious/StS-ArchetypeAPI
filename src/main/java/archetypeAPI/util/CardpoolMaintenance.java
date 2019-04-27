@@ -47,7 +47,12 @@ public class CardpoolMaintenance {
         return false;
     }
     
-    public static boolean containsGroupByID(ArrayList<AbstractCard> poolToCheck, ArrayList<AbstractCard> checkAgainst) {
+    /**
+     * Checks whether the poolToCheck group [ex. A, B, C] contains every unique card inside checkAgainst [ex. A, A, B, C, B]. <p> Returns true if it does. [ex. True]
+     * @param poolToCheck If this pool contains every unique card in checkAgainst, this method will return true.
+     * @param checkAgainst If every unique card in this pool is contained within poolToCheck, this method will return true.
+     */
+    public static boolean containsGroupByID(ArrayList<AbstractCard> poolToCheck, ArrayList<AbstractCard> checkAgainst) { // Thanks kio!
         List<String> poolToCheckIDs = // Create a new list of strings
                 poolToCheck.stream() // Start with the card group
                         .map(c -> c.cardID) // convert every card to be card.cardID instead
@@ -122,14 +127,14 @@ public class CardpoolMaintenance {
         if (cleanCards.isEmpty()) {
             populateTrulyFullClassCardList(AbstractDungeon.player.getCardColor());
         }
-        return cleanCards.getRandomCard(true, rarity);
+        return cleanCards.getRandomCard(true, rarity).makeCopy();
     }
     
     public static AbstractCard getSuperRandomCard(AbstractCard.CardType type) {
         if (cleanCards.isEmpty()) {
             populateTrulyFullClassCardList(AbstractDungeon.player.getCardColor());
         }
-        return cleanCards.getRandomCard(type, true);
+        return cleanCards.getRandomCard(type, true).makeCopy();
     }
     
     public static AbstractCard getSuperRandomCard(AbstractCard.CardRarity rarity, AbstractCard.CardType type) {
@@ -145,7 +150,7 @@ public class CardpoolMaintenance {
             }
         }
         
-        return temp.getRandomCard(cardRandomRng);
+        return temp.getRandomCard(cardRandomRng).makeCopy();
     }
     
     // ===================

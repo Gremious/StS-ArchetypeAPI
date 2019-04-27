@@ -88,6 +88,7 @@ public class ArchetypeAPI implements
         logger.info("Done subscribing");
     }
     
+    
     @SuppressWarnings("unused")
     public static void initialize() {
         ArchetypeAPI ArchetypeApiInit = new ArchetypeAPI();

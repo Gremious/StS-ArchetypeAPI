@@ -158,6 +158,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             if (c.hasTag(SUPPORT)) {
                 isSupport = true;
             }
+            
             if (c.hasTag(INCLUDE_SUPPORT)) {
                 canSupport = true;
             }

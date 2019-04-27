@@ -3,6 +3,7 @@ package archetypeAPI.patches;
 import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.effects.RandomArchetypeEffect;
 import archetypeAPI.effects.SelectArchetypeEffect;
+import basemod.BaseMod;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
