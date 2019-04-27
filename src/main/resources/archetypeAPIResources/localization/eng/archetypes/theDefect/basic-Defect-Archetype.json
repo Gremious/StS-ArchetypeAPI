@@ -1,6 +1,7 @@
 {
   "CHARACTER": "DEFECT",
   "NAME": "Basic",
+  "ARCHETYPE_NAME": "Basic",
   "CARD_TYPE": "POWER",
   "IMG": "blue/power/echo_form",
   "TAGS": [

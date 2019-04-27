@@ -1,6 +1,7 @@
 {
   "CHARACTER": "DEFECT",
   "NAME": "Lightning",
+  "ARCHETYPE_NAME": "Lightning",
   "CARD_TYPE": "ATTACK",
   "IMG": "blue/attack/thunder_strike",
   "TAGS": [

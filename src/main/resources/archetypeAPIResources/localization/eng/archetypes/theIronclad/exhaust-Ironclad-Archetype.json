@@ -1,6 +1,7 @@
 {
   "CHARACTER": "IRONCLAD",
   "NAME": "Exhaust",
+  "ARCHETYPE_NAME": "Exhaust",
   "CARD_TYPE": "POWER",
   "IMG": "red/power/corruption",
   "TAGS": [

@@ -1,6 +1,7 @@
 {
   "CHARACTER": "IRONCLAD",
   "NAME": "Block",
+  "ARCHETYPE_NAME": "Block",
   "CARD_TYPE": "POWER",
   "IMG": "red/power/barricade",
   "TAGS": [

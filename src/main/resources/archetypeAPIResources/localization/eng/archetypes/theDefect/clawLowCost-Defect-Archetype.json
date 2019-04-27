@@ -1,6 +1,7 @@
 {
   "CHARACTER": "DEFECT",
   "NAME": "Claw",
+  "ARCHETYPE_NAME": "Claw",
   "CARD_TYPE": "ATTACK",
   "IMG": "blue/attack/claw",
   "TAGS": [

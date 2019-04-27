@@ -1,6 +1,7 @@
 {
   "CHARACTER": "IRONCLAD",
   "NAME": "Strength",
+  "ARCHETYPE_NAME": "Strength",
   "CARD_TYPE": "POWER",
   "IMG": "red/power/demon_form",
   "TAGS": [

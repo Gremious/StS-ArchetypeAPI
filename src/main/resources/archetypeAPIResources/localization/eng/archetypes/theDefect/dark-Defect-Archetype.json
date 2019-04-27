@@ -1,6 +1,7 @@
 {
   "CHARACTER": "DEFECT",
   "NAME": "Dark",
+  "ARCHETYPE_NAME": "Dark",
   "CARD_TYPE": "SKILL",
   "IMG": "blue/skill/darkness",
   "TAGS": [

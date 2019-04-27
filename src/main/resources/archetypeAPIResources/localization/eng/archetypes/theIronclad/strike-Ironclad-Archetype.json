@@ -1,6 +1,7 @@
 {
   "CHARACTER": "IRONCLAD",
   "NAME": "Strike",
+  "ARCHETYPE_NAME": "Strike",
   "CARD_TYPE": "ATTACK",
   "IMG": "red/attack/perfected_strike",
   "TAGS": [

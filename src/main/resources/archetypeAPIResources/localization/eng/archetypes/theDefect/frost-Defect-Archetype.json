@@ -1,6 +1,7 @@
 {
   "CHARACTER": "DEFECT",
   "NAME": "Frost",
+  "ARCHETYPE_NAME": "Frost",
   "CARD_TYPE": "ATTACK",
   "IMG": "blue/attack/blizzard",
   "TAGS": [

@@ -1,6 +1,7 @@
 {
   "CHARACTER": "DEFECT",
   "NAME": "Plasma",
+  "ARCHETYPE_NAME": "Plasma",
   "CARD_TYPE": "ATTACK",
   "IMG": "blue/attack/meteor_strike",
   "TAGS": [

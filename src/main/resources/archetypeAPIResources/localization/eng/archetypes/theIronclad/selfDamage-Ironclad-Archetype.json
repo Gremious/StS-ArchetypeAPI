@@ -1,6 +1,7 @@
 {
   "CHARACTER": "IRONCLAD",
   "NAME": "Self-Damage",
+  "ARCHETYPE_NAME": "Self-Damage",
   "CARD_TYPE": "ATTACK",
   "IMG": "red/attack/blood_for_blood",
   "TAGS": [
