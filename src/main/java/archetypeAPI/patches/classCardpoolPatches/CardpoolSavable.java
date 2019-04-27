@@ -34,19 +34,21 @@ public class CardpoolSavable implements CustomSavable<List<String>> {
     @Override
     public void onLoad(List<String> listOfIDs) {
         if (cardsOfTheArchetypesInUse.isEmpty()) {
-            logger.info("In use cardpool is empty, loading from save");
-            logger.info("List of ID's to load pre-load: " + listOfIDs.toString());
-            
-            for (String id : listOfIDs) {
-                logger.info("Attempting to load tmpPool from ID list: " + listOfIDs.toString());
-                logger.info("id: " + id);
-                cardsOfTheArchetypesInUse.addToTop(CardLibrary.getCard(id));
-            }
-            
-            makeSureWeMeetMinimum();
-            if (!cardsOfTheArchetypesInUse.isEmpty()) {
-                logger.info("Cardpool loaded successfully, initialising.");
-                CardCrawlGame.dungeon.initializeCardPools();
+            logger.info("In use cardpool is empty, looking for save");
+            if (!listOfIDs.isEmpty()) {
+                logger.info("List of ID's to load pre-load: " + listOfIDs.toString());
+                
+                for (String id : listOfIDs) {
+                    logger.info("Attempting to load tmpPool from ID list: " + listOfIDs.toString());
+                    logger.info("id: " + id);
+                    cardsOfTheArchetypesInUse.addToTop(CardLibrary.getCard(id));
+                }
+                
+                makeSureWeMeetMinimum();
+                if (!cardsOfTheArchetypesInUse.isEmpty()) {
+                    logger.info("Cardpool loaded successfully, initialising.");
+                    CardCrawlGame.dungeon.initializeCardPools();
+                }
             }
         }
     }
