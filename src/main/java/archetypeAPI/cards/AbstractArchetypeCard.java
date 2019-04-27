@@ -43,6 +43,8 @@ public abstract class AbstractArchetypeCard extends CustomCard {
     public abstract String getTooltipName();
 
     public abstract String getTooltipDesc();
+    
+    public abstract String getArchetypeName();
 
     @Override
     public List<TooltipInfo> getCustomTooltips() {

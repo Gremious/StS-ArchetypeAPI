@@ -68,7 +68,12 @@ public class ArchetypeSelectCard extends AbstractArchetypeCard {
     public String getTooltipName() {
         return TEXT[2];
     }
-
+    
+    @Override
+    public String getArchetypeName() {
+        return stringsClass.ARCHETYPE_NAME;
+    }
+    
     @Override
     public String getTooltipDesc() {
         if (stringsClass.FEATURES == null || stringsClass.FEATURES.length == 0) {

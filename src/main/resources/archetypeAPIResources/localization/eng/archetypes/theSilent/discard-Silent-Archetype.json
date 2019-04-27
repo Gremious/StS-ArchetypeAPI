@@ -1,6 +1,7 @@
 {
   "CHARACTER": "THE_SILENT",
   "NAME": "Discard",
+  "ARCHETYPE_NAME": "Discard",
   "CARD_TYPE": "SKILL",
   "IMG": "green/skill/reflex",
   "TAGS": [

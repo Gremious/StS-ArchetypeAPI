@@ -1,5 +1,7 @@
 {
   "CHARACTER": "THE_SILENT",
+  "NAME": "Shiv",
+  "ARCHETYPE_NAME": "Shiv",
   "CARD_TYPE": "ATTACK",
   "IMG": "colorless/attack/shiv",
   "TAGS": [
@@ -10,7 +12,6 @@
     "Accuracy",
     "Storm of Steel"
   ],
-  "NAME": "Shiv",
   "CARD_IDS": [
     "Blade Dance",
     "Cloak And Dagger",

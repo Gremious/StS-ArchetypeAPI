@@ -15,6 +15,8 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
+
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.patches.ArchetypeCardTags.*;
 import static archetypeAPI.util.CardpoolMaintenance.*;
@@ -65,6 +67,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
         CardGroup basicArchetypeCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CardGroup inUseArchetypes = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CardGroup maxNumberCheckGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        HashMap<ArchetypeSelectCard, String> archNames = new HashMap<>();
         
         supportCheck(); // Prints out a log if you have archetypes that have the support tag but none that allow support ones to be included.
         
@@ -99,6 +102,7 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             }
             if (c.hasTag(SINGLE)) {
                 singleArchetypeCards.addToTop(c);
+                archNames.putIfAbsent(((ArchetypeSelectCard) c), ((ArchetypeSelectCard) c).getArchetypeName());
             }
         }
         
@@ -128,10 +132,19 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
                 }
             }
             
-            ((ArchetypeSelectCard) randomArchetype).archetypeEffect();
-            inUseArchetypes.addToTop(randomArchetype);
-            singleArchetypeCards.removeCard(randomArchetype);
-            currentCardListSize = cardsOfTheArchetypesInUse.group.size();
+            ((ArchetypeSelectCard) randomArchetype).archetypeEffect(); // Add the current archetype.
+    
+            for (ArchetypeSelectCard arch : archNames.keySet()) { // Add all archetypes sharing the same archetype name
+                if (arch.getArchetypeName().equals(((ArchetypeSelectCard) randomArchetype).getArchetypeName())) {
+                    arch.archetypeEffect();
+                    inUseArchetypes.addToTop(randomArchetype);
+                    singleArchetypeCards.removeCard(randomArchetype);
+                }
+            }
+            
+            inUseArchetypes.addToTop(randomArchetype); // add it to the "currenlty in use archetypes"
+            singleArchetypeCards.removeCard(randomArchetype); // Remove it from the random pool
+            currentCardListSize = cardsOfTheArchetypesInUse.group.size(); // Count up card number
         }
     }
     

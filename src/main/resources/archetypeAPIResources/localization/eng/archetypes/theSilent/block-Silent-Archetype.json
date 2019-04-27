@@ -1,6 +1,7 @@
 {
   "CHARACTER": "THE_SILENT",
   "NAME": "Block",
+  "ARCHETYPE_NAME": "Block",
   "CARD_TYPE": "SKILL",
   "IMG": "green/skill/blur",
   "TAGS": [

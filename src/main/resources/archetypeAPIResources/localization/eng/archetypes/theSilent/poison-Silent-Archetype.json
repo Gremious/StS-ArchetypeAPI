@@ -1,6 +1,7 @@
 {
   "CHARACTER": "THE_SILENT",
   "NAME": "Poison",
+  "ARCHETYPE_NAME": "Poison",
   "CARD_TYPE": "POWER",
   "IMG": "green/power/noxious_fumes",
   "TAGS": [
