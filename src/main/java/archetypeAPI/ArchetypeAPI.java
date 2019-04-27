@@ -67,6 +67,8 @@ public class ArchetypeAPI implements
     public static boolean selectArchetypes = false;
     public static final String PROP_ENABLE_NON_API_CARDS = "enableNonAPICards";
     public static boolean enableNonAPICards = false;
+    public static final String COMBINE_ARCHETYPES = "combineArchetypes";
+    public static boolean combineArchetypes = false;
     
     public static Map<AbstractPlayer.PlayerClass, Integer> characterCardNums = new HashMap<>();
     
@@ -77,11 +79,13 @@ public class ArchetypeAPI implements
         
         archetypeSettingsDefaults.setProperty(PROP_SELECT_ARCHETYPES, "FALSE");
         archetypeSettingsDefaults.setProperty(PROP_ENABLE_NON_API_CARDS, "FALSE");
+        archetypeSettingsDefaults.setProperty(COMBINE_ARCHETYPES, "FALSE");
         try {
             SpireConfig config = new SpireConfig("archetypeAPI", "ArchetypeAPIConfig", archetypeSettingsDefaults);
             config.load();
             selectArchetypes = config.getBool(PROP_SELECT_ARCHETYPES);
             enableNonAPICards = config.getBool(PROP_ENABLE_NON_API_CARDS);
+            combineArchetypes = config.getBool(COMBINE_ARCHETYPES);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,7 +127,7 @@ public class ArchetypeAPI implements
             }
         });
         ModLabeledToggleButton enableNonAPIButton = new ModLabeledToggleButton("After manually choosing archetypes, should cards from content mods not registered with \n Archetype API be added? \n Example: Choosing only 1 Silent archetype, but having \"Mod with no ArchAPI support installed\", \n ALL the cards from that mod will be added on top of the ones you selected.\n This option has no effect when the 'archetype selection' is off, as non-API mod cards will always be added.",
-                350.0f, 400.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                350.0f, 450.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
                 selectArchetypes, settingsPanel, (label) -> {
         }, (button) -> {
             selectArchetypes = button.enabled;
@@ -135,10 +139,23 @@ public class ArchetypeAPI implements
                 e.printStackTrace();
             }
         });
+        ModLabeledToggleButton combineArchetypesButton = new ModLabeledToggleButton("When manually choosing basegame archetypes, combine all of the same type. \n Example: Selecting the base 'Poison' archetype will also add ALL modded poison archetypes without needing to select them.",
+                350.0f, 200.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                selectArchetypes, settingsPanel, (label) -> {
+        }, (button) -> {
+            selectArchetypes = button.enabled;
+            try {
+                SpireConfig config = new SpireConfig("archetypeAPI", "ArchetypeAPIConfig", archetypeSettingsDefaults);
+                config.setBool(COMBINE_ARCHETYPES, combineArchetypes);
+                config.save();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         settingsPanel.addUIElement(selectArchetypesButton);
         settingsPanel.addUIElement(enableNonAPIButton);
-    
-        
+        settingsPanel.addUIElement(combineArchetypesButton);
+
         BaseMod.registerModBadge(badgeTexture, MODNAME, AUTHOR, DESCRIPTION, settingsPanel);
         
         characterCardNums.putIfAbsent(AbstractPlayer.PlayerClass.IRONCLAD, 72);
