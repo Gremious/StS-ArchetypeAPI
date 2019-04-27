@@ -146,6 +146,9 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
             singleArchetypeCards.removeCard(randomArchetype);
             currentCardListSize = cardsOfTheArchetypesInUse.group.size();
         }
+        
+        logger.info("There are " + inUseArchetypes.size() + " archetypes selected for this run. They are: " + inUseArchetypes.group.toString());
+        logger.info("There are  " + singleArchetypeCards.size() + " archetypes NOT used in this run. They are: " + singleArchetypeCards.group.toString());
     }
     
     protected static void addNonAPICards() {

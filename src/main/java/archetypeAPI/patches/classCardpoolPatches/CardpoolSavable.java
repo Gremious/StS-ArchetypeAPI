@@ -17,30 +17,33 @@ import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
 public class CardpoolSavable implements CustomSavable<List<String>> {
     private Logger logger = LogManager.getLogger(CardpoolSavable.class.getName());
     private static ArrayList<AbstractCard> tmpTmpPool = new ArrayList<>();
+    private static List<String> IDList;
     
     CardpoolSavable(ArrayList<AbstractCard> tmpPool) {
         this.tmpTmpPool.addAll(tmpPool);
+        IDList = tmpTmpPool.stream().map(c -> c.cardID).collect(Collectors.toList());
+    
     }
     
     @Override
     public List<String> onSave() {
-        List<String> listOfIDs = tmpTmpPool.stream().map(c -> c.cardID).collect(Collectors.toList());
         logger.info("Attempting to save tmpPool: " + tmpTmpPool.toString());
-        logger.info("As an ID list " + listOfIDs.toString());
-        tmpTmpPool.clear();
-        return listOfIDs;
+        logger.info("As an ID list " + IDList.toString());
+        return IDList;
     }
     
     @Override
     public void onLoad(List<String> listOfIDs) {
+        logger.info("In use cardpool pre-clear " + cardsOfTheArchetypesInUse.group.toString());
+        cardsOfTheArchetypesInUse.clear();
+        
+        logger.info("List of ID's to load pre-load: " + listOfIDs.toString());
         for (String id : listOfIDs) {
             logger.info("Attempting to load tmpPool from ID list: " + listOfIDs.toString());
             logger.info("id: " + id);
-            cardsOfTheArchetypesInUse.clear();
             cardsOfTheArchetypesInUse.addToTop(CardLibrary.getCard(id));
         }
         
-        listOfIDs.clear();
         makeSureWeMeetMinimum();
         if (!cardsOfTheArchetypesInUse.isEmpty()) {
             logger.info("Cardpool loaded successfully, initialising.");
