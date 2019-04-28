@@ -161,7 +161,8 @@ public class RandomArchetypeEffect extends AbstractGameEffect {     // This is t
         groupOfAllCards.group.addAll(getAllEffectiveClassCards(AbstractDungeon.player.getCardColor()).group);
         
         removeGroupFromAnotherGroup(groupOfAllCards, groupOfAllAPICards);
-        
+        logger.info("This character has cards not registered with archetype API. Those cards are: " + groupOfAllCards.group.toString());
+        logger.info("Adding them to the pool.");
         cardsOfTheArchetypesInUse.group.addAll(groupOfAllCards.group);
         // removeDuplicatesFromCardGroup(cardsOfTheArchetypesInUse);
     }

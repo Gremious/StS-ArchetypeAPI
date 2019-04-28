@@ -36,12 +36,11 @@ public class IroncladCardPoolPatch {
             CardpoolMaintenance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
             
             // Save the card pools
-            CustomSavable<List<String>> IrconladCardpoolSave = new CardpoolSavable(tmpPool);
+            CustomSavable<List<String>> IrconladCardpoolSave = new CardpoolSavable(cardsOfTheArchetypesInUse.group);
             
             if (BaseMod.getSaveFields().get("ironcladArchetypeCardRewards") == null) {
                 BaseMod.addSaveField("ironcladArchetypeCardRewards", IrconladCardpoolSave);
             }
-            
             IrconladCardpoolSave.onSave();
         }
         System.out.println("Archetype API Log: Ironclad card pool patch. You are playing with: " + tmpPool.size() + " cards.");

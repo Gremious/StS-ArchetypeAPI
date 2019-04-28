@@ -26,7 +26,7 @@ public class CardpoolSavable implements CustomSavable<List<String>> {
     
     @Override
     public List<String> onSave() {
-        logger.info("Attempting to save tmpPool: " + tmpTmpPool.toString());
+        logger.info("Attempting to save the archetype cardpool: " + tmpTmpPool.toString());
         logger.info("As an ID list " + IDList.toString());
         return IDList;
     }
@@ -35,12 +35,13 @@ public class CardpoolSavable implements CustomSavable<List<String>> {
     public void onLoad(List<String> listOfIDs) {
         if (cardsOfTheArchetypesInUse.isEmpty()) {
             logger.info("In use cardpool is empty, looking for save");
-            if (!(listOfIDs == null )&& !listOfIDs.isEmpty()) {
-                logger.info("List of ID's to load pre-load: " + listOfIDs.toString());
+            logger.info("listOfIDs is null?" + (listOfIDs == null));
+            
+            if (!(listOfIDs == null) && !listOfIDs.isEmpty()) {
+                logger.info("List of ID's isn't empty. IDs to pre-load: " + listOfIDs.toString());
                 
                 for (String id : listOfIDs) {
-                    logger.info("Attempting to load tmpPool from ID list: " + listOfIDs.toString());
-                    logger.info("id: " + id);
+                    logger.info("Attempting to load ID from list: " + id);
                     cardsOfTheArchetypesInUse.addToTop(CardLibrary.getCard(id));
                 }
                 

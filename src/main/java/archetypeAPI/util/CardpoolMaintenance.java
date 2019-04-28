@@ -24,18 +24,22 @@ public class CardpoolMaintenance {
     public static CardGroup cleanCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
     
     public static void replaceCardpool(ArrayList<AbstractCard> tmpPool, CardGroup replaceWith) {
-        tmpPool.removeIf(card -> {
-                    boolean idCheckBool = true;
-                    for (AbstractCard c : replaceWith.group) {
-                        //    System.out.println("Only keeping identical cards:");
-                        //    System.out.println("Card ID 1: " + card.cardID + " and Card ID 2: " + c.cardID);
-                        if (card.cardID.equals(c.cardID)) {
-                            idCheckBool = false;
+        if (!tmpPool.isEmpty()) {
+            tmpPool.removeIf(card -> {
+                        boolean idCheckBool = true;
+                        for (AbstractCard c : replaceWith.group) {
+                            //    System.out.println("Only keeping identical cards:");
+                            //    System.out.println("Card ID 1: " + card.cardID + " and Card ID 2: " + c.cardID);
+                            if (card.cardID.equals(c.cardID)) {
+                                idCheckBool = false;
+                            }
                         }
+                        return idCheckBool;
                     }
-                    return idCheckBool;
-                }
-        );
+            );
+        } else {
+            tmpPool.addAll(replaceWith.group);
+        }
     }
     
     public static boolean containsID(ArrayList<AbstractCard> poolToCheck, AbstractCard cardWithID) {
@@ -49,7 +53,8 @@ public class CardpoolMaintenance {
     
     /**
      * Checks whether the poolToCheck group [ex. A, B, C] contains every unique card inside checkAgainst [ex. A, A, B, C, B]. <p> Returns true if it does. [ex. True]
-     * @param poolToCheck If this pool contains every unique card in checkAgainst, this method will return true.
+     *
+     * @param poolToCheck  If this pool contains every unique card in checkAgainst, this method will return true.
      * @param checkAgainst If every unique card in this pool is contained within poolToCheck, this method will return true.
      */
     public static boolean containsGroupByID(ArrayList<AbstractCard> poolToCheck, ArrayList<AbstractCard> checkAgainst) { // Thanks kio!

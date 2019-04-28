@@ -36,12 +36,11 @@ public class DefectCardPoolPatch {
             CardpoolMaintenance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
             
             // Save the card pools
-            CustomSavable<List<String>> DefectCardpoolSave = new CardpoolSavable(tmpPool);
+            CustomSavable<List<String>> DefectCardpoolSave = new CardpoolSavable(cardsOfTheArchetypesInUse.group);
             
             if (BaseMod.getSaveFields().get("defectArchetypeCardRewards") == null) {
                 BaseMod.addSaveField("defectArchetypeCardRewards", DefectCardpoolSave);
             }
-            
             DefectCardpoolSave.onSave();
         }
         

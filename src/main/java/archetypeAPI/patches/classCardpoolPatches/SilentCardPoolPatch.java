@@ -30,18 +30,16 @@ public class SilentCardPoolPatch {
     
     public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
         final Logger logger = LogManager.getLogger(SilentCardPoolPatch.class.getName());
-        
         if (!cardsOfTheArchetypesInUse.isEmpty()) {
             makeSureWeMeetMinimum();
             CardpoolMaintenance.replaceCardpool(tmpPool, cardsOfTheArchetypesInUse);
             
             // Save the card pools
-            CustomSavable<List<String>> SilentCardpoolSave = new CardpoolSavable(tmpPool);
+            CustomSavable<List<String>> SilentCardpoolSave = new CardpoolSavable(cardsOfTheArchetypesInUse.group);
             
             if (BaseMod.getSaveFields().get("silentArchetypeCardRewards") == null) {
                 BaseMod.addSaveField("silentArchetypeCardRewards", SilentCardpoolSave);
             }
-            
             SilentCardpoolSave.onSave();
         }
         
