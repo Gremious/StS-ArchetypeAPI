@@ -28,7 +28,7 @@ public class SilentCardPoolPatch {
             locator = Locator.class
     )
     
-    public static void insert(TheSilent __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
+    public static void insert(TheSilent __instance, ArrayList<AbstractCard> tmpPool) {
         final Logger logger = LogManager.getLogger(SilentCardPoolPatch.class.getName());
         if (!cardsOfTheArchetypesInUse.isEmpty()) {
             makeSureWeMeetMinimum();

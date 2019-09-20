@@ -28,7 +28,7 @@ public class IroncladCardPoolPatch {
             locator = Locator.class
     )
     
-    public static void insert(Ironclad __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
+    public static void insert(Ironclad __instance, ArrayList<AbstractCard> tmpPool) {
         final Logger logger = LogManager.getLogger(IroncladCardPoolPatch.class.getName());
         
         if (!cardsOfTheArchetypesInUse.isEmpty()) {

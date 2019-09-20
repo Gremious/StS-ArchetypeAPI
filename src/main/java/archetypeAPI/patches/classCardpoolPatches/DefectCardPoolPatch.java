@@ -28,7 +28,7 @@ public class DefectCardPoolPatch {
             locator = Locator.class
     )
     
-    public static void insert(Defect __instance, @ByRef ArrayList<AbstractCard> tmpPool) {
+    public static void insert(Defect __instance, ArrayList<AbstractCard> tmpPool) {
         final Logger logger = LogManager.getLogger(DefectCardPoolPatch.class.getName());
         
         if (!cardsOfTheArchetypesInUse.isEmpty()) {

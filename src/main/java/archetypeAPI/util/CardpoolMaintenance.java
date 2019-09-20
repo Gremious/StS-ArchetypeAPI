@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.random.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -208,14 +209,24 @@ public class CardpoolMaintenance {
     public static void extendWithRandomCard(int by) {
         int i = 0;
         do {
-            AbstractCard c = CardLibrary.getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng);
+            AbstractCard c = getRandomColorSpecificCard(AbstractDungeon.player.getCardColor(), AbstractDungeon.cardRandomRng);
             if (!containsID(cardsOfTheArchetypesInUse.group, c)) {
                 cardsOfTheArchetypesInUse.addToRandomSpot(c);
                 i++;
             }
         } while (i < by);
     }
-    
+
+    public static AbstractCard getRandomColorSpecificCard(AbstractCard.CardColor color, Random rng){
+        CardGroup cards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+        for (AbstractCard c : CardLibrary.getAllCards()){
+            if (c.color == color){
+                cards.addToBottom(c);
+            }
+        }
+        return cards.getRandomCard(rng);
+    }
+
     public static void extendWithBasicsInner(int by, AbstractCard basicArchetypeCard) {
         extendWithBasicsInner(by, (AbstractCard.CardType) null, basicArchetypeCard);
     }
