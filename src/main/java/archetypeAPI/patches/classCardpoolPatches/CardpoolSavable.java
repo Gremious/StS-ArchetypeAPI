@@ -26,8 +26,9 @@ public class CardpoolSavable implements CustomSavable<List<String>> {
     
     @Override
     public List<String> onSave() {
-        logger.info("Attempting to save the archetype cardpool: " + tmpTmpPool.toString());
-        logger.info("As an ID list " + IDList.toString());
+        logger.info("Attempting to save the archetype cardpool as an ID list.");
+        // logger.info("Attempting to save the archetype cardpool: " + tmpTmpPool.toString());
+        // logger.info("As an ID list " + IDList.toString());
         return IDList;
     }
     

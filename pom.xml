@@ -3,17 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>archetypeapi</groupId>
     <artifactId>ArchetypeAPI</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <name>ArchetypeAPI</name>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <SlayTheSpire.version>01-23-2019</SlayTheSpire.version>
-        <ModTheSpire.version>3.9.0</ModTheSpire.version>
+        <ModTheSpire.version>3.8.0</ModTheSpire.version>
         <!--CHANGE THIS TO YOUR STEAM INSTALLATION-->
         <!--Also change the path at the very bottom of the file.-->
-        <Steam.path>C:/My Stuff/Games/Steam/steamapps</Steam.path>
+        <Steam.path>E:/Games/Steam/steamapps</Steam.path>
     </properties>
 
     <dependencies>

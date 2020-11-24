@@ -100,6 +100,16 @@ public class CardpoolMaintenance {
         }
     }
     
+    public static ArrayList<AbstractCard> testMissing(AbstractCard.CardColor color, ArrayList<AbstractCard> tmpPool) {
+        ArrayList<AbstractCard> testAllCards = new ArrayList<>(CardLibrary.getAllCards());
+        testAllCards = testAllCards.stream()
+                .filter(c -> c.color == color)
+                .collect(Collectors.toCollection(ArrayList::new));
+        testAllCards.removeAll(tmpPool);
+    
+        return testAllCards;
+    }
+    
     public static CardGroup getAllEffectiveClassCards(AbstractCard.CardColor color) {
         CardGroup allCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         CardGroup effectiveClassCards = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);

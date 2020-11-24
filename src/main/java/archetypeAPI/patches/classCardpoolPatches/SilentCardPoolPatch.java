@@ -45,6 +45,10 @@ public class SilentCardPoolPatch {
         
         System.out.println("Archetype API Log: Silent card pool patch. You are playing with: " + tmpPool.size() + " cards.");
         System.out.println("These cards are: " + tmpPool.toString());
+        
+        ArrayList<AbstractCard> testAllCards = CardpoolMaintenance.testMissing(AbstractCard.CardColor.GREEN, tmpPool);
+        logger.info("You are not playing with: " + testAllCards.size() + " cards.");
+        logger.info("These cards are: " + testAllCards);
     }
     
     private static class Locator extends SpireInsertLocator {

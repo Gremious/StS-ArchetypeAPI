@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static archetypeAPI.archetypes.AbstractArchetype.cardsOfTheArchetypesInUse;
 import static archetypeAPI.util.CardpoolMaintenance.makeSureWeMeetMinimum;
@@ -44,8 +45,12 @@ public class DefectCardPoolPatch {
             DefectCardpoolSave.onSave();
         }
         
-        System.out.println("Archetype API Log: Defect card pool patch. You are playing with: " + tmpPool.size() + " cards.");
-        System.out.println("These cards are: " + tmpPool.toString());
+        logger.info("Archetype API Log: Defect card pool patch. You are playing with: " + tmpPool.size() + " cards.");
+        logger.info("These cards are: " + tmpPool.toString());
+    
+        ArrayList<AbstractCard> testAllCards = CardpoolMaintenance.testMissing(AbstractCard.CardColor.BLUE, tmpPool);
+        logger.info("You are not playing with: " + testAllCards.size() + " cards.");
+        logger.info("These cards are: " + testAllCards);
     }
     
     private static class Locator extends SpireInsertLocator {

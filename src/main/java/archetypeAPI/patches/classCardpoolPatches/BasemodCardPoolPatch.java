@@ -45,7 +45,12 @@ public class BasemodCardPoolPatch {
             logger.info("Archetype API Log: Custom Character card pool patch. You are playing with: " + tmpPool.size() + " cards.");
             logger.info("These cards are: " + tmpPool.toString());
             
+            ArrayList<AbstractCard> testAllCards = CardpoolMaintenance.testMissing(AbstractDungeon.player.getCardColor(), tmpPool);
+            logger.info("You are not playing with: " + testAllCards.size() + " cards.");
+            logger.info("These cards are: " + testAllCards);
+            
             return SpireReturn.Return(tmpPool);
+            
         }
         return SpireReturn.Continue();
     }

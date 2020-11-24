@@ -67,30 +67,3 @@ public abstract class AbstractArchetype {
         removeDuplicatesFromCardGroup(cardsOfTheArchetypesInUse);
     }
 }
-
-   /* Cya!
-   public AbstractArchetype(ArrayList<String> archetypeFiles) {
-        addCardsFromArchetypes(archetypeFiles);
-    }
-
-    public static void addCardsFromArchetypes(ArrayList<String> archetypeFiles) {
-        ArrayList<AbstractCard> currentArchetype = new ArrayList<>();
-
-        for (String archetypeFile : archetypeFiles) {
-            InputStream in = AbstractArchetype.class.getResourceAsStream("/" + archetypeFile);
-            Type mapType = new TypeToken<Map<String, ArchetypeStringsClass>>(){}.getType();
-
-            Map<String, ArchetypeStringsClass> allString = new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), mapType);
-
-            for (Map.Entry<String, ArchetypeStringsClass> entry : allString.entrySet()) {
-
-                for (String ID : entry.getValue().CARD_IDS) {
-                    //logger.info("Adding " + ID);
-                    currentArchetype.add(CardLibrary.getCopy(ID));
-                }
-
-                cardsOfTheArchetypesInUse.group.addAll(currentArchetype);
-            }
-        }
-    }
-*/
