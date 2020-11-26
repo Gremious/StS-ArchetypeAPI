@@ -1,0 +1,23 @@
+{
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Replay: Weakness",
+  "ARCHETYPE_NAME": "Weak",
+  "CARD_TYPE": "SKILL",
+  "IMG": "green/skill/leg_sweep",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "Crippling Poison",
+    "ReplayTheSpireMod:Exploit Weakness",
+    "ReplayTheSpireMod:From All Sides"
+  ],
+  "CARD_IDS": [
+    "ReplayTheSpireMod:Exploit Weakness",
+    "ReplayTheSpireMod:From All Sides",
+    "Heel Hook",
+    "Leg Sweep",
+    "Malaise",
+    "Crippling Poison"
+  ]
+}

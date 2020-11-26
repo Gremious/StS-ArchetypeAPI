@@ -1,0 +1,12 @@
+{
+  "CHARACTER": "DEFECT",
+  "NAME": "Replay: Claw Extension",
+  "ARCHETYPE_NAME": "Claw",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "blue/attack/claw",
+  "TAGS": [],
+  "CARD_IDS": [
+    "ReplaySort",
+    "ReplayGash"
+  ]
+}

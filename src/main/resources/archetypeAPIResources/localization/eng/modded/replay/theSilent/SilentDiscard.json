@@ -1,0 +1,11 @@
+{
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Replay: Discard Extension",
+  "ARCHETYPE_NAME": "Discard",
+  "CARD_TYPE": "SKILL",
+  "IMG": "green/skill/reflex",
+  "TAGS": [],
+  "CARD_IDS": [
+    "ReplayTheSpireMod:Scrap Shanks"
+  ]
+}

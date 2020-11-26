@@ -1,0 +1,11 @@
+{
+  "CHARACTER": "IRONCLAD",
+  "NAME": "Replay: Strike Extension",
+  "ARCHETYPE_NAME": "Strike",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "red/attack/perfected_strike",
+  "TAGS": [],
+  "CARD_IDS": [
+    "ReplayTheSpireMod:LeadingStrike"
+  ]
+}

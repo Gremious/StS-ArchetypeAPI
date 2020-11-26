@@ -1,0 +1,13 @@
+{
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Replay: Block Extension",
+  "ARCHETYPE_NAME": "Block",
+  "CARD_TYPE": "SKILL",
+  "IMG": "green/skill/blur",
+  "TAGS": [],
+  "CARD_IDS": [
+    "Fluid Movement",
+    "ReplayTheSpireMod:Speed Training",
+    "ReplayTheSpireMod:Tripwire"
+  ]
+}

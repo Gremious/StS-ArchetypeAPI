@@ -1,0 +1,11 @@
+{
+  "CHARACTER": "DEFECT",
+  "NAME": "Replay: Power Extension",
+  "ARCHETYPE_NAME": "Power",
+  "CARD_TYPE": "POWER",
+  "IMG": "blue/power/creative_ai",
+  "TAGS": [],
+  "CARD_IDS": [
+    "ReplayTheSpireMod:GoodbyeWorld"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Replay: Poison Extension",
+  "ARCHETYPE_NAME": "Poison",
+  "CARD_TYPE": "POWER",
+  "IMG": "green/power/noxious_fumes",
+  "TAGS": [],
+  "CARD_IDS": [
+    "Replay:Poison Smokescreen",
+    "Replay:Bag of Tricks"
+  ]
+}

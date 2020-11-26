@@ -1,0 +1,11 @@
+{
+  "CHARACTER": "DEFECT",
+  "NAME": "Replay: Dark Extension",
+  "ARCHETYPE_NAME": "Dark",
+  "CARD_TYPE": "SKILL",
+  "IMG": "blue/skill/darkness",
+  "TAGS": [],
+  "CARD_IDS": [
+    "Time Bomb"
+  ]
+}

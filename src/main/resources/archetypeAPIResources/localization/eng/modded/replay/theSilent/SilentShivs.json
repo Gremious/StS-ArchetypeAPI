@@ -1,0 +1,13 @@
+{
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Replay: Shivs Extension",
+  "ARCHETYPE_NAME": "Shiv",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "colorless/attack/shiv",
+  "TAGS": [],
+  "CARD_IDS": [
+    "ReplayTheSpireMod:Shiv Toss",
+    "Hidden Blade",
+    "Replay:Bag of Tricks"
+  ]
+}

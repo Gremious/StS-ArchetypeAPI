@@ -1,0 +1,12 @@
+{
+  "CHARACTER": "DEFECT",
+  "NAME": "Replay: Frost Extension",
+  "ARCHETYPE_NAME": "Frost",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "blue/attack/blizzard",
+  "TAGS": [],
+  "CARD_IDS": [
+    "Mirror Shield",
+    "ReplayTheSpireMod:Repulse"
+  ]
+}

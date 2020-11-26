@@ -4,6 +4,7 @@ import archetypeAPI.archetypes.AbstractArchetype;
 import archetypeAPI.util.IDCheckDontTouchPls;
 import archetypeAPI.util.TextureLoader;
 import basemod.BaseMod;
+import basemod.ModLabel;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.interfaces.EditCardsSubscriber;
@@ -11,12 +12,13 @@ import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
 import basemod.interfaces.PreStartGameSubscriber;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
-import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -61,6 +63,7 @@ public class ArchetypeAPI implements
     public static final String BADGE_IMAGE = "archetypeAPIResources/images/Badge.png";
     
     private static final String ARCHETYPES_DIR = "archetypes";
+    private static final String MODDED_ARCHETYPES_DIR = "modded";
     
     public static Properties archetypeSettingsDefaults = new Properties();
     public static final String PROP_SELECT_ARCHETYPES = "selectArchetypes";
@@ -111,10 +114,12 @@ public class ArchetypeAPI implements
         ModPanel settingsPanel = new ModPanel();
         
         logger.info("Done loading badge Image and mod options");
-        
+    
+        ModLabel warningText = new ModLabel("I have 0 clue why, but sometimes these options don't work on specific re-toggles. Just un/re-tick them.",
+                150.0f, 700.0f, Settings.RED_TEXT_COLOR, FontHelper.charDescFont, settingsPanel, label-> {});
         
         ModLabeledToggleButton selectArchetypesButton = new ModLabeledToggleButton("Select Archetypes at the start of each run.",
-                350.0f, 700.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                350.0f, 700.0f, Settings.GREEN_TEXT_COLOR, FontHelper.charDescFont,
                 selectArchetypes, settingsPanel, (label) -> {
         }, (button) -> {
             selectArchetypes = button.enabled;
@@ -163,12 +168,20 @@ public class ArchetypeAPI implements
         characterCardNums.putIfAbsent(AbstractPlayer.PlayerClass.DEFECT, 71);
         
         loadBaseArchetypes();
-        loadArchetypesDirectory();
+        loadReplayArchetypes();
+        loadArchetypesDirectory(ARCHETYPES_DIR);
+        loadArchetypesDirectory(MODDED_ARCHETYPES_DIR);
     }
     
     // =============== / POST-INITIALIZE/ =================
     private static void loadBaseArchetypes() {
         loadArchetypes("archetypeAPIResources/localization/eng/archetypes/");
+    }
+    // loads replay archetype only if the replay mod is loaded
+    private static void loadReplayArchetypes() {
+        if (Loader.isModLoaded("ReplayTheSpireMod")) {
+            loadArchetypes("archetypeAPIResources/localization/eng/modded/");
+        }
     }
     
     @SuppressWarnings("unused")
@@ -214,8 +227,8 @@ public class ArchetypeAPI implements
      * <p> This folder is in the same place your "mods" folder and "SlayTheSpire.exe" is.
      * <p> Keep in mind that both "mods" and "archetypes" folders need to be created manually if they are not there.
      */
-    private static void loadArchetypesDirectory() {
-        File dir = new File(ARCHETYPES_DIR);
+    private static void loadArchetypesDirectory(String directory) {
+        File dir = new File(directory);
         if (!dir.exists() || !dir.isDirectory()) {
             return;
         }

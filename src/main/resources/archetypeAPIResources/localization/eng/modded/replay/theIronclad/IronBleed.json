@@ -1,0 +1,12 @@
+{
+  "CHARACTER": "IRONCLAD",
+  "NAME": "Replay: Self-Damage Extension",
+  "ARCHETYPE_NAME": "Self-Damage",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "red/attack/blood_for_blood",
+  "TAGS": [],
+  "CARD_IDS": [
+    "Hemogenesis",
+    "Life Link"
+  ]
+}

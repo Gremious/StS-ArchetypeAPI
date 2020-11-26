@@ -1,0 +1,14 @@
+{
+  "CHARACTER": "IRONCLAD",
+  "NAME": "Replay: Exhaust Extension",
+  "ARCHETYPE_NAME": "Exhaust",
+  "CARD_TYPE": "POWER",
+  "IMG": "red/power/corruption",
+  "TAGS": [],
+  "CARD_IDS": [
+    "Abandon",
+    "Eclipse",
+    "Defy Death",
+    "ReplayTheSpireMod:Strike From Hell"
+  ]
+}

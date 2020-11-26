@@ -1,0 +1,21 @@
+{
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Replay: Necrotic",
+  "ARCHETYPE_NAME": "Necrotic",
+  "CARD_TYPE": "SKILL",
+  "IMG": "cards/replay/toxinWave.png",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "Draining Mist",
+    "ReplayTheSpireMod:Necrosis",
+    "Toxin Wave"
+  ],
+  "CARD_IDS": [
+    "Draining Mist",
+    "ReplayTheSpireMod:Necrosis",
+    "Poison Darts",
+    "Toxin Wave"
+  ]
+}

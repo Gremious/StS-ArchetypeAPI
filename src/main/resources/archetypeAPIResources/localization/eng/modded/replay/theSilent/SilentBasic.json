@@ -1,0 +1,13 @@
+{
+  "CHARACTER": "THE_SILENT",
+  "NAME": "Replay: Basic Extension",
+  "ARCHETYPE_NAME": "Basic",
+  "CARD_TYPE": "SKILL",
+  "IMG": "green/skill/adrenaline",
+  "TAGS": [],
+  "CARD_IDS": [
+    "Atom Bomb",
+    "Sneak Up",
+    "ReplayTheSpireMod:The Works"
+  ]
+}

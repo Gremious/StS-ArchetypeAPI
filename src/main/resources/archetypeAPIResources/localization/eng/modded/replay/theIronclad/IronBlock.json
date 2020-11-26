@@ -1,0 +1,12 @@
+{
+  "CHARACTER": "IRONCLAD",
+  "NAME": "Replay: Block Extension",
+  "ARCHETYPE_NAME": "Block",
+  "CARD_TYPE": "POWER",
+  "IMG": "red/power/barricade",
+  "TAGS": [],
+  "CARD_IDS": [
+    "ReplayReversal",
+    "ReplayTheSpireMod:Stacked"
+  ]
+}

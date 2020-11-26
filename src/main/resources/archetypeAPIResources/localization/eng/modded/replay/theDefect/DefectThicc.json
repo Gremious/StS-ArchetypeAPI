@@ -1,0 +1,32 @@
+{
+  "CHARACTER": "DEFECT",
+  "NAME": "Replay: Thick Deck / Status",
+  "ARCHETYPE_NAME": "ThickDefect",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "cards/replay/omegaCannon.png",
+  "TAGS": [
+    "SINGLE"
+  ],
+  "FEATURES": [
+    "ReplayTheSpireMod:GoodbyeWorld",
+    "Creative AI",
+    "ReplayTheSpireMod:Omega Cannon"
+  ],
+  "CARD_IDS": [
+    "ReplayTheSpireMod:GoodbyeWorld",
+    "ReplayTheSpireMod:Fabricate Wheel",
+    "ReplayTheSpireMod:Omega Cannon",
+    "ReplaySort",
+    "ReplaySolidLightProjector",
+    "ReplayTheSpireMod:System Scan",
+    "Aggregate",
+    "Creative AI",
+    "Hello World",
+    "Steam Power",
+    "Recycle",
+    "Reprogram",
+    "Seek",
+    "Stack",
+    "Turbo"
+  ]
+}

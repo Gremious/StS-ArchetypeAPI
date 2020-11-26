@@ -1,0 +1,19 @@
+{
+  "CHARACTER": "DEFECT",
+  "NAME": "Replay: Orb Support Extension",
+  "ARCHETYPE_NAME": "Orb Support",
+  "CARD_TYPE": "ATTACK",
+  "IMG": "blue/attack/barrage",
+  "TAGS": [
+    "SUPPORT"
+  ],
+  "CARD_IDS": [
+    "BasicCrystalCard",
+    "FIFO Queue",
+    "Panic Button",
+    "ReplayTheSpireMod:Calculation Training",
+    "ReplayRNGCard",
+    "Crystallizer",
+    "ReplayTheSpireMod:Reroute Power"
+  ]
+}
